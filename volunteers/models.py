@@ -10,7 +10,7 @@ class Edition(models.Model):
         verbose_name_plural = _('Editions')
 
     def __unicode__(self):
-        return self.year
+        return unicode(self.year)
 
     year = models.IntegerField()
     start_date = models.DateField()
@@ -66,7 +66,7 @@ class TaskCategory(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    volunteers = models.ManyToManyField('Volunteer')
+    volunteers = models.ManyToManyField('Volunteer', blank=True, null=True)
 
 """
 A task template contains all the data about a task that isn't task specific.
@@ -100,7 +100,7 @@ class Task(models.Model):
         return self.name
 
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
+    description = models.TextField()
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -109,7 +109,7 @@ class Task(models.Model):
     # to a specific talk.
     talk = models.ForeignKey(Talk, blank=True, null=True)
     template = models.ForeignKey(TaskTemplate)
-    volunteers = models.ManyToManyField('Volunteer')
+    volunteers = models.ManyToManyField('Volunteer', blank=True, null=True)
 
 
 """
@@ -127,9 +127,9 @@ class Volunteer(models.Model):
     email = models.EmailField()
     user = models.ForeignKey(User)
     # Categories in which they're interested to help out.
-    categories = models.ManyToManyField(TaskCategory)
+    categories = models.ManyToManyField(TaskCategory, blank=True, null=True)
     # Tasks for which they've signed up.
-    tasks = models.ManyToManyField(Task)
+    tasks = models.ManyToManyField(Task, blank=True, null=True)
 
 
 """
