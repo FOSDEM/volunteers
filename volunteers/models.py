@@ -66,7 +66,11 @@ class TaskCategory(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    volunteers = models.ManyToManyField('Volunteer', blank=True, null=True)
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerCategory', blank=True, null=True)
+
+    def assigned_volunteers(self):
+        return self.volunteer_set.count()
+
 
 """
 A task template contains all the data about a task that isn't task specific.
@@ -109,7 +113,10 @@ class Task(models.Model):
     # to a specific talk.
     talk = models.ForeignKey(Talk, blank=True, null=True)
     template = models.ForeignKey(TaskTemplate)
-    volunteers = models.ManyToManyField('Volunteer', blank=True, null=True)
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True, null=True)
+
+    def assigned_volunteers(self):
+        return self.volunteer_set.count()
 
 
 """
@@ -127,9 +134,10 @@ class Volunteer(models.Model):
     email = models.EmailField()
     user = models.ForeignKey(User)
     # Categories in which they're interested to help out.
-    categories = models.ManyToManyField(TaskCategory, blank=True, null=True)
+    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True)
     # Tasks for which they've signed up.
-    tasks = models.ManyToManyField(Task, blank=True, null=True)
+    tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
+    editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
 
 
 """
@@ -151,3 +159,30 @@ class VolunteerStatus(models.Model):
     active = models.BooleanField()
     volunteer = models.ForeignKey(Volunteer)
     edition = models.ForeignKey(Edition)
+
+
+"""
+M2M tables because I want to have the relationship on both model admin pages
+"""
+class VolunteerTask(models.Model):
+    class Meta:
+        verbose_name = _('VolunteerTask')
+        verbose_name_plural = _('VolunteerTasks')
+
+    def __unicode__(self):
+        pass
+
+    volunteer = models.ForeignKey(Volunteer)
+    task = models.ForeignKey(Task)
+
+
+class VolunteerCategory(models.Model):
+    class Meta:
+        verbose_name = _('VolunteerCategory')
+        verbose_name_plural = _('VolunteerCategories')
+
+    def __unicode__(self):
+        pass
+
+    volunteer = models.ForeignKey(Volunteer)
+    category = models.ForeignKey(TaskCategory)
