@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^volunteers/', include('volunteers.urls', namespace='volunteers')),
     url(r'^accounts/login/.*$', 'django.contrib.auth.views.login'),
     url(r'^volunteers/LogOut/$', 'volunteers.views.logOut'),
+    #url(r'^AddTasks/$', views.add_tasks, name='add_tasks'),
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

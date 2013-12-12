@@ -1,8 +1,12 @@
 {% extends "base_generic.html" %}
 
-{% block title %}Update details ({{ user.username }}){% endblock %}
+{% block title %}Add tasks for ({{ user.username }}){% endblock %}
 
 {% block content %}
-<!--edit.html-->
-Editing...
+
+<form action="/volunteers/AddTasks/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+
 {% endblock %}

@@ -1,20 +1,17 @@
 {% extends "base_generic.html" %}
 
-{% block title %}Update details ({{ user.username }}){% endblock %}
+{% block title %}tasks for ({{ user.username }}){% endblock %}
 
 {% block content %}
 
-{% if volunteers %}
+{% if tasks %}
     <ul>
-        {% for volunteer in volunteers %}
+        {% for task in tasks %}
             <li>
-                <a href="{% url 'volunteers:volunteer_detail' volunteer.id %}">{{volunteer.name}}</a>
-                (<a href="{% url 'volunteers:volunteer_edit' volunteer.id %}">edit</a>)
+               {{ task }}
             </li>
         {% endfor %}
     </ul>
-{% else %}
-    <p>No volunteers have signed up yet</p>
 {% endif %}
-
+<a href='AddTasks'> Add tasks</a>
 {% endblock %}

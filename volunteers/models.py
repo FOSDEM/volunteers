@@ -172,7 +172,7 @@ class VolunteerTask(models.Model):
         verbose_name_plural = _('VolunteerTasks')
 
     def __unicode__(self):
-        pass
+        return self.task
 
     volunteer = models.ForeignKey(Volunteer)
     task = models.ForeignKey(Task)
@@ -184,7 +184,7 @@ class VolunteerCategory(models.Model):
         verbose_name_plural = _('VolunteerCategories')
 
     def __unicode__(self):
-        pass
+        return self.category
 
     volunteer = models.ForeignKey(Volunteer)
     category = models.ForeignKey(TaskCategory)
