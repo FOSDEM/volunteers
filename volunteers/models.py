@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -138,6 +139,7 @@ class Volunteer(models.Model):
     # Tasks for which they've signed up.
     tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
+    signed_up = models.DateField(default=datetime.date.today)
 
 
 """
