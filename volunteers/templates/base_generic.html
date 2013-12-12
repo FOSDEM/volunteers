@@ -1,0 +1,68 @@
+{% block extra_head %}
+<script type="text/javascript" src="/my_admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css"/>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/global.css"/>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/widgets.css"/>
+
+<meta charset="utf-8">
+<title>Home</title>
+<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<link rel="stylesheet" href="/static/style.css" media="screen"/>
+<!--[if lte IE 7]><link rel="stylesheet" href="style.ie7.css" media="screen" /><![endif]-->
+<link rel="stylesheet" href="/static/style.responsive.css" media="all"/>
+<script src="/static/jquery.js"></script>
+<script src="/static/script.js"></script>
+<script src="/static/script.responsive.js"></script>
+<style>
+    .content .postcontent-0 .layout-item-0 { padding-right: 10px;padding-left: 10px;  }
+    .ie7 .post .layout-cell {border:none !important; padding:0 !important; }
+    .ie6 .post .layout-cell {border:none !important; padding:0 !important; }
+</style>
+
+{{ form.media }}
+
+{% endblock %}
+
+<div id="main">
+    <div class="sheet clearfix">
+     <!--   <header class="header clearfix">
+            <!--<div class="shapes">
+                <div class="object925415063" data-left="3.69%"></div>
+            </div>-->
+           <!--   <nav class="nav clearfix">-->
+                <ul class="hmenu">
+                    <li><a href=/volunteers/ class="active">Home</a></li>
+                </ul>
+          <!--   </nav>
+        </header>    -->
+        <h1>{% block title %}{% endblock %}</h1>
+
+        <div class="layout-wrapper clearfix">
+            <div class="content-layout">
+                <div class="content-layout-row">
+                    <div class="layout-cell content clearfix">
+                        <article class="post article">
+                            <div class="postcontent postcontent-0 clearfix"><div class="content-layout">
+                                <div class="content-layout-row">
+                                    <div class="layout-cell layout-item-0" style="width: 100%" >
+            <!-- START APP CODE ------------------------------------------------------------------------------>
+                                        <ul>
+                                        {% block content %}{% endblock %}
+                                        </ul>
+            <!-- END APP CODE ------------------------------------------------------------------------------>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer clearfix">
+            <p><a href='LogOut' class="active">Logout</a></p>
+        </footer>
+    </div>
+</div>
