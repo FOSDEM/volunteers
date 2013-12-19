@@ -1,0 +1,22 @@
+# Volunteers TODO
+
+## Once logged in, a volunteer should be able to:
+
+- [ ] change their personal data (name, email)
+- [ ] change the kind of tasks they're interested in (preferably with checkboxes, model TaskCategory)
+- [ ] see all available tasks (model Task), but grouped in two boxes: on top the tasks from categories they've selected, at the bottom tasks in other categories, so they know what else is available
+- [ ] see how many volunteers are needed and how many are assigned to any task, show understaffed tasks in red (in the two lists from previous item)
+- [ ] select talks they're interested in attending, from a list grouped by the tracks and ordered by start time within the tracks, tracks ordered by start time as well (models Talk and Track)
+- [ ] see the moderation tasks for talks they're attending in a different color, so it's clear these are good targets of opportunity
+- [ ] eventually, be able to print out their schedule; HTML or PDF (or both)
+- [ ] anything else I might have overlooked
+
+## The layout is currently very basic and ugly. The general layout should:
+- [ ] have the links at the top
+- [ ] keep some space for the FOSDEM logo that's still to be uploaded
+- [ ] keep the interface clean and simple
+
+## Selection of 2many fields should happen via selection boxes as they're more accessible than multi-select lists. The tasks selection already works like that but has two problems:
+
+- [ ] When viewing the tasks page, the previously selected tasks are not selected. The values are stored in the DB, but the form doesn't display the previous selection.
+- [ ] When saving the selection, the old one is cleared and the new one stored. Maybe an update would be a better and more efficient approach?
