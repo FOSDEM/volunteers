@@ -1,0 +1,11 @@
+# django stuff
+Django==1.5.4
+
+# database stuff
+South==0.8.4
+psycopg2==2.4.5
+
+# userena stuff
+django-userena==1.2.4
+django-guardian==1.1.1
+easy-thumbnails==1.4
