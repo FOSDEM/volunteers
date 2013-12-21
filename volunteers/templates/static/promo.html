@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block content %}
+<div id="intro">
+    <h2 class="intro"><span>FOSDEM</span><br/>Volunteering</h2>
+
+    <p class="intro">This is a site that brings all the volunteers together.
+    Find all the cool tasks that you are interested in.</p>
+
+    <p id="xtra-info">Sum Ting Wong? For bugs you can report an issue at
+    <a href="http://github.com/jrial/fosdem-volunteers/issues">Github</a>.</p>
+</div><!-- /intro-->
+
+<ul class="features">
+    <li><h3>FOSDEM</h3>
+        <p><a href="http://www.gravatar.com">FOSDEM</a> is a free event that offers open source 
+        communities a place to meet, share ideas and collaborate.</p>
+    </li>
+
+    <li><h3>Location</h3>
+        <p>FOSDEM will take place at the<a href="https://fosdem.org/2014/practical/transportation/">
+        ULB Solbosch Campus, Brussels, Belgium, Europe, Earth</a>.</p>
+    </li>
+
+    <li><h3>Volunteering</h3>
+        <p>FOSDEM needs you! Every year, the FOSDEM team is assisted by an enthusiastic team of volunteers 
+        to help out with various tasks and make the event a fun and safe place for all our visitors.</p>
+    </li>
+</ul>
+{% endblock %}

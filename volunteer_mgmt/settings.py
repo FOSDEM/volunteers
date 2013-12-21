@@ -1,5 +1,9 @@
 # Django settings for volunteer_mgmt project.
 
+import os
+settings_dir = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,14 +16,28 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'volunteers',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
+        'NAME': 'volunteers',                               # Or path to database file if using sqlite3.
         'USER': '',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '127.0.0.1',                                # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                                         # Set to empty string for default.
     }
 }
+
+# Django Userena configs
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'codebuddyweb@gmail.com'
+EMAIL_HOST_PASSWORD = 'CodeBuddyStudents123'
+DEFAULT_FROM_EMAIL = "CodeBuddyWeb <codebuddyweb@gmail.com>"
+
+ANONYMOUS_USER_ID = -1
+AUTH_PROFILE_MODULE = 'volunteers.Volunteer'
+USERENA_SIGNIN_REDIRECT_URL = '/volunteers/%(username)s/'
+USERENA_DISABLE_PROFILE_LIST = False
+USERENA_MUGSHOT_SIZE = 140
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -72,6 +90,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'volunteers/static/'),
 )
 
 # List of finder classes that know how to find static files in
@@ -100,6 +119,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'userena.middleware.UserenaLocaleMiddleware',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 ROOT_URLCONF = 'volunteer_mgmt.urls'
@@ -111,6 +137,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'volunteers/templates/'),
 )
 
 INSTALLED_APPS = (
@@ -126,6 +153,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'volunteers',
+    'userena',
+    'guardian',
+    'easy_thumbnails',
+    'userena.contrib.umessages',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

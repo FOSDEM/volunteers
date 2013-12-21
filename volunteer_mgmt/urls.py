@@ -12,11 +12,15 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    url(r'^volunteers/', include('volunteers.urls', namespace='volunteers')),
-    url(r'^accounts/login/.*$', 'django.contrib.auth.views.login'),
-    url(r'^volunteers/LogOut/$', 'volunteers.views.logOut'),
+    #url(r'^volunteers/', include('volunteers.urls', namespace='volunteers')),
+    #url(r'^accounts/login/.*$', 'django.contrib.auth.views.login'),
+    #url(r'^volunteers/LogOut/$', 'volunteers.views.logOut'),
     #url(r'^AddTasks/$', views.add_tasks, name='add_tasks'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    # Userena urls:
+    url(r'^$', 'volunteers.views.promo', name='promo'),
+    url(r'^volunteers/', include('userena.urls')),
+    url(r'^messages/', include('userena.contrib.umessages.urls')),
 )

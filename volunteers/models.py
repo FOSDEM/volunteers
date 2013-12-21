@@ -1,6 +1,7 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+from userena.models import UserenaLanguageBaseProfile
+from django.utils.translation import ugettext_lazy as _
 import datetime
 
 # Create your models here.
@@ -123,7 +124,7 @@ class Task(models.Model):
 """
 The nice guys n' gals who make it all happen.
 """
-class Volunteer(models.Model):
+class Volunteer(UserenaLanguageBaseProfile):
     class Meta:
         verbose_name = _('Volunteer')
         verbose_name_plural = _('Volunteers')
@@ -131,15 +132,16 @@ class Volunteer(models.Model):
     def __unicode__(self):
         return self.name
 
+    user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
     name = models.CharField(max_length=50)
     email = models.EmailField()
-    user = models.ForeignKey(User)
     # Categories in which they're interested to help out.
     categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True)
     # Tasks for which they've signed up.
     tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
     signed_up = models.DateField(default=datetime.date.today)
+    about_me = models.TextField(_('about me'), blank=True)
 
 
 """
