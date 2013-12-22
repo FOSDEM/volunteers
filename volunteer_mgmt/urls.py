@@ -21,6 +21,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # Userena urls:
     url(r'^$', 'volunteers.views.promo', name='promo'),
+    url(r'^volunteers/(?P<username>[\.\w-]+)/edit/$', 'volunteers.views.profile_edit', name='userena_profile_edit'),
     url(r'^volunteers/', include('userena.urls')),
     url(r'^messages/', include('userena.contrib.umessages.urls')),
+    # other urls:
+    url(r'^tasks/', 'volunteers.views.task_list', name='task_list'),
 )
