@@ -25,19 +25,20 @@ DATABASES = {
 }
 
 # Django Userena configs
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'codebuddyweb@gmail.com'
-EMAIL_HOST_PASSWORD = 'CodeBuddyStudents123'
-DEFAULT_FROM_EMAIL = "CodeBuddyWeb <codebuddyweb@gmail.com>"
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = ''
 
+SITE_ID = 1
 ANONYMOUS_USER_ID = -1
 AUTH_PROFILE_MODULE = 'volunteers.Volunteer'
 USERENA_SIGNIN_REDIRECT_URL = '/volunteers/%(username)s/'
 USERENA_DISABLE_PROFILE_LIST = False
 USERENA_MUGSHOT_SIZE = 140
+TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
