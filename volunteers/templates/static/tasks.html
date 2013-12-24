@@ -5,33 +5,56 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Tasks' %}</h2>{% endblock %}
 
 {% block content %}
-<h3>Interesting tasks</h3>
-<ul class="task_list">
-    {% for task in interesting_tasks %}
-    {% if task.volunteers_assigned == 0 %}
-    <li style="color: red;">
-    {% else %}
-    <li>
-    {% endif %}
-         <input type="checkbox" />
-         [needed: {{ task.nbr_volunteers }}, assigned: {{ task.volunteers_assigned }}] - {{ task.name }} - {{ task.description }}
-    </li>
-    {% endfor %}
-</ul>
-<br>
-<h3>Other tasks</h3>
-<ul class="task_list">
-    {% for task in other_tasks %}
-    {% if task.volunteers_assigned == 0 %}
-    <li style="color: red;">
-    {% else %}
-    <li>
-    {% endif %}
-        <input type="checkbox" />
-        [needed: {{ task.nbr_volunteers }} assigned: {{ task.volunteers_assigned }}] - {{ task.name }} - {{ task.description }}
-    </li>
-    {% endfor %}
-</ul>
+<form class="task_list">
+    <fieldset>
+        <legend class="task_list">{% trans 'Interesting tasks' %} <span style="font-size: small; font-weight: normal;">({% trans 'Change in profile' %})</span></legend>
+        <table class="task_list">
+            <tr>
+                <th>{% trans 'Do' %}!</th><th>{% trans 'Needed' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
+            </tr>
+            {% for task in interesting_tasks %}
+            <tr>
+                <td><input type="checkbox" /></td>
+                <td>{{ task.nbr_volunteers }}</td>
+                <td>{{ task.date }} ( {{ task.start_time }} - {{ task.end_time }} )</td>
+                <td title="{{ task.description }}">{{ task.name }}</td>
+                {% if task.volunteers_assigned == 0 %}
+                <td class="red" title="{% trans 'More volunteers needed' %}"></td>
+                {% elif task.volunteers_assigned == task.nbr_volunteers %}
+                <td class="green" title="{% trans 'Full' %}"></td>
+                {% else %}
+                <td class="gray" title="{% trans 'Stable' %}"></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </fieldset>
+    <fieldset>
+        <legend class="task_list">{% trans 'Other tasks' %}</legend>
+        <table class="task_list">
+            <tr>
+                <th>{% trans 'Do' %}!</th><th>{% trans 'Needed' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
+            </tr>
+            {% for task in other_tasks %}
+            <tr>
+                <td><input type="checkbox" /></td>
+                <td>{{ task.nbr_volunteers }}</td>
+                <td>{{ task.date }} ( {{ task.start_time }} - {{ task.end_time }} )</td>
+                <td title="{{ task.description }}">{{ task.name }}</td>
+                {% if task.volunteers_assigned == 0 %}
+                <td class="red" title="{% trans 'More volunteers needed' %}"></td>
+                {% elif task.volunteers_assigned == task.nbr_volunteers %}
+                <td class="green" title="{% trans 'Full' %}"></td>
+                {% else %}
+                <td class="gray" title="{% trans 'Stable' %}"></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+    <input type="submit" value="{% trans "Save changes" %}" />
+</form>
 
 {% if is_paginated %}
 <div class="pagination">
