@@ -1,4 +1,5 @@
 from models import VolunteerCategory, TaskCategory, Task
+from forms import EditProfileForm
 
 from django.db.models import Count
 from django.contrib import messages
@@ -7,7 +8,6 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 
 from userena.utils import get_user_model
-from userena.forms import EditProfileForm
 from userena.decorators import secure_required
 from userena import settings as userena_settings
 from userena.views import ExtraContextTemplateView, get_profile_model
