@@ -1,9 +1,11 @@
 # django stuff
 Django==1.5.4
+dj-static==0.0.5
 
 # database stuff
 South==0.8.4
 psycopg2==2.4.5
+dj_database_url==0.2.2
 
 # userena stuff
 django-userena==1.2.4
