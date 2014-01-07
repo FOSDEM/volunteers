@@ -1,6 +1,7 @@
 # django stuff
 Django==1.5.4
 dj-static==0.0.5
+gunicorn==18.0
 
 # database stuff
 South==0.8.4
