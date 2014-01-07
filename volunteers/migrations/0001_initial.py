@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
@@ -49,15 +49,6 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'volunteers', ['TaskCategory'])
 
-        # Adding M2M table for field volunteers on 'TaskCategory'
-        m2m_table_name = db.shorten_name(u'volunteers_taskcategory_volunteers')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('taskcategory', models.ForeignKey(orm[u'volunteers.taskcategory'], null=False)),
-            ('volunteer', models.ForeignKey(orm[u'volunteers.volunteer'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['taskcategory_id', 'volunteer_id'])
-
         # Adding model 'TaskTemplate'
         db.create_table(u'volunteers_tasktemplate', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -71,7 +62,7 @@ class Migration(SchemaMigration):
         db.create_table(u'volunteers_task', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('description', self.gf('django.db.models.fields.TextField')()),
             ('date', self.gf('django.db.models.fields.DateField')()),
             ('start_time', self.gf('django.db.models.fields.TimeField')()),
             ('end_time', self.gf('django.db.models.fields.TimeField')()),
@@ -81,41 +72,17 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'volunteers', ['Task'])
 
-        # Adding M2M table for field volunteers on 'Task'
-        m2m_table_name = db.shorten_name(u'volunteers_task_volunteers')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('task', models.ForeignKey(orm[u'volunteers.task'], null=False)),
-            ('volunteer', models.ForeignKey(orm[u'volunteers.volunteer'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['task_id', 'volunteer_id'])
-
         # Adding model 'Volunteer'
         db.create_table(u'volunteers_volunteer', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('mugshot', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
+            ('privacy', self.gf('django.db.models.fields.CharField')(default='registered', max_length=15)),
+            ('language', self.gf('django.db.models.fields.CharField')(default='en', max_length=5)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(related_name='volunteer', unique=True, to=orm['auth.User'])),
+            ('signed_up', self.gf('django.db.models.fields.DateField')(default=datetime.date.today)),
+            ('about_me', self.gf('django.db.models.fields.TextField')(blank=True)),
         ))
         db.send_create_signal(u'volunteers', ['Volunteer'])
-
-        # Adding M2M table for field categories on 'Volunteer'
-        m2m_table_name = db.shorten_name(u'volunteers_volunteer_categories')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('volunteer', models.ForeignKey(orm[u'volunteers.volunteer'], null=False)),
-            ('taskcategory', models.ForeignKey(orm[u'volunteers.taskcategory'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['volunteer_id', 'taskcategory_id'])
-
-        # Adding M2M table for field tasks on 'Volunteer'
-        m2m_table_name = db.shorten_name(u'volunteers_volunteer_tasks')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('volunteer', models.ForeignKey(orm[u'volunteers.volunteer'], null=False)),
-            ('task', models.ForeignKey(orm[u'volunteers.task'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['volunteer_id', 'task_id'])
 
         # Adding model 'VolunteerStatus'
         db.create_table(u'volunteers_volunteerstatus', (
@@ -125,6 +92,22 @@ class Migration(SchemaMigration):
             ('edition', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['volunteers.Edition'])),
         ))
         db.send_create_signal(u'volunteers', ['VolunteerStatus'])
+
+        # Adding model 'VolunteerTask'
+        db.create_table(u'volunteers_volunteertask', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('volunteer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['volunteers.Volunteer'])),
+            ('task', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['volunteers.Task'])),
+        ))
+        db.send_create_signal(u'volunteers', ['VolunteerTask'])
+
+        # Adding model 'VolunteerCategory'
+        db.create_table(u'volunteers_volunteercategory', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('volunteer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['volunteers.Volunteer'])),
+            ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['volunteers.TaskCategory'])),
+        ))
+        db.send_create_signal(u'volunteers', ['VolunteerCategory'])
 
 
     def backwards(self, orm):
@@ -140,29 +123,23 @@ class Migration(SchemaMigration):
         # Deleting model 'TaskCategory'
         db.delete_table(u'volunteers_taskcategory')
 
-        # Removing M2M table for field volunteers on 'TaskCategory'
-        db.delete_table(db.shorten_name(u'volunteers_taskcategory_volunteers'))
-
         # Deleting model 'TaskTemplate'
         db.delete_table(u'volunteers_tasktemplate')
 
         # Deleting model 'Task'
         db.delete_table(u'volunteers_task')
 
-        # Removing M2M table for field volunteers on 'Task'
-        db.delete_table(db.shorten_name(u'volunteers_task_volunteers'))
-
         # Deleting model 'Volunteer'
         db.delete_table(u'volunteers_volunteer')
 
-        # Removing M2M table for field categories on 'Volunteer'
-        db.delete_table(db.shorten_name(u'volunteers_volunteer_categories'))
-
-        # Removing M2M table for field tasks on 'Volunteer'
-        db.delete_table(db.shorten_name(u'volunteers_volunteer_tasks'))
-
         # Deleting model 'VolunteerStatus'
         db.delete_table(u'volunteers_volunteerstatus')
+
+        # Deleting model 'VolunteerTask'
+        db.delete_table(u'volunteers_volunteertask')
+
+        # Deleting model 'VolunteerCategory'
+        db.delete_table(u'volunteers_volunteercategory')
 
 
     models = {
@@ -223,7 +200,7 @@ class Migration(SchemaMigration):
         u'volunteers.task': {
             'Meta': {'object_name': 'Task'},
             'date': ('django.db.models.fields.DateField', [], {}),
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'description': ('django.db.models.fields.TextField', [], {}),
             'end_time': ('django.db.models.fields.TimeField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
@@ -231,14 +208,14 @@ class Migration(SchemaMigration):
             'start_time': ('django.db.models.fields.TimeField', [], {}),
             'talk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.Talk']", 'null': 'True', 'blank': 'True'}),
             'template': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.TaskTemplate']"}),
-            'volunteers': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['volunteers.Volunteer']", 'symmetrical': 'False'})
+            'volunteers': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['volunteers.Volunteer']", 'null': 'True', 'through': u"orm['volunteers.VolunteerTask']", 'blank': 'True'})
         },
         u'volunteers.taskcategory': {
             'Meta': {'object_name': 'TaskCategory'},
             'description': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'volunteers': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['volunteers.Volunteer']", 'symmetrical': 'False'})
+            'volunteers': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['volunteers.Volunteer']", 'null': 'True', 'through': u"orm['volunteers.VolunteerCategory']", 'blank': 'True'})
         },
         u'volunteers.tasktemplate': {
             'Meta': {'object_name': 'TaskTemplate'},
@@ -258,18 +235,34 @@ class Migration(SchemaMigration):
         },
         u'volunteers.volunteer': {
             'Meta': {'object_name': 'Volunteer'},
-            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['volunteers.TaskCategory']", 'symmetrical': 'False'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'about_me': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['volunteers.TaskCategory']", 'null': 'True', 'through': u"orm['volunteers.VolunteerCategory']", 'blank': 'True'}),
+            'editions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['volunteers.Edition']", 'null': 'True', 'through': u"orm['volunteers.VolunteerStatus']", 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'tasks': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['volunteers.Task']", 'symmetrical': 'False'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+            'language': ('django.db.models.fields.CharField', [], {'default': "'en'", 'max_length': '5'}),
+            'mugshot': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
+            'privacy': ('django.db.models.fields.CharField', [], {'default': "'registered'", 'max_length': '15'}),
+            'signed_up': ('django.db.models.fields.DateField', [], {'default': 'datetime.date.today'}),
+            'tasks': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['volunteers.Task']", 'null': 'True', 'through': u"orm['volunteers.VolunteerTask']", 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'volunteer'", 'unique': 'True', 'to': u"orm['auth.User']"})
+        },
+        u'volunteers.volunteercategory': {
+            'Meta': {'object_name': 'VolunteerCategory'},
+            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.TaskCategory']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'volunteer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.Volunteer']"})
         },
         u'volunteers.volunteerstatus': {
             'Meta': {'object_name': 'VolunteerStatus'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'edition': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.Edition']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'volunteer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.Volunteer']"})
+        },
+        u'volunteers.volunteertask': {
+            'Meta': {'object_name': 'VolunteerTask'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'task': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.Task']"}),
             'volunteer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.Volunteer']"})
         }
     }

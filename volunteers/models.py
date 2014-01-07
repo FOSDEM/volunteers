@@ -133,8 +133,6 @@ class Volunteer(UserenaLanguageBaseProfile):
         return self.name
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
     # Categories in which they're interested to help out.
     categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True)
     # Tasks for which they've signed up.
