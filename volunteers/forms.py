@@ -7,8 +7,17 @@ from django.forms.extras.widgets import SelectDateWidget
 
 from userena.utils import get_profile_model
 
-class AddTasks(forms.Form):
+class AddTasksForm(forms.Form):
     tasks = forms.ModelMultipleChoiceField(queryset=VolunteerTask.objects.none(), widget=forms.CheckboxSelectMultiple())
+
+class EditTasksForm(forms.Form):
+    #do = forms.BooleanField(label=_(u'Do'), required=False)
+    #nbr_volunteers = forms.IntegerField(label=_(u'Assigned volunteers'), required=True)
+    date = forms.TimeField(label=_(u'Date'), required=True)
+    start_time = forms.TimeField(label=_(u'Start time'), required=True)
+    end_time = forms.TimeField(label=_(u'End time'), required=True)
+    name = forms.CharField(label=_(u'Name'), max_length=30, required=True)
+    description = forms.CharField(label=_(u'Description'), max_length=30, required=False, widget=forms.Textarea)
 
 class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
