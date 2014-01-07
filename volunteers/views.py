@@ -1,8 +1,10 @@
-from models import VolunteerCategory, TaskCategory, Task
+from models import Volunteer, VolunteerTask, VolunteerCategory, TaskCategory, Task
 from forms import EditProfileForm
+from forms import EditTasksForm
 
 from django.db.models import Count
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
@@ -17,11 +19,48 @@ from guardian.decorators import permission_required_or_403
 def promo(request):
     return render(request, 'static/promo.html')
 
-def task_list(request):
-    categories = TaskCategory.objects.filter(volunteer=request.user)
+def task_add(request):
+    task = Task.objects.filter(name="Shity task for moderation")
     context = {}
-    context['interesting_tasks'] = Task.objects.filter(template__category__in=categories).annotate(volunteers_assigned=Count('volunteers'))
+    context['form'] = EditTasksForm(initial={})
+    return render(request, 'static/tasks.html', context) 
+
+def task_list(request):
+    # get the signed in volunteer
+    volunteer = Volunteer.objects.get(user=request.user)
+
+    # when the user submitted the form
+    if request.method == 'POST':
+        # get the checked tasks
+        ids = request.POST.getlist('task')
+
+        # go trough all the checked tasks
+        for task in Task.objects.filter(id__in=ids):
+            # when the volunteer is not assigned to this task
+            if volunteer not in task.volunteers.all():
+                # add him/her
+                VolunteerTask(task=task, volunteer=volunteer).save()
+
+        # go trough all the not checked tasks
+        for task in Task.objects.exclude(id__in=ids):
+            # delete him/her
+            VolunteerTask.objects.filter(task=task, volunteer=volunteer).delete()
+    
+    # get the categories the volunteer is interested in
+    categories = TaskCategory.objects.filter(volunteer=request.user)
+    # get the interesting and other tasks
+    context = {}
+    context['volunteer'] = volunteer
+    context['interesting_tasks'] = list(Task.objects.filter(template__category__in=categories).annotate(volunteers_assigned=Count('volunteers')))
     context['other_tasks'] = Task.objects.exclude(template__category__in=categories).annotate(volunteers_assigned=Count('volunteers'))
+    
+    context['checked'] = {}
+    for task in context['interesting_tasks']:
+        context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
+
+    for task in context['other_tasks']:
+        context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
+
     return render(request, 'static/tasks.html', context)
 
 @secure_required
