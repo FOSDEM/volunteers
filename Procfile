@@ -1,1 +1,1 @@
-web: python manage.py runserver
+web: gunicorn volunteer_mgmt.wsgi
