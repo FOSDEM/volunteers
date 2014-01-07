@@ -130,7 +130,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         verbose_name_plural = _('Volunteers')
 
     def __unicode__(self):
-        return self.name
+        return self.user.username
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
     # Categories in which they're interested to help out.
