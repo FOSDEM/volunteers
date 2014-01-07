@@ -1,11 +1,12 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
 {% load url from future %}
+{% load volunteer_extras %}
 
 {% block content_title %}<h2 class="content-title">{% trans 'Tasks' %}</h2>{% endblock %}
 
 {% block content %}
-<form class="task_list">
+<form class="task_list" action="/tasks/" method="post">{% csrf_token %}
     <fieldset>
         <legend class="task_list">{% trans 'Interesting tasks' %} <span style="font-size: small; font-weight: normal;">({% trans 'Change in profile' %})</span></legend>
         <table class="task_list">
@@ -14,9 +15,9 @@
             </tr>
             {% for task in interesting_tasks %}
             <tr>
-                <td><input type="checkbox" /></td>
+                <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
                 <td>{{ task.nbr_volunteers }}</td>
-                <td>{{ task.date }} ( {{ task.start_time }} - {{ task.end_time }} )</td>
+                <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time }}></td>
                 <td title="{{ task.description }}">{{ task.name }}</td>
                 {% if task.volunteers_assigned == 0 %}
                 <td class="red" title="{% trans 'More volunteers needed' %}"></td>
@@ -38,7 +39,7 @@
             </tr>
             {% for task in other_tasks %}
             <tr>
-                <td><input type="checkbox" /></td>
+                <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
                 <td>{{ task.nbr_volunteers }}</td>
                 <td>{{ task.date }} ( {{ task.start_time }} - {{ task.end_time }} )</td>
                 <td title="{{ task.description }}">{{ task.name }}</td>
