@@ -18,6 +18,7 @@ MANAGERS = ADMINS
 
 # When on heroku
 if dj_database_url.config():
+    DATABASES = {}
     DATABASES['default'] = dj_database_url.config();
 # When on localhost
 else:
