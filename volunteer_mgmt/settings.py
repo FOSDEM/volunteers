@@ -1,7 +1,10 @@
 # Django settings for volunteer_mgmt project.
 
 import os
+import dj_database_url
+
 settings_dir = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
 
 DEBUG = True
@@ -13,24 +16,29 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'volunteers',                               # Or path to database file if using sqlite3.
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',                                # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                                         # Set to empty string for default.
+# When on heroku
+if dj_database_url.config():
+    DATABASES['default'] = dj_database_url.config();
+# When on localhost
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'volunteers',                               # Or path to database file if using sqlite3.
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',                                # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '',                                         # Set to empty string for default.
+        }
     }
-}
 
 # Django Userena configs
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = ''
+EMAIL_HOST_USER = os.environ['SMTP_USERNAME']
+EMAIL_HOST_PASSWORD = os.environ['SMTP_PASSWORD']
+DEFAULT_FROM_EMAIL = os.environ['SMTP_FROM_EMAIL']
 
 SITE_ID = 1
 ANONYMOUS_USER_ID = -1
@@ -40,9 +48,13 @@ USERENA_DISABLE_PROFILE_LIST = False
 USERENA_MUGSHOT_SIZE = 140
 TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -80,7 +92,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = 'staticfiles'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -92,6 +104,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_ROOT, 'volunteers/static/'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 # List of finder classes that know how to find static files in
