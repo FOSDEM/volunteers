@@ -11,12 +11,12 @@
         <legend class="task_list">{% trans 'Interesting tasks' %} <span style="font-size: small; font-weight: normal;">({% trans 'Change in profile' %})</span></legend>
         <table class="task_list">
             <tr>
-                <th>{% trans 'Do' %}!</th><th>{% trans 'Needed' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
+                <th>{% trans 'Do' %}!</th><th>{% trans 'Volunteers' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
             </tr>
             {% for task in interesting_tasks %}
             <tr>
                 <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
-                <td>{{ task.nbr_volunteers }}</td>
+                <td>{{task.volunteers_assigned}}/{{ task.nbr_volunteers }}</td>
                 <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time }}></td>
                 <td title="{{ task.description }}">{{ task.name }}</td>
                 {% if task.volunteers_assigned == 0 %}
@@ -35,12 +35,12 @@
         <legend class="task_list">{% trans 'Other tasks' %}</legend>
         <table class="task_list">
             <tr>
-                <th>{% trans 'Do' %}!</th><th>{% trans 'Needed' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
+                <th>{% trans 'Do' %}!</th><th>{% trans 'Volunteers' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
             </tr>
             {% for task in other_tasks %}
             <tr>
                 <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
-                <td>{{ task.nbr_volunteers }}</td>
+                <td>{{task.volunteers_assigned}}/{{ task.nbr_volunteers }}</td>
                 <td>{{ task.date }} ( {{ task.start_time }} - {{ task.end_time }} )</td>
                 <td title="{{ task.description }}">{{ task.name }}</td>
                 {% if task.volunteers_assigned == 0 %}
