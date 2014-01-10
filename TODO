@@ -20,3 +20,29 @@
 
 - [ ] When viewing the tasks page, the previously selected tasks are not selected. The values are stored in the DB, but the form doesn't display the previous selection.
 - [ ] When saving the selection, the old one is cleared and the new one stored. Maybe an update would be a better and more efficient approach?
+
+
+
+# Remarks from Mark:
+
+## Front page:
+- [ ] fix page title: 'fostemers management" -> "FOSDEM 2014: Make it happen! volunteer!" (or something similarly descriptive)
+- [ ] always visible: mailing list info, Juan & Mark contact info (you can also add my phone number there, don't know about Juan)
+
+### Not logged in:
+ - [ ] short call to action. example, loosely adapted from the call for action:"FOSDEM 2014(link) needs your help as a volunteer. From Friday noon 20140131 at 12:00 until Sunday 20140202 at 1:00, an enthusiastic band of volunteers helps us make FOSDEM a fun and safe place for all visitors. We can't do this without you. We need as many hands as possible, especially during buildup and teardown. Do you have some spare time during weekend? Would you like to be a part of the team that makes FOSDEM tick?"
+ - [ ] big central basic signup form. Think like the one at https://basecamp.com/
+ - [ ] drop as much of the other content as possible. it distracts from the message
+### At first login after email confirmation:
+ - [ ] complete your user profile (see below)
+
+## User profile:
+- [ ] We need a mobile phone number in the user profile. This has been discussed in the past and proven invaluable. Some explanation why we need it would be most appropriate. => we need to be able to quickly contact volunteers in case of emergencies.
+- [ ] STILL DISCUSSING; PERSONALLY I DISAGREE WITH MARK. I LIKE THE CAREFREE LANGUAGE USED IN THE TOOL. Mugshot is really useful. I would give it a more descriptive label though, like "ID photo". This also _really_ need some explanation why we want it: Staff and volunteers need to be able to quickly recognise people they've never worked before with during the event.
+- [ ] Only main language is mentioned. I'd love to see a list of languages that is easy to tick off for the most common ones. Somewhat in order of usefullness: en, fr, de, nl, es. Maybe a dropdown for less common ones? Minor wishlist request. Let's  not forget minority languages (Catalan, Basque, ...) => agree, but not necessarily with the specific implementation proposed. See my mail about how the search field works in OpenERP V7.
+- [ ] Minor nitpick: "teardown" is before "buildup" in the list task at hand. => Already mentioned above; this list needs to be ordered chronologically.
+- [ ] Tasks need some n => Waiting for Mark to finish that sentence. ;)
+- [ ] STILL DISCUSSING; PERSONALLY I DISAGREE WITH MARK. Profiles should be as public as possible, to make communication at the conf as easy as possible:
+ 1. public by default (with some warning explaining why!)
+ 2. volunteers and staff only (also printed lists at the event!)
+ 3. visible to admins only
