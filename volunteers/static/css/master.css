@@ -875,42 +875,43 @@ p.date {
 /*  tasks list
 ................................... */
 
-form.task_list {
+form.task_list, form.talk_list {
     width: 90%;
     margin-right: auto;
     margin-left: auto;
 }
 
-legend.task_list {
+legend.task_list, legend.talk_list {
     border: none;
 }
 
-table.task_list {
+table.task_list, table.talk_list {
     width: 100%;
     text-align: center;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
 
-table.task_list tr td, table.task_list tr th {
+table.task_list tr td, table.task_list tr th,
+table.talk_list tr td, table.talk_list tr th {
     padding: 0 10px 0 10px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
 
 }
 
-table.task_list tr th {
+table.task_list tr th, table.talk_list tr th {
     border-bottom: 1px solid #ddd;
 }
 
-table.task_list tr td.red {
+table.task_list tr td.red, table.talk_list tr td.red {
     background-color: red;
 }
 
-table.task_list tr td.gray {
+table.task_list tr td.gray, table.talk_list tr td.gray {
     background-color: gray;
 }
 
-table.task_list tr td.green {
+table.task_list tr td.green, table.talk_list tr td.green {
     background-color: green;
 }
