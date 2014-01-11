@@ -116,7 +116,9 @@ class Task(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    nbr_volunteers = models.IntegerField()
+    nbr_volunteers = models.IntegerField(default=0)
+    nbr_volunteers_min = models.IntegerField(default=0)
+    nbr_volunteers_max = models.IntegerField(default=0)
     # Only for moderation, or possible future tasks related
     # to a specific talk.
     talk = models.ForeignKey(Talk, blank=True, null=True)
@@ -133,7 +135,7 @@ class Language(models.Model):
     class Meta:
         verbose_name = _('Language')
         verbose_name_plural = _('Languages')
-		
+
     def __unicode__(self):
         return self.task
 
