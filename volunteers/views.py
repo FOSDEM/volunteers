@@ -20,10 +20,8 @@ def promo(request):
     return render(request, 'static/promo.html')
 
 def task_add(request):
-    task = Task.objects.filter(name="Shity task for moderation")
-    context = {}
-    context['form'] = EditTasksForm(initial={})
-    return render(request, 'static/tasks.html', context) 
+    context = { 'form': EditTasksForm() }
+    return render(request, 'volunteers/tasks.html', context) 
 
 def task_list(request):
     # get the signed in volunteer
@@ -61,7 +59,7 @@ def task_list(request):
     for task in context['other_tasks']:
         context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
 
-    return render(request, 'static/tasks.html', context)
+    return render(request, 'volunteers/tasks.html', context)
 
 @secure_required
 @permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))
