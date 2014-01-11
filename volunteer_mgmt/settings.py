@@ -49,6 +49,16 @@ USERENA_DISABLE_PROFILE_LIST = False
 USERENA_MUGSHOT_SIZE = 140
 TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 
+_ = lambda s: s
+LANGUAGES = (
+    ('--', _('select here')),
+    ('en', _('English')),
+    ('fr', _('Francais')),
+    ('de', _('Deutsch')),
+    ('nl', _('Nederlands')),
+    ('es', _('Espanol')),
+)
+
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
