@@ -19,7 +19,11 @@ def promo(request):
     return render(request, 'static/promo.html')
 
 def talk_list(request):
-    context = {}
+    context = { 'tracks': {} }
+    tracks = Track.objects.all()
+    for track in tracks:
+        context['tracks'][track.title] = Talk.objects.filter(track=track)
+    print context
     return render(request, 'volunteers/talks.html', context)
 
 def task_list(request):
