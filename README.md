@@ -15,8 +15,3 @@ python manage.py check_permissions
 python manage.py runserver
 firefox 127.0.0.1:8000
 ```
-
-CREDITS ^_^
-===========
-* Django developers
-* postgre developers
