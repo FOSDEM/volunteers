@@ -10,6 +10,7 @@ class Edition(models.Model):
     class Meta:
         verbose_name = _('Edition')
         verbose_name_plural = _('Editions')
+        ordering = ['-year']
 
     def __unicode__(self):
         return unicode(self.year)
@@ -27,6 +28,7 @@ class Track(models.Model):
     class Meta:
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
+        ordering = ['date','start_time','-end_time','title']
 
     def __unicode__(self):
         return self.title
@@ -42,6 +44,7 @@ class Talk(models.Model):
     class Meta:
         verbose_name = _('Talk')
         verbose_name_plural = _('Talks')
+        ordering = ['date','start_time','-end_time','title']
 
     def __unicode__(self):
         return self.title
@@ -62,6 +65,7 @@ class TaskCategory(models.Model):
     class Meta:
         verbose_name = _('Task Category')
         verbose_name_plural = _('Task Categories')
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -84,6 +88,7 @@ class TaskTemplate(models.Model):
     class Meta:
         verbose_name = _('Task Template')
         verbose_name_plural = _('Task Templates')
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -101,6 +106,7 @@ class Task(models.Model):
     class Meta:
         verbose_name = _('Task')
         verbose_name_plural = _('Tasks')
+        ordering = ['date','start_time','-end_time','name']
 
     def __unicode__(self):
         return self.name
