@@ -1,4 +1,3 @@
-# Compiled source #
-###################
 *.pyc
 mugshots
+*.sqlite

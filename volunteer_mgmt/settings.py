@@ -23,22 +23,26 @@ if dj_database_url.config():
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'volunteers',                               # Or path to database file if using sqlite3.
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': '127.0.0.1',                                # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-            'PORT': '',                                         # Set to empty string for default.
+            # 'django.db.backends.' +  'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'ENGINE': os.environ.get('VOLUNTEER_DB_TYPE', 'django.db.backends.sqlite3'),
+            # Or path to database file if using sqlite3.
+            'NAME': os.environ.get('VOLUNTEER_DB_NAME', 'volunteers_db.sqlite'),
+            'USER': os.environ.get('VOLUNTEER_DB_USER'),
+            'PASSWORD': os.environ.get('VOLUNTEER_DB_PASS'),
+            # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'HOST': os.environ.get('VOLUNTEER_DB_HOST'),
+            # Set to empty string for default.
+            'PORT': os.environ.get('VOLUNTEER_DB_PORT'),
         }
     }
 
 # Django Userena configs
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = os.environ.get('SMTP_HOST', 'localhost')
 EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME')
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
-DEFAULT_FROM_EMAIL = os.environ.get('SMTP_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = os.environ.get('SMTP_FROM_EMAIL', 'noreply@example.com')
 
 SITE_ID = 1
 ANONYMOUS_USER_ID = -1
@@ -123,7 +127,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ.get('SESSION_SECRET')
+SECRET_KEY = os.environ.get('VOLUNTEER_SESSION_SECRET')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

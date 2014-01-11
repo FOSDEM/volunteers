@@ -184,7 +184,7 @@ html, body {
     padding: 6px;
     text-align: left;
     -webkit-border-radius: 7px;
-    -moz-border-radius: 7px; 
+    -moz-border-radius: 7px;
     border-radius: 7px;
     -moz-box-shadow: 0 0 3px #999;
     -webkit-box-shadow: 0 0 3px #999;
@@ -208,7 +208,7 @@ html, body {
 /*	Type
 ................................... */
 
-h1, h2, h3, h4, h5, h6 { 
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Droid Sans',
     helvetica, arial, Geneva, sans-serif;
     text-transform: uppercase;
@@ -240,7 +240,7 @@ h1 {
 h2.content-title {
     font-size: 1.5em;
     margin: 10px;
-    padding: 15px 15px 12px;	
+    padding: 15px 15px 12px;
     background: #e7e2de no-repeat 90px 30px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -776,7 +776,7 @@ ul.messages li {
     padding: 15px 10px;
     margin: 0;
     overflow: auto;
-}  
+}
 
 #messages li a {
     font-weight: bold;
@@ -864,7 +864,7 @@ p.date {
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     border-radius: 7px;
-} 
+}
 
 #account_list li a {
     font-size: 0.9em;
@@ -887,7 +887,7 @@ legend.task_list, legend.talk_list {
 
 table.task_list, table.talk_list {
     width: 100%;
-    text-align: center;
+    text-align: left;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
@@ -905,13 +905,21 @@ table.task_list tr th, table.talk_list tr th {
 }
 
 table.task_list tr td.red, table.talk_list tr td.red {
-    background-color: red;
+    color: red;
+    font-weight: bold;
 }
 
 table.task_list tr td.gray, table.talk_list tr td.gray {
-    background-color: gray;
+    color: gray;
+    font-weight: bold;
 }
 
 table.task_list tr td.green, table.talk_list tr td.green {
-    background-color: green;
+    color: green;
+    font-weight: bold;
+}
+
+table.task_list tr td.blue, table.talk_list tr td.blue {
+    color: blue;
+    font-weight: bold;
 }

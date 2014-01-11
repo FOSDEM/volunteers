@@ -55,7 +55,7 @@ class TaskTemplateAdmin(admin.ModelAdmin):
 
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['name', 'nbr_volunteers', 'date', 'start_time', 'end_time']}),
+        (None, {'fields': ['name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date', 'start_time', 'end_time']}),
         (None, {'fields': ['talk', 'template']}),
         (None, {'fields': ['description']}),
     ]
