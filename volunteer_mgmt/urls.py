@@ -26,4 +26,5 @@ urlpatterns = patterns('',
     url(r'^messages/', include('userena.contrib.umessages.urls')),
     # other urls:
     url(r'^tasks/', 'volunteers.views.task_list', name='task_list'),
+    url(r'^talks/', 'volunteers.views.talk_list', name='talk_list'),
 )

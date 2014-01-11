@@ -1,6 +1,5 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, TaskCategory, Task
+from models import Volunteer, VolunteerTask, VolunteerCategory, TaskCategory, Task, Track, Talk
 from forms import EditProfileForm
-from forms import EditTasksForm
 
 from django.db.models import Count
 from django.contrib import messages
@@ -19,9 +18,9 @@ from guardian.decorators import permission_required_or_403
 def promo(request):
     return render(request, 'static/promo.html')
 
-def task_add(request):
-    context = { 'form': EditTasksForm() }
-    return render(request, 'volunteers/tasks.html', context) 
+def talk_list(request):
+    context = {}
+    return render(request, 'volunteers/talks.html', context)
 
 def task_list(request):
     # get the signed in volunteer

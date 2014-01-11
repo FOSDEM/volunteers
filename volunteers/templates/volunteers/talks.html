@@ -1,0 +1,54 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load volunteer_extras %}
+
+{% block content_title %}<h2 class="content-title">{% trans 'Talks' %}</h2>{% endblock %}
+
+{% block content %}
+<form class="task_list" action="/tasks/" method="post">{% csrf_token %}
+    <fieldset>
+        <legend class="talk_list">{% trans 'Talks' %} <span style="font-size: small; font-weight: normal;">({% trans 'Change in profile' %})</span></legend>
+        <table class="talk_list">
+            <tr>
+                <th>{% trans 'Go' %}!</th><th>{% trans 'Volunteers' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
+            </tr>
+            {% for track in tracks %}
+            <tr>
+                <td><input type="checkbox" name="talk" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
+                <td>{{task.volunteers_assigned}}/{{ task.nbr_volunteers }}</td>
+                <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time }}></td>
+                <td title="{{ task.description }}">{{ task.name }}</td>
+                {% if task.volunteers_assigned == 0 %}
+                <td class="red" title="{% trans 'More volunteers needed' %}"></td>
+                {% elif task.volunteers_assigned == task.nbr_volunteers %}
+                <td class="green" title="{% trans 'Full' %}"></td>
+                {% else %}
+                <td class="gray" title="{% trans 'Stable' %}"></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </fieldset>
+    <input type="submit" value="{% trans "Save changes" %}" />
+</form>
+
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="{% url 'userena_profile_list_paginated' page_obj.previous_page_number %}">{% trans 'previous' %}</a>
+        {% endif %}
+
+        <span class="current">
+            {% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="{% url 'userena_profile_list_paginated'  page_obj.next_page_number %}">{% trans 'next' %}</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% endblock %}
