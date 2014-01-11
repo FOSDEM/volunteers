@@ -146,6 +146,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
+    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
 
 
 """
