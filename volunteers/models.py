@@ -126,6 +126,7 @@ class Task(models.Model):
     def assigned_volunteers(self):
         return self.volunteer_set.count()
 
+
 """
 table to contain the language names and ISO codes
 """
@@ -210,6 +211,7 @@ class VolunteerCategory(models.Model):
     volunteer = models.ForeignKey(Volunteer)
     category = models.ForeignKey(TaskCategory)
 
+
 """
 link table between volunteers and languages
 """
@@ -224,3 +226,17 @@ class VolunteerLanguage(models.Model):
     volunteer = models.ForeignKey(Volunteer)
     language = models.ForeignKey(Language)
 
+
+"""
+link table between volunteers and talks
+"""
+class VolunteerTalk(models.Model):
+    class Meta:
+        verbose_name = _('VolunteerTalk')
+        verbose_name_plural = _('VolunteerTalks')
+
+    def __unicode__(self):
+        return self.talk
+
+    volunteer = models.ForeignKey(Volunteer)
+    language = models.ForeignKey(Language)
