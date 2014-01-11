@@ -7,30 +7,24 @@
 
 {% block content %}
 <form class="task_list" action="/tasks/" method="post">{% csrf_token %}
+    {% for track, talks in tracks.items %}
     <fieldset>
-        <legend class="talk_list">{% trans 'Talks' %} <span style="font-size: small; font-weight: normal;">({% trans 'Change in profile' %})</span></legend>
+        <legend class="talk_list">{{ track }}</legend>
         <table class="talk_list">
             <tr>
-                <th>{% trans 'Go' %}!</th><th>{% trans 'Volunteers' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Name' %}</th><th></th>
+                <th>{% trans 'Go' %}!</th><th>{% trans 'Title' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Speaker' %}</th><th></th>
             </tr>
-            {% for track in tracks %}
+            {% for talk in talks %}
             <tr>
-                <td><input type="checkbox" name="talk" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
-                <td>{{task.volunteers_assigned}}/{{ task.nbr_volunteers }}</td>
-                <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time }}></td>
-                <td title="{{ task.description }}">{{ task.name }}</td>
-                {% if task.volunteers_assigned == 0 %}
-                <td class="red" title="{% trans 'More volunteers needed' %}"></td>
-                {% elif task.volunteers_assigned == task.nbr_volunteers %}
-                <td class="green" title="{% trans 'Full' %}"></td>
-                {% else %}
-                <td class="gray" title="{% trans 'Stable' %}"></td>
-                {% endif %}
+                <td><input type="checkbox" name="task" value="{{ talk.id }}"  /></td>
+                <td title="{{ talk.description }}">{{ talk.title }}</td>
+                <td>{{ talk.date|date:"M d" }} <{{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}></td>
+                <td>{{ talk.speaker }}</td>
             </tr>
             {% endfor %}
         </table>
-        <br>
     </fieldset>
+    {% endfor %}
     <input type="submit" value="{% trans "Save changes" %}" />
 </form>
 
