@@ -5,10 +5,14 @@
 - [x] change their personal data (name, email)
 - [x] change the kind of tasks they're interested in (preferably with checkboxes, model TaskCategory)
 - [x] see all available tasks (model Task), but grouped in two boxes: on top the tasks from categories they've selected, at the bottom tasks in other categories, so they know what else is available
+- [x] assign and remove themselves to/from tasks
+- [ ] but not be able to select tasks that overlap
 - [x] see how many volunteers are needed and how many are assigned to any task, show understaffed tasks in red (in the two lists from previous item)
 - [ ] select talks they're interested in attending, from a list grouped by the tracks and ordered by start time within the tracks, tracks ordered by start time as well (models Talk and Track)
 - [ ] see the moderation tasks for talks they're attending in a different color, so it's clear these are good targets of opportunity
 - [ ] eventually, be able to print out their schedule; HTML or PDF (or both)
+- [ ] be able to see the people assigned to a task (friends like to do things together)
+- [ ] be able to see the the tasks a user has assigned himself to, on his profile (friends like to do things together)
 - [ ] anything else I might have overlooked
 
 ## The layout is currently very basic and ugly. The general layout should:
