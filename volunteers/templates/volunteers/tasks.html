@@ -17,7 +17,7 @@
             <tr>
                 <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
                 <td>{{task.volunteers_assigned}}/{{ task.nbr_volunteers }}</td>
-                <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time }}></td>
+                <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}></td>
                 <td title="{{ task.description }}">{{ task.name }}</td>
                 {% if task.volunteers_assigned == 0 %}
                 <td class="red" title="{% trans 'More volunteers needed' %}"></td>
