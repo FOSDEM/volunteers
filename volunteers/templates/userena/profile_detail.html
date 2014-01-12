@@ -31,13 +31,17 @@
     {% if profile.about_me %}
     <p><strong>{% trans "About me" %}</strong><br />{{ profile.about_me }}</p>
     {% endif %}
+    <strong>{% trans "Tasks" %}</strong><br />
     {% if profile.tasks %}
     <p>
-        <strong>{% trans "Tasks" %}</strong><br />
-        {% for task in tasks %}
-        {{ task.name }}
-        {% endfor %}
+        <ul>
+            {% for task in tasks %}
+            <li>{{ task.name }}</li>
+            {% endfor %}
+        </ul>
     </p>
+    {% else %}
+    {{ profile.user.get_full_name or profile.user }} hasn't signed up for any tasks yet.
     {% endif %}
     <p><strong>{% trans "Signed up" %}</strong><br />{{ profile.signed_up }}</p>
 </div>
