@@ -1,5 +1,5 @@
 from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk
-from forms import EditProfileForm
+from forms import EditProfileForm, SignupForm
 
 from django.db.models import Count
 from django.contrib import messages
@@ -10,8 +10,11 @@ from django.utils.datastructures import SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 
+
 from userena.utils import get_user_model
+from userena.forms import SignupFormOnlyEmail
 from userena.decorators import secure_required
+from userena import signals as userena_signals
 from userena import settings as userena_settings
 from userena.views import ExtraContextTemplateView, get_profile_model
 
@@ -20,8 +23,6 @@ from guardian.decorators import permission_required_or_403
 def promo(request):
     return render(request, 'static/promo.html')
 
-@secure_required
-@permission_required_or_403('talks_edit')
 def talk_list(request):
     # get the signed in volunteer
     volunteer = Volunteer.objects.get(user=request.user)
@@ -60,8 +61,6 @@ def talk_list(request):
 
     return render(request, 'volunteers/talks.html', context)
 
-@secure_required
-@permission_required_or_403('tasks_edit')
 def task_list(request):
     # get the signed in volunteer
     volunteer = Volunteer.objects.get(user=request.user)
@@ -135,6 +134,78 @@ def task_list_detailed(request, username):
         return render_to_pdf('volunteers/tasks_detailed.html', { 'pagesize':'A4', 'tasks': context['tasks'], })
 
     return render(request, 'volunteers/tasks_detailed.html', context)
+
+@secure_required
+def signup(request, signup_form=SignupForm,
+           template_name='userena/signup_form.html', success_url=None,
+           extra_context=None):
+    """
+    Signup of an account.
+
+    Signup requiring a username, email and password. After signup a user gets
+    an email with an activation link used to activate their account. After
+    successful signup redirects to ``success_url``.
+
+    :param signup_form:
+        Form that will be used to sign a user. Defaults to userena's
+        :class:`SignupForm`.
+
+    :param template_name:
+        String containing the template name that will be used to display the
+        signup form. Defaults to ``userena/signup_form.html``.
+
+    :param success_url:
+        String containing the URI which should be redirected to after a
+        successful signup. If not supplied will redirect to
+        ``userena_signup_complete`` view.
+
+    :param extra_context:
+        Dictionary containing variables which are added to the template
+        context. Defaults to a dictionary with a ``form`` key containing the
+        ``signup_form``.
+
+    **Context**
+
+    ``form``
+        Form supplied by ``signup_form``.
+
+    """
+    # If signup is disabled, return 403
+    if userena_settings.USERENA_DISABLE_SIGNUP:
+        raise PermissionDenied
+
+    # If no usernames are wanted and the default form is used, fallback to the
+    # default form that doesn't display to enter the username.
+    if userena_settings.USERENA_WITHOUT_USERNAMES and (signup_form == SignupForm):
+        signup_form = SignupFormOnlyEmail
+
+    form = signup_form()
+
+    if request.method == 'POST':
+        form = signup_form(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+
+            # Send the signup complete signal
+            userena_signals.signup_complete.send(sender=None, user=user)
+
+            if success_url: redirect_to = success_url
+            else: redirect_to = reverse('userena_signup_complete', kwargs={'username': user.username})
+
+            # A new signed user should logout the old one.
+            if request.user.is_authenticated():
+                logout(request)
+
+            if (userena_settings.USERENA_SIGNIN_AFTER_SIGNUP and
+                not userena_settings.USERENA_ACTIVATION_REQUIRED):
+                user = authenticate(identification=user.email, check_password=False)
+                login(request, user)
+
+            return redirect(redirect_to)
+
+    if not extra_context: extra_context = dict()
+    extra_context['form'] = form
+    return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
 
 @secure_required
 @permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))
