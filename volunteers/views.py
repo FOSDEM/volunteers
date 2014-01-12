@@ -230,6 +230,5 @@ def profile_detail(request, username,
     if not extra_context: extra_context = dict()
     extra_context['profile'] = user.get_profile()
     extra_context['tasks'] = Task.objects.filter(volunteers__user=user)
-    print Task.objects.filter(volunteers__user=user)
     extra_context['hide_email'] = userena_settings.USERENA_HIDE_EMAIL
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
