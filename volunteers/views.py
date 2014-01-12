@@ -3,6 +3,7 @@ from forms import EditProfileForm
 
 from django.db.models import Count
 from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.datastructures import SortedDict
@@ -105,14 +106,33 @@ def task_list(request):
 
     return render(request, 'volunteers/tasks.html', context)
 
-def task_list_detailed(request, username):
+import cStringIO as StringIO
+import ho.pisa as pisa
+from django.template.loader import get_template
+from django.template import Context
+from django.http import HttpResponse
+from cgi import escape
 
-    if request.POST:
-        return redirect('/tasks/'+username)
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    context = Context(context_dict)
+    html  = template.render(context)
+    result = StringIO.StringIO()
+
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
+
+def task_list_detailed(request, username):
 
     context = {}
     # get the requested users tasks
     context['tasks'] = Task.objects.filter(volunteers__user__username=username)
+
+    if request.POST:
+        # create the HttpResponse object with the appropriate PDF headers.
+        return render_to_pdf('volunteers/tasks_detailed.html', { 'pagesize':'A4', 'tasks': context['tasks'], })
 
     return render(request, 'volunteers/tasks_detailed.html', context)
 
