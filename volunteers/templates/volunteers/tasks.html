@@ -7,8 +7,9 @@
 
 {% block content %}
 <form class="task_list" action="/tasks/" method="post">{% csrf_token %}
+    {% for title, tasks in tasks.items %}
     <fieldset>
-        <legend class="task_list">{% trans 'Interesting tasks' %} <span style="font-size: small; font-weight: normal;">(<a href="/volunteers/{{ user.username }}/edit">{% trans 'Change in profile' %}</a>)</span></legend>
+        <legend class="task_list">{% trans title %} <span style="font-size: small; font-weight: normal;">(<a href="/volunteers/{{ user.username }}/edit">{% trans 'Change in profile' %}</a>)</span></legend>
         <table class="task_list">
             <tr>
                 <th>{% trans "I'm in" %}!</th>
@@ -16,54 +17,31 @@
                 <th>{% trans 'When' %}</th>
                 <th>{% trans 'Volunteers' %}</th>
             </tr>
-            {% for task in interesting_tasks %}
+            {% for task in tasks %}
             <tr>
                 <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
-                <td title="{{ task.description }}">{{ task.name }}</td>
+                {% if attending|get_item:task.id == True %}
+                <td class="special" title="{{ task.description }}">{{ task.name }}</td>
+                {% else %}
+                <td title="{{ task.description }}"><BLINK>{{ task.name }}</BLINK></td>
+                {% endif %}
                 <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}></td>
-                {% if task.volunteers_assigned == task.nbr_volunteers_max %}
+                {% if task.assigned_volunteers == task.nbr_volunteers_max %}
                 <td class="blue" title="{% trans 'Full' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
-                {% elif task.volunteers_assigned >= task.nbr_volunteers %}
+                {% elif task.assigned_volunteers >= task.nbr_volunteers %}
                 <td class="green" title="{% trans 'Staffed' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
-                {% elif task.volunteers_assigned >= task.nbr_volunteers_min %}
+                {% elif task.assigned_volunteers >= task.nbr_volunteers_min %}
                 <td class="gray" title="{% trans 'Manageable' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
                 {% else %}
                 <td class="red" title="{% trans 'More volunteers needed' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
                 {% endif %}
-                {{task.volunteers_assigned}}/{{ task.nbr_volunteers }}</td>
+                {{task.assigned_volunteers}}/{{ task.nbr_volunteers }}</td>
             </tr>
             {% endfor %}
         </table>
         <br>
     </fieldset>
-    <fieldset>
-        <legend class="task_list">{% trans 'Other tasks' %}</legend>
-        <table class="task_list">
-            <tr>
-                <th>{% trans "I'm in" %}!</th>
-                <th>{% trans 'Task' %}</th>
-                <th>{% trans 'When' %}</th>
-                <th>{% trans 'Volunteers' %}</th>
-            </tr>
-            {% for task in other_tasks %}
-            <tr>
-                <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
-                <td title="{{ task.description }}">{{ task.name }}</td>
-                <td>{{ task.date|date:"M d" }} <{{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}></td>
-                {% if task.volunteers_assigned == task.nbr_volunteers_max %}
-                <td class="blue" title="{% trans 'Full' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
-                {% elif task.volunteers_assigned >= task.nbr_volunteers %}
-                <td class="green" title="{% trans 'Staffed' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
-                {% elif task.volunteers_assigned >= task.nbr_volunteers_min %}
-                <td class="gray" title="{% trans 'Manageable' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
-                {% else %}
-                <td class="red" title="{% trans 'More volunteers needed' %}\n{% for volunteer in task.volunteers.all %}{{ volunteer.user.first_name }} {{ volunteer.user.last_name}}\n{% endfor %}">
-                {% endif %}
-                {{task.volunteers_assigned}}/{{ task.nbr_volunteers }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </fieldset>
+    {% endfor %}
     <input type="submit" value="{% trans "Save changes" %}" />
 </form>
 
