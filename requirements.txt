@@ -12,3 +12,4 @@ dj_database_url==0.2.2
 django-userena==1.2.4
 django-guardian==1.1.1
 easy-thumbnails==1.4
+pisa=3.0.33
