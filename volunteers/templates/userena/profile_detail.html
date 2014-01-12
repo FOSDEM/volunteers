@@ -41,7 +41,7 @@
         </ul>
     </p>
     {% else %}
-    {{ profile.user.get_full_name or profile.user }} hasn't signed up for any tasks yet.
+    {% if profile.user.get_full_name %}{{ profile.user.get_full_name }}{% else %}{{ profile.user }}{% endif %} hasn't signed up for any tasks yet.
     {% endif %}
     <p><strong>{% trans "Signed up" %}</strong><br />{{ profile.signed_up }}</p>
 </div>
