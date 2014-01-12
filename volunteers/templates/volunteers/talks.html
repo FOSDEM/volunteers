@@ -6,20 +6,25 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Talks' %}</h2>{% endblock %}
 
 {% block content %}
-<form class="task_list" action="/tasks/" method="post">{% csrf_token %}
+<form class="task_list" action="/talks/" method="post">{% csrf_token %}
     {% for track, talks in tracks.items %}
     <fieldset>
         <legend class="talk_list">{{ track }}</legend>
         <table class="talk_list">
             <tr>
-                <th>{% trans 'Go' %}!</th><th>{% trans 'Title' %}</th><th>{% trans 'When' %}</th><th>{% trans 'Speaker' %}</th><th></th>
+                <th>{% trans "I'm in" %}!</th>
+                <th>{% trans 'Title' %}</th>
+                <th>{% trans 'When' %}</th>
+                <th>{% trans 'Speaker' %}</th>
+                <th>{% trans 'Attending' %}</th>
             </tr>
             {% for talk in talks %}
             <tr>
-                <td><input type="checkbox" name="task" value="{{ talk.id }}"  /></td>
+                <td><input type="checkbox" name="talk" value="{{ talk.id }}" {{ checked|get_item:talk.id }} /></td>
                 <td title="{{ talk.description }}">{{ talk.title }}</td>
                 <td>{{ talk.date|date:"M d" }} <{{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}></td>
                 <td>{{ talk.speaker }}</td>
+                <td>{{ 0 }}</td>
             </tr>
             {% endfor %}
         </table>
