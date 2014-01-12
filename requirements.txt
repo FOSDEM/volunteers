@@ -13,3 +13,4 @@ django-userena==1.2.4
 django-guardian==1.1.1
 easy-thumbnails==1.4
 pisa==3.0.33
+reportlab==2.6
