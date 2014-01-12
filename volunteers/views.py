@@ -80,17 +80,17 @@ def task_list(request):
 
         # redirect to prevent repost
         return redirect('/tasks')
-    
+
     # get the categories the volunteer is interested in
     categories = TaskCategory.objects.filter(volunteer=request.user)
-    # get the interesting and other tasks, preserve key order with srteddict for view
+    # get the preferred and other tasks, preserve key order with srteddict for view
     context = { 'tasks': SortedDict({}), 'checked': {}, 'attending': {} }
     context['volunteer'] = volunteer
-    context['tasks']['interesting tasks'] = Task.objects.filter(template__category__in=categories)
+    context['tasks']['preferred tasks'] = Task.objects.filter(template__category__in=categories)
     context['tasks']['other tasks'] = Task.objects.exclude(template__category__in=categories)
 
     # mark checked, attending tasks
-    for task in context['tasks']['interesting tasks']:
+    for task in context['tasks']['preferred tasks']:
         context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
     for task in context['tasks']['other tasks']:
         context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
