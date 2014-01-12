@@ -1,4 +1,4 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, TaskCategory, Task, Track, Talk
+from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk
 from forms import EditProfileForm
 
 from django.db.models import Count
@@ -19,11 +19,41 @@ def promo(request):
     return render(request, 'static/promo.html')
 
 def talk_list(request):
-    context = { 'tracks': {} }
+    # get the signed in volunteer
+    volunteer = Volunteer.objects.get(user=request.user)
+
+    # when the user submitted the form
+    if request.method == 'POST':
+        # get the checked tasks
+        talk_ids = request.POST.getlist('talk')
+
+        # go trough all the talks that were checked
+        for talk in Talk.objects.filter(id__in=talk_ids):
+            # add the volunteer to the talk when he/she is not added
+            VolunteerTalk.objects.get_or_create(talk=talk, volunteer=volunteer)
+
+        # go trough all the not checked tasks
+        for talk in Talk.objects.exclude(id__in=talk_ids):
+            # delete him/her
+            VolunteerTalk.objects.filter(talk=talk, volunteer=volunteer).delete()
+
+        # show success message when enabled
+        if userena_settings.USERENA_USE_MESSAGES:
+            messages.success(request, _('Your talks have been updated.'), fail_silently=True)
+
+        # redirect to prevent repost
+        return redirect('/talks')
+
+    # group the talks according to tracks
+    context = { 'tracks': {}, 'checked': {} }
     tracks = Track.objects.all()
     for track in tracks:
         context['tracks'][track.title] = Talk.objects.filter(track=track)
-    print context
+
+    # mark checked, attending talks
+    for talk in Talk.objects.filter(volunteers=volunteer):
+        context['checked'][talk.id] = 'checked'
+
     return render(request, 'volunteers/talks.html', context)
 
 def task_list(request):
@@ -33,34 +63,40 @@ def task_list(request):
     # when the user submitted the form
     if request.method == 'POST':
         # get the checked tasks
-        ids = request.POST.getlist('task')
+        task_ids = request.POST.getlist('task')
 
-        # go trough all the checked tasks
-        for task in Task.objects.filter(id__in=ids):
-            # when the volunteer is not assigned to this task
-            if volunteer not in task.volunteers.all():
-                # add him/her
-                VolunteerTask(task=task, volunteer=volunteer).save()
+        # checked boxes, add the volunteer to the tasks when he/she is not added
+        for task in Task.objects.filter(id__in=task_ids):
+            VolunteerTask.objects.get_or_create(task=task, volunteer=volunteer)
 
-        # go trough all the not checked tasks
-        for task in Task.objects.exclude(id__in=ids):
-            # delete him/her
+        # unchecked boxes, delete him/her from the task
+        for task in Task.objects.exclude(id__in=task_ids):
             VolunteerTask.objects.filter(task=task, volunteer=volunteer).delete()
+
+        # show success message when enabled
+        if userena_settings.USERENA_USE_MESSAGES:
+            messages.success(request, _('Your tasks have been updated.'), fail_silently=True)
+
+        # redirect to prevent repost
+        return redirect('/tasks')
     
     # get the categories the volunteer is interested in
     categories = TaskCategory.objects.filter(volunteer=request.user)
     # get the interesting and other tasks
-    context = {}
+    context = { 'tasks': {}, 'checked': {}, 'attending': {} }
     context['volunteer'] = volunteer
-    context['interesting_tasks'] = list(Task.objects.filter(template__category__in=categories).annotate(volunteers_assigned=Count('volunteers')))
-    context['other_tasks'] = Task.objects.exclude(template__category__in=categories).annotate(volunteers_assigned=Count('volunteers'))
-    
-    context['checked'] = {}
-    for task in context['interesting_tasks']:
+    context['tasks']['interesting_tasks'] = Task.objects.filter(template__category__in=categories)
+    context['tasks']['other_tasks'] = Task.objects.exclude(template__category__in=categories)
+
+    # mark checked, attending tasks
+    for task in context['tasks']['interesting_tasks']:
+        context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
+    for task in context['tasks']['other_tasks']:
         context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
 
-    for task in context['other_tasks']:
-        context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
+    # take the moderation tasks to talks the volunteer is attending
+    for task in Task.objects.filter(talk__volunteers=volunteer):
+        context['attending'][task.id] = True
 
     return render(request, 'volunteers/tasks.html', context)
 
@@ -110,19 +146,16 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
         Instance of the ``Profile`` that is edited.
 
     """
-    user = get_object_or_404(get_user_model(),
-                             username__iexact=username)
+    user = get_object_or_404(get_user_model(), username__iexact=username)
 
     profile = user.get_profile()
 
-    user_initial = {'first_name': user.first_name,
-                    'last_name': user.last_name}
+    user_initial = {'first_name': user.first_name, 'last_name': user.last_name}
 
     form = edit_profile_form(instance=profile, initial=user_initial)
 
     if request.method == 'POST':
-        form = edit_profile_form(request.POST, request.FILES, instance=profile,
-                                 initial=user_initial)
+        form = edit_profile_form(request.POST, request.FILES, instance=profile, initial=user_initial)
 
         if form.is_valid():
             profile = form.save(commit=False)
@@ -141,13 +174,11 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
                     profilecategory.delete()
 
             if userena_settings.USERENA_USE_MESSAGES:
-                messages.success(request, _('Your profile has been updated.'),
-                                 fail_silently=True)
+                messages.success(request, _('Your profile has been updated.'), fail_silently=True)
 
             if success_url:
                 # Send a signal that the profile has changed
-                userena_signals.profile_change	.send(sender=None,
-                                                    user=user)
+                userena_signals.profile_change.send(sender=None, user=user)
                 redirect_to = success_url
             else: redirect_to = reverse('userena_profile_detail', kwargs={'username': username})
             return redirect(redirect_to)
