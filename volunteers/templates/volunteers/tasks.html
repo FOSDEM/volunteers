@@ -6,6 +6,7 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Tasks' %}</h2>{% endblock %}
 
 {% block content %}
+<a href="/tasks/{{ user.username }}" title="Print tasks">Print your tasks</a>
 <form class="task_list" action="/tasks/" method="post">{% csrf_token %}
     {% for title, tasks in tasks.items %}
     <fieldset>
