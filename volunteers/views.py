@@ -23,7 +23,7 @@ def promo(request):
 @permission_required_or_403('talks_edit')
 def talk_list(request):
     # get the signed in volunteer
-    volunteer = get_object_or_404(Volunteer, user=request.user)
+    volunteer = Volunteer.objects.get(user=request.user)
 
     # when the user submitted the form
     if request.method == 'POST':
