@@ -105,6 +105,17 @@ def task_list(request):
 
     return render(request, 'volunteers/tasks.html', context)
 
+def task_list_detailed(request, username):
+
+    if request.POST:
+        return redirect('/tasks/'+username)
+
+    context = {}
+    # get the requested users tasks
+    context['tasks'] = Task.objects.filter(volunteers__user__username=username)
+
+    return render(request, 'volunteers/tasks_detailed.html', context)
+
 @secure_required
 @permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))
 def profile_edit(request, username, edit_profile_form=EditProfileForm,
