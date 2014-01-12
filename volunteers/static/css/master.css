@@ -928,7 +928,7 @@ table.task_list tr td.blue, table.talk_list tr td.blue {
     color:purple;
     font-weight:bold;
     -webkit-animation-name: blinker;
-    -webkit-animation-duration: 0.1s;
+    -webkit-animation-duration: 3s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
 
