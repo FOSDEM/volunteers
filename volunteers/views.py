@@ -5,6 +5,7 @@ from django.db.models import Count
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.utils.datastructures import SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -82,16 +83,16 @@ def task_list(request):
     
     # get the categories the volunteer is interested in
     categories = TaskCategory.objects.filter(volunteer=request.user)
-    # get the interesting and other tasks
-    context = { 'tasks': {}, 'checked': {}, 'attending': {} }
+    # get the interesting and other tasks, preserve key order with srteddict for view
+    context = { 'tasks': SortedDict({}), 'checked': {}, 'attending': {} }
     context['volunteer'] = volunteer
-    context['tasks']['interesting_tasks'] = Task.objects.filter(template__category__in=categories)
-    context['tasks']['other_tasks'] = Task.objects.exclude(template__category__in=categories)
+    context['tasks']['interesting tasks'] = Task.objects.filter(template__category__in=categories)
+    context['tasks']['other tasks'] = Task.objects.exclude(template__category__in=categories)
 
     # mark checked, attending tasks
-    for task in context['tasks']['interesting_tasks']:
+    for task in context['tasks']['interesting tasks']:
         context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
-    for task in context['tasks']['other_tasks']:
+    for task in context['tasks']['other tasks']:
         context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
 
     # take the moderation tasks to talks the volunteer is attending
