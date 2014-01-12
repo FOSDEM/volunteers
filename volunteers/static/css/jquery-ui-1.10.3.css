@@ -196,6 +196,7 @@ input.ui-button {
 .ui-button-icon-only .ui-icon {
 	left: 50%;
 	margin-left: -8px;
+	background-color: #e7e2de;
 }
 .ui-button-text-icon-primary .ui-button-icon-primary,
 .ui-button-text-icons .ui-button-icon-primary,
@@ -410,6 +411,7 @@ button.ui-button::-moz-focus-inner {
 	width: 90%;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	background-color: #e7e2de;
 }
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
@@ -426,6 +428,7 @@ button.ui-button::-moz-focus-inner {
 	padding: .5em 1em;
 	background: none;
 	overflow: auto;
+	background-color: #f6f4f2;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
@@ -450,6 +453,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-draggable .ui-dialog-titlebar {
 	cursor: move;
+	background-color: #e7e2de;
 }
 .ui-menu {
 	list-style: none;
@@ -780,7 +784,7 @@ button.ui-button::-moz-focus-inner {
 	box-shadow: inset 0 0 1px #999;
 }
 body .ui-tooltip {
-	border-width: 2px;
+	border-width: 1px;
 	background-color: #f6f4f2;
 }
 
@@ -802,7 +806,7 @@ body .ui-tooltip {
 }
 .ui-widget-content {
 	border: 1px solid #aaaaaa;
-	background-color: #ffffff;
+	background-color: #f6f4f2;
 	color: #222222;
 }
 .ui-widget-content a {
@@ -841,7 +845,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #999999;
-	background-color: #dadada;
+	background-color: #e7e2de;
 	font-weight: normal;
 	color: #212121;
 }
@@ -856,7 +860,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
 	border: 1px solid #aaaaaa;
-	background-color: #ffffff;
+	background-color: #e7e2de;
 	font-weight: normal;
 	color: #212121;
 }
