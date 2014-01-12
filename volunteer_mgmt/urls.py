@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -27,4 +29,5 @@ urlpatterns = patterns('',
     # other urls:
     url(r'^tasks/', 'volunteers.views.task_list', name='task_list'),
     url(r'^talks/', 'volunteers.views.talk_list', name='talk_list'),
-)
+
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
