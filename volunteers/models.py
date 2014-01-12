@@ -56,6 +56,10 @@ class Talk(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True, null=True)
+
+    def assigned_volunteers(self):
+        return self.volunteer_set.count()
 
 
 """
@@ -241,4 +245,4 @@ class VolunteerTalk(models.Model):
         return self.talk
 
     volunteer = models.ForeignKey(Volunteer)
-    language = models.ForeignKey(Language)
+    talk = models.ForeignKey(Talk)
