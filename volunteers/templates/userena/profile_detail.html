@@ -31,9 +31,8 @@
     {% if profile.about_me %}
     <p><strong>{% trans "About me" %}</strong><br />{{ profile.about_me }}</p>
     {% endif %}
-    <a href="/tasks/{{ user.username }}"<strong>{% trans "Tasks" %}</strong></a><br />
+    <p><a href="/tasks/{{ user.username }}"<strong>{% trans "Tasks" %}</strong></a><br />
     {% if tasks %}
-    <p>
         <ul>
             {% for task in tasks %}
             <li>{{ task.name }}</li>
@@ -41,8 +40,13 @@
         </ul>
     </p>
     {% else %}
-    {% if profile.user.get_full_name %}{{ profile.user.get_full_name }}{% else %}{{ profile.user }}{% endif %} hasn't signed up for any tasks yet.
-    {% endif %}
+        {% if profile.user.get_full_name %}
+            {{ profile.user.get_full_name }}
+        {% else %}
+            {{ profile.user }}
+        {% endif %}
+            hasn't signed up for any tasks yet.</p>
+        {% endif %}
     <p><strong>{% trans "Signed up" %}</strong><br />{{ profile.signed_up }}</p>
 </div>
 
