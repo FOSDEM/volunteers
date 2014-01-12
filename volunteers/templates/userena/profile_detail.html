@@ -32,7 +32,7 @@
     <p><strong>{% trans "About me" %}</strong><br />{{ profile.about_me }}</p>
     {% endif %}
     <strong>{% trans "Tasks" %}</strong><br />
-    {% if profile.tasks %}
+    {% if tasks %}
     <p>
         <ul>
             {% for task in tasks %}
