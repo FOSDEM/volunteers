@@ -31,13 +31,13 @@
                 {% endif %}
                 <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
                 {% if task.assigned_volunteers == task.nbr_volunteers_max %}
-                <td class="blue" title="{% trans 'Full' %}<br/><br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                <td class="blue" title="{% trans 'Full' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
                 {% elif task.assigned_volunteers >= task.nbr_volunteers %}
-                <td class="green" title="{% trans 'Staffed' %}<br/><br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                <td class="green" title="{% trans 'Staffed' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
                 {% elif task.assigned_volunteers >= task.nbr_volunteers_min %}
-                <td class="gray" title="{% trans 'Manageable' %}<br/><br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                <td class="gray" title="{% trans 'Manageable' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
                 {% else %}
-                <td class="red" title="{% trans 'More volunteers needed' %}<br/><br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                <td class="red" title="{% trans 'More volunteers needed' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
                 {% endif %}
                 {{task.assigned_volunteers}}/{{ task.nbr_volunteers }}</td>
             </tr>

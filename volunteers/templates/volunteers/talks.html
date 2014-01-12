@@ -12,7 +12,7 @@
         <legend class="talk_list">{{ track }}</legend>
         <table class="talk_list">
             <tr>
-                <th>{% trans "I'm in" %}!</th>
+                <th>{% trans "I'm Going" %}!</th>
                 <th>{% trans 'Title' %}</th>
                 <th>{% trans 'When' %}</th>
                 <th>{% trans 'Speaker' %}</th>
@@ -22,9 +22,9 @@
             <tr>
                 <td><input type="checkbox" name="talk" value="{{ talk.id }}" {{ checked|get_item:talk.id }} /></td>
                 <td title="{{ talk.description }}">{{ talk.title }}</td>
-                <td>{{ talk.date|date:"M d" }} <{{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}></td>
+                <td>{{ talk.date|date:"D" }}, {{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}</td>
                 <td>{{ talk.speaker }}</td>
-                <td>{{ 0 }}</td>
+                <td title="Attending:<br/>{% for volunteer in talk.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">{{ talk.assigned_volunteers }}</td>
             </tr>
             {% endfor %}
         </table>

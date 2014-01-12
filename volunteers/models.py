@@ -59,7 +59,7 @@ class Talk(models.Model):
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True, null=True)
 
     def assigned_volunteers(self):
-        return self.volunteer_set.count()
+        return self.volunteers.count()
 
 
 """
