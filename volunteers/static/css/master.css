@@ -924,6 +924,11 @@ table.task_list tr td.blue, table.talk_list tr td.blue {
     font-weight: bold;
 }
 
+.small_note {
+    color: gray;
+    font-size: 0.7em;
+}
+
 .special {
     color:purple;
     font-weight:bold;
