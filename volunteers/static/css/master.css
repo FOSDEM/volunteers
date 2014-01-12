@@ -924,44 +924,20 @@ table.task_list tr td.blue, table.talk_list tr td.blue {
     font-weight: bold;
 }
 
-.small_note {
+table.task_list .small_note {
     color: gray;
     font-size: 0.7em;
 }
 
-.special {
+table.task_list .special-task {
     color:purple;
     font-weight:bold;
-/*    -webkit-animation-name: blinker;
-    -webkit-animation-duration: 3s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-
-    -moz-animation-name: blinker;
-    -moz-animation-duration: 1s;
-    -moz-animation-timing-function: linear;
-    -moz-animation-iteration-count: infinite;
-
-    animation-name: blinker;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;*/
 }
 
-@-moz-keyframes blinker {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
+table.task_list .task-name {
+    cursor: pointer;
 }
 
-@-webkit-keyframes blinker {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
-}
-
-@keyframes blinker {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
+table.task_list .task-volunteers {
+    cursor: pointer;
 }
