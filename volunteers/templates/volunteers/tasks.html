@@ -28,7 +28,7 @@
                 {% if attending|get_item:task.id == True %}
                 <td class="task-name special-task" title="{{ task.description }}">{{ task.name }} <span class="small_note">(Hey, you're attending this!)</span></td>
                 {% else %}
-                <td class="task-name" title="{{ task.description }}">{{ task.name }}</td>
+                <td class="task-name" title="{{ task.description }}"><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
                 {% endif %}
                 <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
                 {% if task.assigned_volunteers == task.nbr_volunteers_max %}

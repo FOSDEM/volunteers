@@ -19,7 +19,7 @@
             {% for task in tasks %}
             <tr>
                 <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
-                <td>{{ task.name }}</td>
+                <td><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
                 <td>
                 {% for volunteer in task.volunteer_set.all %}
                     {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}, 
