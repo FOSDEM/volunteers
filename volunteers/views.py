@@ -10,7 +10,6 @@ from django.utils.datastructures import SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 
-
 from userena.utils import get_user_model
 from userena.forms import SignupFormOnlyEmail
 from userena.decorators import secure_required
@@ -22,6 +21,22 @@ from guardian.decorators import permission_required_or_403
 
 def promo(request):
     return render(request, 'static/promo.html')
+
+def talk_detailed(request, talk_id):
+    talk = get_object_or_404(Talk, id=talk_id)
+    # when no talk, redirect to talks
+    if not talk:
+        return redirect('/talks')
+    context = { 'talk': talk }
+    return render(request, 'volunteers/talk_detailed.html', context)
+
+def task_detailed(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    # when no talk, redirect to talks
+    if not task:
+        return redirect('/tasks')
+    context = { 'task': task }
+    return render(request, 'volunteers/task_detailed.html', context)
 
 def talk_list(request):
     # get the signed in volunteer
