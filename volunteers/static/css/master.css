@@ -934,7 +934,7 @@ table.task_list .special-task {
     font-weight:bold;
 }
 
-table.task_list .task-name {
+table.task_list .task-name, table.talk_list .talk-volunteers {
     cursor: pointer;
 }
 
