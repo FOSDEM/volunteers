@@ -37,7 +37,7 @@ else:
     }
 
 # Django Userena configs
-EMAIL_PORT = 587
+EMAIL_PORT = int(os.environ.get('SMTP_PORT', '25'))
 EMAIL_USE_TLS = True
 EMAIL_HOST = os.environ.get('SMTP_HOST', 'localhost')
 EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME')
