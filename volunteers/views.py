@@ -24,17 +24,11 @@ def promo(request):
 
 def talk_detailed(request, talk_id):
     talk = get_object_or_404(Talk, id=talk_id)
-    # when no talk, redirect to talks
-    if not talk:
-        return redirect('/talks')
     context = { 'talk': talk }
     return render(request, 'volunteers/talk_detailed.html', context)
 
 def task_detailed(request, task_id):
     task = get_object_or_404(Task, id=task_id)
-    # when no talk, redirect to talks
-    if not task:
-        return redirect('/tasks')
     context = { 'task': task }
     return render(request, 'volunteers/task_detailed.html', context)
 
