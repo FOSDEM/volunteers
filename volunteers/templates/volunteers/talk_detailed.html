@@ -1,0 +1,33 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load volunteer_extras %}
+
+{% block content_title %}<h2 class="content-title">{% trans 'Talk' %}</h2>{% endblock %}
+
+{% block content %}
+<form class="talk_list" action="" method="post">{% csrf_token %}
+    <fieldset>
+        <legend class="talk_list">{{ user.username }} {% trans 'Talk' %}</legend>
+        <table class="talk_list">
+            <tr>
+                <th width="20%">{% trans 'When' %}</th>
+                <th width="40%">{% trans 'Title' %}</th>
+                <th width="20%">{% trans 'Attending' %}</th>
+            </tr>
+            <tr>
+                <td>{{ talk.date|date:"D" }}, {{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}</td>
+                <td>{{ talk.name }}</td>
+                <td>
+                {% for volunteer in talk.volunteer_set.all %}
+                    {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}, 
+                {% endfor %}
+            </tr>
+        </table>
+        <br>
+    </fieldset>
+    <input type="submit" value="{% trans "Print tasks" %}" />
+</form>
+
+<div id="dialog" title="Talk"></div>
+{% endblock %}
