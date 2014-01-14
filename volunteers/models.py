@@ -19,7 +19,7 @@ class Edition(models.Model):
     @classmethod
     def get_current(self):
         retval = False
-        year = (datetime.date.today() + relativedelta(months=6)).year
+        year = (datetime.date.today() + relativedelta(months=+6)).year
         current = self.objects.filter(year=year)
         if current:
             retval = current[0].id
@@ -44,7 +44,7 @@ class Track(models.Model):
         return self.title
 
     title = models.CharField(max_length=128)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
