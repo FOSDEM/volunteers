@@ -46,7 +46,7 @@ class Track(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
     edition = models.ForeignKey(Edition, default=Edition.get_current)
-    date = models.DateField()
+    date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
     # end_time = models.TimeField()
 
@@ -64,7 +64,7 @@ class Talk(models.Model):
     title = models.CharField(max_length=128)
     speaker = models.CharField(max_length=50)
     description = models.TextField()
-    date = models.DateField()
+    date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
     end_time = models.TimeField()
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True, null=True)
@@ -128,7 +128,7 @@ class Task(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    date = models.DateField()
+    date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
     end_time = models.TimeField()
     nbr_volunteers = models.IntegerField(default=0)
