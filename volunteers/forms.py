@@ -93,7 +93,7 @@ class SignupForm(forms.Form):
                                                      userena_settings.USERENA_ACTIVATION_REQUIRED)
         new_user.first_name = first_name
         new_user.last_name = last_name
-        
+        new_user.save()
         return new_user
 
 class EditProfileForm(forms.ModelForm):
