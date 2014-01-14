@@ -27,10 +27,10 @@ class EditionAdmin(admin.ModelAdmin):
 
 class TrackAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['date', 'start_time']}),
+        (None, {'fields': ['edition', 'date', 'start_time']}),
         (None, {'fields': ['title', 'description']}),
     ]
-    list_display = ['date', 'start_time', 'title']
+    list_display = ['edition', 'date', 'start_time', 'title']
 
 
 class TalkAdmin(admin.ModelAdmin):
