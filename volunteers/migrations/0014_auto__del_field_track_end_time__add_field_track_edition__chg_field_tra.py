@@ -13,7 +13,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'Track.edition'
         db.add_column(u'volunteers_track', 'edition',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=17, to=orm['volunteers.Edition']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['volunteers.Edition']),
                       keep_default=False)
 
 
@@ -128,7 +128,7 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "['date', 'start_time', 'title']", 'object_name': 'Track'},
             'date': ('django.db.models.fields.DateField', [], {}),
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'edition': ('django.db.models.fields.related.ForeignKey', [], {'default': '17', 'to': u"orm['volunteers.Edition']"}),
+            'edition': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['volunteers.Edition']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'start_time': ('django.db.models.fields.TimeField', [], {}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '128'})
@@ -162,7 +162,7 @@ class Migration(SchemaMigration):
         u'volunteers.volunteerstatus': {
             'Meta': {'object_name': 'VolunteerStatus'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'edition': ('django.db.models.fields.related.ForeignKey', [], {'default': '17', 'to': u"orm['volunteers.Edition']"}),
+            'edition': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['volunteers.Edition']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'volunteer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['volunteers.Volunteer']"})
         },
