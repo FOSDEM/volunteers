@@ -38,16 +38,17 @@ class Track(models.Model):
     class Meta:
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
-        ordering = ['date','start_time','-end_time','title']
+        ordering = ['date','start_time','title']
 
     def __unicode__(self):
         return self.title
 
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
+    edition = models.ForeignKey(Edition, default=Edition.get_current)
     date = models.DateField()
     start_time = models.TimeField()
-    end_time = models.TimeField()
+    # end_time = models.TimeField()
 
 
 class Talk(models.Model):
