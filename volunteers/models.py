@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from userena.models import UserenaLanguageBaseProfile
 from django.utils.translation import ugettext_lazy as _
 import datetime
+from dateutil.relativedelta import relativedelta
 
 # Create your models here.
 
@@ -14,6 +15,15 @@ class Edition(models.Model):
 
     def __unicode__(self):
         return unicode(self.year)
+
+    @classmethod
+    def get_current(self):
+        retval = False
+        year = (datetime.date.today() + relativedelta(months=6)).year
+        current = self.objects.filter(year=year)
+        if current:
+            retval = current[0].id
+        return retval
 
     year = models.IntegerField()
     start_date = models.DateField()
@@ -167,7 +177,8 @@ class Volunteer(UserenaLanguageBaseProfile):
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
-    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
+    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, \
+        help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
 
 
 """
@@ -188,7 +199,7 @@ class VolunteerStatus(models.Model):
 
     active = models.BooleanField()
     volunteer = models.ForeignKey(Volunteer)
-    edition = models.ForeignKey(Edition)
+    edition = models.ForeignKey(Edition, default=Edition.get_current)
 
 
 """
