@@ -61,8 +61,8 @@ class Talk(models.Model):
         return self.title
 
     track = models.ForeignKey(Track)
-    title = models.CharField(max_length=128)
-    speaker = models.CharField(max_length=50)
+    title = models.CharField(max_length=256)
+    speaker = models.CharField(max_length=128)
     description = models.TextField()
     date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
