@@ -142,7 +142,7 @@ class Language(models.Model):
         verbose_name_plural = _('Languages')
 
     def __unicode__(self):
-        return self.task
+        return self.name
 
     name = models.CharField(max_length=128)
     iso_code = models.CharField(max_length=2)
