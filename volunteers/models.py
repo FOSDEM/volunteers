@@ -182,8 +182,8 @@ class VolunteerStatus(models.Model):
         verbose_name_plural = _('Volunteer Statuses')
 
     def __unicode__(self):
-        return '%s - %s: %s' % (self.volunteer.name,
-            self.edition.year,
+        return '%s %s - %s: %s' % (self.volunteer.user.first_name,
+            self.volunteer.user.last_name, self.edition.year,
             'Yes' if self.active else 'No')
 
     active = models.BooleanField()
