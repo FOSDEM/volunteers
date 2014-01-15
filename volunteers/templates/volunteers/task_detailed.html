@@ -6,7 +6,7 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Task' %}</h2>{% endblock %}
 
 {% block content %}
-<form class="task_list" action="" method="post">{% csrf_token %}
+<form class="task_list">{% csrf_token %}
     <fieldset>
         <legend class="task_list">{% trans 'Task' %}</legend>
         <table class="task_list">
@@ -28,7 +28,6 @@
         </table>
         <br>
     </fieldset>
-    <input type="submit" value="{% trans "Print tasks" %}" />
 </form>
 
 <div id="dialog" title="Task"></div>
