@@ -126,7 +126,7 @@ class Task(models.Model):
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=300)
     description = models.TextField()
     date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
