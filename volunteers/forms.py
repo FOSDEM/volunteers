@@ -98,8 +98,8 @@ class SignupForm(forms.Form):
 
 class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
-    first_name = forms.CharField(label=_(u'First name'), max_length=30, required=False)
-    last_name = forms.CharField(label=_(u'Last name'), max_length=30, required=False)
+    first_name = forms.CharField(label=_(u'First name'), max_length=30, required=True)
+    last_name = forms.CharField(label=_(u'Last name'), max_length=30, required=True)
 
     categories = forms.ModelMultipleChoiceField(label=_(u'Categories'), queryset=TaskCategory.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False)
 
