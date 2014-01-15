@@ -411,7 +411,7 @@ span.label {
     font-weight: bold;
 }
 
-input[type=text],input[type=password], input[type=file], textarea, span.editable {
+input[type=text],input[type=password], input[type=file], textarea, span.editable, #s2id_id_language .select2-choices {
     width: 306px;
     border: 1px solid #d7d7d7;
     font-size: 14px;

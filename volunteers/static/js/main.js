@@ -33,4 +33,5 @@ $(document).ready(function() {
 			}
 		}
 	});
+  $('#id_language').select2();
 });

@@ -1,4 +1,4 @@
-from volunteers.models import VolunteerTask, TaskCategory, Edition, Task
+from volunteers.models import VolunteerTask, TaskCategory, Edition, Task, Language, VolunteerLanguage
 
 from django import forms
 from django.contrib.admin import widgets
@@ -100,15 +100,20 @@ class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
     first_name = forms.CharField(label=_(u'First name'), max_length=30, required=False)
     last_name = forms.CharField(label=_(u'Last name'), max_length=30, required=False)
-
+    #this is the broken bit that I can't work out how to do because I can't pass an instance of volunteer to the VolunteerLanguage
+    #language = forms.ModelMultipleChoiceField(label=_(u'Language'), queryset=Language.objects.all(), initial=VolunteerLanguage.objects.filter(volunteer=initial_volunteer))
     categories = forms.ModelMultipleChoiceField(label=_(u'Categories'), queryset=TaskCategory.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False)
 
-    def __init__(self, *args, **kw):
+    def get_profile(self):
+        return super(EditProfileForm, self).save(True)
+
+    def __init__(self, initial_volunteer, *args, **kw):
         super(EditProfileForm, self).__init__(*args, **kw)
-        # Put the first and last name at the top
-        new_order = self.fields.keyOrder[:-2]
+        # Put the first, last name and language at the top
+        new_order = self.fields.keyOrder[:-3]
         new_order.insert(0, 'first_name')
         new_order.insert(1, 'last_name')
+        new_order.insert(2, 'language')
         self.fields.keyOrder = new_order
 
     class Meta:
@@ -118,6 +123,10 @@ class EditProfileForm(forms.ModelForm):
     def save(self, force_insert=False, force_update=False, commit=True):
         profile = super(EditProfileForm, self).save(commit=commit)
         # Save first and last name
+        VolunteerLanguage.objects.filter(volunteer=profile).delete()
+        for lang in self.cleaned_data['language']:
+            languages = VolunteerLanguage(volunteer=profile, language=lang)
+            languages.save()
         user = profile.user
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
