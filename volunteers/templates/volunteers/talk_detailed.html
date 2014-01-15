@@ -6,9 +6,9 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Talk' %}</h2>{% endblock %}
 
 {% block content %}
-<form class="talk_list" action="" method="post">{% csrf_token %}
+<form class="talk_list">{% csrf_token %}
     <fieldset>
-        <legend class="talk_list">{{ user.username }} {% trans 'Talk' %}</legend>
+        <legend class="talk_list">{% trans 'Talk' %}</legend>
         <table class="talk_list">
             <tr>
                 <th width="20%">{% trans 'When' %}</th>
@@ -26,7 +26,6 @@
         </table>
         <br>
     </fieldset>
-    <input type="submit" value="{% trans "Print tasks" %}" />
 </form>
 
 <div id="dialog" title="Talk"></div>
