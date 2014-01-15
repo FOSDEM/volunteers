@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from userena.models import UserenaLanguageBaseProfile
 from django.utils.translation import ugettext_lazy as _
 import datetime
+from dateutil.relativedelta import relativedelta
 
 # Create your models here.
 
@@ -14,6 +15,15 @@ class Edition(models.Model):
 
     def __unicode__(self):
         return unicode(self.year)
+
+    @classmethod
+    def get_current(self):
+        retval = False
+        year = (datetime.date.today() + relativedelta(months=+6)).year
+        current = self.objects.filter(year=year)
+        if current:
+            retval = current[0].id
+        return retval
 
     year = models.IntegerField()
     start_date = models.DateField()
@@ -28,16 +38,17 @@ class Track(models.Model):
     class Meta:
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
-        ordering = ['date','start_time','-end_time','title']
+        ordering = ['date','start_time','title']
 
     def __unicode__(self):
         return self.title
 
     title = models.CharField(max_length=128)
-    description = models.TextField()
-    date = models.DateField()
+    description = models.TextField(blank=True, null=True)
+    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
-    end_time = models.TimeField()
+    # end_time = models.TimeField()
 
 
 class Talk(models.Model):
@@ -50,10 +61,10 @@ class Talk(models.Model):
         return self.title
 
     track = models.ForeignKey(Track)
-    title = models.CharField(max_length=128)
-    speaker = models.CharField(max_length=50)
+    title = models.CharField(max_length=256)
+    speaker = models.CharField(max_length=128)
     description = models.TextField()
-    date = models.DateField()
+    date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
     end_time = models.TimeField()
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True, null=True)
@@ -117,7 +128,7 @@ class Task(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    date = models.DateField()
+    date = models.DateField(default=datetime.date(2014,2,1))
     start_time = models.TimeField()
     end_time = models.TimeField()
     nbr_volunteers = models.IntegerField(default=0)
@@ -167,7 +178,8 @@ class Volunteer(UserenaLanguageBaseProfile):
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
-    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
+    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, \
+        help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
 
 
 """
@@ -182,13 +194,13 @@ class VolunteerStatus(models.Model):
         verbose_name_plural = _('Volunteer Statuses')
 
     def __unicode__(self):
-        return '%s - %s: %s' % (self.volunteer.name,
-            self.edition.year,
+        return '%s %s - %s: %s' % (self.volunteer.user.first_name,
+            self.volunteer.user.last_name, self.edition.year,
             'Yes' if self.active else 'No')
 
     active = models.BooleanField()
     volunteer = models.ForeignKey(Volunteer)
-    edition = models.ForeignKey(Edition)
+    edition = models.ForeignKey(Edition, default=Edition.get_current)
 
 
 """
