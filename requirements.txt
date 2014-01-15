@@ -15,3 +15,4 @@ easy-thumbnails==1.4
 pisa==3.0.33
 reportlab==2.6
 html5lib==0.999
+python-dateutil==1.5
