@@ -172,7 +172,12 @@ class Volunteer(UserenaLanguageBaseProfile):
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
     # Categories in which they're interested to help out.
-    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True)
+    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True, \
+        help_text="""<br/><br/>
+        Indicate your preference for which kind of tasks you'd prefer to do.
+        The tasks belonging to this category will appear on top in the Tasks page, so you
+        can find them easily.<br/><br/>
+        Signing up for actual tasks does not happen here; that's done in the Tasks screen!""")
     # Tasks for which they've signed up.
     tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
