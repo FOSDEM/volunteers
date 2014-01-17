@@ -811,6 +811,13 @@ p.date {
     margin: 0 10px;
 }
 
+.avatar_large {
+    width: 140;
+    border: 1px solid #ccc;
+    float: right;
+    margin: 0 10px;
+}
+
 .avatar.received {
     float: left;
 }
@@ -882,6 +889,7 @@ form.task_list, form.talk_list {
 
 legend.task_list, legend.talk_list {
     border: none;
+    width: 100%;
 }
 
 table.task_list, table.talk_list {

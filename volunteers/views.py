@@ -137,6 +137,7 @@ def task_list_detailed(request, username):
     # get the requested users tasks
     context['tasks'] = Task.objects.filter(volunteers__user__username=username)
     context['profile_user'] = User.objects.filter(username=username)[0]
+    context['volunteer'] = Volunteer.objects.filter(user__username=username)[0]
 
     if request.POST:
         # create the HttpResponse object with the appropriate PDF headers.
