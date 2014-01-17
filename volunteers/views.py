@@ -133,14 +133,15 @@ def render_to_pdf(template_src, context_dict):
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
 def task_list_detailed(request, username):
-
     context = {}
     # get the requested users tasks
     context['tasks'] = Task.objects.filter(volunteers__user__username=username)
+    context['profile_user'] = User.objects.filter(username=username)[0]
 
     if request.POST:
         # create the HttpResponse object with the appropriate PDF headers.
-        return render_to_pdf('volunteers/tasks_detailed.html', { 'pagesize':'A4', 'tasks': context['tasks'], })
+        context.update({ 'pagesize':'A4'})
+        return render_to_pdf('volunteers/tasks_detailed.html', context)
 
     return render(request, 'volunteers/tasks_detailed.html', context)
 

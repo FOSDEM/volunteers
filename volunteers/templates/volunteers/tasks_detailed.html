@@ -6,9 +6,22 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Tasks' %}</h2>{% endblock %}
 
 {% block content %}
+
+
+{% if profile_user %}
+<form class="task_list" action="/tasks/{{ profile_user.username }}" method="post">{% csrf_token %}
+{% else %}
 <form class="task_list" action="/tasks/{{ user.username }}" method="post">{% csrf_token %}
+{% endif %}
+
     <fieldset>
-        <legend class="task_list">{{ user.username }} {% trans 'tasks' %}</legend>
+        <legend class="task_list">{% trans 'tasks for ' %}
+            {% if profile_user %}
+                {{ profile_user.first_name }} {{ profile_user.last_name }}
+            {% else %}
+                {{ user.first_name }} {{ user.last_name }}
+            {% endif %}
+        </legend>
         <table class="task_list">
             <tr>
                 <th width="20%">{% trans 'When' %}</th>
@@ -22,7 +35,7 @@
                 <td><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
                 <td>
                 {% for volunteer in task.volunteer_set.all %}
-                    {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}, 
+                    {{ volunteer.user.first_name }} {{ volunteer.user.last_name }},
                 {% endfor %}
                 <td>{{ task.talk }}</td>
             </tr>
