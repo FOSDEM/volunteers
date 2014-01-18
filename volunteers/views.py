@@ -1,10 +1,11 @@
 from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk
 from forms import EditProfileForm, SignupForm
 
-from django.db.models import Count
 from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.utils.datastructures import SortedDict
 from django.utils.translation import ugettext as _
@@ -18,6 +19,12 @@ from userena import settings as userena_settings
 from userena.views import ExtraContextTemplateView, get_profile_model
 
 from guardian.decorators import permission_required_or_403
+
+import cStringIO as StringIO
+import ho.pisa as pisa
+from django.template.loader import get_template
+from django.template import Context
+from cgi import escape
 
 def promo(request):
     return render(request, 'static/promo.html')
@@ -113,13 +120,6 @@ def task_list(request):
         context['attending'][task.id] = True
 
     return render(request, 'volunteers/tasks.html', context)
-
-import cStringIO as StringIO
-import ho.pisa as pisa
-from django.template.loader import get_template
-from django.template import Context
-from django.http import HttpResponse
-from cgi import escape
 
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
