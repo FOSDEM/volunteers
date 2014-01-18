@@ -21,11 +21,10 @@ class EditTasksForm(forms.Form):
 
 class SignupForm(forms.Form):
     """
-    Form for creating a new user account.
+        Form for creating a new user account.
 
-    Validates that the requested username and e-mail is not already in use.
-    Also requires the password to be entered twice.
-
+        Validates that the requested username and e-mail is not already in use.
+        Also requires the password to be entered twice.
     """
     USERNAME_RE = r'^[\.\w]+$'
     attrs_dict = {'class': 'required'}
@@ -39,10 +38,9 @@ class SignupForm(forms.Form):
 
     def clean_username(self):
         """
-        Validate that the username is alphanumeric and is not already in use.
-        Also validates that the username is not listed in
-        ``USERENA_FORBIDDEN_USERNAMES`` list.
-
+            Validate that the username is alphanumeric and is not already in use.
+            Also validates that the username is not listed in
+            ``USERENA_FORBIDDEN_USERNAMES`` list.
         """
         try:
             user = get_user_model().objects.get(username__iexact=self.cleaned_data['username'])
@@ -66,10 +64,9 @@ class SignupForm(forms.Form):
 
     def clean(self):
         """
-        Validates that the values entered into the two password fields match.
-        Note that an error here will end up in ``non_field_errors()`` because
-        it doesn't apply to a single field.
-
+            Validates that the values entered into the two password fields match.
+            Note that an error here will end up in ``non_field_errors()`` because
+            it doesn't apply to a single field.
         """
         if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data:
             if self.cleaned_data['password1'] != self.cleaned_data['password2']:
