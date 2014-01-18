@@ -64,9 +64,10 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 class VolunteerAdmin(admin.ModelAdmin):
-    fields = ['name', 'email', 'user']
+    fields = ['user', 'full_name', 'email', 'mobile_nbr']
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
-    list_display = ['name', 'email']
+    list_display = ['user', 'full_name', 'email', 'mobile_nbr']
+    readonly_fields = ['full_name', 'email']
 
 
 class VolunteerStatusAdmin(admin.ModelAdmin):
@@ -80,5 +81,5 @@ admin.site.register(Talk, TalkAdmin)
 admin.site.register(TaskCategory, TaskCategoryAdmin)
 admin.site.register(TaskTemplate, TaskTemplateAdmin)
 admin.site.register(Task, TaskAdmin)
-#admin.site.register(Volunteer, VolunteerAdmin)
+admin.site.register(Volunteer, VolunteerAdmin)
 admin.site.register(VolunteerStatus, VolunteerStatusAdmin)

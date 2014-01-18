@@ -51,6 +51,7 @@ USERENA_DISABLE_PROFILE_LIST = False
 AUTH_PROFILE_MODULE = 'volunteers.Volunteer'
 TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 USERENA_SIGNIN_REDIRECT_URL = '/volunteers/%(username)s/'
+USERENA_REGISTER_PROFILE = False
 
 _ = lambda s: s
 LANGUAGES = (

@@ -186,6 +186,13 @@ class Volunteer(UserenaLanguageBaseProfile):
     mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, \
         help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
 
+    # Just here for the admin interface.
+    def full_name(self):
+        return " ".join([self.user.first_name, self.user.last_name])
+
+    def email(self):
+        return self.user.email
+
 
 """
 Many volunteers come back year after year, but sometimes they
