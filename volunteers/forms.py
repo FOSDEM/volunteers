@@ -1,14 +1,11 @@
-from volunteers.models import VolunteerTask, TaskCategory, Edition, Task
+from volunteers.models import VolunteerTask, TaskCategory
 
 from django import forms
-from django.contrib.admin import widgets
 from django.utils.translation import ugettext as _
-from django.forms.extras.widgets import SelectDateWidget
 
 from userena.models import UserenaSignup
-from userena.managers import UserenaManager
 from userena import settings as userena_settings
-from userena.utils import get_profile_model, get_user_model, get_datetime_now
+from userena.utils import get_profile_model, get_user_model
 
 class AddTasksForm(forms.Form):
     tasks = forms.ModelMultipleChoiceField(queryset=VolunteerTask.objects.none(), widget=forms.CheckboxSelectMultiple())
