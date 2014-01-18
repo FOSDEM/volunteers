@@ -151,35 +151,34 @@ def signup(request, signup_form=SignupForm,
            template_name='userena/signup_form.html', success_url=None,
            extra_context=None):
     """
-    Signup of an account.
+        Signup of an account.
 
-    Signup requiring a username, email and password. After signup a user gets
-    an email with an activation link used to activate their account. After
-    successful signup redirects to ``success_url``.
+        Signup requiring a username, email and password. After signup a user gets
+        an email with an activation link used to activate their account. After
+        successful signup redirects to ``success_url``.
 
-    :param signup_form:
-        Form that will be used to sign a user. Defaults to userena's
-        :class:`SignupForm`.
+        :param signup_form:
+            Form that will be used to sign a user. Defaults to userena's
+            :class:`SignupForm`.
 
-    :param template_name:
-        String containing the template name that will be used to display the
-        signup form. Defaults to ``userena/signup_form.html``.
+        :param template_name:
+            String containing the template name that will be used to display the
+            signup form. Defaults to ``userena/signup_form.html``.
 
-    :param success_url:
-        String containing the URI which should be redirected to after a
-        successful signup. If not supplied will redirect to
-        ``userena_signup_complete`` view.
+        :param success_url:
+            String containing the URI which should be redirected to after a
+            successful signup. If not supplied will redirect to
+            ``userena_signup_complete`` view.
 
-    :param extra_context:
-        Dictionary containing variables which are added to the template
-        context. Defaults to a dictionary with a ``form`` key containing the
-        ``signup_form``.
+        :param extra_context:
+            Dictionary containing variables which are added to the template
+            context. Defaults to a dictionary with a ``form`` key containing the
+            ``signup_form``.
 
-    **Context**
+        **Context**
 
-    ``form``
-        Form supplied by ``signup_form``.
-
+        ``form``
+            Form supplied by ``signup_form``.
     """
     # If signup is disabled, return 403
     if userena_settings.USERENA_DISABLE_SIGNUP:
@@ -224,45 +223,44 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
                  template_name='userena/profile_form.html', success_url=None,
                  extra_context=None, **kwargs):
     """
-    Edit profile.
+        Edit profile.
 
-    Edits a profile selected by the supplied username. First checks
-    permissions if the user is allowed to edit this profile, if denied will
-    show a 404. When the profile is successfully edited will redirect to
-    ``success_url``.
+        Edits a profile selected by the supplied username. First checks
+        permissions if the user is allowed to edit this profile, if denied will
+        show a 404. When the profile is successfully edited will redirect to
+        ``success_url``.
 
-    :param username:
-        Username of the user which profile should be edited.
+        :param username:
+            Username of the user which profile should be edited.
 
-    :param edit_profile_form:
+        :param edit_profile_form:
 
-        Form that is used to edit the profile. The :func:`EditProfileForm.save`
-        method of this form will be called when the form
-        :func:`EditProfileForm.is_valid`.  Defaults to :class:`EditProfileForm`
-        from userena.
+            Form that is used to edit the profile. The :func:`EditProfileForm.save`
+            method of this form will be called when the form
+            :func:`EditProfileForm.is_valid`.  Defaults to :class:`EditProfileForm`
+            from userena.
 
-    :param template_name:
-        String of the template that is used to render this view. Defaults to
-        ``userena/edit_profile_form.html``.
+        :param template_name:
+            String of the template that is used to render this view. Defaults to
+            ``userena/edit_profile_form.html``.
 
-    :param success_url:
-        Named URL which will be passed on to a django ``reverse`` function after
-        the form is successfully saved. Defaults to the ``userena_detail`` url.
+        :param success_url:
+            Named URL which will be passed on to a django ``reverse`` function after
+            the form is successfully saved. Defaults to the ``userena_detail`` url.
 
-    :param extra_context:
-        Dictionary containing variables that are passed on to the
-        ``template_name`` template.  ``form`` key will always be the form used
-        to edit the profile, and the ``profile`` key is always the edited
-        profile.
+        :param extra_context:
+            Dictionary containing variables that are passed on to the
+            ``template_name`` template.  ``form`` key will always be the form used
+            to edit the profile, and the ``profile`` key is always the edited
+            profile.
 
-    **Context**
+        **Context**
 
-    ``form``
-        Form that is used to alter the profile.
+        ``form``
+            Form that is used to alter the profile.
 
-    ``profile``
-        Instance of the ``Profile`` that is edited.
-
+        ``profile``
+            Instance of the ``Profile`` that is edited.
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
 
@@ -311,24 +309,23 @@ def profile_detail(request, username,
     template_name=userena_settings.USERENA_PROFILE_DETAIL_TEMPLATE,
     extra_context=None, **kwargs):
     """
-    Detailed view of an user.
+        Detailed view of an user.
 
-    :param username:
-        String of the username of which the profile should be viewed.
+        :param username:
+            String of the username of which the profile should be viewed.
 
-    :param template_name:
-        String representing the template name that should be used to display
-        the profile.
+        :param template_name:
+            String representing the template name that should be used to display
+            the profile.
 
-    :param extra_context:
-        Dictionary of variables which should be supplied to the template. The
-        ``profile`` key is always the current profile.
+        :param extra_context:
+            Dictionary of variables which should be supplied to the template. The
+            ``profile`` key is always the current profile.
 
-    **Context**
+        **Context**
 
-    ``profile``
-        Instance of the currently viewed ``Profile``.
-
+        ``profile``
+            Instance of the currently viewed ``Profile``.
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
 
