@@ -17,10 +17,13 @@ class Edition(models.Model):
         return unicode(self.year)
 
     @classmethod
+    def get_current_year(self):
+        return (datetime.date.today() + relativedelta(months=+6)).year
+
+    @classmethod
     def get_current(self):
         retval = False
-        year = (datetime.date.today() + relativedelta(months=+6)).year
-        current = self.objects.filter(year=year)
+        current = self.objects.filter(year=self.get_current_year())
         if current:
             retval = current[0].id
         return retval

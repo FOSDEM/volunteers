@@ -1,4 +1,4 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk
+from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk, Edition
 from forms import EditProfileForm, SignupForm
 
 from django.contrib import messages
@@ -80,6 +80,9 @@ def talk_list(request):
 def task_list(request):
     # get the signed in volunteer
     volunteer = Volunteer.objects.get(user=request.user)
+    current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
+    throwaway = current_tasks.order_by('date').distinct('date')
+    days = [x.date for x in throwaway]
 
     # when the user submitted the form
     if request.method == 'POST':
@@ -102,21 +105,25 @@ def task_list(request):
         return redirect('/tasks')
 
     # get the categories the volunteer is interested in
-    categories = TaskCategory.objects.filter(volunteer=request.user)
+    interesting_categories = TaskCategory.objects.filter(volunteer=volunteer)
+    other_categories = TaskCategory.objects.exclude(volunteer=volunteer)
     # get the preferred and other tasks, preserve key order with srteddict for view
     context = { 'tasks': SortedDict({}), 'checked': {}, 'attending': {} }
     context['volunteer'] = volunteer
-    context['tasks']['preferred tasks'] = Task.objects.filter(template__category__in=categories)
-    context['tasks']['other tasks'] = Task.objects.exclude(template__category__in=categories)
+    context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, SortedDict.fromkeys(interesting_categories, {}))
+    context['tasks']['other tasks'] = SortedDict.fromkeys(days, SortedDict.fromkeys(other_categories, {}))
+    for category_group in context['tasks']:
+        for day in context['tasks'][category_group]:
+            for category in context['tasks'][category_group][day]:
+                context['tasks'][category_group][day][category] = current_tasks.filter(template__category=category)
 
     # mark checked, attending tasks
-    for task in context['tasks']['preferred tasks']:
-        context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
-    for task in context['tasks']['other tasks']:
+    for task in current_tasks:
         context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
 
     # take the moderation tasks to talks the volunteer is attending
-    for task in Task.objects.filter(talk__volunteers=volunteer):
+    for task in current_tasks.filter(talk__volunteers=volunteer):
+
         context['attending'][task.id] = True
 
     return render(request, 'volunteers/tasks.html', context)
@@ -134,8 +141,9 @@ def render_to_pdf(template_src, context_dict):
 
 def task_list_detailed(request, username):
     context = {}
+    current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
     # get the requested users tasks
-    context['tasks'] = Task.objects.filter(volunteers__user__username=username)
+    context['tasks'] = current_tasks.filter(volunteers__user__username=username)
     context['profile_user'] = User.objects.filter(username=username)[0]
     context['volunteer'] = Volunteer.objects.filter(user__username=username)[0]
 
@@ -328,6 +336,7 @@ def profile_detail(request, username,
             Instance of the currently viewed ``Profile``.
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
+    current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
 
     profile_model = get_profile_model()
     try:
@@ -339,6 +348,6 @@ def profile_detail(request, username,
         raise PermissionDenied
     if not extra_context: extra_context = dict()
     extra_context['profile'] = user.get_profile()
-    extra_context['tasks'] = Task.objects.filter(volunteers__user=user)
+    extra_context['tasks'] = current_tasks.filter(volunteers__user=user)
     extra_context['hide_email'] = userena_settings.USERENA_HIDE_EMAIL
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)

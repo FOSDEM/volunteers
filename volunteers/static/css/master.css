@@ -247,7 +247,7 @@ h2.content-title {
     -moz-box-shadow: inset 0 0 3px #999;
     -webkit-box-shadow: inset 0 0 3px #999;
     box-shadow: inset 0 0 3px #999;
-    color: #ab292a;
+    color: #333;
 }
 
 h2.intro {
@@ -269,7 +269,7 @@ h2 span {
     font-weight: bold;
     text-transform: none;
     border-bottom: 1px solid #f1edeb;
-    color: #ab292a;
+    color: #333;
     background-image: none;
 }
 
@@ -291,12 +291,12 @@ h6 {
 }
 
 a{
-    color: #880e00;
+    color: #333;
     text-decoration: underline;
 }
 
 a.button {
-    background: #ede9e4;
+    background: #333;
     display: block;
     width: 200px;
     padding: 4px 4px 3px;
@@ -457,12 +457,12 @@ input[type=submit] {
     padding: 0 10px;
     margin: 4px 0 0 180px;
     min-width: 150px;
-    background-color: #ab292a;
+    background-color: #333;
     display: block;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-    border: 1px outset #ce3024;
+    border: 1px outset #555;
     color: #f9f9f9;
     font-size: 13px;
     letter-spacing: 1px;
@@ -482,7 +482,7 @@ input[type=submit]:active {
     line-height: 36px;
     background-color: #bd302d;
     line-height: 36px;
-    border: 1px inset #ce3024;
+    border: 1px inset #555;
 }
 
 #signin input[type=checkbox] {
@@ -513,7 +513,7 @@ legend {
     width: 500px;
     padding: 5px 0 6px 0;
     font-size: 1.3em;
-    color: #ab292a;
+    color: #333;
     font-weight: bold;
     border-bottom: 1px solid #ddd;
     text-transform: uppercase;
@@ -730,7 +730,7 @@ div#lang_form input[type=submit] {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-    border: 1px outset #ce3024;
+    border: 1px outset #555;
     color: #f9f9f9;
     font-size: 13px;
     letter-spacing: 1px;
@@ -904,11 +904,32 @@ table.talk_list tr td, table.talk_list tr th {
     padding: 0 10px 0 10px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+}
 
+table.task_list tr:hover, table.talk_list tr:hover {
+    background-color: #ddd;
 }
 
 table.task_list tr th, table.talk_list tr th {
+    border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+}
+
+table.task_list tr.table_top, table.talk_list tr.table_top {
+    background-color: #bbf;
+}
+
+table.task_list tr.light_blue, table.talk_list tr.light_blue {
+    background-color: #ccf;
+}
+
+table.task_list tr.lighter_blue, table.talk_list tr.lighter_blue {
+    background-color: #ddf;
+}
+
+table.task_list tr th.no_vert_border, table.talk_list tr th.no_vert_border {
+    border-top: none;
+    border-bottom: none;
 }
 
 table.task_list tr td.red, table.talk_list tr td.red {
@@ -941,10 +962,11 @@ table.task_list .special-task {
     font-weight:bold;
 }
 
-table.task_list .task-name, table.talk_list .talk-volunteers {
+table.task_list .task-name {
     cursor: pointer;
+    padding-left: 20px;
 }
 
-table.task_list .task-volunteers {
+table.task_list .task-volunteers, table.talk_list .talk-volunteers {
     cursor: pointer;
 }
