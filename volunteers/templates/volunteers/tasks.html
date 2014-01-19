@@ -8,6 +8,60 @@
 {% block content %}
 <a href="/tasks/{{ user.username }}" title="View schedule">View your schedule</a>
 <form class="task_list" action="/tasks/" method="post">{% csrf_token %}
+    {% if is_dr_manhattan %}
+    <fieldset>
+        <legend class="task_list">We seem to have a bit of a problem here...</legend><br/>
+        <table>
+            <tr>
+                <td><img src="/static/img/dr_manhattan.png"/></td>
+                <td width="20px;">&nbsp;</td>
+                <td style="vertical-align: top;">
+                    Unless you look like the guy on the left, odds are you're not actually capable
+                    of being in two different locations at the same time. So it might be wise to take
+                    action on the tasks below...
+                </td>
+                <td width="50%">&nbsp;</td>
+            </tr>
+        </table><br/>
+        <table class="task_list">
+            <tr class="table_top_alert">
+                <th width="10%">{% trans "I'm in" %}!</th>
+                <th width="55%">{% trans 'Task' %}</th>
+                <th width="20%">{% trans 'When' %}</th>
+                <th width="15%">{% trans 'Volunteers' %}</th>
+            </tr>
+        {% for task_set in dr_manhattan_task_sets %}
+            <tr class="task_set_alert">
+                <th class="no_vert_border">&nbsp;</th>
+                <th class="no_vert_border">Problematic tasks #{{ forloop.counter }}:</th>
+                <th class="no_vert_border">&nbsp;</th>
+                <th class="no_vert_border">&nbsp;</th>
+            </tr>
+            {% for task in task_set %}
+            <tr>
+                <td><input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} /></td>
+                {% if attending|get_item:task.id == True %}
+                <td class="task-name special-task">{{ task.name }} <span class="small_note">(Hey, you're attending this!)</span></td>
+                {% else %}
+                <td class="task-name"><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
+                {% endif %}
+                <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
+                {% if task.assigned_volunteers == task.nbr_volunteers_max %}
+                <td class="task-volunteers blue" title="{% trans 'Full' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                {% elif task.assigned_volunteers >= task.nbr_volunteers %}
+                <td class="task-volunteers green" title="{% trans 'Staffed' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                {% elif task.assigned_volunteers >= task.nbr_volunteers_min %}
+                <td class="task-volunteers gray" title="{% trans 'Manageable' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                {% else %}
+                <td class="task-volunteers red" title="{% trans 'More volunteers needed' %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">
+                {% endif %}
+                {{task.assigned_volunteers}}/{{ task.nbr_volunteers }}</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+        </table>
+    </fieldset>
+    {% endif %}
     {% for title, days in tasks.items %}
     <fieldset>
         <legend class="task_list">{% trans title %} <span style="font-size: small; font-weight: normal;">

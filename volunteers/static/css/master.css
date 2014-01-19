@@ -927,6 +927,14 @@ table.task_list tr.category, table.talk_list tr.category {
     background-color: #ddd;
 }
 
+table.task_list tr.table_top_alert, table.talk_list tr.table_top_alert {
+    background-color: #f55;
+}
+
+table.task_list tr.task_set_alert, table.talk_list tr.task_set_alert {
+    background-color: #f66;
+}
+
 table.task_list tr th.no_vert_border, table.talk_list tr th.no_vert_border {
     border-top: none;
     border-bottom: none;

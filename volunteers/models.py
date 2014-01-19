@@ -196,6 +196,30 @@ class Volunteer(UserenaLanguageBaseProfile):
     def email(self):
         return self.user.email
 
+    # Dr. Manhattan detection: is this person capable of being in multiple places at once?
+    def detect_dr_manhattan(self):
+        retval = [False, []]
+        current_tasks = self.tasks.filter(date__year=Edition.get_current_year())
+        dates = [x.date for x in current_tasks.order_by('date').distinct('date')]
+        # Yes yes, I know about dict generators; my editor doesn't however and I don't
+        # want to see warnings for perfectly valid code.
+        schedule = {}
+        for date in dates:
+            schedule[date] = []
+        for task in current_tasks:
+            for item in schedule[task.date]:
+                if item.start_time <= task.start_time < item.end_time \
+                    or item.start_time < task.end_time <= item.end_time:
+                    retval[0] = True
+                    for task_set in retval[1]:
+                        if item in task_set:
+                            task_set.add(task)
+                            break
+                    retval[1].append(set([item, task]))
+            schedule[task.date].append(task)
+        # from pprint import pprint ; pprint(schedule)
+        return retval
+
 
 """
 Many volunteers come back year after year, but sometimes they

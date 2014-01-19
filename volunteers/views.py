@@ -85,7 +85,10 @@ def talk_list(request):
 def task_list(request):
     # get the signed in volunteer
     volunteer = Volunteer.objects.get(user=request.user)
+    is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
+    dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
     current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
+    ok_tasks = current_tasks.exclude(id__in=dr_manhattan_task_ids)
     throwaway = current_tasks.order_by('date').distinct('date')
     days = [x.date for x in throwaway]
 
@@ -115,7 +118,13 @@ def task_list(request):
         'other tasks': TaskCategory.objects.exclude(volunteer=volunteer),
     }
     # get the preferred and other tasks, preserve key order with srteddict for view
-    context = { 'tasks': SortedDict({}), 'checked': {}, 'attending': {} }
+    context = {
+        'tasks': SortedDict({}),
+        'checked': {},
+        'attending': {},
+        'is_dr_manhattan': is_dr_manhattan,
+        'dr_manhattan_task_sets': dr_manhattan_task_sets,
+    }
     context['volunteer'] = volunteer
     context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
     context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
@@ -123,7 +132,7 @@ def task_list(request):
         for day in context['tasks'][category_group]:
             context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])
             for category in context['tasks'][category_group][day]:
-                dct = current_tasks.filter(template__category=category, date=day)
+                dct = ok_tasks.filter(template__category=category, date=day)
                 context['tasks'][category_group][day][category] = dct
 
     # mark checked, attending tasks
