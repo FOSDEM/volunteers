@@ -1,6 +1,6 @@
 # Volunteers TODO
 
-## Once logged in, a volunteer should be able to:
+## Once logged in, a volunteer or staff member should be able to:
 
 - [x] change their personal data (name, email)
 - [x] change the kind of tasks they're interested in (preferably with checkboxes, model TaskCategory)
@@ -10,16 +10,29 @@
 - [x] select talks they're interested in attending, from a list grouped by the tracks and ordered by start time within the tracks, tracks ordered by start time as well (models Talk and Track)
 - [x] see the moderation tasks for talks they're attending in a different color, so it's clear these are good targets of opportunity
 - [x] eventually, be able to print out their schedule; HTML or PDF (or both)
-- [x] and why not that of anyone in the system, through their profile page? That way people can print out schedules for friends withoug requiring their login credentials.
-- [ ] have access to detail page for tasks with nicely formatted info, overview of who's signed up, and ability to sign up from there as well
-- [ ] have access to detail page for talks with nicely formatted info, overview of who's attending, and ability to mark their attendance there as well
-- [x] be able to see the people assigned to a task (friends like to do things together) - implemented as tooltip
-- [x] be able to see the the tasks a user has assigned himself to, on his profile (friends like to do things together)
-- [ ] anything else I might have overlooked
+- [x] print the schedule of anyone in the system, through their profile page. That way people can print out schedules for friends withoug requiring their login credentials.
+- [x] have access to detail page for tasks with nicely formatted info and overview of who's signed up
+- [ ] sign up from there as well
+- [ ] view mugshots of other assignees there as well
+- [x] have access to detail page for talks with nicely formatted info and overview of who's attending
+- [ ] mark their attendance there as well
+- [ ] view mugshots of other attendees there as well
+- [x] see the people assigned to a task (friends like to do things together) - implemented as tooltip
+- [x] see the the tasks a user has assigned himself to, on his profile (friends like to do things together)
+- [ ] print schedules for entire task templates (handy for staff members, to get an overview of "their" volunteers)
+- [ ] get an overview of who's supposed to be where for any given date/time, default to "now"
+- [ ] do anything else I might have overlooked
 
-## Some constraints:
-- [ ] users should not be able to select tasks that overlap
+## Some constraints and general functionality:
+- [ ] text in the tool is entered using newlines, they should be converted to <br/> tags when displayed
+- [ ] no more need for onhover task/talk descriptions now that we have detail pages
+- [ ] tasks should display the description of their category, followed by the description of their task template, followed by their own. That way we can prevent data duplication by only listing specific info/overrides on the lower hierarchical level descriptors.
+- [ ] users should not be able to select tasks that overlap (Dr. Manhattan detector)
 - [x] first and last name are mandatory when signing up
+- [ ] synchronization with pentabarf needs to be built in, so we don't need to keep tracks/talks updated manually
+- [ ] this requires aligning the data model for talks/tracks more with pentabarf's data model, and adding rooms etc.
+- [ ] staff members should automatically be granted access through SSO (Juan has example code for another tool that can be adapted)
+- [ ] volunteers should get a notification when tasks they're assigned to, or talks they're attending (or for which they're assigned to a task) change substantially when synchronized against pentabarf
 
 ## The layout is currently very basic and ugly. The general layout should:
 - [x] have the links at the top
@@ -30,6 +43,7 @@
 
 - [x] When viewing the tasks page, the previously selected tasks are not selected. The values are stored in the DB, but the form doesn't display the previous selection.
 - [ ] When saving the selection, the old one is cleared and the new one stored. Maybe an update would be a better and more efficient approach?
+- [ ] Even better, and would obsolete the above, make a toggle button that takes immediate effect so the save button is not necessary, and Dr. Manhattan detection can happen earlier.
 
 
 
