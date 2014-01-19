@@ -15,7 +15,7 @@
 {% endif %}
 
     <fieldset>
-        <legend class="task_list">{% trans 'tasks for ' %}
+        <legend class="task_list">{% trans 'schedule for ' %}
             {% if profile_user %}
                 {{ profile_user.first_name }} {{ profile_user.last_name }}
                 <img src="{{ volunteer.get_mugshot_url }}" class="avatar_large"/>
@@ -44,7 +44,7 @@
         </table>
         <br>
     </fieldset>
-    <input type="submit" value="{% trans "Print tasks" %}" />
+    <input type="submit" value="{% trans "Print schedule" %}" />
 </form>
 
 <div id="dialog" title="Task"></div>
