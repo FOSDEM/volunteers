@@ -1,10 +1,10 @@
 from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk, Edition
 from forms import EditProfileForm, SignupForm
-import datetime
 
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
@@ -30,16 +30,19 @@ from cgi import escape
 def promo(request):
     return render(request, 'static/promo.html')
 
+@login_required
 def talk_detailed(request, talk_id):
     talk = get_object_or_404(Talk, id=talk_id)
     context = { 'talk': talk }
     return render(request, 'volunteers/talk_detailed.html', context)
 
+@login_required
 def task_detailed(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     context = { 'task': task }
     return render(request, 'volunteers/task_detailed.html', context)
 
+@login_required
 def talk_list(request):
     # get the signed in volunteer
     volunteer = Volunteer.objects.get(user=request.user)
@@ -78,6 +81,7 @@ def talk_list(request):
 
     return render(request, 'volunteers/talks.html', context)
 
+@login_required
 def task_list(request):
     # get the signed in volunteer
     volunteer = Volunteer.objects.get(user=request.user)
@@ -133,6 +137,7 @@ def task_list(request):
 
     return render(request, 'volunteers/tasks.html', context)
 
+@login_required
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
@@ -144,6 +149,7 @@ def render_to_pdf(template_src, context_dict):
         return HttpResponse(result.getvalue(), mimetype='application/pdf')
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
+@login_required
 def task_list_detailed(request, username):
     context = {}
     current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
@@ -231,6 +237,7 @@ def signup(request, signup_form=SignupForm,
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
 
 @secure_required
+@login_required
 @permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))
 def profile_edit(request, username, edit_profile_form=EditProfileForm,
                  template_name='userena/profile_form.html', success_url=None,
@@ -318,6 +325,7 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
+@login_required
 def profile_detail(request, username,
     template_name=userena_settings.USERENA_PROFILE_DETAIL_TEMPLATE,
     extra_context=None, **kwargs):

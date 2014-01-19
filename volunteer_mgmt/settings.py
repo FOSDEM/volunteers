@@ -5,6 +5,7 @@ import dj_database_url
 
 settings_dir = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+LOGIN_URL = "/volunteers/signin"
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
