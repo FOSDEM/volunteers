@@ -916,15 +916,15 @@ table.task_list tr th, table.talk_list tr th {
 }
 
 table.task_list tr.table_top, table.talk_list tr.table_top {
-    background-color: #bbf;
+    background-color: #bbb;
 }
 
-table.task_list tr.light_blue, table.talk_list tr.light_blue {
-    background-color: #ccf;
+table.task_list tr.day, table.talk_list tr.day {
+    background-color: #ccc;
 }
 
-table.task_list tr.lighter_blue, table.talk_list tr.lighter_blue {
-    background-color: #ddf;
+table.task_list tr.category, table.talk_list tr.category {
+    background-color: #ddd;
 }
 
 table.task_list tr th.no_vert_border, table.talk_list tr th.no_vert_border {
