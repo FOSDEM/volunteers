@@ -43,6 +43,11 @@
             {% endfor %}
         </table>
         <br>
+        <h1>Task Descriptions</h1><br/>
+        {% for task in tasks %}
+        <h2>{{ task.name }}</h2>
+        <p>{{ task.description }}</p><br/>
+        {% endfor%}
     </fieldset>
     <input type="submit" value="{% trans "Print schedule" %}" />
 </form>

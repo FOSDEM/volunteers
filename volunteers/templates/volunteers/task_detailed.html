@@ -21,9 +21,15 @@
                 <td>{{ task.name }}</td>
                 <td>
                 {% for volunteer in task.volunteer_set.all %}
-                    {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}, 
+                    {{ volunteer.user.first_name }} {{ volunteer.user.last_name }},
                 {% endfor %}
                 <td>{{ task.talk }}</td>
+            </tr>
+            <tr>
+                <th colspan="4" style="border-bottom: none;">&nbsp;</th>
+            </tr>
+            <tr>
+                <td colspan="4">{{ task.description }}</td>
             </tr>
         </table>
         <br>
