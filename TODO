@@ -25,7 +25,7 @@
 
 ## Some constraints and general functionality:
 - [ ] text in the tool is entered using newlines, they should be converted to <br/> tags when displayed
-- [ ] no more need for onhover task/talk descriptions now that we have detail pages
+- [x] no more need for onhover task/talk descriptions now that we have detail pages
 - [ ] tasks should display the description of their category, followed by the description of their task template, followed by their own. That way we can prevent data duplication by only listing specific info/overrides on the lower hierarchical level descriptors.
 - [ ] users should not be able to select tasks that overlap (Dr. Manhattan detector)
 - [x] first and last name are mandatory when signing up
