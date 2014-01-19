@@ -40,15 +40,16 @@
                 <th class="no_vert_border">&nbsp;</th>
             </tr>
                 {% for category, category_tasks in categories.items %}
-            {% ifchanged %}
-            {% else %}
-            <tr>
-                <th class="no_vert_border">&nbsp;</th>
-                <th class="no_vert_border">&nbsp;</th>
-                <th class="no_vert_border">&nbsp;</th>
-                <th class="no_vert_border">&nbsp;</th>
-            </tr>
-            {% endifchanged %}
+                {% if category_tasks %}
+                {% ifchanged %}
+                {% else %}
+                <tr>
+                    <th class="no_vert_border">&nbsp;</th>
+                    <th class="no_vert_border">&nbsp;</th>
+                    <th class="no_vert_border">&nbsp;</th>
+                    <th class="no_vert_border">&nbsp;</th>
+                </tr>
+                {% endifchanged %}
                 <tr class="lighter_blue">
                     <th class="no_vert_border">&nbsp;</th>
                     <th class="no_vert_border">{{ category.name }}</th>
@@ -76,6 +77,7 @@
                         {{task.assigned_volunteers}}/{{ task.nbr_volunteers }}</td>
                     </tr>
                     {% endfor %}
+                {% endif %}
                 {% endfor %}
             {% endif %}
             {% endfor %}

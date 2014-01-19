@@ -1,5 +1,6 @@
 from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk, Edition
 from forms import EditProfileForm, SignupForm
+import datetime
 
 from django.contrib import messages
 from django.http import HttpResponse
@@ -105,17 +106,21 @@ def task_list(request):
         return redirect('/tasks')
 
     # get the categories the volunteer is interested in
-    interesting_categories = TaskCategory.objects.filter(volunteer=volunteer)
-    other_categories = TaskCategory.objects.exclude(volunteer=volunteer)
+    categories_by_task_pref = {
+        'preferred tasks': TaskCategory.objects.filter(volunteer=volunteer),
+        'other tasks': TaskCategory.objects.exclude(volunteer=volunteer),
+    }
     # get the preferred and other tasks, preserve key order with srteddict for view
     context = { 'tasks': SortedDict({}), 'checked': {}, 'attending': {} }
     context['volunteer'] = volunteer
-    context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, SortedDict.fromkeys(interesting_categories, {}))
-    context['tasks']['other tasks'] = SortedDict.fromkeys(days, SortedDict.fromkeys(other_categories, {}))
+    context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
+    context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
     for category_group in context['tasks']:
         for day in context['tasks'][category_group]:
+            context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])
             for category in context['tasks'][category_group][day]:
-                context['tasks'][category_group][day][category] = current_tasks.filter(template__category=category)
+                dct = current_tasks.filter(template__category=category, date=day)
+                context['tasks'][category_group][day][category] = dct
 
     # mark checked, attending tasks
     for task in current_tasks:
