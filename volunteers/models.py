@@ -5,6 +5,12 @@ from django.utils.translation import ugettext_lazy as _
 import datetime
 from dateutil.relativedelta import relativedelta
 
+# Helper model
+class HasLinkField():
+    def link(self):
+        return 'Link'
+
+
 # Create your models here.
 
 class Edition(models.Model):
@@ -54,7 +60,7 @@ class Track(models.Model):
     # end_time = models.TimeField()
 
 
-class Talk(models.Model):
+class Talk(models.Model, HasLinkField):
     class Meta:
         verbose_name = _('Talk')
         verbose_name_plural = _('Talks')
@@ -120,7 +126,7 @@ class TaskTemplate(models.Model):
 Contains the specifics of an instance of a task. It's based on a task template
 but it can override the name and description, yet not the category.
 """
-class Task(models.Model):
+class Task(models.Model, HasLinkField):
     class Meta:
         verbose_name = _('Task')
         verbose_name_plural = _('Tasks')
@@ -173,6 +179,15 @@ class Volunteer(UserenaLanguageBaseProfile):
     def __unicode__(self):
         return self.user.username
 
+    ratings = (
+        (0, 'No longer welcome'),
+        (1, 'Poor'),
+        (2, 'Not great'),
+        (3, 'Average'),
+        (4, 'Good'),
+        (5, 'Superb'),
+    )
+
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
     # Categories in which they're interested to help out.
     categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True, \
@@ -188,6 +203,8 @@ class Volunteer(UserenaLanguageBaseProfile):
     about_me = models.TextField(_('about me'), blank=True)
     mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, \
         help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
+    private_staff_rating = models.IntegerField(null=True, blank=True, choices=ratings)
+    private_staff_notes = models.TextField(null=True, blank=True)
 
     # Just here for the admin interface.
     def full_name(self):
