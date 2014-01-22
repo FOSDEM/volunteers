@@ -179,6 +179,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     class Meta:
         verbose_name = _('Volunteer')
         verbose_name_plural = _('Volunteers')
+        ordering = ['user__first_name', 'user__last_name']
 
     def __unicode__(self):
         return self.user.username

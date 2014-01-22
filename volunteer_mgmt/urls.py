@@ -34,5 +34,7 @@ urlpatterns = patterns('',
     url(r'^talk/(?P<talk_id>\d+)/$', 'volunteers.views.talk_detailed', name='talk_detailed'),
     url(r'^tasks/', 'volunteers.views.task_list', name='task_list'),
     url(r'^talks/', 'volunteers.views.talk_list', name='talk_list'),
+    url(r'^category_schedule/', 'volunteers.views.category_schedule_list', name='category_schedule_list'),
+    url(r'^task_schedule/(?P<template_id>\d+)/$', 'volunteers.views.task_schedule', name='task_schedule'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

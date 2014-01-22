@@ -1,4 +1,4 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, Task, Track, Talk, Edition
+from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, Talk, Edition
 from forms import EditProfileForm, SignupForm
 
 from django.contrib import messages
@@ -82,6 +82,26 @@ def talk_list(request):
     return render(request, 'volunteers/talks.html', context)
 
 @login_required
+def category_schedule_list(request):
+    categories = TaskCategory.objects.all()
+    context = {'categories': dict.fromkeys(categories, [])}
+    for category in context['categories']:
+        context['categories'][category] = TaskTemplate.objects.filter(category=category)
+    return render(request, 'volunteers/category_schedule_list.html', context)
+
+@login_required
+def task_schedule(request, template_id):
+    templates = TaskTemplate.objects.filter(id=template_id)
+    tasks = Task.objects.filter(template=templates[0])
+    context = {
+        'template': templates[0],
+        'tasks': dict.fromkeys(tasks, {}),
+    }
+    for task in context['tasks']:
+        context['tasks'][task] = Volunteer.objects.filter(tasks=task)
+    return render(request, 'volunteers/task_schedule.html', context)
+
+@login_required
 def task_list(request):
     # get the signed in volunteer
     volunteer = Volunteer.objects.get(user=request.user)
@@ -141,7 +161,6 @@ def task_list(request):
 
     # take the moderation tasks to talks the volunteer is attending
     for task in current_tasks.filter(talk__volunteers=volunteer):
-
         context['attending'][task.id] = True
 
     return render(request, 'volunteers/tasks.html', context)

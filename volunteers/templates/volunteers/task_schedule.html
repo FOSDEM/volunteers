@@ -1,0 +1,46 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load volunteer_extras %}
+
+{% block content_title %}<h2 class="content-title">{{ template.name }} {% trans 'Schedule' %}</h2>{% endblock %}
+
+{% block content %}
+    {% for task, volunteers in tasks.items %}
+    <h2 class="task-title">
+        {{ task.name }} ({{task.assigned_volunteers}}/{{task.nbr_volunteers}})<br/>
+        {{ task.date|date:"l" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}
+    </h2><br/>
+    <table width="98%" class="task_schedule">
+        <tr><td colspan="4">&nbsp;</td></tr>
+        {% for volunteer in volunteers %}
+        <tr>
+            <td class="task_schedule_head" width="20%">{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</td>
+            <td class="task_schedule_head" width="50%">
+                {{ task.date|date:"l" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}
+            </td>
+            <td class="task_schedule_head">Present?</td>
+            <td class="task_schedule_head_avatar">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="task_schedule">
+                Nick:<br/>
+                Email:<br/>
+                Mobile:<br/>
+            </td>
+            <td class="task_schedule">
+                {{ volunteer.user.username }}<br/>
+                {{ volunteer.user.email }}<br/>
+                {{ volunteer.mobile_nbr }}
+            </td>
+            <td>&nbsp;</td>
+            <td class="task_schedule">
+                <img src="{{ volunteer.get_mugshot_url }}" class="avatar_center"/>
+            </td>
+        </tr>
+        <tr><td colspan="4">&nbsp;</td></tr>
+        {% endfor %}
+    </table>
+    <br/>&nbsp;<br/>
+    {% endfor %}
+{% endblock %}

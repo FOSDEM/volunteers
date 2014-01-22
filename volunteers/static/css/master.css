@@ -250,6 +250,19 @@ h2.content-title {
     color: #333;
 }
 
+h2.task-title {
+    margin: 10px;
+    padding: 15px 15px 12px;
+    background: #e7e2de no-repeat 90px 30px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    -moz-box-shadow: inset 0 0 3px #999;
+    -webkit-box-shadow: inset 0 0 3px #999;
+    box-shadow: inset 0 0 3px #999;
+    color: #333;
+}
+
 h2.intro {
     font-size: 1.8em;
     margin: 10px 20px 9px 300px;
@@ -812,10 +825,16 @@ p.date {
 }
 
 .avatar_large {
-    width: 140;
+    width: 140px;
     border: 1px solid #ccc;
     float: right;
     margin: 0 10px;
+}
+
+.avatar_center {
+    width: 100px;
+    border: 1px solid #ccc;
+    float: inherit;
 }
 
 .avatar.received {
@@ -977,4 +996,26 @@ table.task_list .task-name {
 
 table.task_list .task-volunteers, table.talk_list .talk-volunteers {
     cursor: pointer;
+}
+
+.task_schedule {
+    vertical-align: top;
+    padding-top: 0.3em;
+}
+
+.task_schedule_head {
+    vertical-align: top;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
+.task_schedule_head_avatar {
+    width:40px;
+    vertical-align: top;
+    border-bottom: 1px solid black;
+}
+
+table.task_schedule {
+    margin: 10px;
+    padding: 15px 15px 12px;
 }
