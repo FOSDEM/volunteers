@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from userena.models import UserenaLanguageBaseProfile
 from django.utils.translation import ugettext_lazy as _
 import datetime
+import time
 from dateutil.relativedelta import relativedelta
 
 # Helper model
@@ -133,7 +134,10 @@ class Task(models.Model, HasLinkField):
         ordering = ['date','start_time','-end_time','name']
 
     def __unicode__(self):
-        return self.name
+        day = self.date.strftime('%a')
+        start = self.start_time.strftime('%H:%M')
+        end = self.end_time.strftime('%H:%M')
+        return "%s (%s, %s - %s)" % (self.name, day, start, end)
 
     name = models.CharField(max_length=300)
     description = models.TextField()
