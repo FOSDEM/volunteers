@@ -21,6 +21,7 @@ from userena.views import ExtraContextTemplateView, get_profile_model
 
 from guardian.decorators import permission_required_or_403
 
+import csv
 import cStringIO as StringIO
 import ho.pisa as pisa
 from django.template.loader import get_template
@@ -100,6 +101,41 @@ def task_schedule(request, template_id):
     for task in context['tasks']:
         context['tasks'][task] = Volunteer.objects.filter(tasks=task)
     return render(request, 'volunteers/task_schedule.html', context)
+
+@login_required
+def task_schedule_csv(request, template_id):
+    template = TaskTemplate.objects.filter(id=template_id)[0]
+    tasks = Task.objects.filter(template=template).order_by('date', 'start_time', 'end_time')
+    response = HttpResponse(content_type='text/csv')
+    filename = "schedule_%s.csv" % template.name
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+    writer = csv.writer(response)
+    writer.writerow(['Task', 'Volunteers', 'Day', 'Start', 'End', 'Volunteer', 'Nick', 'Email', 'Mobile'])
+    for task in tasks:
+        writer.writerow(
+            [
+                task.name,
+                "(%s/%s)" % (task.assigned_volunteers(), task.nbr_volunteers),
+                task.date.strftime('%a'),
+                task.start_time.strftime('%H:%M'),
+                task.end_time.strftime('%H:%M'),
+                '','','','',
+            ]
+        )
+        volunteers = Volunteer.objects.filter(tasks=task)
+        for number, volunteer in enumerate(volunteers):
+            writer.writerow(
+                [
+                    '', '', '', '', '',
+                    "%s %s" % (volunteer.user.first_name, volunteer.user.last_name),
+                    volunteer.user.username,
+                    volunteer.user.email,
+                    volunteer.mobile_nbr,
+                ]
+            )
+        writer.writerow([''] * 9)
+    return response
 
 @login_required
 def task_list(request):
