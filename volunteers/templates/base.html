@@ -36,7 +36,7 @@
                     <!-- TODO: fix it :P <li><a href="{% url 'userena_umessages_list' %}"><span>{% trans 'Messages' %}</span></a></li> -->
                     <li><a href="{% url 'task_list' %}"><span>{% trans 'Tasks' %}</span></a></li>
                     <li><a href="{% url 'talk_list' %}"><span>{% trans 'Talks' %}</span></a></li>
-                    {% if user.is_superuser %}
+                    {% if user.is_staff %}
                     <li><a href="{% url 'category_schedule_list' %}"><span>{% trans 'Task Schedules' %}</span></a></li>
                     {% endif %}
                     <li><a href="{% url 'userena_profile_detail' user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
