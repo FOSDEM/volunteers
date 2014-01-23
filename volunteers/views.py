@@ -92,10 +92,10 @@ def category_schedule_list(request):
 
 @login_required
 def task_schedule(request, template_id):
-    templates = TaskTemplate.objects.filter(id=template_id)
-    tasks = Task.objects.filter(template=templates[0]).order_by('date', 'start_time', 'end_time')
+    template = TaskTemplate.objects.filter(id=template_id)[0]
+    tasks = Task.objects.filter(template=template).order_by('date', 'start_time', 'end_time')
     context = {
-        'template': templates[0],
+        'template': template,
         'tasks': SortedDict.fromkeys(tasks, {}),
     }
     for task in context['tasks']:
