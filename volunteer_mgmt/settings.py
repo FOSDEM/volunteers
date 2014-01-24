@@ -216,3 +216,6 @@ LOGGING = {
         },
     }
 }
+
+if os.path.isfile(settings_dir + '/localsettings.py'):
+    from localsettings import *
