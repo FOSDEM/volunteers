@@ -202,7 +202,7 @@ def task_list(request):
     return render(request, 'volunteers/tasks.html', context)
 
 @login_required
-def render_to_pdf(template_src, context_dict):
+def render_to_pdf(request, template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
     html  = template.render(context)
@@ -225,7 +225,7 @@ def task_list_detailed(request, username):
     if request.POST:
         # create the HttpResponse object with the appropriate PDF headers.
         context.update({ 'pagesize':'A4'})
-        return render_to_pdf('volunteers/tasks_detailed.html', context)
+        return render_to_pdf(request, 'volunteers/tasks_detailed.html', context)
 
     return render(request, 'volunteers/tasks_detailed.html', context)
 
