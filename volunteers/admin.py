@@ -87,7 +87,7 @@ class TaskAdmin(admin.ModelAdmin):
     inlines = (VolunteerTaskInline, )
     list_display = ['link', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers', 'nbr_volunteers']
     list_editable = ['name', 'date', 'start_time', 'end_time', 'nbr_volunteers']
-    list_filter = [DayListFilter]
+    list_filter = [DayListFilter, 'template', 'talk__track']
 
 
 class VolunteerAdmin(admin.ModelAdmin):
