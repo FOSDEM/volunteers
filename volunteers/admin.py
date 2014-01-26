@@ -10,6 +10,9 @@ from volunteers.models import Volunteer
 from volunteers.models import VolunteerStatus
 from volunteers.models import VolunteerTask
 from volunteers.models import VolunteerCategory
+from django.db import models
+from django.forms import TextInput, Textarea
+
 
 class DayListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
@@ -97,6 +100,10 @@ class VolunteerAdmin(admin.ModelAdmin):
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
     list_filter = ['private_staff_rating']
     readonly_fields = ['full_name', 'email']
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'20'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':20})},
+    }
 
 
 class VolunteerStatusAdmin(admin.ModelAdmin):
