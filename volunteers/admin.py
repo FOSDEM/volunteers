@@ -129,7 +129,7 @@ class VolunteerAdmin(admin.ModelAdmin):
                 for volunteer in queryset:
                     # TODO: actually send the mail
                     if volunteer.user.email:
-                        send_mail(subject, message, 'mvandenborre@fosdem.org',[volunteer.email], fail_silently=False)
+                        send_mail(subject, message, 'mvandenborre@fosdem.org', [volunteer.user.email], fail_silently=False)
                         count += 1
                 if count > 1:
                     plural = 's'
