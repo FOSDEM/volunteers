@@ -94,7 +94,7 @@ class VolunteerAdmin(admin.ModelAdmin):
     fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes']
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_editable = ['private_staff_rating', 'mobile_nbr']
+    list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
     list_filter = ['private_staff_rating']
     readonly_fields = ['full_name', 'email']
 
