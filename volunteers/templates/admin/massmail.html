@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<p>Enter subject and message:</p>
+
+<form action="" method="post">{% csrf_token %}
+
+    {{ massmail_form }}
+
+    <p>The message will be sent to:</p>
+
+    <ul>
+        {% for volunteer in volunteers %}
+        <li>{{ volunteer.user.first_name }} {{ volunteer.user.last_name  }} ({{ volunteer.user.email }})</li>
+        {% endfor %}
+    </ul>
+
+    <input type="hidden" name="action" value="mass_mail_volunteer" />
+    <input type="submit" name="send" value="Send" />
+</form>
+
+{% endblock %}
