@@ -37,7 +37,6 @@ def talk_detailed(request, talk_id):
     context = { 'talk': talk }
     return render(request, 'volunteers/talk_detailed.html', context)
 
-@login_required
 def task_detailed(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     context = { 'task': task }
@@ -137,19 +136,25 @@ def task_schedule_csv(request, template_id):
         writer.writerow([''] * 9)
     return response
 
-@login_required
 def task_list(request):
     # get the signed in volunteer
-    volunteer = Volunteer.objects.get(user=request.user)
-    is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
-    dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
+    if request.user.is_authenticated():
+        volunteer = Volunteer.objects.get(user=request.user)
+    else:
+        volunteer = None
+        is_dr_manhattan = False
     current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
-    ok_tasks = current_tasks.exclude(id__in=dr_manhattan_task_ids)
+    if volunteer:
+        is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
+        dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
+        ok_tasks = current_tasks.exclude(id__in=dr_manhattan_task_ids)
+    else:
+        ok_tasks = current_tasks
     throwaway = current_tasks.order_by('date').distinct('date')
     days = [x.date for x in throwaway]
 
     # when the user submitted the form
-    if request.method == 'POST':
+    if request.method == 'POST' and volunteer:
         # get the checked tasks
         task_ids = request.POST.getlist('task')
 
@@ -168,20 +173,27 @@ def task_list(request):
         # redirect to prevent repost
         return redirect('/tasks')
 
-    # get the categories the volunteer is interested in
-    categories_by_task_pref = {
-        'preferred tasks': TaskCategory.objects.filter(volunteer=volunteer),
-        'other tasks': TaskCategory.objects.exclude(volunteer=volunteer),
-    }
     # get the preferred and other tasks, preserve key order with srteddict for view
     context = {
         'tasks': SortedDict({}),
         'checked': {},
         'attending': {},
         'is_dr_manhattan': is_dr_manhattan,
-        'dr_manhattan_task_sets': dr_manhattan_task_sets,
     }
-    context['volunteer'] = volunteer
+    # get the categories the volunteer is interested in
+    if volunteer:
+        categories_by_task_pref = {
+            'preferred tasks': TaskCategory.objects.filter(volunteer=volunteer),
+            'other tasks': TaskCategory.objects.exclude(volunteer=volunteer),
+        }
+        context['volunteer'] = volunteer
+        context['dr_manhattan_task_sets'] = dr_manhattan_task_sets,
+    else:
+        categories_by_task_pref = {
+            'preferred tasks': [],
+            'other tasks': TaskCategory.objects.all(),
+        }
+    context['user'] = request.user
     context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
     context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
     for category_group in context['tasks']:
@@ -192,12 +204,13 @@ def task_list(request):
                 context['tasks'][category_group][day][category] = dct
 
     # mark checked, attending tasks
-    for task in current_tasks:
-        context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
+    if volunteer:
+        for task in current_tasks:
+            context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
 
-    # take the moderation tasks to talks the volunteer is attending
-    for task in current_tasks.filter(talk__volunteers=volunteer):
-        context['attending'][task.id] = True
+        # take the moderation tasks to talks the volunteer is attending
+        for task in current_tasks.filter(talk__volunteers=volunteer):
+            context['attending'][task.id] = True
 
     return render(request, 'volunteers/tasks.html', context)
 

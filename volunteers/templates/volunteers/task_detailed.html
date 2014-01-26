@@ -20,9 +20,13 @@
                 <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
                 <td>{{ task.name }}</td>
                 <td>
-                {% for volunteer in task.volunteer_set.all %}
-                    {{ volunteer.user.first_name }} {{ volunteer.user.last_name }},
-                {% endfor %}
+                    {% if user.is_authenticated %}
+                    {% for volunteer in task.volunteer_set.all %}
+                        {{ volunteer.user.first_name }} {{ volunteer.user.last_name }},
+                    {% endfor %}
+                    {% else %}
+                        {{ task.volunteer_set.count}}/{{ task.nbr_volunteers }}
+                    {% endif%}
                 <td>{{ task.talk }}</td>
             </tr>
             <tr>
