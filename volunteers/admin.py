@@ -1,4 +1,9 @@
 from django.contrib import admin
+from django.core.mail import send_mail
+from django.db import models
+from django.forms import TextInput, Textarea, Form, CharField, MultipleHiddenInput
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 from volunteers.models import Edition
 from volunteers.models import Track
@@ -10,8 +15,6 @@ from volunteers.models import Volunteer
 from volunteers.models import VolunteerStatus
 from volunteers.models import VolunteerTask
 from volunteers.models import VolunteerCategory
-from django.db import models
-from django.forms import TextInput, Textarea
 
 
 class DayListFilter(admin.SimpleListFilter):
@@ -104,6 +107,40 @@ class VolunteerAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
         models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':20})},
     }
+    actions = ['mass_mail_volunteer']
+
+
+    # Mass mail action
+    class MassMailForm(Form):
+
+        _selected_action = CharField(widget=MultipleHiddenInput)
+        subject = CharField()
+        message = CharField(widget=Textarea)
+
+    def mass_mail_volunteer(self, request, queryset):
+        form = None
+        if 'send' in request.POST:
+            form = self.MassMailForm(request.POST)
+            if form.is_valid():
+                subject = form.cleaned_data['subject']
+                message = form.cleaned_data['message']
+                count = 0
+                plural = ''
+                for volunteer in queryset:
+                    # TODO: actually send the mail
+                    if volunteer.user.email:
+                        send_mail(subject, message, 'mvandenborre@fosdem.org',[volunteer.email], fail_silently=False)
+                        count += 1
+                if count > 1:
+                    plural = 's'
+                self.message_user(request, 'Mail with subject "%s" sent to  %d volunteer%s.' % (subject, count, plural))
+                return HttpResponseRedirect(request.get_full_path())
+        if not form:
+            form = self.MassMailForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            return render(request, 'admin/massmail.html', {'volunteers': queryset,
+                                                             'massmail_form': form,
+                                                            })
+    mass_mail_volunteer.short_description = "Send mass mail"
 
 
 class VolunteerStatusAdmin(admin.ModelAdmin):
