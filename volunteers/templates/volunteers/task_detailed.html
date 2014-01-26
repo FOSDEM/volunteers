@@ -33,7 +33,7 @@
                 <th colspan="4" style="border-bottom: none;">&nbsp;</th>
             </tr>
             <tr>
-                <td colspan="4">{{ task.description }}</td>
+                <td colspan="4"><p>{% autoescape off %}{{ task.description }}{% endautoescape %}</p><br/></td>
             </tr>
         </table>
         <br>

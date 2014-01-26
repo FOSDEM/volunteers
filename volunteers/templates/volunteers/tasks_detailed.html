@@ -46,7 +46,7 @@
         <h1>Task Descriptions</h1><br/>
         {% for task in tasks %}
         <h2>{{ task.name }}</h2>
-        <p>{{ autoescape off }}{{ task.description }}{{ endautoescape }}</p><br/>
+        <p>{% autoescape off %}{{ task.description }}{% endautoescape %}</p><br/>
         {% endfor%}
     </fieldset>
     <input type="submit" value="{% trans "Print schedule" %}" />
