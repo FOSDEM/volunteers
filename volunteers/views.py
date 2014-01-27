@@ -188,14 +188,15 @@ def task_list(request):
         }
         context['volunteer'] = volunteer
         context['dr_manhattan_task_sets'] = dr_manhattan_task_sets
+        context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
+        context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
     else:
         categories_by_task_pref = {
-            'preferred tasks': [],
-            'other tasks': TaskCategory.objects.all(),
+            # 'preferred tasks': [],
+            'tasks': TaskCategory.objects.all(),
         }
+        context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     context['user'] = request.user
-    context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
-    context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
     for category_group in context['tasks']:
         for day in context['tasks'][category_group]:
             context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])
