@@ -233,13 +233,15 @@ class Volunteer(UserenaLanguageBaseProfile):
                 if item.start_time <= task.start_time < item.end_time \
                     or item.start_time < task.end_time <= item.end_time:
                     retval[0] = True
+                    item_found = False
                     for task_set in retval[1]:
                         if item in task_set:
+                            item_found = True
                             task_set.add(task)
                             break
-                    retval[1].append(set([item, task]))
+                    if not item_found:
+                        retval[1].append(set([item, task]))
             schedule[task.date].append(task)
-        # from pprint import pprint ; pprint(schedule)
         return retval
 
 
