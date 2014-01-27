@@ -1,5 +1,6 @@
 from django.contrib import admin
-from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import send_mass_mail
 from django.db import models
 from django.forms import TextInput, Textarea, Form, CharField, MultipleHiddenInput
 from django.http import HttpResponseRedirect
@@ -126,11 +127,13 @@ class VolunteerAdmin(admin.ModelAdmin):
                 message = form.cleaned_data['message']
                 count = 0
                 plural = ''
+                volunteer_mails = []
                 for volunteer in queryset:
                     # TODO: actually send the mail
                     if volunteer.user.email:
-                        send_mail(subject, message, 'mvandenborre@fosdem.org', [volunteer.user.email], fail_silently=False)
+                        volunteer_mails.append(volunteer.user.email)
                         count += 1
+                send_mass_mail(((subject, message, settings.DEFAULT_FROM_EMAIL, volunteer_mails),), fail_silently=False)
                 if count > 1:
                     plural = 's'
                 self.message_user(request, 'Mail with subject "%s" sent to  %d volunteer%s.' % (subject, count, plural))
