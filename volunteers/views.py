@@ -187,7 +187,7 @@ def task_list(request):
             'other tasks': TaskCategory.objects.exclude(volunteer=volunteer),
         }
         context['volunteer'] = volunteer
-        context['dr_manhattan_task_sets'] = dr_manhattan_task_sets,
+        context['dr_manhattan_task_sets'] = dr_manhattan_task_sets
     else:
         categories_by_task_pref = {
             'preferred tasks': [],
