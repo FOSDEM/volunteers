@@ -95,13 +95,13 @@ class EditProfileForm(forms.ModelForm):
     first_name = forms.CharField(label=_(u'First name'), max_length=30, required=True)
     last_name = forms.CharField(label=_(u'Last name'), max_length=30, required=True)
 
-    categories = forms.ModelMultipleChoiceField(label=_(u'Categories'), queryset=TaskCategory.objects.all(), \
-        widget=forms.CheckboxSelectMultiple(), required=False, \
-        help_text="""<br/><br/>
-        Indicate your preference for which kind of tasks you'd prefer to do.
-        The tasks belonging to this category will appear on top in the Tasks page, so you
-        can find them easily.<br/><br/>
-        Signing up for actual tasks does not happen here; that's done in the Tasks screen!""")
+    # categories = forms.ModelMultipleChoiceField(label=_(u'Categories'), queryset=TaskCategory.objects.all(), \
+    #     widget=forms.CheckboxSelectMultiple(), required=False, \
+    #     help_text="""<br/><br/>
+    #     Indicate your preference for which kind of tasks you'd prefer to do.
+    #     The tasks belonging to this category will appear on top in the Tasks page, so you
+    #     can find them easily.<br/><br/>
+    #     Signing up for actual tasks does not happen here; that's done in the Tasks screen!""")
 
     def __init__(self, *args, **kw):
         super(EditProfileForm, self).__init__(*args, **kw)
@@ -113,7 +113,7 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = get_profile_model()
-        exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating', 'private_staff_notes']
+        exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating', 'private_staff_notes', 'categories']
 
     def save(self, force_insert=False, force_update=False, commit=True):
         profile = super(EditProfileForm, self).save(commit=commit)
