@@ -102,7 +102,7 @@ class VolunteerAdmin(admin.ModelAdmin):
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = ['private_staff_rating']
+    list_filter = ['private_staff_rating', 'categories', 'tasks']
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
