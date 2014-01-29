@@ -112,28 +112,27 @@ def task_schedule_csv(request, template_id):
     writer = csv.writer(response)
     writer.writerow(['Task', 'Volunteers', 'Day', 'Start', 'End', 'Volunteer', 'Nick', 'Email', 'Mobile'])
     for task in tasks:
-        writer.writerow(
-            [
-                task.name,
-                "(%s/%s)" % (task.assigned_volunteers(), task.nbr_volunteers),
-                task.date.strftime('%a'),
-                task.start_time.strftime('%H:%M'),
-                task.end_time.strftime('%H:%M'),
-                '','','','',
-            ]
-        )
+        row = [
+            task.name,
+            "(%s/%s)" % (task.assigned_volunteers(), task.nbr_volunteers),
+            task.date.strftime('%a'),
+            task.start_time.strftime('%H:%M'),
+            task.end_time.strftime('%H:%M'),
+            '','','','',
+        ]
+        writer.writerow([unicode(s).encode("utf-8") for s in row])
         volunteers = Volunteer.objects.filter(tasks=task)
         for number, volunteer in enumerate(volunteers):
-            writer.writerow(
-                [
-                    '', '', '', '', '',
-                    "%s %s" % (volunteer.user.first_name, volunteer.user.last_name),
-                    volunteer.user.username,
-                    volunteer.user.email,
-                    volunteer.mobile_nbr,
-                ]
-            )
-        writer.writerow([''] * 9)
+            row = [
+                '', '', '', '', '',
+                "%s %s" % (volunteer.user.first_name, volunteer.user.last_name),
+                volunteer.user.username,
+                volunteer.user.email,
+                volunteer.mobile_nbr,
+            ]
+            writer.writerow([unicode(s).encode("utf-8") for s in row])
+        row = [''] * 9
+        writer.writerow([unicode(s).encode("utf-8") for s in row])
     return response
 
 def task_list(request):
