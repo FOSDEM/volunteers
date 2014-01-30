@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # Userena urls:
     url(r'^$', 'volunteers.views.promo', name='promo'),
+    url(r'^faq/', 'volunteers.views.faq', name='faq'),
     url(r'^volunteers/signup', 'volunteers.views.signup', name='signup'),
     url(r'^volunteers/(?P<username>(?!signout|signup|signin)[\.\w-]+)/$', 'volunteers.views.profile_detail', name='profile_detail'),
     url(r'^volunteers/(?P<username>[\.\w-]+)/edit/$', 'volunteers.views.profile_edit', name='userena_profile_edit'),
