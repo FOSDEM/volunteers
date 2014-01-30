@@ -28,6 +28,9 @@ from django.template.loader import get_template
 from django.template import Context
 from cgi import escape
 
+def faq(request):
+    return render(request, 'static/faq.html')
+
 def promo(request):
     return render(request, 'static/promo.html')
 
