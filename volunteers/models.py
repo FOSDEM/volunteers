@@ -1,10 +1,11 @@
-from django.db import models
 from django.contrib.auth.models import User
-from userena.models import UserenaLanguageBaseProfile
+from django.core.mail import send_mail
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import datetime
-import time
 from dateutil.relativedelta import relativedelta
+import time
+from userena.models import UserenaLanguageBaseProfile
 import vobject
 
 # Helper model
