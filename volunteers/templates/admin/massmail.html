@@ -6,7 +6,9 @@
 
 <form action="" method="post">{% csrf_token %}
 
-    {{ massmail_form }}
+    <table>
+        {{ massmail_form.as_table }}
+    </table>
 
     <p>The message will be sent to:</p>
 
