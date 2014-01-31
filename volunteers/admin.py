@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mass_mail
 from django.db import models
 from django.forms import TextInput, Textarea, Form, CharField, MultipleHiddenInput
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from volunteers.models import Edition
@@ -108,7 +109,7 @@ class VolunteerAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
         models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':20})},
     }
-    actions = ['mass_mail_volunteer']
+    actions = ['mass_mail_volunteer', 'vcard_export']
 
 
     # Mass mail action
@@ -119,6 +120,8 @@ class VolunteerAdmin(admin.ModelAdmin):
         message = CharField(widget=Textarea)
 
     def mass_mail_volunteer(self, request, queryset):
+        if not request.user.is_staff:
+            raise PermissionDenied
         form = None
         if 'send' in request.POST:
             form = self.MassMailForm(request.POST)
@@ -144,6 +147,17 @@ class VolunteerAdmin(admin.ModelAdmin):
                                                              'massmail_form': form,
                                                             })
     mass_mail_volunteer.short_description = "Send mass mail"
+
+    # vCard export
+    def vcard_export(self, request, queryset):
+        if not request.user.is_staff:
+            raise PermissionDenied
+        output = ''
+        for volunteer in queryset:
+            output += volunteer.vcard()
+        response = HttpResponse(output, mimetype='text/vcard')
+        response['Content-Disposition'] = 'attachment; filename=volunteers.vcard'
+        return response
 
 
 class VolunteerStatusAdmin(admin.ModelAdmin):
