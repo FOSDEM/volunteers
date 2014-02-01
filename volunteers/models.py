@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db import models
@@ -261,6 +262,27 @@ class Volunteer(UserenaLanguageBaseProfile):
             if len(card_prop) > 2:
                 vkey.type_param = card_prop[2]
         return card.serialize()
+
+    def mail_schedule(self):
+        subject = "FOSDEM Volunteers: your schedule"
+        message_header = []
+        message_header.extend(['Dear %s,' % (unicode(self.user.first_name).encode('utf-8')),''])
+        message_header.extend(['Here is your schedule for FOSDEM %d:' % (Edition.get_current_year(),), ''])
+        message_body = []
+        for task in self.tasks.filter(date__year=Edition.get_current_year()):
+            message_body.extend(["%s, %s-%s: %s" % (
+                    task.date.strftime('%a'),
+                    task.start_time,
+                    task.end_time,
+                    task.name,
+                )])
+        message_txt = '\n'.join(message_header + message_body)
+        message_html = '<br/>'.join(message_header)
+        message_html += '<ul style="font-family: Courier New, monospace"><li>'
+        message_html += '</li><li>'.join(message_body)
+        message_html += '</li></ul>'
+        send_mail(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
+            [self.user.email], html_message=message_html, fail_silently=False)
 
 
 """

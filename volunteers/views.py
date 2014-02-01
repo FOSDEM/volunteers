@@ -236,12 +236,18 @@ def task_list_detailed(request, username):
     # get the requested users tasks
     context['tasks'] = current_tasks.filter(volunteers__user__username=username)
     context['profile_user'] = User.objects.filter(username=username)[0]
-    context['volunteer'] = Volunteer.objects.filter(user__username=username)[0]
+    volunteer = Volunteer.objects.filter(user__username=username)[0]
+    context['volunteer'] = volunteer
 
     if request.POST:
-        # create the HttpResponse object with the appropriate PDF headers.
-        context.update({ 'pagesize':'A4'})
-        return render_to_pdf(request, 'volunteers/tasks_detailed.html', context)
+        if 'print_pdf' in request.POST:
+            # create the HttpResponse object with the appropriate PDF headers.
+            context.update({ 'pagesize':'A4'})
+            return render_to_pdf(request, 'volunteers/tasks_detailed.html', context)
+        elif 'mail_schedule' in request.POST:
+            volunteer.mail_schedule()
+            messages.success(request, _('Your shedule has been mailed to %s.' % (volunteer.user.email,)),
+                fail_silently=True)
 
     return render(request, 'volunteers/tasks_detailed.html', context)
 
