@@ -235,6 +235,7 @@ def task_list_detailed(request, username):
     current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
     # get the requested users tasks
     context['tasks'] = current_tasks.filter(volunteers__user__username=username)
+    context['user'] = request.user
     context['profile_user'] = User.objects.filter(username=username)[0]
     volunteer = Volunteer.objects.filter(user__username=username)[0]
     context['volunteer'] = volunteer

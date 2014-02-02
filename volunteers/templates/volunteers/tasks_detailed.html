@@ -50,7 +50,9 @@
         {% endfor%}
     </fieldset>
     <input type="submit" name="print_pdf" value="{% trans "Print schedule" %}" />
+    {% if user == profile_user or user.is_staff %}
     <input type="submit" name="mail_schedule" value="{% trans "Mail schedule" %}" />
+    {% endif %}
 </form>
 
 <div id="dialog" title="Task"></div>
