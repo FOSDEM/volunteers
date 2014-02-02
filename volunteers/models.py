@@ -277,12 +277,15 @@ class Volunteer(UserenaLanguageBaseProfile):
                     task.name,
                 )])
         message_txt = '\n'.join(message_header + message_body)
-        message_html = '<br/>'.join(message_header)
-        message_html += '<ul style="font-family: Courier New, monospace"><li>'
-        message_html += '</li><li>'.join(message_body)
-        message_html += '</li></ul>'
+        # Uncommenting html stuff for now; it's only in django development ATM
+        # message_html = '<br/>'.join(message_header)
+        # message_html += '<ul style="font-family: Courier New, monospace"><li>'
+        # message_html += '</li><li>'.join(message_body)
+        # message_html += '</li></ul>'
+        # send_mail(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
+        #     [self.user.email], html_message=message_html, fail_silently=False)
         send_mail(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
-            [self.user.email], html_message=message_html, fail_silently=False)
+            [self.user.email], fail_silently=False)
 
 
 """
