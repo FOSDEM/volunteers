@@ -3,10 +3,13 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from userena.models import UserenaLanguageBaseProfile
+
 import datetime
 from dateutil.relativedelta import relativedelta
-import time
-from userena.models import UserenaLanguageBaseProfile
+import hashlib
+import httplib
+import urllib
 import vobject
 
 # Helper model
@@ -287,6 +290,33 @@ class Volunteer(UserenaLanguageBaseProfile):
         send_mail(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
             [self.user.email], fail_silently=False)
 
+    def check_mugshot(self):
+        mugshot_url = self.get_mugshot_url()
+        # We only get None for mugshot_url if userena is not set up to use
+        # gravatar fallback and no mughot has been uploaded.
+        if not mugshot_url:
+            return False
+        # OK, we either have a gravatar, or an uploaded pic.
+        elif 'gravatar.com' not in mugshot_url:
+            return True
+        # Right, definitely a gravatar then... Real, or auto-generated?
+        # Code lifted from http://mcnearney.net/blog/2010/2/14/creating-django-gravatar-template-tag-part-1/
+        GRAVATAR_DOMAIN = 'gravatar.com'
+        GRAVATAR_PATH='/avatar/'
+        gravatar_hash = hashlib.md5(self.user.email.strip().lower()).hexdigest()
+        query = urllib.urlencode({
+            'gravatar_id': gravatar_hash,
+            's': 1,
+            'default': '/'
+            })
+        full_path = '%s?%s' % (GRAVATAR_PATH, query)
+        conn = httplib.HTTPConnection(GRAVATAR_DOMAIN)
+        conn.request('HEAD', full_path)
+        response = conn.getresponse()
+        if response.status == 302:
+            return False
+        else:
+            return True
 
 """
 Many volunteers come back year after year, but sometimes they

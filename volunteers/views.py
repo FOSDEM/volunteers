@@ -28,6 +28,14 @@ from django.template.loader import get_template
 from django.template import Context
 from cgi import escape
 
+def check_profile_completeness(request, volunteer):
+    if request.user != volunteer.user:
+        return True
+    if not volunteer.check_mugshot():
+        messages.warning(request, _("Looks like we don't have your beautiful smile in our system. Be so kind to upload a mugshot in your profile page. :)"), fail_silently=True)
+    if not volunteer.mobile_nbr:
+        messages.warning(request, _("Hey there! It seems you didn't give us a phone number. Please update your profile, or be the last to know the pizza's here..."), fail_silently=True)
+
 def faq(request):
     return render(request, 'static/faq.html')
 
@@ -214,6 +222,7 @@ def task_list(request):
         # take the moderation tasks to talks the volunteer is attending
         for task in current_tasks.filter(talk__volunteers=volunteer):
             context['attending'][task.id] = True
+        check_profile_completeness(request, volunteer)
 
     return render(request, 'volunteers/tasks.html', context)
 
@@ -239,6 +248,7 @@ def task_list_detailed(request, username):
     context['profile_user'] = User.objects.filter(username=username)[0]
     volunteer = Volunteer.objects.filter(user__username=username)[0]
     context['volunteer'] = volunteer
+    check_profile_completeness(request, volunteer)
 
     if request.POST:
         if 'print_pdf' in request.POST:
@@ -450,4 +460,5 @@ def profile_detail(request, username,
     extra_context['profile'] = user.get_profile()
     extra_context['tasks'] = current_tasks.filter(volunteers__user=user)
     extra_context['hide_email'] = userena_settings.USERENA_HIDE_EMAIL
+    check_profile_completeness(request, user.get_profile())
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
