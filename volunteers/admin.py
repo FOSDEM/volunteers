@@ -1,8 +1,10 @@
+import sys
 from django.contrib import admin
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mass_mail
 from django.db import models
+from django.db.models import Count
 from django.forms import TextInput, Textarea, Form, CharField, MultipleHiddenInput
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -38,7 +40,33 @@ class DayListFilter(admin.SimpleListFilter):
             return queryset.filter(date__year=Edition.get_current_year(), \
                 date__week_day=self.value())
         else:
+            return queryset.filter(date__year=Edition.get_current_year())
+
+
+class NumTasksFilter(admin.SimpleListFilter):
+    title = 'Tasks'
+    parameter_name = 'tasks'
+
+    def lookups(self, request, model_admin):
+        return (
+            (0, 'No tasks'),
+            (1, '1 - 5 tasks'),
+            (2, 'More than 5 tasks'),
+        )
+
+    def queryset(self, request, queryset):
+        if not self.value():
             return queryset
+
+        val = int(self.value())
+        if val == 0:
+            min_tasks, max_tasks = (0, 0)
+        elif val == 1:
+            min_tasks, max_tasks = (1, 5)
+        else:
+            min_tasks, max_tasks = (6, sys.maxint)
+        return queryset.annotate(num_tasks=Count('tasks')). \
+            filter(num_tasks__gte=min_tasks, num_tasks__lte=max_tasks)
 
 
 class VolunteerTaskInline(admin.TabularInline):
@@ -101,9 +129,9 @@ class TaskAdmin(admin.ModelAdmin):
 class VolunteerAdmin(admin.ModelAdmin):
     fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes']
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
-    list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr']
+    list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr', 'num_tasks']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = ['private_staff_rating', 'categories', 'tasks']
+    list_filter = ['private_staff_rating', NumTasksFilter, 'categories', 'tasks']
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
@@ -159,6 +187,10 @@ class VolunteerAdmin(admin.ModelAdmin):
         response['Content-Disposition'] = 'attachment; filename=volunteers.vcard'
         return response
 
+    def num_tasks(self, volunteer):
+        return volunteer.tasks.count()
+
+    num_tasks.admin_order_field = 'num_tasks'
 
 class VolunteerStatusAdmin(admin.ModelAdmin):
     fields = ['edition', 'volunteer', 'active']
