@@ -92,7 +92,7 @@ class Talk(models.Model, HasLinkField):
 """
 Categories are things like buildup, cleanup, moderation, ...
 """
-class TaskCategory(models.Model):
+class TaskCategory(models.Model, HasLinkField):
     class Meta:
         verbose_name = _('Task Category')
         verbose_name_plural = _('Task Categories')
@@ -104,6 +104,7 @@ class TaskCategory(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerCategory', blank=True, null=True)
+    active = models.BooleanField(default=True)
 
     def assigned_volunteers(self):
         return self.volunteer_set.count()

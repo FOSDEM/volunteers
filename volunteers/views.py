@@ -94,8 +94,8 @@ def talk_list(request):
 
 @login_required
 def category_schedule_list(request):
-    categories = TaskCategory.objects.all()
-    context = {'categories': dict.fromkeys(categories, [])}
+    categories = TaskCategory.objects.filter(active=True)
+    context = {'categories': SortedDict.fromkeys(categories, [])}
     for category in context['categories']:
         context['categories'][category] = TaskTemplate.objects.filter(category=category)
     return render(request, 'volunteers/category_schedule_list.html', context)
