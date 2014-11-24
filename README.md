@@ -46,3 +46,12 @@ firefox 127.0.0.1:8000
 ```
 
 For production installations it's not recommended to run the development server, but run it behind a real webserver like Apache, Nginx, Lighthttpd, ... Instructions for setting this up can be found online.
+
+
+DEVELOPMENT PITFALLS
+====================
+
+South:
+------
+
+* Sometimes South fails to create a schemamigration for a new field, with the puzzling error that the field does not exist. This happens when another model references the model in which the field has been added, using a default value. If this happens, remove the default value temporarily before you create the schemamigration, and re-add it after the SQL code has been generated.
