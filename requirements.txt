@@ -16,3 +16,4 @@ pisa==3.0.33
 reportlab==2.6
 html5lib==0.999
 python-dateutil==1.5
+vobject==0.6.6
