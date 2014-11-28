@@ -69,6 +69,37 @@ class NumTasksFilter(admin.SimpleListFilter):
             filter(num_tasks__gte=min_tasks, num_tasks__lte=max_tasks)
 
 
+class CategoryActiveFilter(admin.SimpleListFilter):
+    title = 'active category'
+    parameter_name = 'active'
+
+    def lookups(self, requesst, model_admin):
+        return [
+            (2, 'All'),
+            (1, 'Yes'),
+            (0, 'No'),
+        ]
+
+    def choices(self, cl):
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == lookup,
+                'query_string': cl.get_query_string({
+                    self.parameter_name: lookup,
+                }, []),
+                'display': title,
+            }
+
+    def queryset(self, request, queryset):
+        if self.value() is None:
+            self.used_parameters[self.parameter_name] = 1
+        else:
+            self.used_parameters[self.parameter_name] = int(self.value())
+        if self.value() == 2:
+            return queryset
+        return queryset.filter(category__active__exact=self.value())
+
+
 class VolunteerTaskInline(admin.TabularInline):
     model = VolunteerTask
     extra = 1
@@ -113,6 +144,7 @@ class TaskCategoryAdmin(admin.ModelAdmin):
 class TaskTemplateAdmin(admin.ModelAdmin):
     fields = ['name', 'description', 'category']
     list_display = ['name', 'category']
+    list_filter = [CategoryActiveFilter]
 
 
 class TaskAdmin(admin.ModelAdmin):
