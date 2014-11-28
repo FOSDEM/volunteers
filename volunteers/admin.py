@@ -136,7 +136,7 @@ class CategoryActiveFilter(admin.SimpleListFilter):
             self.used_parameters[self.parameter_name] = int(self.value())
         if self.value() == 2:
             return queryset
-        return queryset.filter(category__active__exact=self.value())
+        return queryset.filter(category__active=self.value())
 
 
 class VolunteerTaskInline(admin.TabularInline):
