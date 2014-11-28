@@ -37,14 +37,13 @@ class DayListFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value():
-            return queryset.filter(date__year=Edition.get_current_year(), \
-                date__week_day=self.value())
+            return queryset.filter(date__week_day=self.value())
         else:
-            return queryset.filter(date__year=Edition.get_current_year())
+            return queryset
 
 
 class NumTasksFilter(admin.SimpleListFilter):
-    title = 'Tasks'
+    title = 'tasks'
     parameter_name = 'tasks'
 
     def lookups(self, request, model_admin):
@@ -67,6 +66,46 @@ class NumTasksFilter(admin.SimpleListFilter):
             min_tasks, max_tasks = (6, sys.maxint)
         return queryset.annotate(num_tasks=Count('tasks')). \
             filter(num_tasks__gte=min_tasks, num_tasks__lte=max_tasks)
+
+
+class EditionFilter(admin.SimpleListFilter):
+    title = 'editions'
+    parameter_name = 'edition'
+
+    def lookups(self, request, model_admin):
+        retval = [(0, 'All')]
+        for edition in Edition.objects.all():
+            retval.append((edition.id, edition.name))
+        return retval
+
+    def choices(self, cl):
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == lookup,
+                'query_string': cl.get_query_string({
+                    self.parameter_name: lookup,
+                }, []),
+                'display': title,
+            }
+
+    def queryset(self, request, queryset):
+        if self.value() is None:
+            self.used_parameters[self.parameter_name] = Edition.get_current()
+        else:
+            # Otherwise, the selected value doesn't get highlighted for some reason...
+            # Note: there is something very weird about this. self.value() should
+            # return, and operate on, unicode strings, even for "integers".
+            # Compare to DayListFilter above...
+            # TODO: Investigate.
+            self.used_parameters[self.parameter_name] = int(self.value())
+        if self.value() == 0:
+            return queryset
+        elif 'edition' in queryset.model.__dict__:
+            return queryset.filter(edition=self.value())
+        elif 'track' in queryset.model.__dict__:
+            return queryset.filter(track__edition=self.value())
+        elif 'volunteerstatus_set' in queryset.model.__dict__:
+            return queryset.filter(volunteerstatus__edition=self.value())
 
 
 class CategoryActiveFilter(admin.SimpleListFilter):
@@ -111,8 +150,8 @@ class VolunteerCategoryInline(admin.TabularInline):
 
 
 class EditionAdmin(admin.ModelAdmin):
-    fields = ['year', 'start_date', 'end_date']
-    list_display = ['year', 'start_date', 'end_date']
+    fields = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until']
+    list_display = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until']
 
 
 class TrackAdmin(admin.ModelAdmin):
@@ -121,6 +160,8 @@ class TrackAdmin(admin.ModelAdmin):
         (None, {'fields': ['title', 'description']}),
     ]
     list_display = ['edition', 'date', 'start_time', 'title']
+    list_filter = [EditionFilter]
+
 
 
 class TalkAdmin(admin.ModelAdmin):
@@ -131,7 +172,7 @@ class TalkAdmin(admin.ModelAdmin):
     ]
     list_display = ['link', 'title', 'track', 'date', 'start_time']
     list_editable = ['title', 'track', 'date', 'start_time']
-    list_filter = [DayListFilter, 'track']
+    list_filter = [EditionFilter, DayListFilter, 'track']
 
 
 class TaskCategoryAdmin(admin.ModelAdmin):
@@ -149,14 +190,14 @@ class TaskTemplateAdmin(admin.ModelAdmin):
 
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date', 'start_time', 'end_time']}),
+        (None, {'fields': ['edition', 'name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date', 'start_time', 'end_time']}),
         (None, {'fields': ['talk', 'template']}),
         (None, {'fields': ['description']}),
     ]
     inlines = (VolunteerTaskInline, )
-    list_display = ['link', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
+    list_display = ['link', 'edition', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
     list_editable = ['name', 'date', 'start_time', 'end_time', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
-    list_filter = [DayListFilter, 'template', 'talk__track']
+    list_filter = [EditionFilter, DayListFilter, 'template', 'talk__track']
 
 
 class VolunteerAdmin(admin.ModelAdmin):
@@ -164,7 +205,7 @@ class VolunteerAdmin(admin.ModelAdmin):
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr', 'num_tasks']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = ['private_staff_rating', NumTasksFilter, 'categories', 'tasks']
+    list_filter = [EditionFilter, 'private_staff_rating', NumTasksFilter, 'categories', 'tasks']
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
@@ -221,13 +262,14 @@ class VolunteerAdmin(admin.ModelAdmin):
         return response
 
     def num_tasks(self, volunteer):
-        return volunteer.tasks.count()
+        return volunteer.tasks.filter(edition=Edition.get_current).count()
 
     num_tasks.admin_order_field = 'num_tasks'
 
 class VolunteerStatusAdmin(admin.ModelAdmin):
     fields = ['edition', 'volunteer', 'active']
     list_display = ['edition', 'volunteer', 'active']
+    list_filter = [EditionFilter]
 
 
 admin.site.register(Edition, EditionAdmin)

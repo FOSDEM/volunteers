@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from userena.models import UserenaLanguageBaseProfile
 
 import datetime
-from dateutil.relativedelta import relativedelta
 import hashlib
 import httplib
 import urllib
@@ -24,26 +23,25 @@ class Edition(models.Model):
     class Meta:
         verbose_name = _('Edition')
         verbose_name_plural = _('Editions')
-        ordering = ['-year']
+        ordering = ['-start_date']
 
     def __unicode__(self):
-        return unicode(self.year)
+        return self.name
 
     @classmethod
-    def get_current_year(self):
-        return (datetime.date.today() + relativedelta(months=+6)).year
-
-    @classmethod
-    def get_current(self):
+    def get_current(cls):
         retval = False
-        current = self.objects.filter(year=self.get_current_year())
+        today = datetime.date.today()
+        current = cls.objects.filter(visible_from__lte=today, visible_until__gte=today)
         if current:
             retval = current[0].id
         return retval
 
-    year = models.IntegerField()
+    name = models.CharField(max_length=128)
     start_date = models.DateField()
     end_date = models.DateField()
+    visible_from = models.DateField()
+    visible_until = models.DateField()
 
 
 """
@@ -159,6 +157,7 @@ class Task(models.Model, HasLinkField):
     talk = models.ForeignKey(Talk, blank=True, null=True)
     template = models.ForeignKey(TaskTemplate)
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True, null=True)
+    edition = models.ForeignKey(Edition, default=Edition.get_current)
 
     def assigned_volunteers(self):
         return self.volunteer_set.count()
@@ -228,7 +227,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     # Dr. Manhattan detection: is this person capable of being in multiple places at once?
     def detect_dr_manhattan(self):
         retval = [False, []]
-        current_tasks = self.tasks.filter(date__year=Edition.get_current_year())
+        current_tasks = self.tasks.filter(edition=Edition.get_current)
         dates = [x.date for x in current_tasks.order_by('date').distinct('date')]
         # Yes yes, I know about dict generators; my editor doesn't however and I don't
         # want to see warnings for perfectly valid code.
@@ -271,9 +270,9 @@ class Volunteer(UserenaLanguageBaseProfile):
         subject = "FOSDEM Volunteers: your schedule"
         message_header = []
         message_header.extend(['Dear %s,' % (unicode(self.user.first_name).encode('utf-8')),''])
-        message_header.extend(['Here is your schedule for FOSDEM %d:' % (Edition.get_current_year(),), ''])
+        message_header.extend(['Here is your schedule for %d:' % (Edition.get_current().name,), ''])
         message_body = []
-        for task in self.tasks.filter(date__year=Edition.get_current_year()):
+        for task in self.tasks.filter(edition=Edition.get_current):
             message_body.extend(["%s, %s-%s: %s" % (
                     task.date.strftime('%a'),
                     task.start_time,

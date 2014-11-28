@@ -82,7 +82,7 @@ def talk_list(request):
 
     # group the talks according to tracks
     context = { 'tracks': {}, 'checked': {} }
-    tracks = Track.objects.all()
+    tracks = Track.objects.filter(edition=Edition.get_current)
     for track in tracks:
         context['tracks'][track.title] = Talk.objects.filter(track=track)
 
@@ -103,7 +103,7 @@ def category_schedule_list(request):
 @login_required
 def task_schedule(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template).order_by('date', 'start_time', 'end_time')
+    tasks = Task.objects.filter(template=template, edition=Edition.get_current).order_by('date', 'start_time', 'end_time')
     context = {
         'template': template,
         'tasks': SortedDict.fromkeys(tasks, {}),
@@ -115,7 +115,7 @@ def task_schedule(request, template_id):
 @login_required
 def task_schedule_csv(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template).order_by('date', 'start_time', 'end_time')
+    tasks = Task.objects.filter(template=template, edition=Edition.get_current).order_by('date', 'start_time', 'end_time')
     response = HttpResponse(content_type='text/csv')
     filename = "schedule_%s.csv" % template.name
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -153,7 +153,7 @@ def task_list(request):
     else:
         volunteer = None
         is_dr_manhattan = False
-    current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
+    current_tasks = Task.objects.filter(edition=Edition.get_current)
     if volunteer:
         is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
         dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
@@ -168,13 +168,13 @@ def task_list(request):
         # get the checked tasks
         task_ids = request.POST.getlist('task')
 
-        # checked boxes, add the volunteer to the tasks when he/she is not added
-        for task in Task.objects.filter(id__in=task_ids):
-            VolunteerTask.objects.get_or_create(task=task, volunteer=volunteer)
-
         # unchecked boxes, delete him/her from the task
-        for task in Task.objects.exclude(id__in=task_ids):
+        for task in current_tasks.exclude(id__in=task_ids):
             VolunteerTask.objects.filter(task=task, volunteer=volunteer).delete()
+
+        # checked boxes, add the volunteer to the tasks when he/she is not added
+        for task in current_tasks.filter(id__in=task_ids):
+            VolunteerTask.objects.get_or_create(task=task, volunteer=volunteer)
 
         # show success message when enabled
         if userena_settings.USERENA_USE_MESSAGES:
@@ -241,7 +241,7 @@ def render_to_pdf(request, template_src, context_dict):
 @login_required
 def task_list_detailed(request, username):
     context = {}
-    current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
+    current_tasks = Task.objects.filter(edition=Edition.get_current)
     # get the requested users tasks
     context['tasks'] = current_tasks.filter(volunteers__user__username=username)
     context['user'] = request.user
@@ -446,7 +446,7 @@ def profile_detail(request, username,
             Instance of the currently viewed ``Profile``.
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
-    current_tasks = Task.objects.filter(date__year=Edition.get_current_year())
+    current_tasks = Task.objects.filter(edition=Edition.get_current)
 
     profile_model = get_profile_model()
     try:
