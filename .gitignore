@@ -1,4 +1,8 @@
+venv
 *.pyc
 mugshots
 *.sqlite
 volunteer_mgmt/localsettings.py
+schedule*.xml
+*.sql
+
