@@ -870,6 +870,7 @@ p.date {
 
 #account_list li {
     width: 142px;
+    height: 190px;
     margin: 0 0 12px 12px;
     float: left;
     background-color: #fffeff;
