@@ -16,7 +16,7 @@ html, body {
 }
 
 #container {
-    width: 1008px;
+    width: 55%;
     margin: 30px auto 30px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -47,21 +47,17 @@ html, body {
     -moz-box-shadow: 0 0 3px #999;
     -webkit-box-shadow: 0 0 3px #999;
     box-shadow: 0 0 3px #999;
-    overflow: hidden;
 }
 
 #header {
-    height: 130px;
+    height: 100px;
     margin: -2px 0 0 0;
     padding: 0 13px;
     position: relative;
 }
 
 #nav {
-    position: absolute;
-    right: 12px;
-    top: 48px;
-    overflow: auto;
+    
 }
 
 #nav li {
@@ -188,17 +184,7 @@ html, body {
 }
 
 #details {
-    margin: 0 0;
-    background-color: #fffeff;
-    padding: 6px;
-    text-align: left;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    border-radius: 7px;
-    -moz-box-shadow: 0 0 3px #999;
-    -webkit-box-shadow: 0 0 3px #999;
-    box-shadow: 0 0 3px #999;
-    overflow: hidden;
+    
 }
 
 #details img {
@@ -478,7 +464,8 @@ input[type=submit] {
     height: 35px;
     line-height: 34px;
     padding: 0 10px;
-    margin: 4px 0 0 180px;
+    margin-left: auto;
+    margin-right: auto;
     min-width: 150px;
     background-color: #333;
     display: block;
@@ -579,7 +566,7 @@ ul#profile-nav {
     height: 40px;
     position: absolute;
     right: 25px;
-    top: -47px;
+    top: -63px;
 }
 
 ul#profile-nav li {
@@ -593,9 +580,9 @@ ul#profile-nav li.selected a {
     padding: 8px 25px 8px;
     text-decoration: none;
     background-color: #f6f4f2;
-    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-bottomleft: 8px;
     -webkit-border-top-left-radius: 8px;
-    -moz-border-radius-topright: 8px;
+    -moz-border-radius-bottomright: 8px;
     -webkit-border-top-right-radius: 8px;
     -moz-box-shadow: 0 -1px 1px #ccc;
     -webkit-box-shadow: 0 -1px 1px #ccc;
@@ -911,10 +898,94 @@ p.date {
 /*  tasks list
 ................................... */
 
+
+
+@media only screen and (max-width: 1000px) {
+    body {
+        margin: 0px;
+    }
+
+    #container {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border-left: none;
+        border-right: none;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    /* Force table to not be like tables anymore */
+    .task_list table, 
+    .task_list thead, 
+    .task_list tbody, 
+    .task_list th, 
+    .task_list td, 
+    .task_list tr { 
+        display: block; 
+    }
+ 
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .task_list thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+ 
+    .task_list tr { 
+        border-bottom: 1px solid #ccc; 
+    }
+
+    tr:last-child {
+        border-bottom: none;
+    }
+ 
+    .task_list td { 
+        /* Behave  like a "row" */
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align:left;
+    }
+ 
+    .task_list td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+ 
+    /*
+    Label the data
+    */
+    .task_list td:before { content: attr(data-title); }
+}
+
+@media only screen and (max-width: 550px) {
+    #header {
+        height: 130px;
+    }
+}
+
+a {
+    color:#0088cc;text-decoration:none;
+}
+
+a:hover {
+    color:#005580;text-decoration:underline;
+}
+
 form.task_list, form.talk_list {
-    width: 90%;
-    margin-right: auto;
-    margin-left: auto;
+    width: 100%;
 }
 
 legend.task_list, legend.talk_list {
@@ -925,15 +996,20 @@ legend.task_list, legend.talk_list {
 table.task_list, table.talk_list {
     width: 100%;
     text-align: left;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
+    border-collapse: separate;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
 }
 
-table.task_list tr td, table.task_list tr th,
-table.talk_list tr td, table.talk_list tr th {
-    padding: 0 10px 0 10px;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+table td, table th {
+    padding: 4px 5px;
+    border-left:1px solid #ddd;
+}
+
+table td:first-child, table th:first-child {
+    border: none;
 }
 
 table.task_list tr:hover, table.talk_list tr:hover {
@@ -941,8 +1017,7 @@ table.task_list tr:hover, table.talk_list tr:hover {
 }
 
 table.task_list tr th, table.talk_list tr th {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    /*border-bottom: 1px solid #ddd;*/
 }
 
 table.task_list tr.table_top, table.talk_list tr.table_top {
