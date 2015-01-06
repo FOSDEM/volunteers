@@ -57,7 +57,7 @@ html, body {
 }
 
 #nav {
-    
+    float: right;
 }
 
 #nav li {
@@ -196,7 +196,7 @@ html, body {
     height: 90px;
     width: 124px;
     right: -150px;
-    top: 90px;
+    top: 50px;
     background: url(../img/try.png) no-repeat;
 }
 
@@ -905,6 +905,18 @@ p.date {
         margin: 0px;
     }
 
+    #try{
+        display: none;
+    }
+
+    ul.features {
+        margin: 0;
+    }
+
+    #content-container {
+        padding: 0px;
+    }
+
     #container {
         width: 100%;
         margin-left: 0px;
@@ -917,6 +929,10 @@ p.date {
 }
 
 @media only screen and (max-width: 800px) {
+    #intro, p.intro, h2.intro {
+        margin: 0px;
+        background: none;
+    }
     /* Force table to not be like tables anymore */
     .task_list table, 
     .task_list thead, 
