@@ -9,7 +9,7 @@
     {% for profile in profile_list %}
     <li>
         <a href="{% url 'userena_profile_detail' profile.user.username %}"><img src="{{ profile.get_mugshot_url }}" /></a>
-        <a href="{% url 'userena_profile_detail' profile.user.username %}">{{ profile.user.first_name }} {{ profile.user.last_name  }} ( {{ profile.user.username }})</a>
+        <a href="{% url 'userena_profile_detail' profile.user.username %}">{{ profile.user.first_name }} {{ profile.user.last_name }} <br> ({{ profile.user.username }})</a>
     </li>
     {% endfor %}
 </ul>
