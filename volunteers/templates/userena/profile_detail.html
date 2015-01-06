@@ -31,7 +31,7 @@
     {% if profile.about_me %}
     <p><strong>{% trans "About me" %}</strong><br />{{ profile.about_me }}</p>
     {% endif %}
-    <p><a href="/tasks/{{ profile.user.username }}"<strong>{% trans "Tasks" %}</strong></a><br />
+    <p><a href="/tasks/{{ profile.user.username }}"><strong>{% trans "Tasks" %}</strong></a><br />
     {% if tasks %}
         <ul>
             {% for task in tasks %}
