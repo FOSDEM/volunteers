@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generic_tasks>
+
+    <task template="Buildup">
+        <name>Buildup</name>
+        <counter>1</counter>
+        <description>Any bit of time you can spare on Friday will be helpful! Ideally you can be there from 12:00 until ready. Experience learns us we'll be ready between 18:30 and 22:00 (hard deadline, have to leave the building). Just come in as early you can! We'll have some pizza or other food in the evening. Deadline is 22:00. Some of us go to the beer event afterwards.
+
+This task includes many subtasks. Some require carrying heavy stuff around, some don't. We need to set up stands (tables, chairs), cover the walls in brown paper, put signalization in place, run power cords, ... There will be 3 work areas, each with their own coordinator.</description>
+        <day>-1</day>
+        <start_time>12:00</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>30</nbr_volunteers>
+        <nbr_volunteers_min>20</nbr_volunteers_min>
+        <nbr_volunteers_max>100</nbr_volunteers_max>
+    </task>
+
+    <task template="Buildup">
+        <name>Signage Buildup</name>
+        <counter>1</counter>
+        <description>Exterior signage buildup. What needs to be done:
+*  drag signs (flipboards,...) outside across campus
+* (duct) tape laminated paper signs all across campus
+
+Hints:
+* Bring a decent jacket to protect yourself from the elements (rain forecasted!).
+* Ideally, you also want gloves with the fingertips cut off (for handling tape). We will have some of those, but not enough for everyone!
+
+Meeting point: K infodesk, 07:30. If you are late, please call Geert Goossens at +32 474 68 60 64 for instructions.</description>
+        <day>0</day>
+        <start_time>07:30</start_time>
+        <end_time>09:30</end_time>
+        <nbr_volunteers>10</nbr_volunteers>
+        <nbr_volunteers_min>6</nbr_volunteers_min>
+        <nbr_volunteers_max>16</nbr_volunteers_max>
+    </task>
+
+
+
+
+    <task template="Transportation">
+        <name>Transportation Buildup</name>
+        <counter>1</counter>
+        <description>Organising an event requires lots of stuff to be brought on-site. Things like scaffolding, the O'Reilly books, T-shirts, network gear, ... - some of this stuff may be heavy, so if yo enlist for this, make sure you're OK with lifting potentially heavy objects.
+
+While having a mobile phone number is strongly encouraged for any volunteer, it's mandatory for those signing up for this task as the drivers of the vans need a way to contact you to pick you up somewhere along the way, or when you're running late. ;)</description>
+        <day>-1</day>
+        <start_time>10:00</start_time>
+        <end_time>20:00</end_time>
+        <nbr_volunteers>1</nbr_volunteers>
+        <nbr_volunteers_min>1</nbr_volunteers_min>
+        <nbr_volunteers_max>1</nbr_volunteers_max>
+    </task>
+
+    <task template="Transportation">
+        <name>Transportation Cleanup</name>
+        <counter>1</counter>
+        <description>On Sunday evening, we load all the stuff that needs to be returned back into the vans. The vans will be stalled somewhere overnight so the cargo can be returned the next day. It helps to keep items that go to the same or geographically close locations in the same van, unless everything fits in one.</description>
+        <day>1</day>
+        <start_time>17:30</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>1</nbr_volunteers>
+        <nbr_volunteers_min>1</nbr_volunteers_min>
+        <nbr_volunteers_max>1</nbr_volunteers_max>
+    </task>
+
+    <task template="Transportation">
+        <name>Transportation Return</name>
+        <counter>1</counter>
+        <description>Returning all the things that need to be returned, gas up the van and return to Dockx. The van can be gassed up at the petrol station near Dockx.</description>
+        <day>2</day>
+        <start_time>08:00</start_time>
+        <end_time>14:00</end_time>
+        <nbr_volunteers>1</nbr_volunteers>
+        <nbr_volunteers_min>1</nbr_volunteers_min>
+        <nbr_volunteers_max>1</nbr_volunteers_max>
+    </task>
+
+
+
+
+    <task template="Cleanup">
+        <name>Cleanup</name>
+        <counter>1</counter>
+        <description>We need to leave the premises in a presentable state. Everything we bring and set up must be torn down and removed. All signalization removed, network torn down (go wild; we don't reuse the cables!), tables and chairs stacked so the rental company can load them up when they retrieve them, the floors wiped, ...
+
+Don't damage the building, but make sure none of our stuff remains behind.
+
+Normally we're finished around 9pm, but we stay until we're done.
+
+As many volunteers as possible! That way, it won't take too long. :)</description>
+        <day>1</day>
+        <start_time>18:00</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>30</nbr_volunteers>
+        <nbr_volunteers_min>20</nbr_volunteers_min>
+        <nbr_volunteers_max>1000</nbr_volunteers_max>
+    </task>
+
+
+
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>1</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>0</day>
+        <start_time>09:30</start_time>
+        <end_time>12:00</end_time>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>3</nbr_volunteers_max>
+    </task>
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>2</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>0</day>
+        <start_time>11:45</start_time>
+        <end_time>14:30</end_time>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>3</nbr_volunteers_max>
+    </task>
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>3</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>0</day>
+        <start_time>14:15</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>3</nbr_volunteers_max>
+    </task>
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>4</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>0</day>
+        <start_time>16:45</start_time>
+        <end_time>19:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>5</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>1</day>
+        <start_time>08:30</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>3</nbr_volunteers_max>
+    </task>
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>6</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>1</day>
+        <start_time>10:45</start_time>
+        <end_time>14:00</end_time>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>3</nbr_volunteers_max>
+    </task>
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>7</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>1</day>
+        <start_time>13:45</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>3</nbr_volunteers_max>
+    </task>
+
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>8</counter>
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+
+You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+
+Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+
+
+Location
+
+    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
+
+IMPORTANT Notes
+
+    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+        <day>1</day>
+        <start_time>16:45</start_time>
+        <end_time>19:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+
+
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>1</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>09:30</start_time>
+        <end_time>12:00</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>2</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>12:00</start_time>
+        <end_time>14:30</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>3</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>14:30</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>4</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>17:00</start_time>
+        <end_time>18:30</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>5</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>08:30</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>6</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>11:00</start_time>
+        <end_time>14:00</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>7</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>14:00</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk H</name>
+        <counter>8</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>17:00</start_time>
+        <end_time>18:30</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>1</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>09:30</start_time>
+        <end_time>12:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>2</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>12:00</start_time>
+        <end_time>14:30</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>3</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>14:30</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>4</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>0</day>
+        <start_time>17:00</start_time>
+        <end_time>18:30</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>5</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>08:30</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>6</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>11:00</start_time>
+        <end_time>14:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>7</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>14:00</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+    <task template="Infodesk">
+        <name>Infodesk K</name>
+        <counter>8</counter>
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+
+The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+        <day>1</day>
+        <start_time>17:00</start_time>
+        <end_time>18:30</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>7</nbr_volunteers_max>
+    </task>
+
+
+
+    <task template="Network Buildup">
+        <name>Network Buildup</name>
+        <counter>1</counter>
+        <description>Network buildup starts on Friday around noon and is expected to end around 20:00. We usually don't make that deadline, so please be prepared to stay a bit longer. :)
+
+Your tasks will mainly consist of rolling out, neatly securing and crimping UTP cables. People with experience crimping cables are very welcome to help out! Once all cables have been laid down, the access points need to be installed and secured.</description>
+        <day>-1</day>
+        <start_time>12:00</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>12</nbr_volunteers>
+        <nbr_volunteers_min>8</nbr_volunteers_min>
+        <nbr_volunteers_max>16</nbr_volunteers_max>
+    </task>
+
+</generic_tasks>

@@ -6,10 +6,33 @@ from django.utils.translation import ugettext_lazy as _
 from userena.models import UserenaLanguageBaseProfile
 
 import datetime
+# from dateutil import relativedelta
 import hashlib
 import httplib
 import urllib
 import vobject
+import xml.etree.ElementTree as ET
+
+# Parse dates, times, DRY
+def parse_datetime(date_str, format='%Y-%m-%d'):
+    return datetime.datetime.strptime(date_str, format)
+
+def parse_date(date_str, format='%Y-%m-%d'):
+    return parse_datetime(date_str, format).date()
+
+def parse_time(date_str, format='%H:%M'):
+    return parse_datetime(date_str, format).time()
+
+# More DRY: given a start hour and duration, return start and end time.
+def parse_hour_duration(start_str, duration_str, format='%H:%M'):
+    start = datetime.datetime.strptime(start_str, format)
+    dur_tm = datetime.datetime.strptime(duration_str, format)
+    duration = datetime.timedelta(hours=dur_tm.hour, minutes=dur_tm.minute, seconds=dur_tm.second)
+    end = start + duration
+    start_tm = datetime.time(hour=start.hour, minute=start.minute, second=start.second)
+    end_tm = datetime.time(hour=end.hour, minute=end.minute, second=end.second)
+    return(start_tm, end_tm)
+
 
 # Helper model
 class HasLinkField():
@@ -28,6 +51,12 @@ class Edition(models.Model):
     def __unicode__(self):
         return self.name
 
+    name = models.CharField(max_length=128)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    visible_from = models.DateField()
+    visible_until = models.DateField()
+
     @classmethod
     def get_current(cls):
         retval = False
@@ -37,11 +66,66 @@ class Edition(models.Model):
             retval = current[0].id
         return retval
 
-    name = models.CharField(max_length=128)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    visible_from = models.DateField()
-    visible_until = models.DateField()
+    @classmethod
+    def penta_create_or_update(cls, xml):
+        ed_name = xml.find('title').text
+        start_date = parse_date(xml.find('start').text)
+        end_date = parse_date(xml.find('end').text)
+        visible_from = datetime.date(year=start_date.year - 1, month=8, day=1)
+        visible_until = datetime.date(year=start_date.year, month=7, day=31)
+        editions = cls.objects.filter(name=ed_name)
+        if len(editions):
+            edition = editions[0]
+        else:
+            edition = cls(name=ed_name)  # create if required
+        edition.start_date = start_date
+        edition.end_date = end_date
+        edition.visible_from = visible_from
+        edition.visible_until = visible_until
+        edition.save()
+        return edition
+
+    @classmethod
+    def sync_with_penta(cls):
+        penta_url = settings.SCHEDULE_SYNC_URI
+        response = urllib.urlopen(penta_url)
+        penta_xml = response.read()
+        root = ET.fromstring(penta_xml)
+        ###########
+        # Edition #
+        ###########
+        ed = root.find('conference')
+        edition = cls.penta_create_or_update(ed)
+
+        #################
+        # Generic tasks #
+        #################
+        generic_task_tree = ET.parse('volunteers/init_data/generic_tasks.xml')
+        generic_task_root = generic_task_tree.getroot()
+        for task in generic_task_root.findall('task'):
+            generic_task = Task.create_from_xml(task, edition)
+
+        #########
+        # Talks #
+        #########
+        days = root.findall('day')
+        for day in days:
+            day_date = parse_date(day.get('date'))
+            rooms = day.findall('room')
+            for room in rooms:
+                room_name = room.get('name')
+                # Lightning talks are done manually since the time slots are so small.
+                needs_heralding = needs_video = room_name in ['Janson', 'K.1.105 (La Fontaine)']
+                events = room.findall('event')
+                for event in events:
+                    talk = Talk.penta_create_or_update(event, edition, day_date)
+                    ######################
+                    # Tasks, if required #
+                    ######################
+                    if needs_heralding:
+                        Task.create_or_update_from_talk(edition, talk, 'Heralding', [3, 2, 5])
+                    if needs_video:
+                        Task.create_or_update_from_talk(edition, talk, 'Video', [2, 2, 2])
 
 
 """
@@ -74,6 +158,7 @@ class Talk(models.Model, HasLinkField):
     def __unicode__(self):
         return self.title
 
+    ext_id = models.CharField(max_length=16)  # ID from where we synchronise
     track = models.ForeignKey(Track)
     title = models.CharField(max_length=256)
     speaker = models.CharField(max_length=128)
@@ -85,6 +170,43 @@ class Talk(models.Model, HasLinkField):
 
     def assigned_volunteers(self):
         return self.volunteers.count()
+
+    @classmethod
+    def penta_create_or_update(cls, xml, edition, day_date):
+        event_id = xml.get('id')
+        talks = cls.objects.filter(ext_id=event_id)
+        if len(talks):
+            talk = talks[0]
+        else:
+            talk = cls(ext_id=event_id)
+        start_txt = xml.find('start').text
+        dur_txt = xml.find('duration').text
+        (talk_start, talk_end) = parse_hour_duration(start_txt, dur_txt)
+        track_name = xml.find('track').text
+        tracks = Track.objects.filter(title=track_name, edition=edition)
+        if len(tracks):
+            track = tracks[0]
+        else:
+            track = Track(title=track_name, edition=edition, date=day_date, start_time=talk_start)
+        if day_date < track.date:
+            track.date = day_date
+        if talk_start < track.start_time:
+            track.start_time = talk_start
+        track.save()
+        talk.track = track
+        talk.title = xml.find('title').text
+        talk.description = xml.find('description').text or ''
+        talk.date = day_date
+        (talk.start_time, talk.end_time) = (talk_start, talk_end)
+        persons = xml.find('persons')
+        people = []
+        if len(persons):
+            for person in persons.findall('person'):
+                people.append(person.text)
+            speakers_str = ', '.join(people)
+            talk.speaker = speakers_str
+        talk.save()
+        return talk
 
 
 """
@@ -107,6 +229,16 @@ class TaskCategory(models.Model, HasLinkField):
     def assigned_volunteers(self):
         return self.volunteer_set.count()
 
+    @classmethod
+    def create_or_update_named(cls, name):
+        categories = TaskCategory.objects.filter(name=name)
+        if len(categories):
+            category = categories[0]
+        else:
+            category = TaskCategory(name=name)
+            category.save
+        return category
+
 
 """
 A task template contains all the data about a task that isn't task specific.
@@ -127,6 +259,18 @@ class TaskTemplate(models.Model):
     description = models.TextField()
     category = models.ForeignKey(TaskCategory)
 
+    @classmethod
+    def create_or_update_named(cls, name):
+        templates = cls.objects.filter(name=name)
+        if len(templates):
+            template = templates[0]
+        else:
+            template = cls(name=name)
+            category = TaskCategory.create_or_update_named(name)
+            template.category = category
+            template.save
+        return template
+
 
 """
 Contains the specifics of an instance of a task. It's based on a task template
@@ -145,6 +289,9 @@ class Task(models.Model, HasLinkField):
         return "%s (%s, %s - %s)" % (self.name, day, start, end)
 
     name = models.CharField(max_length=300)
+    # For auto-importing; otherwise we can't have multiple cloak room and
+    # infodesk tasks if we do a simple name search in create_from_xml
+    counter = models.CharField(max_length=2)
     description = models.TextField()
     date = models.DateField()
     start_time = models.TimeField()
@@ -152,15 +299,74 @@ class Task(models.Model, HasLinkField):
     nbr_volunteers = models.IntegerField(default=0)
     nbr_volunteers_min = models.IntegerField(default=0)
     nbr_volunteers_max = models.IntegerField(default=0)
-    # Only for moderation, or possible future tasks related
-    # to a specific talk.
-    talk = models.ForeignKey(Talk, blank=True, null=True)
+    edition = models.ForeignKey(Edition, default=Edition.get_current)
     template = models.ForeignKey(TaskTemplate)
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True, null=True)
-    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    # Only for heralding, or possible future tasks related
+    # to a specific talk.
+    talk = models.ForeignKey(Talk, blank=True, null=True)
 
     def assigned_volunteers(self):
         return self.volunteer_set.count()
+
+    # Create task from talks.
+    # @param volunteers= list/tuple of required number of volunteers, in order:
+    #        ideal, min, max
+    @classmethod
+    def create_or_update_from_talk(cls, edition, talk, task_type, volunteers):
+        tasks = cls.objects.filter(talk=talk, template__name=task_type)
+        templates = TaskTemplate.objects.filter(name=task_type)
+        if len(templates):
+            template = templates[0]
+        else:
+            template = TaskTemplate(name=task_type)
+            categories = TaskCategory.objects.filter(name=task_type)
+            if len(categories):
+                category = categories[0]
+            else:
+                category = TaskCategory(name=task_type)
+                category.save
+            template.category = category
+            template.save
+        if len(tasks):
+            task = tasks[0]
+        else:
+            task = cls(talk=talk, template=template)
+        task.template = template
+        task.name = '%s: %s' % (task_type, talk.title)
+        task.date = talk.date
+        task.start_time = talk.start_time
+        task.end_time = talk.end_time
+        task.edition = edition
+        task.nbr_volunteers = volunteers[0]
+        task.nbr_volunteers_min = volunteers[1]
+        task.nbr_volunteers_max = volunteers[2]
+        task.save()
+        return task
+
+    @classmethod
+    def create_from_xml(cls, xml, edition):
+        template_str = xml.get('template')
+        template = TaskTemplate.create_or_update_named(template_str)
+        name = xml.find('name').text
+        counter = xml.find('counter').text
+        tasks = cls.objects.filter(name=name, counter=counter, template=template, edition=edition)
+        if len(tasks):
+            task = tasks[0]
+            # In this specific model I do not want to update after initial import
+            return task
+        else:
+            task = cls(name=name, counter=counter, template=template, edition=edition)
+        task.description = xml.find('description').text
+        day_offset = int(xml.find('day').text)
+        task.date = edition.start_date + datetime.timedelta(days=day_offset)
+        task.start_time = parse_time(xml.find('start_time').text)
+        task.end_time = parse_time(xml.find('end_time').text)
+        task.nbr_volunteers = int(xml.find('nbr_volunteers').text)
+        task.nbr_volunteers_min = int(xml.find('nbr_volunteers_min').text)
+        task.nbr_volunteers_max = int(xml.find('nbr_volunteers_max').text)
+        task.save()
+        return task
 
 
 """
