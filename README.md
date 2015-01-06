@@ -14,20 +14,20 @@ pip install -r requirements.txt
 If you wish to set up a database, instead of using the default sqlite3 setup, you can adapt the following to your situation:
 
 ```bash
-export VOLUNTEER_DB_TYPE="django.db.backends.postgresql_psycopg2"
+export VOLUNTEER_DB_USER="fosdem"
 export VOLUNTEER_DB_HOST="127.0.0.1"
 export VOLUNTEER_DB_NAME="volunteers"
-export VOLUNTEER_DB_USER="fosdem"
 export VOLUNTEER_DB_PASS="volunteers"
 export VOLUNTEER_SESSION_SECRET="demo"
+export VOLUNTEER_DB_TYPE="django.db.backends.postgresql_psycopg2"
 ```
 
 If you need to test mail functionality (or don't want to get errors during signup), you also need to set up some SMTP variables:
 
 ```bash
+export SMTP_PORT="25"
 export SMTP_HOST="localhost"
 export SMTP_FROM_EMAIL="me@example.com"
-export SMTP_PORT="25"
 ```
 
 Then do the initial setup:
