@@ -516,12 +516,18 @@ class Volunteer(UserenaLanguageBaseProfile):
             'default': '/'
             })
         full_path = '%s?%s' % (GRAVATAR_PATH, query)
-        conn = httplib.HTTPConnection(GRAVATAR_DOMAIN)
-        conn.request('HEAD', full_path)
-        response = conn.getresponse()
-        if response.status == 302:
-            return False
-        else:
+        try:
+            import socket
+            socket.setdefaulttimeout(10)
+            conn = httplib.HTTPConnection(GRAVATAR_DOMAIN)
+            conn.request('HEAD', full_path)
+            response = conn.getresponse()
+            if response.status == 302:
+                return False
+            else:
+                return True
+        except:
+            # Don't bug them if the connection can't be established
             return True
 
 """
