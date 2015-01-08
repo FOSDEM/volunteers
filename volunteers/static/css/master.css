@@ -1,13 +1,13 @@
 /* @override http://localhost:8000/media/css/master.css */
 
-/*	WdeB
+/*  WdeB
 breadandpepper.com
 ................................... */
 
 @import "reset.css";
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
 
-/*	Main elements
+/*  Main elements
 ................................... */
 
 html, body {
@@ -16,8 +16,8 @@ html, body {
 }
 
 #container {
-    width: 55%;
-    margin: 30px auto 30px;
+    width: 1008px;
+    margin: 30px auto 50px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
@@ -38,29 +38,23 @@ html, body {
 #content-container {
     padding: 12px;
     position: relative;
-    margin: 0 0;
-    padding: 6px;
-    text-align: left;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    border-radius: 7px;
-    -moz-box-shadow: 0 0 3px #999;
-    -webkit-box-shadow: 0 0 3px #999;
-    box-shadow: 0 0 3px #999;
 }
 
 #header {
-    height: 100px;
+    height: 130px;
     margin: -2px 0 0 0;
     padding: 0 13px;
     position: relative;
 }
 
-.nav {
-    float: right;
+#nav {
+    position: absolute;
+    right: 12px;
+    top: 48px;
+    overflow: auto;
 }
 
-.nav li {
+#nav li {
     float: left;
     margin: 0 0 0 10px ;
     border-width: 1px;
@@ -72,7 +66,7 @@ html, body {
     -webkit-background-clip: padding-box;
 }
 
-.nav li a {
+#nav li a {
     background: #ede9e4;
     float: left;
     padding: 4px 4px 3px;
@@ -84,7 +78,7 @@ html, body {
     -webkit-background-clip: padding-box;
 }
 
-.nav li a span {
+#nav li a span {
     display: block;
     color: #686868;
     padding: 0.52em 1.6em 0.48em;
@@ -104,11 +98,11 @@ html, body {
     font-weight: bold;
 }
 
-.nav li a:hover span {
+#nav li a:hover span {
     background-color: #e0dfda;
 }
 
-.nav li a:active span {
+#nav li a:active span {
     background-color: #e0dfda;
     -webkit-box-shadow: rgba(33,33,33,0.45) 0px 0px 1px;
     -moz-box-shadow: rgba(33,33,33,0.45) 0px 0px 1px;
@@ -117,7 +111,7 @@ html, body {
     line-height: 1.5em;
 }
 
-.nav li a span:active {
+#nav li a span:active {
 }
 
 #intro {
@@ -184,7 +178,17 @@ html, body {
 }
 
 #details {
-    
+    margin: 0 0;
+    background-color: #fffeff;
+    padding: 6px;
+    text-align: left;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -moz-box-shadow: 0 0 3px #999;
+    -webkit-box-shadow: 0 0 3px #999;
+    box-shadow: 0 0 3px #999;
+    overflow: hidden;
 }
 
 #details img {
@@ -196,11 +200,11 @@ html, body {
     height: 90px;
     width: 124px;
     right: -150px;
-    top: 50px;
+    top: 90px;
     background: url(../img/try.png) no-repeat;
 }
 
-/*	Type
+/*  Type
 ................................... */
 
 h1, h2, h3, h4, h5, h6 {
@@ -370,7 +374,7 @@ a#fork {
     margin: 0 10px;
 }
 
-/*	Forms
+/*  Forms
 ................................... */
 
 form {
@@ -420,7 +424,7 @@ span.label {
 }
 
 input[type=text],input[type=password], input[type=file], textarea, span.editable {
-    width: 60%;
+    width: 306px;
     border: 1px solid #d7d7d7;
     font-size: 14px;
     line-height: 20px;
@@ -464,8 +468,7 @@ input[type=submit] {
     height: 35px;
     line-height: 34px;
     padding: 0 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 4px 0 0 180px;
     min-width: 150px;
     background-color: #333;
     display: block;
@@ -540,7 +543,7 @@ p.forgot-password{
     border-top: 1px solid #f1edeb;
 }
 
-/*	Nav
+/*  Nav
 ................................... */
 
 #header h1 {
@@ -554,13 +557,19 @@ p.forgot-password{
     height: 112px;
     display: block;
     text-indent: -9999px;
+    background: url(../img/bread-and-pepper-logo.png) center top;
 }
+
+#header h1 a:hover {
+    background: url(../img/bread-and-pepper-logo.png) center bottom;
+}
+
 
 ul#profile-nav {
     height: 40px;
     position: absolute;
     right: 25px;
-    top: -63px;
+    top: -47px;
 }
 
 ul#profile-nav li {
@@ -574,9 +583,9 @@ ul#profile-nav li.selected a {
     padding: 8px 25px 8px;
     text-decoration: none;
     background-color: #f6f4f2;
-    -moz-border-radius-bottomleft: 8px;
+    -moz-border-radius-topleft: 8px;
     -webkit-border-top-left-radius: 8px;
-    -moz-border-radius-bottomright: 8px;
+    -moz-border-radius-topright: 8px;
     -webkit-border-top-right-radius: 8px;
     -moz-box-shadow: 0 -1px 1px #ccc;
     -webkit-box-shadow: 0 -1px 1px #ccc;
@@ -594,14 +603,14 @@ ul#profile-nav li a {
     line-height: 25px;
     padding: 8px 25px 8px;
     color: #999997;
-	text-align: center;
+    text-align: center;
 }
 
 ul#profile-nav li a:hover {
     text-decoration: underline;
 }
 
-/*	features
+/*  features
 ................................... */
 
 ul.features {
@@ -617,7 +626,7 @@ ul.features li {
     margin: 10px 0 0 12px;
 }
 
-/*	blocks
+/*  blocks
 ................................... */
 
 ul.blocks {
@@ -670,7 +679,7 @@ ul.blocks li {
     margin: 20px auto;
 }
 
-/*	footer
+/*  footer
 ................................... */
 
 #footer p {
@@ -682,7 +691,7 @@ ul.blocks li {
     font-weight: bold;
 }
 
-/*	change language
+/*  change language
 ................................... */
 
 div#lang_form {
@@ -745,7 +754,7 @@ div#lang_form input[type=submit] {
     font-family: 'Droid Sans', helvetica, arial, Geneva, sans-serif;
 }
 
-/*	notifications
+/*  notifications
 ................................... */
 
 ul.messages {
@@ -767,7 +776,7 @@ ul.messages li {
     text-align: center;
 }
 
-/*	messages
+/*  messages
 ................................... */
 
 #messages {
@@ -818,6 +827,7 @@ p.date {
 .avatar_large {
     width: 140px;
     border: 1px solid #ccc;
+    float: right;
     margin: 0 10px;
 }
 
@@ -850,7 +860,7 @@ p.date {
     background-color: #dadada;
 }
 
-/*	account list
+/*  account list
 ................................... */
 
 #account_list {
@@ -860,8 +870,7 @@ p.date {
 
 #account_list li {
     width: 142px;
-    height: 190px;
-    margin: 1px 1px 11px 11px;
+    margin: 0 0 12px 12px;
     float: left;
     background-color: #fffeff;
     padding: 6px;
@@ -890,8 +899,138 @@ p.date {
 
 /*  tasks list
 ................................... */
+
+form.task_list, form.talk_list {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+legend.task_list, legend.talk_list {
+    border: none;
+    width: 100%;
+}
+
+table.task_list, table.talk_list {
+    width: 100%;
+    text-align: left;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+table.task_list tr td, table.task_list tr th,
+table.talk_list tr td, table.talk_list tr th {
+    padding: 0 10px 0 10px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+table.task_list tr:hover, table.talk_list tr:hover {
+    background-color: #ddd;
+}
+
+table.task_list tr th, table.talk_list tr th {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+table.task_list tr.table_top, table.talk_list tr.table_top {
+    background-color: #bbb;
+}
+
+table.task_list tr.day, table.talk_list tr.day {
+    background-color: #ccc;
+}
+
+table.task_list tr.category, table.talk_list tr.category {
+    background-color: #ddd;
+}
+
+table.task_list tr.table_top_alert, table.talk_list tr.table_top_alert {
+    background-color: #f55;
+}
+
+table.task_list tr.task_set_alert, table.talk_list tr.task_set_alert {
+    background-color: #f66;
+}
+
+table.task_list tr th.no_vert_border, table.talk_list tr th.no_vert_border {
+    border-top: none;
+    border-bottom: none;
+}
+
+table.task_list tr td.red, table.talk_list tr td.red {
+    color: red;
+    font-weight: bold;
+}
+
+table.task_list tr td.gray, table.talk_list tr td.gray {
+    color: gray;
+    font-weight: bold;
+}
+
+table.task_list tr td.green, table.talk_list tr td.green {
+    color: green;
+    font-weight: bold;
+}
+
+table.task_list tr td.blue, table.talk_list tr td.blue {
+    color: blue;
+    font-weight: bold;
+}
+
+table.task_list .small_note {
+    color: gray;
+    font-size: 0.7em;
+}
+
+table.task_list .special-task {
+    color:purple;
+    font-weight:bold;
+}
+
+table.task_list .task-name {
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+table.task_list .task-volunteers, table.talk_list .talk-volunteers {
+    cursor: pointer;
+}
+
+.task_schedule {
+    vertical-align: top;
+    padding-top: 0.3em;
+}
+
+.task_schedule_head {
+    vertical-align: top;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
+.task_schedule_head_avatar {
+    width:40px;
+    vertical-align: top;
+    border-bottom: 1px solid black;
+}
+
+table.task_schedule {
+    margin: 10px;
+    padding: 15px 15px 12px;
+}
+
+
+/* for smartphone and tablet */
 #header label, [id^="nav1"] {
     display:none;
+}
+a {
+    color: #0088cc;
+    text-decoration: none;
+}
+a:hover {
+    color: #005580;
 }
 @media only screen and (max-width: 1000px) {
     body {
@@ -986,7 +1125,7 @@ p.date {
         text-align: center;
         width: 300px;
     }
-    [id^="nav2"] {
+    [id^="nav"] {
         display: none;
     }
     [id^="toggle-list"],                        /* HIDE CHECKBOX*/
@@ -1243,129 +1382,4 @@ p.date {
     Label the data
     */
     .task_list td:before { content: attr(data-title); }
-}
-
-a {
-    color:#0088cc;text-decoration:none;
-}
-
-a:hover {
-    color:#005580;text-decoration:underline;
-}
-
-form.task_list, form.talk_list {
-    width: 100%;
-}
-
-legend.task_list, legend.talk_list {
-    border: none;
-    width: 100%;
-}
-
-table.task_list, table.talk_list {
-    width: 100%;
-    text-align: left;
-    border: 1px solid #ddd;
-    border-collapse: separate;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px
-}
-
-table td, table th {
-    padding: 4px 5px;
-    border-left:1px solid #ddd;
-}
-
-table td:first-child, table th:first-child {
-    border: none;
-}
-
-table.task_list tr:hover, table.talk_list tr:hover {
-    background-color: #ddd;
-}
-
-table.task_list tr th, table.talk_list tr th {
-    /*border-bottom: 1px solid #ddd;*/
-}
-
-table.task_list tr.table_top, table.talk_list tr.table_top {
-    background-color: #bbb;
-}
-
-table.task_list tr.day, table.talk_list tr.day {
-    background-color: #ccc;
-}
-
-table.task_list tr.category, table.talk_list tr.category {
-    background-color: #ddd;
-}
-
-table.task_list tr.table_top_alert, table.talk_list tr.table_top_alert {
-    background-color: #f55;
-}
-
-table.task_list tr.task_set_alert, table.talk_list tr.task_set_alert {
-    background-color: #f66;
-}
-
-table.task_list tr th.no_vert_border, table.talk_list tr th.no_vert_border {
-    border-top: none;
-    border-bottom: none;
-}
-
-table.task_list tr td.red, table.talk_list tr td.red {
-    color: red;
-    font-weight: bold;
-}
-
-table.task_list tr td.gray, table.talk_list tr td.gray {
-    color: gray;
-    font-weight: bold;
-}
-
-table.task_list tr td.green, table.talk_list tr td.green {
-    color: green;
-    font-weight: bold;
-}
-
-table.task_list tr td.blue, table.talk_list tr td.blue {
-    color: blue;
-    font-weight: bold;
-}
-
-table.task_list .small_note {
-    color: gray;
-    font-size: 0.7em;
-}
-
-table.task_list .special-task {
-    color:purple;
-    font-weight:bold;
-}
-
-table.task_list .task-volunteers, table.talk_list .talk-volunteers {
-    cursor: pointer;
-}
-
-.task_schedule {
-    vertical-align: top;
-    padding-top: 0.3em;
-}
-
-.task_schedule_head {
-    vertical-align: top;
-    border-bottom: 1px solid black;
-    font-weight: bold;
-}
-
-.task_schedule_head_avatar {
-    width:40px;
-    vertical-align: top;
-    border-bottom: 1px solid black;
-}
-
-table.task_schedule {
-    margin: 10px;
-    padding: 15px 15px 12px;
 }
