@@ -42,6 +42,8 @@ $(document).ready(function() {
 		/* hide second intro and the <br> on the main page */
 		$(".intro span:eq(1)").hide();
 		$(".intro span:eq(1)").next().hide();
+		/* move "change in profile" to next line */
+		$("legend.task_list span").prepend("<br>");
 		/* replace user avatar in task schedule */
 		var avatar = $('legend.task_list .avatar_large').remove();
 		$('legend.task_list').prepend("<br>").prepend(avatar);
@@ -60,7 +62,9 @@ $(document).ready(function() {
 			$('#nav1').hide('fast');
 		});
 		/* collapse tasks */
-		$("table.task_list tbody tr:not(.category,.day)").hide();
+		if ($("legend.task_list .avatar_large").length == 0) {
+			$("table.task_list tbody tr:not(.category,.day)").hide();
+		}
 		/* open tasks when clicked */
 		$("table tbody tr.category").on('click', function() {
 			$(this).nextUntil(".row-hide").each(function() {
