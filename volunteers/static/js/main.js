@@ -46,7 +46,7 @@ $(document).ready(function() {
 			else elem.show('fast');
 		});
 		/* collapse tasks */
-		$("table.task_list tbody tr:not(.category)").hide();
+		$("table.task_list tbody tr:not(.category,.day)").hide();
 		/* open tasks when clicked */
 		$("table tbody tr.category").on('click', function() {
 			$(this).nextUntil(".row-hide").each(function() {

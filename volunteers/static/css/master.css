@@ -1046,6 +1046,12 @@ a:hover {
         text-decoration: none;
     }
 
+    table.task_list tbody tr.day th:first-child {
+        text-align: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
     form.task_list fieldset {
         margin: 0px;
     }
@@ -1412,6 +1418,18 @@ a:hover {
     }
 
     table.task_list tbody tr.category th:nth-child(3) {
+        display: none;
+    }
+
+    table.task_list tbody tr.day th:last-child {
+        display: none;
+    }
+
+    table.task_list tbody tr.day th:nth-child(2) {
+        display: none;
+    }
+
+    table.task_list tbody tr.day th:nth-child(3) {
         display: none;
     }
 
