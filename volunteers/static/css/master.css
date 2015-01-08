@@ -1160,6 +1160,8 @@ a:hover {
     }
 
     [id^="nav1"] {
+        padding-bottom: 35px;
+        padding-left: 25px;
         z-index: 5;
         right: 0px;
         top: 130px;

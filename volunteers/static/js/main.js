@@ -52,7 +52,11 @@ $(document).ready(function() {
 			else elem.show('fast');
 			e.stopPropagation();
 		});
-		$("body").on('click', function() {
+		/* collapse menu when other activity */
+		$(window).scroll(function() {
+		    $('#nav1').hide('fast');
+		});
+		$(window).click(function() {
 			$('#nav1').hide('fast');
 		});
 		/* collapse tasks */
