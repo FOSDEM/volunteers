@@ -39,11 +39,21 @@ $(document).ready(function() {
 	div.innerHTML = div.innerHTML + "<br>screen width: " + document.documentElement.clientWidth;
 	/* for mobile browsing */
 	if ( document.documentElement.clientWidth <= 1000 ) {
+		/* hide second intro and the <br> on the main page */
+		$(".intro span:eq(1)").hide();
+		$(".intro span:eq(1)").next().hide();
+		/* replace user avatar in task schedule */
+		var avatar = $('legend.task_list .avatar_large').remove();
+		$('legend.task_list').prepend("<br>").prepend(avatar);
 		/* collapse and open menu */
-		$("span.menu-button").on('click', function() {
+		$("span.menu-button").on('click', function(e) {
 			var elem = $('#nav1');
 			if (elem.is(":visible")) elem.hide('fast');
 			else elem.show('fast');
+			e.stopPropagation();
+		});
+		$("body").on('click', function() {
+			$('#nav1').hide('fast');
 		});
 		/* collapse tasks */
 		$("table.task_list tbody tr:not(.category,.day)").hide();

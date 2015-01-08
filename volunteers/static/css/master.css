@@ -1026,6 +1026,9 @@ table.task_schedule {
 .menu-button {
     display: none;
 }
+.mobile-intro {
+    display: none;
+}
 #header label, [id^="nav1"] {
     display:none;
 }
@@ -1038,6 +1041,10 @@ a:hover {
     color: #005580;
 }
 @media only screen and (max-width: 1000px) {
+    .mobile-intro {
+        display: block;
+        text-align: center;
+    }
     table.task_list tbody tr.category th:nth-child(2) {
         padding-top: 40px;
         padding-bottom: 40px;
@@ -1221,6 +1228,29 @@ a:hover {
         -webkit-border-radius: 0px;
     }
 
+    #details p {
+        margin-top: 40px;
+    }
+
+    #content-container {
+        clear: both;
+    }
+
+    .task_list input[type="submit"] {
+        margin-bottom: 50px;
+        width: 75%;
+    }
+    legend.task_list img:before {
+        content: '\00000A';
+    }
+    legend.task_list img {
+        float: initial;
+    }
+
+    #details ul {
+        margin: 0px;
+    }
+
     .task_schedule {
         font-size: 1.5em;
     }
@@ -1266,7 +1296,7 @@ a:hover {
     }
 
     h2.intro {
-        font-size: 6em;
+        font-size: 5em;
     }
 
     div#details {
