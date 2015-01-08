@@ -1046,6 +1046,14 @@ p.date {
         -webkit-border-radius: 0px;
     }
 
+    .task_schedule {
+        font-size: 1.5em;
+    }
+
+    h2.task-title {
+        font-size: 2em;
+    }
+
     ul#profile-nav {
         font-size: 2.5em;
         position: initial;
