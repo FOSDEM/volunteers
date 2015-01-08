@@ -125,7 +125,7 @@ class Edition(models.Model):
                     if needs_heralding:
                         Task.create_or_update_from_talk(edition, talk, 'Heralding', [3, 2, 5])
                     if needs_video:
-                        Task.create_or_update_from_talk(edition, talk, 'Video', [2, 2, 2])
+                        Task.create_or_update_from_talk(edition, talk, 'Video', [1, 1, 1])
 
 
 """
