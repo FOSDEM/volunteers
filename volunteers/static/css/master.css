@@ -468,7 +468,7 @@ input[type=submit] {
     height: 35px;
     line-height: 34px;
     padding: 0 10px;
-    margin: 4px 0 0 180px;
+    margin: auto;
     min-width: 150px;
     background-color: #333;
     display: block;
@@ -1023,10 +1023,14 @@ table.task_schedule {
 
 
 /* for smartphone and tablet */
+.menu-button {
+    display: none;
+}
 #header label, [id^="nav1"] {
     display:none;
 }
 a {
+    cursor: pointer;
     color: #0088cc;
     text-decoration: none;
 }
@@ -1034,6 +1038,34 @@ a:hover {
     color: #005580;
 }
 @media only screen and (max-width: 1000px) {
+    table.task_list tbody tr.category th:nth-child(2) {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        cursor: pointer;
+        color: #0088cc;
+        text-decoration: none;
+    }
+
+    form.task_list fieldset {
+        margin: 0px;
+    }
+
+    fieldset legend.talk_list {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 10px;
+        background-color: #ddd;
+        border-bottom: 1px solid #ccc;
+    }
+
+    table.task_list tbody tr.category th:nth-child(2):hover {
+        color: #005580;
+    }
+
+    form.task_list, form.talk_list {
+        width: 100%;
+    }
+
     body {
         margin: 0px;
     }
@@ -1066,7 +1098,7 @@ a:hover {
     }
 
     span.helptext {
-        padding-left: 180px;
+        padding-left: 220px;
     }
 
     input[type=submit] {
@@ -1078,31 +1110,40 @@ a:hover {
         -webkit-border-radius: 20px;
     }
 
-    #header label {
+    span.menu-button {
+        cursor: pointer;
+        top: 0px;
         display: block;
-        right: 5px;
-        width: 100px;
+        right: 0px;
+        width: 120px;
         position: fixed;
         z-index: 5;
         font-size: 8em;
         float: right;
-        color: #0088cc;
+        color: transparent;
         text-decoration: none;
+        border-radius: 20px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
         background: linear-gradient(
             to bottom, 
-            #0088cc, #0088cc 25%, 
-            #f6f4f2 25%, #f6f4f2 40%, 
+            #0088cc, #0088cc 20%,
+            rgba(0,0,0,0) 20%, rgba(0,0,0,0) 40%, 
             #0088cc 40%, #0088cc 60%, 
-            #f6f4f2 60%, #f6f4f2 74%, 
-            #0088cc 74%, #0088cc 74%
+            rgba(0,0,0,0) 60%, rgba(0,0,0,0) 80%, 
+            #0088cc 80%, #0088cc 100%
         );
     }
 
-    ul.messages {
-        z-index: 10;
-        left: 30%;
-        width: 90%;
-        font-size: 2em;
+    span.menu-button:hover {
+        background: linear-gradient(
+            to bottom, 
+            #005580, #005580 20%,
+            rgba(0,0,0,0) 20%, rgba(0,0,0,0) 40%, 
+            #005580 40%, #005580 60%, 
+            rgba(0,0,0,0) 60%, rgba(0,0,0,0) 80%, 
+            #005580 80%, #005580 100%
+        );
     }
 
     [id^="nav1"] {
@@ -1128,18 +1169,6 @@ a:hover {
     }
     [id^="nav"] {
         display: none;
-    }
-    [id^="toggle-list"],                        /* HIDE CHECKBOX*/
-    [id^="toggle-list"] ~ .list,                /* HIDE LIST */
-    [id^="toggle-list"] + label  span + span,   /* HIDE "Collapse" */
-    [id^="toggle-list"]:checked + label span{   /* HIDE "Expand" (IF CHECKED) */
-        display:none;
-    }
-    [id^="toggle-list"]:checked + label span + span{
-        display:inline-block;               /* SHOW "Collapse" (IF CHECKED) */
-    }
-    [id^="toggle-list"]:checked ~ .list{
-        display:block;                      /* SHOW LIST (IF CHECKED) */
     }
 
     p.forgot-password {
@@ -1170,14 +1199,14 @@ a:hover {
     }
 
     .features {
-        font-size: 2em;
+        font-size: 2.5em;
     }
 
     #intro {
         border: none;
         padding-top: 0px;
         text-align: center;
-        padding-bottom: 120px;
+        padding-bottom: 90px;
         -moz-box-shadow: none;
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -1249,6 +1278,16 @@ a:hover {
         height: 200px;
     }
 
+    legend.talk_list {
+        cursor: pointer;
+        color: #0088cc;
+        text-decoration: none;
+    }
+
+    legend.talk_list:hover {
+        color: #005580;
+    }
+
     h2.content-title {
         padding-left: 0px;
         padding-right: 0px;
@@ -1300,9 +1339,13 @@ a:hover {
 
     }
 
+    form p label {
+        font-size: 1.5em;
+    }
+
     #content-container {
         border: none;
-        padding: 10px;
+        padding: 0px;
         -moz-box-shadow: none;
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -1324,6 +1367,9 @@ a:hover {
         box-shadow: none;
     }
 
+    p.intro {
+        font-size: 2em;
+    }
     #intro, p.intro, h2.intro {
         margin: 0px;
         background: none;
@@ -1356,8 +1402,24 @@ a:hover {
     tr:last-child {
         border-bottom: none;
     }
+
+    table.task_list tbody tr.category th:last-child {
+        display: none;
+    }
+
+    table.task_list tbody tr.category th:first-child {
+        display: none;
+    }
+
+    table.task_list tbody tr.category th:nth-child(3) {
+        display: none;
+    }
+
+    table.talk_list {
+        display: none;
+    }
  
-    .task_list td { 
+    table.task_list tr td, table.talk_list tr td, table.task_list .task-name { 
         /* Behave  like a "row" */
         border: none;
         position: relative;
@@ -1449,5 +1511,38 @@ a:hover {
         box-shadow: rgba(33,33,33,0.45) 0px 0px 1px;
         padding: 0.58em 1.6em 0.30em;
         line-height: 1.5em;
+    }
+
+    ul.messages {
+        width: 100%;
+        left: initial;
+        z-index: 4;
+        font-size: 2em;
+        margin: 0px;
+        top: initial;
+    }
+
+    p {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #content-container div.faq h3 {
+        margin-top: 30px;
+        padding-top: 30px;
+        background: url(../img/stripe.png) repeat-x center top;
+    }
+
+    #content-container div.faq p, #content-container div.faq h3 {
+        padding-left: 10px;
+    }
+
+    #content-container div.faq h3:first-child {
+        padding-top: 10px;
+    }
+
+    #account_list {
+        padding-top: 10px;
+        padding-left: 10px;
     }
 }
