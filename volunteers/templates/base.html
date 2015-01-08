@@ -28,8 +28,36 @@
         {% endif %}
         <div id="container">
             <div id="header">
+                <input id="toggle-list" type="checkbox" style="display:none;">
+                <label for="toggle-list">
+                    <span>&#9776;</span>
+                    <span>&#9776;</span>
+                </label>
+                <nav class="list" id="nav1">
+                    <ul class="nav">
+                        <li><a href="{% url 'promo' %}"><span>{% trans 'Home' %}</span></a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Profiles' %}</span></a></li>
+                        <!-- TODO: fix it :P <li><a href="{% url 'userena_umessages_list' %}"><span>{% trans 'Messages' %}</span></a></li> -->
+                        {% endif %}
+                        <li><a href="{% url 'task_list' %}"><span>{% trans 'Tasks' %}</span></a></li>
+                        <li><a href="{% url 'faq' %}"><span>{% trans 'FAQ' %}</span></a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'talk_list' %}"><span>{% trans 'Talks' %}</span></a></li>
+                            {% if user.is_staff %}
+                                <li><a href="{% url 'category_schedule_list' %}"><span>{% trans 'Task Schedules' %}</span></a></li>
+                            {% endif %}
+                            <li><a href="{% url 'userena_profile_detail' user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
+                            <li><a href="{% url 'userena_signout' %}"><span>{% trans 'Signout' %}</span></a></li>
+                        {% else %}
+                            <li><a href="{% url 'userena_signin' %}"><span>{% trans 'Signin' %}</span></a></li>
+                            <li><a href="{% url 'userena_signup' %}"><span>{% trans 'Signup' %}</span></a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            
                 {% block nav %}
-                <ul id="nav">
+                <ul class="nav" id="nav2">
                     <li><a href="{% url 'promo' %}"><span>{% trans 'Home' %}</span></a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Profiles' %}</span></a></li>

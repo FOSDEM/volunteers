@@ -24,23 +24,27 @@
             {% endif %}
         </legend>
         <table class="task_list">
-            <tr>
-                <th width="20%">{% trans 'When' %}</th>
-                <th width="40%">{% trans 'Title' %}</th>
-                <th width="20%">{% trans 'Attending' %}</th>
-                <th width="20%">{% trans 'Talk' %}</th>
-            </tr>
-            {% for task in tasks %}
-            <tr>
-                <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
-                <td><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
-                <td>
-                {% for volunteer in task.volunteer_set.all %}
-                    {{ volunteer.user.first_name }} {{ volunteer.user.last_name }},
+            <thead>
+                <tr>
+                    <th width="20%">{% trans 'When' %}</th>
+                    <th width="40%">{% trans 'Title' %}</th>
+                    <th width="20%">{% trans 'Attending' %}</th>
+                    <th width="20%">{% trans 'Talk' %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td data-title="{% trans 'When' %}">{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
+                    <td data-title="{% trans 'Title' %}"><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
+                    <td data-title="{% trans 'Attending' %}">
+                    {% for volunteer in task.volunteer_set.all %}
+                        {{ volunteer.user.first_name }} {{ volunteer.user.last_name }},
+                    {% endfor %}
+                    <td data-title="{% trans 'Talk' %}">{{ task.talk }}</td>
+                </tr>
                 {% endfor %}
-                <td>{{ task.talk }}</td>
-            </tr>
-            {% endfor %}
+            </tbody>
         </table>
         <br>
         <h1>Task Descriptions</h1><br/>
