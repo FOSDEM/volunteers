@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var div = document.getElementById("container");
+	div.innerHTML = div.innerHTML + "<br>screen width: " + document.documentElement.clientWidth;
 	var temp_title = "";
 	$("#dialog").dialog({ autoOpen: false });
 	/*$(".task-name").click(function() {
