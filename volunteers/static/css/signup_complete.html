@@ -1,0 +1,17 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Signup almost done!" %}{% endblock %}
+
+{% block content_title %}<h2 class="huge-font">{% trans "Signup" %}</h2>{% endblock %}
+
+{% block content %}
+<p class="huge-font">{% trans "Thank you for signing up with us!" %}</p>
+
+{% if userena_activation_required %}
+<p class="huge-font">{% blocktrans %}You have been sent an e-mail with an activation link to the supplied email.{% endblocktrans %}</p>
+<p class="huge-font">{% blocktrans %}We will store your signup information for {{ userena_activation_days }} days on our server. {% endblocktrans %}</p>
+{% else  %}
+<p class="huge-font">{% blocktrans %}You can now use the supplied credentials to signin.{% endblocktrans %}</p>
+{% endif %}
+{% endblock %}
