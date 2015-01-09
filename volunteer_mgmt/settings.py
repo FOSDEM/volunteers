@@ -133,7 +133,7 @@ SECRET_KEY = os.environ.get('VOLUNTEER_SESSION_SECRET')
 
 # Volunteer sync
 SCHEDULE_SYNC_TYPE = os.environ.get('VOLUNTEER_SCHEDULE_TYPE', 'pentabarf')
-SCHEDULE_SYNC_URI = os.environ.get('VOLUNTEER_SCHEDULE_URI', 'https://fosdem.org/2015/schedule/xml')
+SCHEDULE_SYNC_URI = os.environ.get('VOLUNTEER_SCHEDULE_URI', 'https://fosdem.org/schedule/xml')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
