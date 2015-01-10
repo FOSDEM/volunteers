@@ -15,6 +15,7 @@ pip install -r requirements.txt
 If you wish to set up a database, instead of using the default sqlite3 setup, you can adapt the following to your situation:
 
 ```bash
+export VOLUNTEER_DB_PORT="5432"
 export VOLUNTEER_DB_USER="fosdem"
 export VOLUNTEER_DB_HOST="127.0.0.1"
 export VOLUNTEER_DB_NAME="volunteers"
@@ -27,6 +28,8 @@ If you need to test mail functionality (or don't want to get errors during signu
 ```bash
 export SMTP_PORT="25"
 export SMTP_HOST="localhost"
+export SMTP_USERNAME="username"
+export SMTP_PASSWORD="password"
 export SMTP_FROM_EMAIL="me@example.com"
 ```
 
