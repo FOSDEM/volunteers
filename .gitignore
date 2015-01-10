@@ -6,3 +6,4 @@ volunteer_mgmt/localsettings.py
 schedule*.xml
 *.sql
 .directory
+start.sh
