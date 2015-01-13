@@ -41,7 +41,6 @@
                     {% for volunteer in task.volunteer_set.all %}
                         {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}
                         {% if not forloop.last %},{% endif %}
-
                     {% endfor %}
                     <td data-title="{% trans 'Talk' %}">{{ task.talk }}</td>
                 </tr>
