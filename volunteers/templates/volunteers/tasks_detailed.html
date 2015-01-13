@@ -39,7 +39,8 @@
                     <td data-title="{% trans 'Title' %}"><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
                     <td data-title="{% trans 'Attending' %}">
                     {% for volunteer in task.volunteer_set.all %}
-                        {{ volunteer.user.first_name }} {{ volunteer.user.last_name }},
+                        {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}
+                        {% if not forloop.last %},{% endif %}
                     {% endfor %}
                     <td data-title="{% trans 'Talk' %}">{{ task.talk }}</td>
                 </tr>
