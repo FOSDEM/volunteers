@@ -20,6 +20,7 @@ from volunteers.models import VolunteerStatus
 from volunteers.models import VolunteerTask
 from volunteers.models import VolunteerCategory
 
+import datetime
 
 class DayListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
@@ -40,7 +41,6 @@ class DayListFilter(admin.SimpleListFilter):
             return queryset.filter(date__week_day=self.value())
         else:
             return queryset
-
 
 class NumTasksFilter(admin.SimpleListFilter):
     title = 'tasks'
@@ -107,6 +107,23 @@ class EditionFilter(admin.SimpleListFilter):
         elif 'volunteerstatus_set' in queryset.model.__dict__:
             return queryset.filter(volunteerstatus__edition=self.value())
 
+class SignupFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = 'singup'
+    parameter_name = 'singup'
+
+    def lookups(self, request, model_admin):
+        return (
+            (2015, '2015'),
+            (2014, '2014'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(signed_up__gte=datetime.date(int(self.value()), 1, 1))
+        else:
+            return queryset
 
 class CategoryActiveFilter(admin.SimpleListFilter):
     title = 'active category'
@@ -205,7 +222,7 @@ class VolunteerAdmin(admin.ModelAdmin):
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr', 'num_tasks']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = [EditionFilter, 'private_staff_rating', NumTasksFilter, 'categories', 'tasks']
+    list_filter = [EditionFilter, SignupFilter, 'private_staff_rating', NumTasksFilter, 'categories', 'tasks']
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
