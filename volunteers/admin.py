@@ -110,18 +110,20 @@ class EditionFilter(admin.SimpleListFilter):
 class SignupFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
-    title = 'singup'
+    title = 'singup edition'
     parameter_name = 'singup'
 
     def lookups(self, request, model_admin):
-        return (
-            (2015, '2015'),
-            (2014, '2014'),
-        )
+        retval = set()
+        editions = Edition.objects.all().order_by('start_date')
+        for val in [(e.id, e.name) for e in editions]:
+            retval.add(val)
+        return retval
 
     def queryset(self, request, queryset):
         if self.value():
-            return queryset.filter(signed_up__gte=datetime.date(int(self.value()), 1, 1))
+            edition = Edition.objects.get(pk=self.value())
+            return queryset.filter(signed_up__gte=edition.visible_from, signed_up__lte=edition.visible_until)
         else:
             return queryset
 
