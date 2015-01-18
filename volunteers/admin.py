@@ -162,6 +162,12 @@ class VolunteerTaskInline(admin.TabularInline):
     model = VolunteerTask
     extra = 1
 
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
+        field = super(VolunteerTaskInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        if db_field.name == 'task':
+            field.queryset = field.queryset.order_by('-edition', 'name')
+        return field
+
 
 class VolunteerCategoryInline(admin.TabularInline):
     model = VolunteerCategory

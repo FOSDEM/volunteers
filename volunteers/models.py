@@ -286,7 +286,7 @@ class Task(models.Model, HasLinkField):
         day = self.date.strftime('%a')
         start = self.start_time.strftime('%H:%M')
         end = self.end_time.strftime('%H:%M')
-        return "%s (%s, %s - %s)" % (self.name, day, start, end)
+        return "%s - %s (%s, %s - %s)" % (self.edition.name, self.name, day, start, end)
 
     name = models.CharField(max_length=300)
     # For auto-importing; otherwise we can't have multiple cloak room and
