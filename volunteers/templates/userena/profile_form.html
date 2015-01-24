@@ -24,6 +24,7 @@
     </ul>
     {% endif %}
     {% csrf_token %}
+    <center><img src="{{ profile.get_mugshot_url }}" alt="mugshot"></center>
     <fieldset>
         <legend>{% trans "Edit Profile" %}</legend>
         {{ form.as_p }}
