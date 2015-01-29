@@ -3,6 +3,7 @@ from forms import EditProfileForm, SignupForm
 
 from django.contrib import messages
 from django.http import HttpResponse
+from django.views.generic.list import ListView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -462,3 +463,37 @@ def profile_detail(request, username,
     extra_context['hide_email'] = userena_settings.USERENA_HIDE_EMAIL
     check_profile_completeness(request, user.get_profile())
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
+
+class ProfileListView(ListView):
+    """ Lists all profiles """
+    context_object_name='profile_list'
+    page=1
+    paginate_by=50
+    template_name=userena_settings.USERENA_PROFILE_LIST_TEMPLATE
+    extra_context=None
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ProfileListView, self).get_context_data(**kwargs)
+        try:
+            page = int(self.request.GET.get('page', None))
+        except (TypeError, ValueError):
+            page = self.page
+
+        if userena_settings.USERENA_DISABLE_PROFILE_LIST \
+           and not self.request.user.is_staff:
+            raise Http404
+
+        if not self.extra_context: self.extra_context = dict()
+
+        context['page'] = page
+        context['paginate_by'] = self.paginate_by
+        context['extra_context'] = self.extra_context
+
+        return context
+
+    def get_queryset(self):
+        profile_model = get_profile_model()
+        queryset = profile_model.objects.get_visible_profiles(self.request.user).select_related().extra(\
+            select={'lower_name': 'lower(first_name)'}).order_by('lower_name')
+        return queryset
