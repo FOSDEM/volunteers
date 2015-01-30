@@ -475,7 +475,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     def mail_schedule(self):
         subject = "FOSDEM Volunteers: your schedule"
         message_header = []
-        message_header.extend(['Dear %s,' % (unicode(self.user.first_name).encode('utf-8')),''])
+        message_header.extend(['Dear %s,' % (self.user.first_name),''])
         edition = Edition.objects.filter(pk=Edition.get_current)[0]
         message_header.extend(['Here is your schedule for %s:' % (edition.name,), ''])
         message_body = []
