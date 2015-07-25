@@ -235,8 +235,8 @@ class TaskCategory(models.Model, HasLinkField):
         if len(categories):
             category = categories[0]
         else:
-            category = TaskCategory(name=name)
-            category.save
+            category = cls(name=name)
+            category.save()
         return category
 
 
@@ -268,7 +268,7 @@ class TaskTemplate(models.Model):
             template = cls(name=name)
             category = TaskCategory.create_or_update_named(name)
             template.category = category
-            template.save
+            template.save()
         return template
 
 
@@ -325,9 +325,9 @@ class Task(models.Model, HasLinkField):
                 category = categories[0]
             else:
                 category = TaskCategory(name=task_type)
-                category.save
+                category.save() 
             template.category = category
-            template.save
+            template.save()
         if len(tasks):
             task = tasks[0]
         else:
