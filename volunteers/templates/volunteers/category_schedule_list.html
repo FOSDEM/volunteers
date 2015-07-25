@@ -11,7 +11,7 @@
     <ul>
         {% for template in templates %}
 
-        <li><a href="/task_schedule/{{ template.id }}" title="View Schedule">{{ template.name }}</a></li>
+        <li><a href="{% url 'task_schedule' template.id %}" title="View Schedule">{{ template.name }}</a></li>
         {% endfor %}
     </ul>
     <br/>
