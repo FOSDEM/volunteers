@@ -561,7 +561,7 @@ class VolunteerTask(models.Model):
         verbose_name_plural = _('VolunteerTasks')
 
     def __unicode__(self):
-        return self.task
+        return self.task.name
 
     volunteer = models.ForeignKey(Volunteer)
     task = models.ForeignKey(Task)
@@ -573,7 +573,7 @@ class VolunteerCategory(models.Model):
         verbose_name_plural = _('VolunteerCategories')
 
     def __unicode__(self):
-        return self.category
+        return self.category.name
 
     volunteer = models.ForeignKey(Volunteer)
     category = models.ForeignKey(TaskCategory)
@@ -588,7 +588,7 @@ class VolunteerLanguage(models.Model):
         verbose_name_plural = _('VolunteerLanguages')
 
     def __unicode__(self):
-        return self.language
+        return language.name.name
 
     volunteer = models.ForeignKey(Volunteer)
     language = models.ForeignKey(Language)
@@ -603,7 +603,7 @@ class VolunteerTalk(models.Model):
         verbose_name_plural = _('VolunteerTalks')
 
     def __unicode__(self):
-        return self.talk
+        return self.talk.name
 
     volunteer = models.ForeignKey(Volunteer)
     talk = models.ForeignKey(Talk)
