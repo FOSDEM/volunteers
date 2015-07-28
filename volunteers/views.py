@@ -224,9 +224,10 @@ def task_list(request):
         # take the moderation tasks to talks the volunteer is attending
         for task in current_tasks.filter(talk__volunteers=volunteer):
             context['attending'][task.id] = True
-        else:
-            context['attending'][task.id] = False
         check_profile_completeness(request, volunteer)
+    else:
+        for task in current_tasks:
+            context['attending'][task.id] = False
 
     return render(request, 'volunteers/tasks.html', context)
 
