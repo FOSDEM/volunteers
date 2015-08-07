@@ -6,8 +6,8 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Tasks' %}</h2>{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}<a class="larger-font" href="/tasks/{{ user.username }}" title="View schedule">View your schedule</a>{% endif %}
-<form class="task_list" action="/tasks/" method="post">{% csrf_token %}
+{% if user.is_authenticated %}<a class="larger-font" href="{% url 'task_list_detailed' user.username %}" title="View schedule">View your schedule</a>{% endif %}
+<form class="task_list" action="{% url 'task_list' %}" method="post">{% csrf_token %}
     {% if is_dr_manhattan %}
     <fieldset>
         <legend class="task_list">We seem to have a bit of a problem here...</legend><br/>
@@ -46,7 +46,7 @@
                         {% if attending|get_item:task.id == True %}
                         <td class="task-name special-task">{{ task.name }} <span class="small_note">(Hey, you're attending this!)</span></td>
                         {% else %}
-                        <td data-title="{% trans 'Task' %}" class="task-name"><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
+                        <td data-title="{% trans 'Task' %}" class="task-name"><a href="{% url 'task_detailed' task.id %}">{{ task.name }}</a></td>
                         {% endif %}
                         <td data-title="{% trans 'When' %}" >{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
                         {% if task.assigned_volunteers == task.nbr_volunteers_max %}
@@ -74,7 +74,7 @@
     <fieldset>
         <legend class="task_list">{% trans title %} <span style="font-size: small; font-weight: normal;">
             {% if user.is_authenticated %}{% if title == 'preferred tasks' %}
-            (<a class="larger-font" href="/volunteers/{{ user.username }}/edit">{% trans 'Change in profile' %}</a>)
+            (<a class="larger-font" href="{% url 'userena_profile_edit' user.username %}/edit">{% trans 'Change in profile' %}</a>)
             {% endif %}{% endif %}
         </span></legend>
         <table class="task_list">
@@ -127,7 +127,7 @@
                             {% if attending|get_item:task.id == True %}
                             <td class="task-name special-task">{{ task.name }} <span class="small_note">(Hey, you're attending this!)</span></td>
                             {% else %}
-                            <td data-title="{% trans 'Task' %}" class="task-name"><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
+                            <td data-title="{% trans 'Task' %}" class="task-name"><a href="{% url 'task_detailed' task.id %}">{{ task.name }}</a></td>
                             {% endif %}
                             <td data-title="{% trans 'When' %}">{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
                             {% if task.assigned_volunteers == task.nbr_volunteers_max %}

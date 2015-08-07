@@ -79,7 +79,7 @@ def talk_list(request):
             messages.success(request, _('Your talks have been updated.'), fail_silently=True)
 
         # redirect to prevent repost
-        return redirect('/talks')
+        return redirect('talk_list')
 
     # group the talks according to tracks
     context = { 'tracks': {}, 'checked': {} }
@@ -182,7 +182,7 @@ def task_list(request):
             messages.success(request, _('Your tasks have been updated.'), fail_silently=True)
 
         # redirect to prevent repost
-        return redirect('/tasks')
+        return redirect('task_list')
 
     # get the preferred and other tasks, preserve key order with srteddict for view
     context = {
@@ -219,11 +219,15 @@ def task_list(request):
     if volunteer:
         for task in current_tasks:
             context['checked'][task.id] = 'checked' if volunteer in task.volunteers.all() else ''
+            context['attending'][task.id] = False
 
         # take the moderation tasks to talks the volunteer is attending
         for task in current_tasks.filter(talk__volunteers=volunteer):
             context['attending'][task.id] = True
         check_profile_completeness(request, volunteer)
+    else:
+        for task in current_tasks:
+            context['attending'][task.id] = False
 
     return render(request, 'volunteers/tasks.html', context)
 

@@ -235,8 +235,8 @@ class TaskCategory(models.Model, HasLinkField):
         if len(categories):
             category = categories[0]
         else:
-            category = TaskCategory(name=name)
-            category.save
+            category = cls(name=name)
+            category.save()
         return category
 
 
@@ -268,7 +268,7 @@ class TaskTemplate(models.Model):
             template = cls(name=name)
             category = TaskCategory.create_or_update_named(name)
             template.category = category
-            template.save
+            template.save()
         return template
 
 
@@ -325,9 +325,9 @@ class Task(models.Model, HasLinkField):
                 category = categories[0]
             else:
                 category = TaskCategory(name=task_type)
-                category.save
+                category.save() 
             template.category = category
-            template.save
+            template.save()
         if len(tasks):
             task = tasks[0]
         else:
@@ -561,7 +561,7 @@ class VolunteerTask(models.Model):
         verbose_name_plural = _('VolunteerTasks')
 
     def __unicode__(self):
-        return self.task
+        return self.task.name
 
     volunteer = models.ForeignKey(Volunteer)
     task = models.ForeignKey(Task)
@@ -573,7 +573,7 @@ class VolunteerCategory(models.Model):
         verbose_name_plural = _('VolunteerCategories')
 
     def __unicode__(self):
-        return self.category
+        return self.category.name
 
     volunteer = models.ForeignKey(Volunteer)
     category = models.ForeignKey(TaskCategory)
@@ -588,7 +588,7 @@ class VolunteerLanguage(models.Model):
         verbose_name_plural = _('VolunteerLanguages')
 
     def __unicode__(self):
-        return self.language
+        return language.name.name
 
     volunteer = models.ForeignKey(Volunteer)
     language = models.ForeignKey(Language)
@@ -603,7 +603,7 @@ class VolunteerTalk(models.Model):
         verbose_name_plural = _('VolunteerTalks')
 
     def __unicode__(self):
-        return self.talk
+        return self.talk.name
 
     volunteer = models.ForeignKey(Volunteer)
     talk = models.ForeignKey(Talk)

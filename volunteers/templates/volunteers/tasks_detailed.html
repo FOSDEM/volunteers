@@ -9,9 +9,9 @@
 
 
 {% if profile_user %}
-<form class="task_list" action="/tasks/{{ profile_user.username }}" method="post">{% csrf_token %}
+<form class="task_list" action="{% url 'task_list_detailed' profile_user.username %}" method="post">{% csrf_token %}
 {% else %}
-<form class="task_list" action="/tasks/{{ user.username }}" method="post">{% csrf_token %}
+<form class="task_list" action="{% url 'task_list_detailed' user.username %}" method="post">{% csrf_token %}
 {% endif %}
 
     <fieldset>
@@ -36,7 +36,7 @@
                 {% for task in tasks %}
                 <tr>
                     <td data-title="{% trans 'When' %}">{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
-                    <td data-title="{% trans 'Title' %}"><a href="/task/{{ task.id }}">{{ task.name }}</a></td>
+                    <td data-title="{% trans 'Title' %}"><a href="{% url 'task_detailed' task.id %}">{{ task.name }}</a></td>
                     <td data-title="{% trans 'Attending' %}">
                     {% for volunteer in task.volunteer_set.all %}
                         {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}

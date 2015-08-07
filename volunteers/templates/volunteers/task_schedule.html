@@ -6,7 +6,7 @@
 {% block content_title %}<h2 class="content-title">{{ template.name }} {% trans 'Schedule' %}</h2>{% endblock %}
 
 {% block content %}
-    <form action="/task_schedule_csv/{{ template.id }}" class="button">
+    <form action="{% url 'task_schedule_csv' template.id %}" class="button">
         <input type="submit" value="Export CSV"/>
     </form>
     {% for task, volunteers in tasks.items %}
