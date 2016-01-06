@@ -42,6 +42,7 @@
                             <li><a href="{% url 'talk_list' %}"><span>{% trans 'Talks' %}</span></a></li>
                             {% if user.is_staff %}
                                 <li><a href="{% url 'category_schedule_list' %}"><span>{% trans 'Task Schedules' %}</span></a></li>
+                                <li><a href="{% url 'admin' %}"><span>{% trans 'Admin Area' %}</span></a></li>
                             {% endif %}
                             <li><a href="{% url 'faq' %}"><span>{% trans 'FAQ' %}</span></a></li>
                             <li><a href="{% url 'userena_profile_detail' user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
