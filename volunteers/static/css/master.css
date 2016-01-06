@@ -49,7 +49,7 @@ html, body {
 
 #nav {
     position: absolute;
-    right: 12px;
+    left: 0px;
     top: 48px;
     overflow: auto;
 }
@@ -93,8 +93,8 @@ html, body {
     background: transparent -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.15) 100%, rgba(255,255,255,0.01) 100%, transparent);
     -webkit-background-clip: padding-box;
     text-decoration: none;
-    font-size: .9em;
-    line-height: 1.4em;
+    font-size: .8em;
+    line-height: 1.2em;
     font-weight: bold;
 }
 
@@ -1141,22 +1141,22 @@ a:hover {
         -moz-border-radius: 20px;
         -webkit-border-radius: 20px;
         background: linear-gradient(
-            to bottom, 
+            to bottom,
             #0088cc, #0088cc 20%,
-            rgba(0,0,0,0) 20%, rgba(0,0,0,0) 40%, 
-            #0088cc 40%, #0088cc 60%, 
-            rgba(0,0,0,0) 60%, rgba(0,0,0,0) 80%, 
+            rgba(0,0,0,0) 20%, rgba(0,0,0,0) 40%,
+            #0088cc 40%, #0088cc 60%,
+            rgba(0,0,0,0) 60%, rgba(0,0,0,0) 80%,
             #0088cc 80%, #0088cc 100%
         );
     }
 
     span.menu-button:hover {
         background: linear-gradient(
-            to bottom, 
+            to bottom,
             #005580, #005580 20%,
-            rgba(0,0,0,0) 20%, rgba(0,0,0,0) 40%, 
-            #005580 40%, #005580 60%, 
-            rgba(0,0,0,0) 60%, rgba(0,0,0,0) 80%, 
+            rgba(0,0,0,0) 20%, rgba(0,0,0,0) 40%,
+            #005580 40%, #005580 60%,
+            rgba(0,0,0,0) 60%, rgba(0,0,0,0) 80%,
             #005580 80%, #005580 100%
         );
     }
@@ -1420,28 +1420,28 @@ a:hover {
         background: none;
     }
     /* Force table to not be like tables anymore */
-    .task_list table, 
-    .task_list thead, 
-    .task_list tbody, 
-    .task_list th, 
-    .task_list td, 
-    .task_list tr { 
+    .task_list table,
+    .task_list thead,
+    .task_list tbody,
+    .task_list th,
+    .task_list td,
+    .task_list tr {
         display: block;
     }
 
     .task_list tr.row-hide {
         display: none;
     }
- 
+
     /* Hide table headers (but not display: none;, for accessibility) */
     .task_list thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
- 
-    .task_list tr { 
-        border-bottom: 1px solid #ccc; 
+
+    .task_list tr {
+        border-bottom: 1px solid #ccc;
     }
 
     tr:last-child {
@@ -1475,8 +1475,8 @@ a:hover {
     table.talk_list {
         display: none;
     }
- 
-    table.task_list tr td, table.talk_list tr td, table.task_list .task-name { 
+
+    table.task_list tr td, table.talk_list tr td, table.task_list .task-name {
         /* Behave  like a "row" */
         border: none;
         position: relative;
@@ -1484,8 +1484,8 @@ a:hover {
         white-space: normal;
         text-align:left;
     }
- 
-    .task_list td:before { 
+
+    .task_list td:before {
         /* Now like a table header */
         position: absolute;
         /* Top/left values mimic padding */
@@ -1497,7 +1497,7 @@ a:hover {
         text-align:left;
         font-weight: bold;
     }
- 
+
     /*
     Label the data
     */
