@@ -34,7 +34,7 @@
                     <ul class="nav">
                         <li><a href="{% url 'promo' %}"><span>{% trans 'Home' %}</span></a></li>
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Profiles' %}</span></a></li>
+                            <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Volunteers' %}</span></a></li>
                         <!-- TODO: fix it :P <li><a href="{% url 'userena_umessages_list' %}"><span>{% trans 'Messages' %}</span></a></li> -->
                         {% endif %}
                         <li><a href="{% url 'task_list' %}"><span>{% trans 'Tasks' %}</span></a></li>
@@ -52,12 +52,12 @@
                         {% endif %}
                     </ul>
                 </nav>
-            
+
                 {% block nav %}
                 <ul id="nav">
                     <li><a href="{% url 'promo' %}"><span>{% trans 'Home' %}</span></a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Profiles' %}</span></a></li>
+                        <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Volunteers' %}</span></a></li>
                     <!-- TODO: fix it :P <li><a href="{% url 'userena_umessages_list' %}"><span>{% trans 'Messages' %}</span></a></li> -->
                     {% endif %}
                     <li><a href="{% url 'task_list' %}"><span>{% trans 'Tasks' %}</span></a></li>
