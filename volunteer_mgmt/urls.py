@@ -7,7 +7,8 @@ import volunteers.views as views
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     # Examples:
     # url(r'^$', 'volunteer_mgmt.views.home', name='home'),
     # url(r'^volunteer_mgmt/', include('volunteer_mgmt.foo.urls')),
