@@ -161,8 +161,7 @@ def task_list(request):
         ok_tasks = current_tasks.exclude(id__in=dr_manhattan_task_ids)
     else:
         ok_tasks = current_tasks
-    throwaway = current_tasks.order_by('date').distinct('date')
-    days = [x.date for x in throwaway]
+    days = sorted(list(set([x.date for x in current_tasks])))
 
     # when the user submitted the form
     if request.method == 'POST' and volunteer:

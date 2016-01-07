@@ -434,7 +434,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     def detect_dr_manhattan(self):
         retval = [False, []]
         current_tasks = self.tasks.filter(edition=Edition.get_current)
-        dates = [x.date for x in current_tasks.order_by('date').distinct('date')]
+        dates = sorted(list(set([x.date for x in current_tasks])))
         # Yes yes, I know about dict generators; my editor doesn't however and I don't
         # want to see warnings for perfectly valid code.
         schedule = {}
