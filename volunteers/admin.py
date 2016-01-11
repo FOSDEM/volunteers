@@ -237,7 +237,7 @@ class VolunteerAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
         models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':20})},
     }
-    actions = ['mass_mail_volunteer', 'vcard_export']
+    actions = ['mass_mail_volunteer', 'vcard_export', 'mail_schedule']
 
 
     # Mass mail action
@@ -260,7 +260,6 @@ class VolunteerAdmin(admin.ModelAdmin):
                 plural = ''
                 volunteer_mails = []
                 for volunteer in queryset:
-                    # TODO: actually send the mail
                     if volunteer.user.email:
                         volunteer_mails.append(volunteer.user.email)
                         count += 1
@@ -286,6 +285,16 @@ class VolunteerAdmin(admin.ModelAdmin):
         response = HttpResponse(output, mimetype='text/vcard')
         response['Content-Disposition'] = 'attachment; filename=volunteers.vcard'
         return response
+
+    def mail_schedule(self, request, queryset):
+        if not request.user.is_staff:
+            raise PermissionDenied
+        for volunteer in queryset:
+            volunteer.mail_schedule()
+        count = len(queryset)
+        plural = 's' if count >1 else ''
+        self.message_user(request, 'Volunteer schedule sent to  %d volunteer%s.' % (count, plural))
+        return HttpResponseRedirect(request.get_full_path())
 
     def num_tasks(self, volunteer):
         return volunteer.tasks.filter(edition=Edition.get_current).count()
