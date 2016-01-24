@@ -258,12 +258,14 @@ class VolunteerAdmin(admin.ModelAdmin):
                 message = form.cleaned_data['message']
                 count = 0
                 plural = ''
-                volunteer_mails = []
                 for volunteer in queryset:
                     if volunteer.user.email:
-                        volunteer_mails.append(volunteer.user.email)
+                        # Would have preferred to collect the mails in volunteer_mails list,
+                        # then send one mail outside this loop, but we don't want volunteers
+                        # to see each other's email addresses for privacy reasons, which means
+                        # BCC, which means it will get sent out as separate mails anyway.
+                        send_mass_mail(((subject, message, settings.DEFAULT_FROM_EMAIL, [volunteer.user.email]),), fail_silently=False)
                         count += 1
-                send_mass_mail(((subject, message, settings.DEFAULT_FROM_EMAIL, volunteer_mails),), fail_silently=False)
                 if count > 1:
                     plural = 's'
                 self.message_user(request, 'Mail with subject "%s" sent to  %d volunteer%s.' % (subject, count, plural))
