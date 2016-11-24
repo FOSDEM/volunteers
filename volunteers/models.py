@@ -518,9 +518,18 @@ class Volunteer(UserenaLanguageBaseProfile):
             })
         full_path = '%s?%s' % (GRAVATAR_PATH, query)
         try:
-            import socket
-            socket.setdefaulttimeout(10)
-            conn = httplib.HTTPConnection(GRAVATAR_DOMAIN, timeout=20)
+            if os.environ.get('HTTPS_PROXY'):
+                proxy_host, proxy_port = os.environ.get('HTTPS_PROXY').split('//')[1].split(':')
+                proxy_port = int(proxy_port)
+                conn = httplib.HTTPSConnection(proxy_host, proxy_port, timeout=5)
+                conn.set_tunnel(GRAVATAR_DOMAIN)
+            elif os.environ.get('HTTP_PROXY'):
+                proxy_host, proxy_port = os.environ.get('HTTP_PROXY').split('//')[1].split(':')
+                proxy_port = int(proxy_port)
+                conn = httplib.HTTPConnection(proxy_host, proxy_port, timeout=5)
+                conn.set_tunnel(GRAVATAR_DOMAIN)
+            else:
+                conn = httplib.HTTPConnection(GRAVATAR_DOMAIN, timeout=5)
             conn.request('HEAD', full_path)
             response = conn.getresponse()
             if response.status == 302:
