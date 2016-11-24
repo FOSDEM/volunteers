@@ -325,7 +325,7 @@ class Task(models.Model, HasLinkField):
                 category = categories[0]
             else:
                 category = TaskCategory(name=task_type)
-                category.save() 
+                category.save()
             template.category = category
             template.save()
         if len(tasks):
@@ -520,7 +520,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         try:
             import socket
             socket.setdefaulttimeout(10)
-            conn = httplib.HTTPConnection(GRAVATAR_DOMAIN)
+            conn = httplib.HTTPConnection(GRAVATAR_DOMAIN, timeout=20)
             conn.request('HEAD', full_path)
             response = conn.getresponse()
             if response.status == 302:
