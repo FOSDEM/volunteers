@@ -9,6 +9,7 @@ import datetime
 # from dateutil import relativedelta
 import hashlib
 import httplib
+import os
 import urllib
 import vobject
 import xml.etree.ElementTree as ET
