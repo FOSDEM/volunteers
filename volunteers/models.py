@@ -87,6 +87,15 @@ class Edition(models.Model):
         return edition
 
     @classmethod
+    def init_generic_tasks(cls):
+        edition = cls.get_current()
+        if edition:
+            generic_task_tree = ET.parse('volunteers/init_data/generic_tasks.xml')
+            generic_task_root = generic_task_tree.getroot()
+            for task in generic_task_root.findall('task'):
+                Task.create_from_xml(task, edition)
+
+    @classmethod
     def sync_with_penta(cls):
         penta_url = settings.SCHEDULE_SYNC_URI
         response = urllib.urlopen(penta_url)
@@ -97,14 +106,6 @@ class Edition(models.Model):
         ###########
         ed = root.find('conference')
         edition = cls.penta_create_or_update(ed)
-
-        #################
-        # Generic tasks #
-        #################
-        generic_task_tree = ET.parse('volunteers/init_data/generic_tasks.xml')
-        generic_task_root = generic_task_tree.getroot()
-        for task in generic_task_root.findall('task'):
-            generic_task = Task.create_from_xml(task, edition)
 
         #########
         # Talks #
