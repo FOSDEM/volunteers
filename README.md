@@ -8,7 +8,7 @@ SETUP
 ```bash
 git clone https://github.com/jrial/fosdem-volunteers.git
 cd fosdem-volunteers
-sudo apt-get install libpq-dev
+sudo apt-get install python-dev libpq-dev zlib1g-dev libjpeg-dev 
 ```
 
 It is advised to use virtualenv for the Python dependencies. Information on how
