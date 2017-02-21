@@ -8,18 +8,20 @@ MANAGERS = ADMINS = (
 # When on heroku
 if dj_database_url.config():
     DATABASES = {}
-    DATABASES['default'] = dj_database_url.config();
+    DATABASES['default'] = dj_database_url.config()
 # When on localhost
 else:
     DATABASES = {
         'default': {
-            # 'django.db.backends.' +  'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            # 'django.db.backends.' +  'postgresql_psycopg2', 'mysql',
+            # 'sqlite3' or 'oracle'.
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             # Or path to database file if using sqlite3.
             'NAME': 'volunteers',
             'USER': 'volunteers',
             'PASSWORD': 'volunteers',
-            # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            # Empty for localhost through domain sockets or '127.0.0.1' for
+            # localhost through TCP.
             'HOST': '127.0.0.1',
             # Set to empty string for default.
             'PORT': '5432',
