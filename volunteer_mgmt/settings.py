@@ -19,6 +19,12 @@ DATABASES = {
     }
 }
 
+# Admins - Override these in local.py
+ADMINS = (
+    ('Your Name', 'your_email@example.com'),
+)
+MANAGERS = ADMINS
+
 
 # Userena settings
 SITE_ID = 1
@@ -191,5 +197,5 @@ LOGGING = {
     }
 }
 
-if os.path.isfile(settings_dir + '/localsettings.py'):
-    from localsettings import *
+if os.path.isfile(settings_dir + '/local.py'):
+    from local import *
