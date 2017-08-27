@@ -94,7 +94,7 @@ class Edition(models.Model):
     def init_generic_tasks(cls):
         edition = cls.get_current()
         if edition:
-            generic_task_tree = ET.parse('volunteers/init_data/generic_tasks.xml')
+            generic_task_tree = ET.parse(settings.GENERIC_TASKS_FILE)
             generic_task_root = generic_task_tree.getroot()
             for task in generic_task_root.findall('task'):
                 Task.create_from_xml(task, edition)
@@ -121,7 +121,8 @@ class Edition(models.Model):
             for room in rooms:
                 room_name = room.get('name')
                 # Lightning talks are done manually since the time slots are so small.
-                needs_heralding = needs_video = room_name in ['Janson', 'K.1.105 (La Fontaine)']
+                needs_heralding = room_name in settings.ROOMS_HERALDING_REQUIRED
+                needs_video = room_name in settings.ROOMS_VIDEO_NEEDED
                 events = room.findall('event')
                 for event in events:
                     talk = Talk.penta_create_or_update(event, edition, day_date)
