@@ -118,15 +118,15 @@ def task_schedule_csv(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
     tasks = Task.objects.filter(template=template, edition=Edition.get_current).order_by('date', 'start_time', 'end_time')
     response = HttpResponse(content_type='text/csv')
-    filename = "schedule_%s.csv" % template.name
-    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    f_name = "schedule_{}.csv".format(template.name)
+    response['Content-Disposition'] = 'attachment; filename={}'.format(f_name)
 
     writer = csv.writer(response)
     writer.writerow(['Task', 'Volunteers', 'Day', 'Start', 'End', 'Volunteer', 'Nick', 'Email', 'Mobile'])
     for task in tasks:
         row = [
             task.name,
-            "(%s/%s)" % (task.assigned_volunteers(), task.nbr_volunteers),
+            "({}/{})".format(task.assigned_volunteers(), task.nbr_volunteers),
             task.date.strftime('%a'),
             task.start_time.strftime('%H:%M'),
             task.end_time.strftime('%H:%M'),
@@ -137,7 +137,9 @@ def task_schedule_csv(request, template_id):
         for number, volunteer in enumerate(volunteers):
             row = [
                 '', '', '', '', '',
-                "%s %s" % (volunteer.user.first_name, volunteer.user.last_name),
+                "{} {}".format(
+                    volunteer.user.first_name,
+                    volunteer.user.last_name),
                 volunteer.user.username,
                 volunteer.user.email,
                 volunteer.mobile_nbr,
@@ -240,7 +242,8 @@ def render_to_pdf(request, template_src, context_dict):
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
     if not pdf.err:
         return HttpResponse(result.getvalue(), mimetype='application/pdf')
-    return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
+    return HttpResponse('We had some errors<pre>{}</pre>'.format(escape(html)))
+
 
 @login_required
 def task_list_detailed(request, username):
@@ -261,7 +264,10 @@ def task_list_detailed(request, username):
             return render_to_pdf(request, 'volunteers/tasks_detailed.html', context)
         elif 'mail_schedule' in request.POST:
             volunteer.mail_schedule()
-            messages.success(request, _('Your shedule has been mailed to %s.' % (volunteer.user.email,)),
+            messages.success(
+                request,
+                _('Your shedule has been mailed to {}'.format(
+                    volunteer.user.email,)),
                 fail_silently=True)
 
     return render(request, 'volunteers/tasks_detailed.html', context)

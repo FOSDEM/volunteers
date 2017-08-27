@@ -268,7 +268,7 @@ class VolunteerAdmin(admin.ModelAdmin):
                         count += 1
                 if count > 1:
                     plural = 's'
-                self.message_user(request, 'Mail with subject "%s" sent to  %d volunteer%s.' % (subject, count, plural))
+                self.message_user(request, 'Mail with subject "{}" sent to  {} volunteer{}.'.format(subject, count, plural))
                 return HttpResponseRedirect(request.get_full_path())
         if not form:
             form = self.MassMailForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
@@ -294,8 +294,8 @@ class VolunteerAdmin(admin.ModelAdmin):
         for volunteer in queryset:
             volunteer.mail_schedule()
         count = len(queryset)
-        plural = 's' if count >1 else ''
-        self.message_user(request, 'Volunteer schedule sent to  %d volunteer%s.' % (count, plural))
+        plural = 's' if count > 1 else ''
+        self.message_user(request, 'Volunteer schedule sent to  {} volunteer{}.'.format(count, plural))
         return HttpResponseRedirect(request.get_full_path())
 
     def num_tasks(self, volunteer):

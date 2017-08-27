@@ -293,7 +293,7 @@ class Task(models.Model, HasLinkField):
         day = self.date.strftime('%a')
         start = self.start_time.strftime('%H:%M')
         end = self.end_time.strftime('%H:%M')
-        return "%s - %s (%s, %s - %s)" % (self.edition.name, self.name, day, start, end)
+        return "{} - {} ({}, {} - {})".format(self.edition.name, self.name, day, start, end)
 
     name = models.CharField(max_length=300)
     # For auto-importing; otherwise we can't have multiple cloak room and
@@ -340,7 +340,7 @@ class Task(models.Model, HasLinkField):
         else:
             task = cls(talk=talk, template=template)
         task.template = template
-        task.name = '%s: %s' % (task_type, talk.title)
+        task.name = '{}: {}'.format(task_type, talk.title)
         task.date = talk.date
         task.start_time = talk.start_time
         task.end_time = talk.end_time
@@ -473,7 +473,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         card = vobject.vCard()
         card_props = [
             ('n', vobject.vcard.Name(family=self.user.last_name, given=self.user.first_name)),
-            ('fn', '%s %s' % (self.user.first_name, self.user.last_name)),
+            ('fn', '{} {}'.format(self.user.first_name, self.user.last_name)),
             ('email', self.user.email),
             ('tel', self.mobile_nbr, 'cell'),
             ('categories', ['FOSDEM Volunteer']),
@@ -488,17 +488,15 @@ class Volunteer(UserenaLanguageBaseProfile):
     def mail_schedule(self):
         subject = "FOSDEM Volunteers: your schedule"
         message_header = []
-        message_header.extend(['Dear %s,' % (self.user.first_name),''])
+        message_header.extend(['Dear {},'.format(self.user.first_name), ''])
         edition = Edition.objects.filter(pk=Edition.get_current)[0]
-        message_header.extend(['Here is your schedule for %s:' % (edition.name,), ''])
+        message_header.extend(['Here is your schedule for {}:'.format(edition.name,), ''])
         message_body = []
         for task in self.tasks.filter(edition=Edition.get_current):
-            message_body.extend(["%s, %s-%s: %s" % (
-                    task.date.strftime('%a'),
-                    task.start_time,
-                    task.end_time,
-                    task.name,
-                )])
+            message_body.extend(["{}, {}-{}: {}".format(task.date.strftime('%a'),
+                                                        task.start_time,
+                                                        task.end_time,
+                                                        task.name,)])
         message_txt = '\n'.join(message_header + message_body)
         # Uncommenting html stuff for now; it's only in django development ATM
         # message_html = '<br/>'.join(message_header)
@@ -528,8 +526,8 @@ class Volunteer(UserenaLanguageBaseProfile):
             'gravatar_id': gravatar_hash,
             's': 1,
             'default': '/'
-            })
-        full_path = '%s?%s' % (GRAVATAR_PATH, query)
+        })
+        full_path = '{}?{}'.format(GRAVATAR_PATH, query)
         try:
             if os.environ.get('HTTPS_PROXY'):
                 proxy_host, proxy_port = os.environ.get('HTTPS_PROXY').split('//')[1].split(':')
@@ -566,9 +564,10 @@ class VolunteerStatus(models.Model):
         verbose_name_plural = _('Volunteer Statuses')
 
     def __unicode__(self):
-        return '%s %s - %s: %s' % (self.volunteer.user.first_name,
-            self.volunteer.user.last_name, self.edition.year,
-            'Yes' if self.active else 'No')
+        return '{} {} - {}: {}'.format(self.volunteer.user.first_name,
+                                       self.volunteer.user.last_name,
+                                       self.edition.year,
+                                       'Yes' if self.active else 'No')
 
     active = models.BooleanField()
     volunteer = models.ForeignKey(Volunteer)
