@@ -158,8 +158,13 @@ def task_list(request):
         is_dr_manhattan = False
     current_tasks = Task.objects.filter(edition=Edition.get_current)
     if volunteer:
-        is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
-        dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
+        is_dr_manhattan, dr_manhattan_tasks = volunteer.detect_dr_manhattan()
+        if dr_manhattan_tasks:
+            dr_manhattan_task_ids = [
+                x.id for x in set.union(*dr_manhattan_tasks)
+            ]
+        else:
+            dr_manhattan_task_ids = []
         ok_tasks = current_tasks.exclude(id__in=dr_manhattan_task_ids)
     else:
         ok_tasks = current_tasks
@@ -199,7 +204,7 @@ def task_list(request):
             'other tasks': TaskCategory.objects.filter(active=True).exclude(volunteer=volunteer),
         }
         context['volunteer'] = volunteer
-        context['dr_manhattan_task_sets'] = dr_manhattan_task_sets
+        context['dr_manhattan_tasks'] = dr_manhattan_tasks
         context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
         context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
     else:
