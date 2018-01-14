@@ -122,7 +122,7 @@ class Edition(models.Model):
 
                 if room_name in ['Janson', 'K.1.105 (La Fontaine)']:
                     needs_heralding = True
-                    needs_video = settings.IMPORT_VIDEO_TASKS
+                    needs_video = getattr(settings, 'IMPORT_VIDEO_TASKS', True)
 
                 events = room.findall('event')
                 for event in events:
