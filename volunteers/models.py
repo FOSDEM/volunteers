@@ -64,7 +64,7 @@ class Edition(models.Model):
         today = datetime.date.today()
         current = cls.objects.filter(visible_from__lte=today, visible_until__gte=today)
         if current:
-            retval = current[0].id
+            retval = current[0]
         return retval
 
     @classmethod
