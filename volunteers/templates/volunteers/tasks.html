@@ -70,6 +70,18 @@
         </table>
     </fieldset>
     {% endif %}
+    {% if not setup_for_current_year_complete %}
+        <legend class="task_list">We're still setting up the system for this year's edition of FOSDEM!</legend><br/>
+        <table>
+            <tr>
+                <td><img style="height: 100px;" src="https://img1.etsystatic.com/135/0/10713786/il_340x270.1048010949_fi0b.jpg"/></td>
+                <td width="20px;">&nbsp;</td>
+                <td style="vertical-align: middle;">
+                  We're still in the middle of getting all the tasks populated for this year's FOSDEM. <strong>Please check back before the event</strong> - there will be (a lot) more to do than what is listed below, including heralding for talks! Please sign up to the <a href="https://lists.fosdem.org/listinfo/volunteers">volunteers mailing list</a> to get timely updates.
+                </td>
+            </tr>
+        </table>
+    {% endif %}
     {% for title, days in tasks.items %}
     <fieldset>
         <legend class="task_list">{% trans title %} <span style="font-size: small; font-weight: normal;">

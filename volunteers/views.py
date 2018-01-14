@@ -3,6 +3,7 @@ import csv
 from django.contrib import messages
 from django.http import HttpResponse
 from django.views.generic.list import ListView
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -233,6 +234,7 @@ def task_list(request):
         'checked': {},
         'attending': {},
         'is_dr_manhattan': is_dr_manhattan,
+        'setup_for_current_year_complete': getattr(settings, 'SETUP_FOR_CURRENT_YEAR_COMPLETE', False),
     }
     # get the categories the volunteer is interested in
     if volunteer:
