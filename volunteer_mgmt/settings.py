@@ -3,22 +3,43 @@
 # and edit that copy instead.
 
 import os
-import dj_database_url
+import random
 
-settings_dir = os.path.dirname(__file__)
-PROJECT_ROOT = os.path.abspath(os.path.join(settings_dir, '..'))
-LOGIN_URL = "/volunteers/signin"
-
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, 'volunteers_db.sqlite'),
-    }
-}
+settings_dir = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(settings_dir)))
+LOGIN_URL = "/volunteers/signin"
 
+# We use Postgres everywhere atm.
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(PROJECT_ROOT, 'volunteers_db.sqlite'),
+#     }
+# }
+
+# The Django docs state that the secret key must not be part of version control.
+# There's no need to store this permanently in case of a reinstall; it's used
+# for transient data only. At most some logged in sessions or password reset
+# tokens may become invalidated.
+SECRET_FILE = os.path.join(PROJECT_ROOT, 'secret.txt')
+try:
+    SECRET_KEY = open(SECRET_FILE).read().strip()
+except IOError:
+    try:
+        print("No secret key file present. Creating...")
+        SECRET_KEY = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+        secret = file(SECRET_FILE, 'w')
+        secret.write(SECRET_KEY)
+        secret.close()
+        print("Secret key file {} has been created.".format(SECRET_FILE))
+    except IOError:
+        Exception('Please create a %s file with random characters \
+        to generate your secret key!' % SECRET_FILE)
+
+GENERIC_TASKS_FILE = 'volunteers/init_data/generic_tasks.xml'
 
 # Userena settings
 SITE_ID = 1
@@ -149,12 +170,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'django_extensions',  # not sure if necessary, was an untracked change on live server
     'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'volunteers',
     'userena',
     'guardian',
+    'gunicorn',
     'easy_thumbnails',
     'userena.contrib.umessages',
 )
