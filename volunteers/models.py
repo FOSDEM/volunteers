@@ -117,7 +117,13 @@ class Edition(models.Model):
             for room in rooms:
                 room_name = room.get('name')
                 # Lightning talks are done manually since the time slots are so small.
-                needs_heralding = needs_video = room_name in ['Janson', 'K.1.105 (La Fontaine)']
+                needs_heralding = False
+                needs_video = False
+
+                if room_name in ['Janson', 'K.1.105 (La Fontaine)']:
+                    needs_heralding = True
+                    needs_video = getattr(settings, 'IMPORT_VIDEO_TASKS', True)
+
                 events = room.findall('event')
                 for event in events:
                     talk = Talk.penta_create_or_update(event, edition, day_date)
