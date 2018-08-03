@@ -49,7 +49,7 @@
                         <td data-title="{% trans 'Task' %}" class="task-name"><a href="{% url 'task_detailed' task.id %}">{{ task.name }}</a></td>
                         {% endif %}
                         <td data-title="{% trans 'When' %}" >{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
-                        {% if task.assigned_volunteers == task.nbr_volunteers_max %}
+                        {% if task.assigned_volunteers >= task.nbr_volunteers_max %}
                         <td data-title="{% trans 'Volunteers' %}" class="task-volunteers blue" title="{% trans 'Full' %}
                         {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
                         {% elif task.assigned_volunteers >= task.nbr_volunteers %}
