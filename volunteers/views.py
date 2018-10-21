@@ -155,7 +155,7 @@ def task_list(request):
     else:
         volunteer = None
         is_dr_manhattan = False
-    current_tasks = Task.objects.filter(edition=Edition.get_current)
+    current_tasks = Task.objects.filter(edition=Edition.get_current())
     if volunteer:
         is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
         dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
