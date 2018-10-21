@@ -5,11 +5,11 @@
 import os
 import random
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 settings_dir = os.path.dirname(__file__)
-PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(settings_dir)))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
 LOGIN_URL = "/volunteers/signin"
 
 # We use Postgres everywhere atm.
@@ -30,7 +30,8 @@ try:
 except IOError:
     try:
         print("No secret key file present. Creating...")
-        SECRET_KEY = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+        SECRET_KEY = ''.join(
+            [random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
         secret = file(SECRET_FILE, 'w')
         secret.write(SECRET_KEY)
         secret.close()
@@ -122,15 +123,32 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+# TEMPLATE_LOADERS = (
+#    'django.template.loaders.filesystem.Loader',
+#    'django.template.loaders.app_directories.Loader',
+##     'django.template.loaders.eggs.Loader',
+# )
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': [
+            os.path.join(PROJECT_ROOT, 'templates/')
+        ],
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ]
+        }
+    }
+]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -154,12 +172,12 @@ ROOT_URLCONF = 'volunteer_mgmt.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'volunteer_mgmt.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, 'templates/'),
-)
+# TEMPLATE_DIRS = (
+#   # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+#    # Always use forward slashes, even on Windows.
+#    # Don't forget to use absolute paths, not relative paths.
+#    os.path.join(PROJECT_ROOT, 'templates/'),
+# )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -171,7 +189,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django_extensions',  # not sure if necessary, was an untracked change on live server
-    'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'volunteers',

@@ -1,20 +1,19 @@
 # django stuff
-Django==1.5.4
-gunicorn==18.0
-dj-static==0.0.5
-django-extensions==1.5.4
+Django
+gunicorn
+dj-static
+django-extensions
 
 # database stuff
-South==1.0.0
-psycopg2==2.4.5
-dj_database_url==0.2.2
+psycopg2
+dj_database_url
 
 # userena stuff
-pisa==3.0.33
-vobject==0.6.6
-reportlab==2.6
-html5lib==0.999
-easy-thumbnails==1.4
-python-dateutil==1.5
-django-userena==1.2.4
-django-guardian==1.1.1
+xhtml2pdf
+vobject
+reportlab
+html5lib
+easy-thumbnails
+python-dateutil
+django-userena
+django-guardian

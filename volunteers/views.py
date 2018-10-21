@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.utils.datastructures import SortedDict
+from collections import OrderedDict as SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -25,7 +25,7 @@ from guardian.decorators import permission_required_or_403
 
 import csv
 import cStringIO as StringIO
-import ho.pisa as pisa
+from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.template import Context
 from cgi import escape
@@ -236,7 +236,7 @@ def task_list(request):
 def render_to_pdf(request, template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
-    html  = template.render(context)
+    html = template.render(context)
     result = StringIO.StringIO()
 
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
