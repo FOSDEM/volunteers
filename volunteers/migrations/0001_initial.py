@@ -79,7 +79,7 @@ class Migration(migrations.Migration):
                 ('nbr_volunteers', models.IntegerField(default=0)),
                 ('nbr_volunteers_min', models.IntegerField(default=0)),
                 ('nbr_volunteers_max', models.IntegerField(default=0)),
-                ('edition', models.ForeignKey(default=volunteers.models.Edition.get_current, on_delete=django.db.models.deletion.CASCADE, to='volunteers.Edition')),
+                ('edition', models.ForeignKey(default=volunteers.models.Edition.get_current(), on_delete=django.db.models.deletion.CASCADE, to='volunteers.Edition')),
                 ('talk', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='volunteers.Talk')),
             ],
             options={
@@ -124,7 +124,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, null=True)),
                 ('date', models.DateField()),
                 ('start_time', models.TimeField()),
-                ('edition', models.ForeignKey(default=volunteers.models.Edition.get_current, on_delete=django.db.models.deletion.CASCADE, to='volunteers.Edition')),
+                ('edition', models.ForeignKey(default=volunteers.models.Edition.get_current(), on_delete=django.db.models.deletion.CASCADE, to='volunteers.Edition')),
             ],
             options={
                 'ordering': ['date', 'start_time', 'title'],
@@ -180,7 +180,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('active', models.BooleanField()),
-                ('edition', models.ForeignKey(default=volunteers.models.Edition.get_current, on_delete=django.db.models.deletion.CASCADE, to='volunteers.Edition')),
+                ('edition', models.ForeignKey(default=volunteers.models.Edition.get_current(), on_delete=django.db.models.deletion.CASCADE, to='volunteers.Edition')),
                 ('volunteer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='volunteers.Volunteer')),
             ],
             options={

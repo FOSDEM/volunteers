@@ -299,7 +299,7 @@ class VolunteerAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(request.get_full_path())
 
     def num_tasks(self, volunteer):
-        return volunteer.tasks.filter(edition=Edition.get_current).count()
+        return volunteer.tasks.filter(edition=Edition.get_current()).count()
 
     num_tasks.admin_order_field = 'num_tasks'
 

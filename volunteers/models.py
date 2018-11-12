@@ -157,7 +157,7 @@ class Track(models.Model):
 
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
-    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    edition = models.ForeignKey(Edition, default=Edition.get_current())
     date = models.DateField()
     start_time = models.TimeField()
     # end_time = models.TimeField()
@@ -328,7 +328,7 @@ class Task(models.Model):
     nbr_volunteers = models.IntegerField(default=0)
     nbr_volunteers_min = models.IntegerField(default=0)
     nbr_volunteers_max = models.IntegerField(default=0)
-    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    edition = models.ForeignKey(Edition, default=Edition.get_current())
     template = models.ForeignKey(TaskTemplate)
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True, null=True)
     # Only for heralding, or possible future tasks related
@@ -469,7 +469,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     # Dr. Manhattan detection: is this person capable of being in multiple places at once?
     def detect_dr_manhattan(self):
         retval = [False, []]
-        current_tasks = self.tasks.filter(edition=Edition.get_current)
+        current_tasks = self.tasks.filter(edition=Edition.get_current())
         dates = sorted(list(set([x.date for x in current_tasks])))
         # Yes yes, I know about dict generators; my editor doesn't however and I don't
         # want to see warnings for perfectly valid code.
@@ -512,10 +512,10 @@ class Volunteer(UserenaLanguageBaseProfile):
         subject = "FOSDEM Volunteers: your schedule"
         message_header = []
         message_header.extend(['Dear %s,' % (self.user.first_name), ''])
-        edition = Edition.objects.filter(pk=Edition.get_current)[0]
+        edition = Edition.objects.filter(pk=Edition.get_current())[0]
         message_header.extend(['Here is your schedule for %s:' % (edition.name,), ''])
         message_body = []
-        for task in self.tasks.filter(edition=Edition.get_current):
+        for task in self.tasks.filter(edition=Edition.get_current()):
             message_body.extend(["%s, %s-%s: %s" % (
                 task.date.strftime('%a'),
                 task.start_time,
@@ -597,7 +597,7 @@ class VolunteerStatus(models.Model):
 
     active = models.BooleanField()
     volunteer = models.ForeignKey(Volunteer)
-    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    edition = models.ForeignKey(Edition, default=Edition.get_current())
 
 
 """

@@ -84,7 +84,7 @@ def talk_list(request):
 
     # group the talks according to tracks
     context = { 'tracks': {}, 'checked': {} }
-    tracks = Track.objects.filter(edition=Edition.get_current)
+    tracks = Track.objects.filter(edition=Edition.get_current())
     for track in tracks:
         context['tracks'][track.title] = Talk.objects.filter(track=track)
 
@@ -105,7 +105,7 @@ def category_schedule_list(request):
 @login_required
 def task_schedule(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current).order_by('date', 'start_time', 'end_time')
+    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
     context = {
         'template': template,
         'tasks': SortedDict.fromkeys(tasks, {}),
@@ -117,7 +117,7 @@ def task_schedule(request, template_id):
 @login_required
 def task_schedule_csv(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current).order_by('date', 'start_time', 'end_time')
+    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
     response = HttpResponse(content_type='text/csv')
     filename = "schedule_%s.csv" % template.name
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -247,7 +247,7 @@ def render_to_pdf(request, template_src, context_dict):
 @login_required
 def task_list_detailed(request, username):
     context = {}
-    current_tasks = Task.objects.filter(edition=Edition.get_current)
+    current_tasks = Task.objects.filter(edition=Edition.get_current())
     # get the requested users tasks
     context['tasks'] = current_tasks.filter(volunteers__user__username=username)
     context['user'] = request.user
@@ -387,7 +387,7 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
 
-    profile = user.get_profile()
+    profile = user.volunteer
 
     user_initial = {'first_name': user.first_name, 'last_name': user.last_name}
 
@@ -452,21 +452,21 @@ def profile_detail(request, username,
             Instance of the currently viewed ``Profile``.
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
-    current_tasks = Task.objects.filter(edition=Edition.get_current)
+    current_tasks = Task.objects.filter(edition=Edition.get_current())
 
     profile_model = get_profile_model()
     try:
-        profile = user.get_profile()
+        profile = user.volunteer
     except profile_model.DoesNotExist:
         profile = profile_model.objects.create(user=user)
 
     if not profile.can_view_profile(request.user):
         raise PermissionDenied
     if not extra_context: extra_context = dict()
-    extra_context['profile'] = user.get_profile()
+    extra_context['profile'] = user.volunteer
     extra_context['tasks'] = current_tasks.filter(volunteers__user=user)
     extra_context['hide_email'] = userena_settings.USERENA_HIDE_EMAIL
-    check_profile_completeness(request, user.get_profile())
+    check_profile_completeness(request, user.volunteer)
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
 
 class ProfileListView(ListView):
