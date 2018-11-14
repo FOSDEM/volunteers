@@ -1,14 +1,15 @@
-from django.conf.urls import patterns, include, url
+#from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 import volunteers.views as views
+from volunteers.views import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'volunteer_mgmt.views.home', name='home'),
     # url(r'^volunteer_mgmt/', include('volunteer_mgmt.foo.urls')),
@@ -24,24 +25,24 @@ urlpatterns = patterns(
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     # Userena urls:
-    url(r'^$', 'volunteers.views.promo', name='promo'),
-    url(r'^faq/', 'volunteers.views.faq', name='faq'),
-    url(r'^volunteers/signup', 'volunteers.views.signup', name='signup'),
-    url(r'^volunteers/(?P<username>(?!signout|signup|signin)[\.\w-]+)/$', 'volunteers.views.profile_detail', name='profile_detail'),
-    url(r'^volunteers/(?P<username>[\.\w-]+)/edit/$', 'volunteers.views.profile_edit', name='userena_profile_edit'),
+    url(r'^$', promo, name='promo'),
+    url(r'^faq/', faq, name='faq'),
+    url(r'^volunteers/signup', signup, name='signup'),
+    url(r'^volunteers/(?P<username>(?!signout|signup|signin)[\.\w-]+)/$', profile_detail, name='profile_detail'),
+    url(r'^volunteers/(?P<username>[\.\w-]+)/edit/$', profile_edit, name='userena_profile_edit'),
     url(r'^volunteers/page/(?P<page>[0-9]+)/$', views.ProfileListView.as_view(), name='userena_profile_list_paginated'),
     url(r'^volunteers/$', views.ProfileListView.as_view(), name='userena_profile_list'),
     url(r'^volunteers/', include('userena.urls')),
     url(r'^messages/', include('userena.contrib.umessages.urls')),
     # other urls:
-    url(r'^tasks/(?P<username>[\.\w-]+)', 'volunteers.views.task_list_detailed', name='task_list_detailed'),
-    url(r'^task/(?P<task_id>\d+)/$', 'volunteers.views.task_detailed', name='task_detailed'),
-    url(r'^talk/(?P<talk_id>\d+)/$', 'volunteers.views.talk_detailed', name='talk_detailed'),
-    url(r'^tasks/', 'volunteers.views.task_list', name='task_list'),
-    url(r'^talks/', 'volunteers.views.talk_list', name='talk_list'),
-    url(r'^category_schedule/', 'volunteers.views.category_schedule_list', name='category_schedule_list'),
-    url(r'^task_schedule/(?P<template_id>\d+)/$', 'volunteers.views.task_schedule', name='task_schedule'),
-    url(r'^task_schedule_csv/(?P<template_id>\d+)/$', 'volunteers.views.task_schedule_csv', name='task_schedule_csv'),
+    url(r'^tasks/(?P<username>[\.\w-]+)', task_list_detailed, name='task_list_detailed'),
+    url(r'^task/(?P<task_id>\d+)/$', task_detailed, name='task_detailed'),
+    url(r'^talk/(?P<talk_id>\d+)/$', talk_detailed, name='talk_detailed'),
+    url(r'^tasks/', task_list, name='task_list'),
+    url(r'^talks/', talk_list, name='talk_list'),
+    url(r'^category_schedule/', category_schedule_list, name='category_schedule_list'),
+    url(r'^task_schedule/(?P<template_id>\d+)/$', task_schedule, name='task_schedule'),
+    url(r'^task_schedule_csv/(?P<template_id>\d+)/$', task_schedule_csv, name='task_schedule_csv'),
 
 
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

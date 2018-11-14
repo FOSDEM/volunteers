@@ -36,13 +36,13 @@ def parse_hour_duration(start_str, duration_str, format='%H:%M'):
     end = start + duration
     start_tm = datetime.time(hour=start.hour, minute=start.minute, second=start.second)
     end_tm = datetime.time(hour=end.hour, minute=end.minute, second=end.second)
-    return(start_tm, end_tm)
+    return (start_tm, end_tm)
 
 
 # Helper model
-class HasLinkField():
-    def link(self):
-        return 'Link'
+#class HasLinkField():
+#    def link(self):
+#        return 'Link'
 
 
 # Create your models here.
@@ -68,7 +68,7 @@ class Edition(models.Model):
         today = datetime.date.today()
         current = cls.objects.filter(visible_from__lte=today, visible_until__gte=today)
         if current:
-            retval = current[0].id
+            retval = current[0]
         return retval
 
     @classmethod
@@ -94,7 +94,7 @@ class Edition(models.Model):
     def init_generic_tasks(cls):
         edition = cls.get_current()
         if edition:
-            generic_task_tree = ET.parse(settings.GENERIC_TASKS_FILE)
+            generic_task_tree = ET.parse('volunteers/init_data/generic_tasks.xml')
             generic_task_root = generic_task_tree.getroot()
             for task in generic_task_root.findall('task'):
                 Task.create_from_xml(task, edition)
@@ -121,8 +121,13 @@ class Edition(models.Model):
             for room in rooms:
                 room_name = room.get('name')
                 # Lightning talks are done manually since the time slots are so small.
-                needs_heralding = room_name in settings.ROOMS_HERALDING_REQUIRED
-                needs_video = room_name in settings.ROOMS_VIDEO_NEEDED
+                needs_heralding = False
+                needs_video = False
+
+                if room_name in ['Janson', 'K.1.105 (La Fontaine)']:
+                    needs_heralding = True
+                    needs_video = getattr(settings, 'IMPORT_VIDEO_TASKS', True)
+
                 events = room.findall('event')
                 for event in events:
                     talk = Talk.penta_create_or_update(event, edition, day_date)
@@ -135,11 +140,13 @@ class Edition(models.Model):
                         Task.create_or_update_from_talk(edition, talk, 'Video', [1, 1, 1])
 
 
+"""
+A track is a collection of talks, grouped around one single
+concept or subject.
+"""
+
+
 class Track(models.Model):
-    """
-    A track is a collection of talks, grouped around one single
-    concept or subject.
-    """
     class Meta:
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
@@ -150,13 +157,14 @@ class Track(models.Model):
 
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
-    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    edition = models.ForeignKey(Edition, default=Edition.get_current())
     date = models.DateField()
     start_time = models.TimeField()
     # end_time = models.TimeField()
 
 
-class Talk(models.Model, HasLinkField):
+#class Talk(models.Model, HasLinkField):
+class Talk(models.Model):
     class Meta:
         verbose_name = _('Talk')
         verbose_name_plural = _('Talks')
@@ -177,6 +185,9 @@ class Talk(models.Model, HasLinkField):
 
     def assigned_volunteers(self):
         return self.volunteers.count()
+
+    def link(self):
+        return 'Link'
 
     @classmethod
     def penta_create_or_update(cls, xml, edition, day_date):
@@ -216,10 +227,13 @@ class Talk(models.Model, HasLinkField):
         return talk
 
 
-class TaskCategory(models.Model, HasLinkField):
-    """
-    Categories are things like buildup, cleanup, moderation, ...
-    """
+"""
+Categories are things like buildup, cleanup, moderation, ...
+"""
+
+
+#class TaskCategory(models.Model, HasLinkField):
+class TaskCategory(models.Model):
     class Meta:
         verbose_name = _('Task Category')
         verbose_name_plural = _('Task Categories')
@@ -236,6 +250,9 @@ class TaskCategory(models.Model, HasLinkField):
     def assigned_volunteers(self):
         return self.volunteer_set.count()
 
+    def link(self):
+        return 'Link'
+
     @classmethod
     def create_or_update_named(cls, name):
         categories = TaskCategory.objects.filter(name=name)
@@ -247,13 +264,15 @@ class TaskCategory(models.Model, HasLinkField):
         return category
 
 
+"""
+A task template contains all the data about a task that isn't task specific.
+For example, cleanup can happen in multiple locations or at multiple times.
+Not sure we need this, but it seemed like a good thing to have when I wrote
+down the DB model. ;)
+"""
+
+
 class TaskTemplate(models.Model):
-    """
-    A task template contains all data about a task that isn't task specific.
-    For example, cleanup can happen in multiple locations or at multiple times.
-    Not sure we need this, but it seemed like a good thing to have when I wrote
-    down the DB model. ;)
-    """
     class Meta:
         verbose_name = _('Task Template')
         verbose_name_plural = _('Task Templates')
@@ -279,11 +298,14 @@ class TaskTemplate(models.Model):
         return template
 
 
-class Task(models.Model, HasLinkField):
-    """
-    Contains the specifics of an instance of a task. It's based on a task
-    template but can override the name and description, yet not the category.
-    """
+"""
+Contains the specifics of an instance of a task. It's based on a task template
+but it can override the name and description, yet not the category.
+"""
+
+
+#class Task(models.Model, HasLinkField):
+class Task(models.Model):
     class Meta:
         verbose_name = _('Task')
         verbose_name_plural = _('Tasks')
@@ -293,7 +315,7 @@ class Task(models.Model, HasLinkField):
         day = self.date.strftime('%a')
         start = self.start_time.strftime('%H:%M')
         end = self.end_time.strftime('%H:%M')
-        return "{} - {} ({}, {} - {})".format(self.edition.name, self.name, day, start, end)
+        return "%s - %s (%s, %s - %s)" % (self.edition.name, self.name, day, start, end)
 
     name = models.CharField(max_length=300)
     # For auto-importing; otherwise we can't have multiple cloak room and
@@ -306,7 +328,7 @@ class Task(models.Model, HasLinkField):
     nbr_volunteers = models.IntegerField(default=0)
     nbr_volunteers_min = models.IntegerField(default=0)
     nbr_volunteers_max = models.IntegerField(default=0)
-    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    edition = models.ForeignKey(Edition, default=Edition.get_current())
     template = models.ForeignKey(TaskTemplate)
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True, null=True)
     # Only for heralding, or possible future tasks related
@@ -315,6 +337,9 @@ class Task(models.Model, HasLinkField):
 
     def assigned_volunteers(self):
         return self.volunteer_set.count()
+
+    def link(self):
+        return 'Link'
 
     # Create task from talks.
     # @param volunteers= list/tuple of required number of volunteers, in order:
@@ -340,7 +365,7 @@ class Task(models.Model, HasLinkField):
         else:
             task = cls(talk=talk, template=template)
         task.template = template
-        task.name = '{}: {}'.format(task_type, talk.title)
+        task.name = '%s: %s' % (task_type, talk.title)
         task.date = talk.date
         task.start_time = talk.start_time
         task.end_time = talk.end_time
@@ -376,10 +401,12 @@ class Task(models.Model, HasLinkField):
         return task
 
 
+"""
+table to contain the language names and ISO codes
+"""
+
+
 class Language(models.Model):
-    """
-    table to contain the language names and ISO codes
-    """
     class Meta:
         verbose_name = _('Language')
         verbose_name_plural = _('Languages')
@@ -391,10 +418,12 @@ class Language(models.Model):
     iso_code = models.CharField(max_length=2)
 
 
+"""
+The nice guys n' gals who make it all happen.
+"""
+
+
 class Volunteer(UserenaLanguageBaseProfile):
-    """
-    The nice guys n' gals who make it all happen.
-    """
     class Meta:
         verbose_name = _('Volunteer')
         verbose_name_plural = _('Volunteers')
@@ -414,26 +443,20 @@ class Volunteer(UserenaLanguageBaseProfile):
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
     # Categories in which they're interested to help out.
-    categories = models.ManyToManyField(TaskCategory,
-                                        through='VolunteerCategory',
-                                        blank=True, null=True,
+    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True, \
                                         help_text="""<br/><br/>
         Indicate your preference for which kind of tasks you'd prefer to do.
-        The tasks belonging to this category will appear on top in the Tasks
-        page, so you can find them easily.<br/><br/>
-        Signing up for actual tasks does not happen here; that's done in the
-        Tasks screen!""")
+        The tasks belonging to this category will appear on top in the Tasks page, so you
+        can find them easily.<br/><br/>
+        Signing up for actual tasks does not happen here; that's done in the Tasks screen!""")
     # Tasks for which they've signed up.
     tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
-    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True,
-                                  help_text="""We won't share this, but we need
-                                  it in case we need to contact you in a pinch
-                                  during the event.""")
-    private_staff_rating = models.IntegerField(null=True, blank=True,
-                                               choices=ratings)
+    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, \
+                                  help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
+    private_staff_rating = models.IntegerField(null=True, blank=True, choices=ratings)
     private_staff_notes = models.TextField(null=True, blank=True)
 
     # Just here for the admin interface.
@@ -446,17 +469,17 @@ class Volunteer(UserenaLanguageBaseProfile):
     # Dr. Manhattan detection: is this person capable of being in multiple places at once?
     def detect_dr_manhattan(self):
         retval = [False, []]
-        current_tasks = self.tasks.filter(edition=Edition.get_current)
+        current_tasks = self.tasks.filter(edition=Edition.get_current())
         dates = sorted(list(set([x.date for x in current_tasks])))
-        # Yes yes, I know about dict generators; my editor doesn't however and
-        # I don't want to see warnings for perfectly valid code.
+        # Yes yes, I know about dict generators; my editor doesn't however and I don't
+        # want to see warnings for perfectly valid code.
         schedule = {}
         for date in dates:
             schedule[date] = []
         for task in current_tasks:
             for item in schedule[task.date]:
-                if (item.start_time <= task.start_time < item.end_time or
-                        item.start_time < task.end_time <= item.end_time):
+                if item.start_time <= task.start_time < item.end_time \
+                        or item.start_time < task.end_time <= item.end_time:
                     retval[0] = True
                     item_found = False
                     for task_set in retval[1]:
@@ -473,7 +496,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         card = vobject.vCard()
         card_props = [
             ('n', vobject.vcard.Name(family=self.user.last_name, given=self.user.first_name)),
-            ('fn', '{} {}'.format(self.user.first_name, self.user.last_name)),
+            ('fn', '%s %s' % (self.user.first_name, self.user.last_name)),
             ('email', self.user.email),
             ('tel', self.mobile_nbr, 'cell'),
             ('categories', ['FOSDEM Volunteer']),
@@ -488,15 +511,17 @@ class Volunteer(UserenaLanguageBaseProfile):
     def mail_schedule(self):
         subject = "FOSDEM Volunteers: your schedule"
         message_header = []
-        message_header.extend(['Dear {},'.format(self.user.first_name), ''])
-        edition = Edition.objects.filter(pk=Edition.get_current)[0]
-        message_header.extend(['Here is your schedule for {}:'.format(edition.name,), ''])
+        message_header.extend(['Dear %s,' % (self.user.first_name), ''])
+        edition = Edition.objects.filter(pk=Edition.get_current())[0]
+        message_header.extend(['Here is your schedule for %s:' % (edition.name,), ''])
         message_body = []
-        for task in self.tasks.filter(edition=Edition.get_current):
-            message_body.extend(["{}, {}-{}: {}".format(task.date.strftime('%a'),
-                                                        task.start_time,
-                                                        task.end_time,
-                                                        task.name,)])
+        for task in self.tasks.filter(edition=Edition.get_current()):
+            message_body.extend(["%s, %s-%s: %s" % (
+                task.date.strftime('%a'),
+                task.start_time,
+                task.end_time,
+                task.name,
+            )])
         message_txt = '\n'.join(message_header + message_body)
         # Uncommenting html stuff for now; it's only in django development ATM
         # message_html = '<br/>'.join(message_header)
@@ -527,7 +552,7 @@ class Volunteer(UserenaLanguageBaseProfile):
             's': 1,
             'default': '/'
         })
-        full_path = '{}?{}'.format(GRAVATAR_PATH, query)
+        full_path = '%s?%s' % (GRAVATAR_PATH, query)
         try:
             if os.environ.get('HTTPS_PROXY'):
                 proxy_host, proxy_port = os.environ.get('HTTPS_PROXY').split('//')[1].split(':')
@@ -552,32 +577,35 @@ class Volunteer(UserenaLanguageBaseProfile):
             return True
 
 
+"""
+Many volunteers come back year after year, but sometimes they
+take a hiatus of one or multiple years. This is there to capture
+their availability on a per-event basis, in order to filter out
+inactive volunteers from the selection pool.
+"""
+
+
 class VolunteerStatus(models.Model):
-    """
-    Many volunteers come back year after year, but sometimes they
-    take a hiatus of one or multiple years. This is there to capture
-    their availability on a per-event basis, in order to filter out
-    inactive volunteers from the selection pool.
-    """
     class Meta:
         verbose_name = _('Volunteer Status')
         verbose_name_plural = _('Volunteer Statuses')
 
     def __unicode__(self):
-        return '{} {} - {}: {}'.format(self.volunteer.user.first_name,
-                                       self.volunteer.user.last_name,
-                                       self.edition.year,
-                                       'Yes' if self.active else 'No')
+        return '%s %s - %s: %s' % (self.volunteer.user.first_name,
+                                   self.volunteer.user.last_name, self.edition.year,
+                                   'Yes' if self.active else 'No')
 
     active = models.BooleanField()
     volunteer = models.ForeignKey(Volunteer)
-    edition = models.ForeignKey(Edition, default=Edition.get_current)
+    edition = models.ForeignKey(Edition, default=Edition.get_current())
+
+
+"""
+M2M tables because I want to have the relationship on both model admin pages
+"""
 
 
 class VolunteerTask(models.Model):
-    """
-    M2M tables because I want to have the relationship on both model admin pages
-    """
     class Meta:
         verbose_name = _('VolunteerTask')
         verbose_name_plural = _('VolunteerTasks')
@@ -601,10 +629,12 @@ class VolunteerCategory(models.Model):
     category = models.ForeignKey(TaskCategory)
 
 
+"""
+link table between volunteers and languages
+"""
+
+
 class VolunteerLanguage(models.Model):
-    """
-    link table between volunteers and languages
-    """
     class Meta:
         verbose_name = _('VolunteerLanguage')
         verbose_name_plural = _('VolunteerLanguages')
@@ -616,10 +646,12 @@ class VolunteerLanguage(models.Model):
     language = models.ForeignKey(Language)
 
 
+"""
+link table between volunteers and talks
+"""
+
+
 class VolunteerTalk(models.Model):
-    """
-    link table between volunteers and talks
-    """
     class Meta:
         verbose_name = _('VolunteerTalk')
         verbose_name_plural = _('VolunteerTalks')
