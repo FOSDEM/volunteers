@@ -1,0 +1,60 @@
+- name: Install dependencies
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - python2.7
+    - nginx
+    - python-pip
+- name: "Create system user {{app_user}}"
+  user:
+    name: "{{app_user}}"
+    group: "{{app_group}}"
+    create_home: yes
+    shell: /bin/false
+    system: yes
+    home: "{{base_dir}}"
+  become: yes
+- name: Clone the application
+  git:
+    repo: https://github.com/FOSDEM/volunteers.git
+    dest: "{{base_dir}}/tool"
+    version: master
+  become: yes
+  become_user: "{{app_user}}"
+- name: Install dependencies inside a virtual environment
+  pip:
+    virtualenv: "{{base_dir}}/venv"
+    virtualenv_python: python2.7
+    requirements: "{{base_dir}}/tool/requirements.txt"
+  become: yes
+  become_user: "{{app_user}}"
+- name: Create media directory
+  file:
+    path: "{{base_dir}}/tool/media/mugshots"
+    state: directory
+  become: yes
+  become_user: "{{app_user}}"
+- name: Create systemd service file
+  template:
+    dest: /etc/systemd/system/fosdem_volunteers.service
+    src: volunteers.service.j2
+  become: yes
+- pause:
+    prompt: "Please create localsettings.py in {{base_dir}}/tool/volunteer_mgmt"
+- name: Start volunteers tool
+  systemd:
+    name: fosdem_volunteers
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  become: yes
+- name: Install nginx configuration file
+  template:
+    dest: /etc/nginx/conf.d/fosdem_volunteers.conf
+    src: nginx.conf.j2
+  become: yes
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded

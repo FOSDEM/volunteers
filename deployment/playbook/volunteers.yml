@@ -1,0 +1,10 @@
+---
+- hosts: all
+  roles:
+    - role: fosdem_volunteers
+      vars:
+        base_dir: /var/opt/app/fosdem_volunteers
+        app_user: fosdem_volunteers
+        app_group: fosdem_volunteers
+        server_name: volunteers.fosdem.org
+        server_port: 8000

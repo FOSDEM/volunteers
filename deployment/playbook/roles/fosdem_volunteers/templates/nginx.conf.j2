@@ -1,0 +1,42 @@
+server {
+    listen 0.0.0.0:{{ server_port }};
+    server_name {{ server_name }};
+    access_log /var/log/nginx/volunteers.access.log;
+    error_log /var/log/nginx/volunteers.error.log;
+
+    root {{ base_dir }}/tool;
+
+    location /static/admin {
+        alias  {{ base_dir }}/tool/admin;
+        if ($query_string) {
+            expires max;
+        }
+    }
+
+    location /static {
+        alias  {{ base_dir }}/tool/volunteers/static;
+        if ($query_string) {
+            expires max;
+        }
+    }
+
+    location /media {
+        alias  {{ base_dir }}/tool/media;
+        if ($query_string) {
+            expires max;
+        }
+    }
+
+    location / {
+        root  {{ base_dir }}/tool;
+        proxy_connect_timeout 10;
+        proxy_pass http://127.0.0.1:5000/;
+        proxy_pass_header Server;
+        proxy_read_timeout 10;
+        proxy_redirect off;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+    }
+}
