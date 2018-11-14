@@ -8,3 +8,4 @@
         app_group: fosdem_volunteers
         server_name: volunteers.fosdem.org
         server_port: 8000
+        fake_initial: false

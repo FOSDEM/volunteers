@@ -35,13 +35,20 @@
     state: directory
   become: yes
   become_user: "{{app_user}}"
+- pause:
+    prompt: "Please create localsettings.py in {{base_dir}}/tool/volunteer_mgmt"
+- name: Run migrations
+  django_manage:
+    app_path: "{{base_dir}}/tool"
+    command: migrate
+    virtualenv: "{{base_dir}}/venv"
+  become: yes
+  become_user: "{{app_user}}"
 - name: Create systemd service file
   template:
     dest: /etc/systemd/system/fosdem_volunteers.service
     src: volunteers.service.j2
   become: yes
-- pause:
-    prompt: "Please create localsettings.py in {{base_dir}}/tool/volunteer_mgmt"
 - name: Start volunteers tool
   systemd:
     name: fosdem_volunteers
