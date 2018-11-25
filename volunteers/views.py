@@ -1,4 +1,5 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, Talk, Edition
+from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
+    Talk, Edition
 from forms import EditProfileForm, SignupForm
 
 from django.contrib import messages
@@ -30,30 +31,40 @@ from django.template.loader import get_template
 from django.template import Context
 from cgi import escape
 
+
 def check_profile_completeness(request, volunteer):
     if request.user != volunteer.user:
         return True
     if not volunteer.check_mugshot():
-        messages.warning(request, _("Looks like we don't have your beautiful smile in our system. Be so kind to upload a mugshot in your profile page. :)"), fail_silently=True)
+        messages.warning(request, _(
+            "Looks like we don't have your beautiful smile in our system. Be so kind to upload a mugshot in your profile page. :)"),
+                         fail_silently=True)
     if not volunteer.mobile_nbr:
-        messages.warning(request, _("Hey there! It seems you didn't give us a phone number. Please update your profile, or be the last to know the pizza's here..."), fail_silently=True)
+        messages.warning(request, _(
+            "Hey there! It seems you didn't give us a phone number. Please update your profile, or be the last to know the pizza's here..."),
+                         fail_silently=True)
+
 
 def faq(request):
     return render(request, 'static/faq.html')
 
+
 def promo(request):
     return render(request, 'static/promo.html')
+
 
 @login_required
 def talk_detailed(request, talk_id):
     talk = get_object_or_404(Talk, id=talk_id)
-    context = { 'talk': talk }
+    context = {'talk': talk}
     return render(request, 'volunteers/talk_detailed.html', context)
+
 
 def task_detailed(request, task_id):
     task = get_object_or_404(Task, id=task_id)
-    context = { 'task': task }
+    context = {'task': task}
     return render(request, 'volunteers/task_detailed.html', context)
+
 
 @login_required
 def talk_list(request):
@@ -83,7 +94,7 @@ def talk_list(request):
         return redirect('talk_list')
 
     # group the talks according to tracks
-    context = { 'tracks': {}, 'checked': {} }
+    context = {'tracks': {}, 'checked': {}}
     tracks = Track.objects.filter(edition=Edition.get_current())
     for track in tracks:
         context['tracks'][track.title] = Talk.objects.filter(track=track)
@@ -94,6 +105,7 @@ def talk_list(request):
 
     return render(request, 'volunteers/talks.html', context)
 
+
 @login_required
 def category_schedule_list(request):
     categories = TaskCategory.objects.filter(active=True)
@@ -102,10 +114,12 @@ def category_schedule_list(request):
         context['categories'][category] = TaskTemplate.objects.filter(category=category)
     return render(request, 'volunteers/category_schedule_list.html', context)
 
+
 @login_required
 def task_schedule(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
+    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
+                                                                                           'end_time')
     context = {
         'template': template,
         'tasks': SortedDict.fromkeys(tasks, {}),
@@ -114,10 +128,12 @@ def task_schedule(request, template_id):
         context['tasks'][task] = Volunteer.objects.filter(tasks=task)
     return render(request, 'volunteers/task_schedule.html', context)
 
+
 @login_required
 def task_schedule_csv(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
+    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
+                                                                                           'end_time')
     response = HttpResponse(content_type='text/csv')
     filename = "schedule_%s.csv" % template.name
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -131,7 +147,7 @@ def task_schedule_csv(request, template_id):
             task.date.strftime('%a'),
             task.start_time.strftime('%H:%M'),
             task.end_time.strftime('%H:%M'),
-            '','','','',
+            '', '', '', '',
         ]
         writer.writerow([unicode(s).encode("utf-8") for s in row])
         volunteers = Volunteer.objects.filter(tasks=task)
@@ -147,6 +163,7 @@ def task_schedule_csv(request, template_id):
         row = [''] * 9
         writer.writerow([unicode(s).encode("utf-8") for s in row])
     return response
+
 
 def task_list(request):
     # get the signed in volunteer
@@ -232,6 +249,7 @@ def task_list(request):
 
     return render(request, 'volunteers/tasks.html', context)
 
+
 @login_required
 def render_to_pdf(request, template_src, context_dict):
     template = get_template(template_src)
@@ -243,6 +261,7 @@ def render_to_pdf(request, template_src, context_dict):
     if not pdf.err:
         return HttpResponse(result.getvalue(), mimetype='application/pdf')
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
+
 
 @login_required
 def task_list_detailed(request, username):
@@ -259,14 +278,15 @@ def task_list_detailed(request, username):
     if request.POST:
         if 'print_pdf' in request.POST:
             # create the HttpResponse object with the appropriate PDF headers.
-            context.update({ 'pagesize':'A4'})
+            context.update({'pagesize': 'A4'})
             return render_to_pdf(request, 'volunteers/tasks_detailed.html', context)
         elif 'mail_schedule' in request.POST:
             volunteer.mail_schedule()
             messages.success(request, _('Your shedule has been mailed to %s.' % (volunteer.user.email,)),
-                fail_silently=True)
+                             fail_silently=True)
 
     return render(request, 'volunteers/tasks_detailed.html', context)
+
 
 @secure_required
 def signup(request, signup_form=SignupForm,
@@ -321,15 +341,17 @@ def signup(request, signup_form=SignupForm,
             # Send the signup complete signal
             userena_signals.signup_complete.send(sender=None, user=user)
 
-            if success_url: redirect_to = success_url
-            else: redirect_to = reverse('userena_signup_complete', kwargs={'username': user.username})
+            if success_url:
+                redirect_to = success_url
+            else:
+                redirect_to = reverse('userena_signup_complete', kwargs={'username': user.username})
 
             # A new signed user should logout the old one.
             if request.user.is_authenticated():
                 logout(request)
 
             if (userena_settings.USERENA_SIGNIN_AFTER_SIGNUP and
-                not userena_settings.USERENA_ACTIVATION_REQUIRED):
+                    not userena_settings.USERENA_ACTIVATION_REQUIRED):
                 user = authenticate(identification=user.email, check_password=False)
                 login(request, user)
 
@@ -338,6 +360,7 @@ def signup(request, signup_form=SignupForm,
     if not extra_context: extra_context = dict()
     extra_context['form'] = form
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
+
 
 @secure_required
 @login_required
@@ -419,7 +442,8 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
                 # Send a signal that the profile has changed
                 userena_signals.profile_change.send(sender=None, user=user)
                 redirect_to = success_url
-            else: redirect_to = reverse('userena_profile_detail', kwargs={'username': username})
+            else:
+                redirect_to = reverse('userena_profile_detail', kwargs={'username': username})
             return redirect(redirect_to)
 
     if not extra_context: extra_context = dict()
@@ -428,10 +452,11 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
+
 @login_required
 def profile_detail(request, username,
-    template_name=userena_settings.USERENA_PROFILE_DETAIL_TEMPLATE,
-    extra_context=None, **kwargs):
+                   template_name=userena_settings.USERENA_PROFILE_DETAIL_TEMPLATE,
+                   extra_context=None, **kwargs):
     """
         Detailed view of an user.
 
@@ -469,13 +494,14 @@ def profile_detail(request, username,
     check_profile_completeness(request, user.volunteer)
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
 
+
 class ProfileListView(ListView):
     """ Lists all profiles """
-    context_object_name='profile_list'
-    page=1
-    paginate_by=50
-    template_name=userena_settings.USERENA_PROFILE_LIST_TEMPLATE
-    extra_context=None
+    context_object_name = 'profile_list'
+    page = 1
+    paginate_by = 50
+    template_name = userena_settings.USERENA_PROFILE_LIST_TEMPLATE
+    extra_context = None
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -486,7 +512,7 @@ class ProfileListView(ListView):
             page = self.page
 
         if userena_settings.USERENA_DISABLE_PROFILE_LIST \
-           and not self.request.user.is_staff:
+                and not self.request.user.is_staff:
             raise Http404
 
         if not self.extra_context: self.extra_context = dict()
@@ -499,6 +525,6 @@ class ProfileListView(ListView):
 
     def get_queryset(self):
         profile_model = get_profile_model()
-        queryset = profile_model.objects.get_visible_profiles(self.request.user).select_related().extra(\
+        queryset = profile_model.objects.get_visible_profiles(self.request.user).select_related().extra( \
             select={'lower_name': 'lower(first_name)'}).order_by('lower_name')
         return queryset

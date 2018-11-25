@@ -22,6 +22,7 @@ from volunteers.models import VolunteerCategory
 
 import datetime
 
+
 class DayListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
@@ -41,6 +42,7 @@ class DayListFilter(admin.SimpleListFilter):
             return queryset.filter(date__week_day=self.value())
         else:
             return queryset
+
 
 class NumTasksFilter(admin.SimpleListFilter):
     title = 'tasks'
@@ -107,6 +109,7 @@ class EditionFilter(admin.SimpleListFilter):
         elif 'volunteerstatus_set' in queryset.model.__dict__:
             return queryset.filter(volunteerstatus__edition=self.value())
 
+
 class SignupFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
@@ -126,6 +129,7 @@ class SignupFilter(admin.SimpleListFilter):
             return queryset.filter(signed_up__gte=edition.visible_from, signed_up__lte=edition.visible_until)
         else:
             return queryset
+
 
 class CategoryActiveFilter(admin.SimpleListFilter):
     title = 'active category'
@@ -188,7 +192,6 @@ class TrackAdmin(admin.ModelAdmin):
     list_filter = [EditionFilter]
 
 
-
 class TalkAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['track', 'speaker', 'title']}),
@@ -202,7 +205,7 @@ class TalkAdmin(admin.ModelAdmin):
 
 class TaskCategoryAdmin(admin.ModelAdmin):
     fields = ['name', 'description']
-    inlines = (VolunteerCategoryInline, )
+    inlines = (VolunteerCategoryInline,)
     list_display = ['link', 'name', 'assigned_volunteers', 'active']
     list_editable = ['name', 'active']
 
@@ -215,30 +218,33 @@ class TaskTemplateAdmin(admin.ModelAdmin):
 
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['edition', 'name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date', 'start_time', 'end_time']}),
+        (None, {'fields': ['edition', 'name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date',
+                           'start_time', 'end_time']}),
         (None, {'fields': ['talk', 'template']}),
         (None, {'fields': ['description']}),
     ]
-    inlines = (VolunteerTaskInline, )
-    list_display = ['link', 'edition', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
-    list_editable = ['name', 'date', 'start_time', 'end_time', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
+    inlines = (VolunteerTaskInline,)
+    list_display = ['link', 'edition', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers',
+                    'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
+    list_editable = ['name', 'date', 'start_time', 'end_time', 'nbr_volunteers', 'nbr_volunteers_min',
+                     'nbr_volunteers_max']
     list_filter = [EditionFilter, DayListFilter, 'template', 'talk__track']
 
 
 class VolunteerAdmin(admin.ModelAdmin):
     fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes']
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
-    list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr', 'num_tasks']
+    list_display = ['user', 'full_name', 'email', 'private_staff_rating', 'private_staff_notes', 'mobile_nbr',
+                    'num_tasks']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
     # list_filter = [EditionFilter, SignupFilter, 'private_staff_rating', NumTasksFilter, 'categories', 'tasks']
     list_filter = [SignupFilter, 'private_staff_rating', NumTasksFilter, 'categories', 'tasks']
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size':'20'})},
-        models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':20})},
+        models.CharField: {'widget': TextInput(attrs={'size': '20'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 20})},
     }
     actions = ['mass_mail_volunteer', 'vcard_export', 'mail_schedule']
-
 
     # Mass mail action
     class MassMailForm(Form):
@@ -264,17 +270,20 @@ class VolunteerAdmin(admin.ModelAdmin):
                         # then send one mail outside this loop, but we don't want volunteers
                         # to see each other's email addresses for privacy reasons, which means
                         # BCC, which means it will get sent out as separate mails anyway.
-                        send_mass_mail(((subject, message, settings.DEFAULT_FROM_EMAIL, [volunteer.user.email]),), fail_silently=False)
+                        send_mass_mail(((subject, message, settings.DEFAULT_FROM_EMAIL, [volunteer.user.email]),),
+                                       fail_silently=False)
                         count += 1
                 if count > 1:
                     plural = 's'
-                self.message_user(request, 'Mail with subject "{}" sent to  {} volunteer{}.'.format(subject, count, plural))
+                self.message_user(request,
+                                  'Mail with subject "{}" sent to  {} volunteer{}.'.format(subject, count, plural))
                 return HttpResponseRedirect(request.get_full_path())
         if not form:
             form = self.MassMailForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
             return render(request, 'admin/massmail.html', {'volunteers': queryset,
-                                                             'massmail_form': form,
-                                                            })
+                                                           'massmail_form': form,
+                                                           })
+
     mass_mail_volunteer.short_description = "Send mass mail"
 
     # vCard export
@@ -302,6 +311,7 @@ class VolunteerAdmin(admin.ModelAdmin):
         return volunteer.tasks.filter(edition=Edition.get_current()).count()
 
     num_tasks.admin_order_field = 'num_tasks'
+
 
 class VolunteerStatusAdmin(admin.ModelAdmin):
     fields = ['edition', 'volunteer', 'active']

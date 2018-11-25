@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <generic_tasks>
-
     <task template="Buildup">
         <name>Buildup</name>
         <counter>1</counter>
@@ -14,7 +13,6 @@ This task includes many subtasks. Some require carrying heavy stuff around, some
         <nbr_volunteers_min>20</nbr_volunteers_min>
         <nbr_volunteers_max>100</nbr_volunteers_max>
     </task>
-
     <task template="Buildup">
         <name>Signage Buildup</name>
         <counter>1</counter>
@@ -34,10 +32,6 @@ Meeting point: K infodesk, 07:30. If you are late, please call Geert Goossens at
         <nbr_volunteers_min>6</nbr_volunteers_min>
         <nbr_volunteers_max>16</nbr_volunteers_max>
     </task>
-
-
-
-
     <task template="Transportation">
         <name>Transportation Buildup</name>
         <counter>1</counter>
@@ -47,11 +41,10 @@ While having a mobile phone number is strongly encouraged for any volunteer, it'
         <day>-1</day>
         <start_time>10:00</start_time>
         <end_time>20:00</end_time>
-        <nbr_volunteers>1</nbr_volunteers>
-        <nbr_volunteers_min>1</nbr_volunteers_min>
-        <nbr_volunteers_max>1</nbr_volunteers_max>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
-
     <task template="Transportation">
         <name>Transportation Cleanup</name>
         <counter>1</counter>
@@ -59,26 +52,21 @@ While having a mobile phone number is strongly encouraged for any volunteer, it'
         <day>1</day>
         <start_time>17:30</start_time>
         <end_time>22:00</end_time>
-        <nbr_volunteers>1</nbr_volunteers>
-        <nbr_volunteers_min>1</nbr_volunteers_min>
-        <nbr_volunteers_max>1</nbr_volunteers_max>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
-
     <task template="Transportation">
         <name>Transportation Return</name>
         <counter>1</counter>
         <description>Returning all the things that need to be returned, gas up the van and return to Dockx. The van can be gassed up at the petrol station near Dockx.</description>
-        <day>2</day>
+        <day>1</day>
         <start_time>08:00</start_time>
         <end_time>14:00</end_time>
-        <nbr_volunteers>1</nbr_volunteers>
-        <nbr_volunteers_min>1</nbr_volunteers_min>
-        <nbr_volunteers_max>1</nbr_volunteers_max>
+        <nbr_volunteers>2</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
-
-
-
-
     <task template="Cleanup">
         <name>Cleanup</name>
         <counter>1</counter>
@@ -96,10 +84,6 @@ As many volunteers as possible! That way, it won't take too long. :)</descriptio
         <nbr_volunteers_min>20</nbr_volunteers_min>
         <nbr_volunteers_max>1000</nbr_volunteers_max>
     </task>
-
-
-
-
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>1</counter>
@@ -149,7 +133,6 @@ IMPORTANT Notes
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>3</nbr_volunteers_max>
     </task>
-
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>3</counter>
@@ -174,7 +157,6 @@ IMPORTANT Notes
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>3</nbr_volunteers_max>
     </task>
-
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>4</counter>
@@ -199,7 +181,6 @@ IMPORTANT Notes
         <nbr_volunteers_min>3</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>5</counter>
@@ -224,7 +205,6 @@ IMPORTANT Notes
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>3</nbr_volunteers_max>
     </task>
-
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>6</counter>
@@ -249,7 +229,6 @@ IMPORTANT Notes
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>3</nbr_volunteers_max>
     </task>
-
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>7</counter>
@@ -274,7 +253,6 @@ IMPORTANT Notes
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>3</nbr_volunteers_max>
     </task>
-
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>8</counter>
@@ -299,10 +277,6 @@ IMPORTANT Notes
         <nbr_volunteers_min>3</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
-
-
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>1</counter>
@@ -316,7 +290,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>2</counter>
@@ -330,7 +303,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>3</counter>
@@ -344,7 +316,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>4</counter>
@@ -358,7 +329,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>5</counter>
@@ -372,7 +342,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>6</counter>
@@ -386,7 +355,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>7</counter>
@@ -400,7 +368,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>8</counter>
@@ -414,7 +381,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>2</nbr_volunteers_min>
         <nbr_volunteers_max>5</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>1</counter>
@@ -428,7 +394,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>2</counter>
@@ -442,7 +407,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>3</counter>
@@ -456,7 +420,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>4</counter>
@@ -470,7 +433,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>5</counter>
@@ -484,7 +446,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>6</counter>
@@ -498,7 +459,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>7</counter>
@@ -512,7 +472,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>8</counter>
@@ -526,9 +485,6 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
         <nbr_volunteers_min>4</nbr_volunteers_min>
         <nbr_volunteers_max>7</nbr_volunteers_max>
     </task>
-
-
-
     <task template="Network Buildup">
         <name>Network Buildup</name>
         <counter>1</counter>
