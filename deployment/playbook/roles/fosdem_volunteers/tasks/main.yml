@@ -44,6 +44,13 @@
     virtualenv: "{{base_dir}}/venv"
   become: yes
   become_user: "{{app_user}}"
+- name: Collect static files
+  django_manage:
+    app_path: "{{base_dir}}/tool"
+    command: collectstatic
+    virtualenv: "{{base_dir}}/venv"
+  become: yes
+  become_user: "{{app_user}}"
 - name: Create systemd service file
   template:
     dest: /etc/systemd/system/fosdem_volunteers.service

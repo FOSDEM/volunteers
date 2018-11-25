@@ -40,7 +40,7 @@ def parse_hour_duration(start_str, duration_str, format='%H:%M'):
 
 
 # Helper model
-#class HasLinkField():
+# class HasLinkField():
 #    def link(self):
 #        return 'Link'
 
@@ -163,7 +163,7 @@ class Track(models.Model):
     # end_time = models.TimeField()
 
 
-#class Talk(models.Model, HasLinkField):
+# class Talk(models.Model, HasLinkField):
 class Talk(models.Model):
     class Meta:
         verbose_name = _('Talk')
@@ -232,7 +232,6 @@ Categories are things like buildup, cleanup, moderation, ...
 """
 
 
-#class TaskCategory(models.Model, HasLinkField):
 class TaskCategory(models.Model):
     class Meta:
         verbose_name = _('Task Category')
@@ -304,7 +303,7 @@ but it can override the name and description, yet not the category.
 """
 
 
-#class Task(models.Model, HasLinkField):
+# class Task(models.Model, HasLinkField):
 class Task(models.Model):
     class Meta:
         verbose_name = _('Task')
