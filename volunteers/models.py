@@ -283,6 +283,10 @@ class TaskTemplate(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     category = models.ForeignKey(TaskCategory)
+    primary = models.ForeignKey(User, default=1, limit_choices_to={'is_staff': True})
+
+    def link(self):
+        return 'Link'
 
     @classmethod
     def create_or_update_named(cls, name):
