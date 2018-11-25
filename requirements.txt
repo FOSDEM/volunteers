@@ -11,7 +11,7 @@ dj_database_url
 # userena stuff
 xhtml2pdf
 vobject
-reportlab
+reportlab==3.5.9
 html5lib
 easy-thumbnails
 python-dateutil
