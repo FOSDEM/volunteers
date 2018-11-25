@@ -106,6 +106,21 @@ class TaskFilter(admin.SimpleListFilter):
         return Volunteer.objects.filter(tasks__id=self.value())
 
 
+class MyVolunteersFilter(admin.SimpleListFilter):
+    title = 'tasks I\'m primary on'
+    parameter_name = 'my_task'
+
+    def lookups(self, request, model_admin):
+        tasks = []
+        for task_template in TaskTemplate.objects.filter(primary__id=int(request.user.id)):
+            tasks.append((task_template.id, task_template.name))
+        return tasks
+
+    def queryset(self, request, queryset):
+        return Volunteer.objects.filter(tasks__template__id=self.value(),
+                                        tasks__edition_id=Edition.get_current())
+
+
 class EditionFilter(admin.SimpleListFilter):
     title = 'editions'
     parameter_name = 'edition'
@@ -247,8 +262,9 @@ class TaskCategoryAdmin(admin.ModelAdmin):
 
 
 class TaskTemplateAdmin(admin.ModelAdmin):
-    fields = ['name', 'description', 'category']
-    list_display = ['name', 'category']
+    fields = ['name', 'description', 'category', 'primary']
+    list_display = ['link', 'name', 'category', 'primary']
+    list_editable = ['name', 'category', 'primary']
     list_filter = [CategoryActiveFilter]
 
 
@@ -272,7 +288,7 @@ class VolunteerAdmin(admin.ModelAdmin):
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['full_name', 'mobile_nbr', 'email', 'private_staff_rating', 'private_staff_notes']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = [TaskCategoryFilter, TaskFilter, 'private_staff_rating']
+    list_filter = [MyVolunteersFilter, TaskCategoryFilter, TaskFilter, 'private_staff_rating']
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '20'})},
