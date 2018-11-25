@@ -106,10 +106,6 @@ class EditProfileForm(forms.ModelForm):
     def __init__(self, *args, **kw):
         super(EditProfileForm, self).__init__(*args, **kw)
         # Put the first and last name at the top
-        new_order = self.fields.keyOrder[:-2]
-        new_order.insert(0, 'first_name')
-        new_order.insert(1, 'last_name')
-        self.fields.keyOrder = new_order
 
     class Meta:
         model = get_profile_model()
