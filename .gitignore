@@ -3,6 +3,7 @@ venv
 mugshots
 *.sqlite
 volunteer_mgmt/settings/local.py
+volunteer_mgmt/localsettings.py
 schedule*.xml
 *.sql
 .directory

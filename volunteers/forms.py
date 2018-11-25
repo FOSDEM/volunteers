@@ -7,8 +7,10 @@ from userena.models import UserenaSignup
 from userena import settings as userena_settings
 from userena.utils import get_profile_model, get_user_model
 
+
 class AddTasksForm(forms.Form):
     tasks = forms.ModelMultipleChoiceField(queryset=VolunteerTask.objects.none(), widget=forms.CheckboxSelectMultiple())
+
 
 class EditTasksForm(forms.Form):
     #do = forms.BooleanField(label=_(u'Do'), required=False)
@@ -18,6 +20,7 @@ class EditTasksForm(forms.Form):
     end_time = forms.TimeField(label=_(u'End time'), required=True)
     name = forms.CharField(label=_(u'Name'), max_length=30, required=True)
     description = forms.CharField(label=_(u'Description'), max_length=30, required=False, widget=forms.Textarea)
+
 
 class SignupForm(forms.Form):
     """
@@ -90,6 +93,7 @@ class SignupForm(forms.Form):
         new_user.save()
         return new_user
 
+
 class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
     first_name = forms.CharField(label=_(u'First name'), max_length=30, required=True)
@@ -109,7 +113,9 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = get_profile_model()
-        exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating', 'private_staff_notes', 'categories']
+        exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating',
+                   'private_staff_notes', 'categories']
+        fields = ['first_name', 'last_name', 'mobile_nbr', 'about_me', 'mugshot']
 
     def save(self, force_insert=False, force_update=False, commit=True):
         profile = super(EditProfileForm, self).save(commit=commit)
