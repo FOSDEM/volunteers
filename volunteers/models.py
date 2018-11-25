@@ -232,7 +232,6 @@ Categories are things like buildup, cleanup, moderation, ...
 """
 
 
-# class TaskCategory(models.Model, HasLinkField):
 class TaskCategory(models.Model):
     class Meta:
         verbose_name = _('Task Category')

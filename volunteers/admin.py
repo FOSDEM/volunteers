@@ -45,8 +45,8 @@ class DayListFilter(admin.SimpleListFilter):
 
 
 class NumTasksFilter(admin.SimpleListFilter):
-    title = 'tasks'
-    parameter_name = 'tasks'
+    title = 'number of tasks'
+    parameter_name = 'number_of_tasks'
 
     def lookups(self, request, model_admin):
         return (
@@ -68,6 +68,42 @@ class NumTasksFilter(admin.SimpleListFilter):
             min_tasks, max_tasks = (6, sys.maxint)
         return queryset.annotate(num_tasks=Count('tasks')). \
             filter(num_tasks__gte=min_tasks, num_tasks__lte=max_tasks)
+
+
+class TaskCategoryFilter(admin.SimpleListFilter):
+    title = '{0} categories'.format(Edition.get_current().name)
+    parameter_name = 'category'
+
+    def lookups(self, request, model_admin):
+        templates = []
+        for template in TaskTemplate.objects.all():
+            templates.append((template.id, template.name))
+        return templates
+
+    def queryset(self, request, queryset):
+        if not self.value() or self.value() == 0:
+            return queryset
+        return Volunteer.objects.filter(tasks__edition_id=Edition.get_current(), tasks__template_id=self.value())
+
+
+class TaskFilter(admin.SimpleListFilter):
+    title = '{0} tasks'.format(Edition.get_current().name)
+    parameter_name = 'task'
+
+    def lookups(self, request, model_admin):
+        tasks = []
+        for task in Task.objects.filter(edition=Edition.get_current()).order_by('date', 'name', 'start_time'):
+            day = task.date.strftime('%a')
+            start = task.start_time.strftime('%H:%M')
+            end = task.end_time.strftime('%H:%M')
+            name = '{0} ({1} {2} - {3})'.format(task.name, day, start, end)
+            tasks.append((task.id, name))
+        return tasks
+
+    def queryset(self, request, queryset):
+        if not self.value() or self.value() == 0:
+            return queryset
+        return Volunteer.objects.filter(tasks__id=self.value())
 
 
 class EditionFilter(admin.SimpleListFilter):
@@ -238,7 +274,12 @@ class VolunteerAdmin(admin.ModelAdmin):
                     'num_tasks']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
     # list_filter = [EditionFilter, SignupFilter, 'private_staff_rating', NumTasksFilter, 'categories', 'tasks']
-    list_filter = [SignupFilter, 'private_staff_rating', NumTasksFilter, 'categories', 'tasks']
+    # Signup
+    # Rating
+    # Number of Tasks
+    # Categories
+    # Tasks
+    list_filter = [TaskCategoryFilter, TaskFilter, 'private_staff_rating', NumTasksFilter]
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '20'})},
