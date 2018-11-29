@@ -5,7 +5,7 @@
 import os
 import random
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 settings_dir = os.path.dirname(__file__)

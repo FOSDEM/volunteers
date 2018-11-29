@@ -515,7 +515,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         subject = "FOSDEM Volunteers: your schedule"
         message_header = []
         message_header.extend(['Dear %s,' % (self.user.first_name), ''])
-        edition = Edition.objects.filter(pk=Edition.get_current())[0]
+        edition = Edition.get_current()
         message_header.extend(['Here is your schedule for %s:' % (edition.name,), ''])
         message_body = []
         for task in self.tasks.filter(edition=Edition.get_current()):
