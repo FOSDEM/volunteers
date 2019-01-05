@@ -100,6 +100,15 @@ class Edition(models.Model):
                 Task.create_from_xml(task, edition)
 
     @classmethod
+    def create_from_task_list(cls, file_name):
+        edition = cls.get_current()
+        if edition:
+            generic_task_tree = ET.parse(file_name)
+            generic_task_root = generic_task_tree.getroot()
+            for task in generic_task_root.findall('task'):
+                Task.create_from_xml(task, edition)
+
+    @classmethod
     def sync_with_penta(cls):
         penta_url = settings.SCHEDULE_SYNC_URI
         response = urllib.urlopen(penta_url)
