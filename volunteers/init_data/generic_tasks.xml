@@ -1345,5 +1345,38 @@ There will also be sheets available with instructions/reminders.</description>
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
+    <task template="Beer event token selling">
+<name>Beer Event token selling/admissions steward</name>
+        <day>-1</day>
+        <counter>1</counter>
+        <description>The beer event is (one of) the greatest FOSDEM-side-activities. During Friday night, the Delirium Café is ours and we organize a world-famous beer event with equally famous Belgian beers.
 
+Your role is to separate those who are allowed to enter from those who are not. The café is reserved exclusively for FOSDEM use, and while the security knows this, they don't speak English or know what FOSDEM is. So your role will be to check whether a visitor is indeed FOSDEM-related, and if so, to stamp their wrists in order for them to gain continued entry.
+
+You'll also be responsible for selling the tokens visitors can buy beer (or other drinks) with.
+
+Perks of the job are plentiful. You'll meet a great amount of interesting people, have guaranteed access to Delirium and we'll ensure your throat never goes dry.</description>
+        <start_time>17:45</start_time>
+        <end_time>23:59</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>12</nbr_volunteers_min>
+        <nbr_volunteers_max>16</nbr_volunteers_max>
+    </task>
+    <task template="Beer event token selling">
+<name>Beer Event token selling/admissions steward</name>
+        <day>0</day>
+        <counter>2</counter>
+        <description>The beer event is (one of) the greatest FOSDEM-side-activities. During Friday night, the Delirium Café is ours and we organize a world-famous beer event with equally famous Belgian beers.
+
+Your role is to separate those who are allowed to enter from those who are not. The café is reserved exclusively for FOSDEM use, and while the security knows this, they don't speak English or know what FOSDEM is. So your role will be to check whether a visitor is indeed FOSDEM-related, and if so, to stamp their wrists in order for them to gain continued entry.
+
+You'll also be responsible for selling the tokens visitors can buy beer (or other drinks) with.
+
+Perks of the job are plentiful. You'll meet a great amount of interesting people, have guaranteed access to Delirium and we'll ensure your throat never goes dry.</description>
+        <start_time>00:00</start_time>
+        <end_time>03:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>12</nbr_volunteers_min>
+        <nbr_volunteers_max>16</nbr_volunteers_max>
+    </task>
 </generic_tasks>
