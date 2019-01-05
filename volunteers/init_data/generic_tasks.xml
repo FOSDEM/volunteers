@@ -1288,5 +1288,62 @@ There will also be sheets available with instructions/reminders.</description>
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
+    <task template="Heralding Lightning Talks">
+        <name>Heralding Lightning Talks</name>
+        <day>1</day>
+        <counter>14</counter>
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+
+The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+
+Each talk is 15 minutes, with 5 minute breaks in between.
+
+
+= Heralding =
+
+Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
+
+You will also be backup for video.
+
+Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+
+
+= Video =
+
+Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+You will also be backup for heralding.
+
+
+= Speakers =
+
+The speakers are given the following instructions:
+
+We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
+
+To ensure a smooth switch between speakers, please:
+* Attend the lightningtalk before you (= 20 minutes before your talk)
+* There are 5 minute breaks for speaker switches:
+** You can copy your slides from a USB key onto the presentation PC
+** You can use your own laptop, but have a fallback on USB
+** We will give you a microphone and pointer device
+* We will shortly introduce your talk
+* Then, we will set a kitchen timer to exactly 15 minutes
+
+When the kitchen timer rings, your speaking time is over!
+
+We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+= Briefing =
+
+You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
+There will also be sheets available with instructions/reminders.</description>
+        <start_time>12:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>1</nbr_volunteers>
+        <nbr_volunteers_min>1</nbr_volunteers_min>
+        <nbr_volunteers_max>2</nbr_volunteers_max>
+    </task>
 
 </generic_tasks>
