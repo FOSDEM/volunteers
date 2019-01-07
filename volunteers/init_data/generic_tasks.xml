@@ -1651,4 +1651,30 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
+    <task template="Video subtitling">
+        <name>Video subtitling</name>
+        <day>0</day>
+        <counter>1</counter>
+        <description>We try to be an inclusive and accessible conference, and videoing tasks is a big part of that. We've also started to subtitle a part of the video's, starting with the Keynote and Main Track video's. For this job, you don't have to be on site, but need to be a fluent speaker of English, as you'll have to understand all speakers. For most of them, English is not their first or even second language.
+
+We start on Saturday evening, after all tasks have finished. More information will be provided to you by the Video team, but you'll need a decent uplink, web browser and Github account. The software used is Amara (https://amara.org). </description>
+        <start_time>19:00</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>1</nbr_volunteers_min>
+        <nbr_volunteers_max>4</nbr_volunteers_max>
+    </task>
+    <task template="Video subtitling">
+        <name>Video subtitling</name>
+        <day>1</day>
+        <counter>2</counter>
+        <description>We try to be an inclusive and accessible conference, and videoing tasks is a big part of that. We've also started to subtitle a part of the video's, starting with the Keynote and Main Track video's. For this job, you don't have to be on site, but need to be a fluent speaker of English, as you'll have to understand all speakers. For most of them, English is not their first or even second language.
+
+We start on Saturday evening, after all tasks have finished. More information will be provided to you by the Video team, but you'll need a decent uplink, web browser and Github account. The software used is Amara (https://amara.org). </description>
+        <start_time>19:00</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>1</nbr_volunteers_min>
+        <nbr_volunteers_max>4</nbr_volunteers_max>
+    </task>
 </generic_tasks>
