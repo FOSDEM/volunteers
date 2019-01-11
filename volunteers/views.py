@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
@@ -248,6 +248,72 @@ def task_list(request):
             context['attending'][task.id] = False
 
     return render(request, 'volunteers/tasks.html', context)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def event_sign_on(request):
+    current_tasks = Task.objects.filter(edition=Edition.get_current())
+    ok_tasks = current_tasks
+    days = sorted(list(set([x.date for x in current_tasks])))
+    signup_form = SignupForm
+    # when the user submitted the form
+    if request.method == 'POST':
+        # create volunteer
+        form = signup_form(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(activation_required=True)
+
+            # Send the signup complete signal
+            userena_signals.signup_complete.send(sender=None, user=user)
+            print(user)
+
+            volunteer = Volunteer.objects.get(user=user)
+            print(volunteer)
+            # get the checked tasks
+            task_ids = request.POST.getlist('task')
+
+            # unchecked boxes, delete him/her from the task
+            for task in current_tasks.exclude(id__in=task_ids):
+                VolunteerTask.objects.filter(task=task, volunteer=volunteer).delete()
+
+            # checked boxes, add the volunteer to the tasks when he/she is not added
+            for task in current_tasks.filter(id__in=task_ids):
+                VolunteerTask.objects.get_or_create(task=task, volunteer=volunteer)
+
+            # show success message when enabled
+            if userena_settings.USERENA_USE_MESSAGES:
+                messages.success(request, _('Tasks for {0} have been updated.'.format(user.username)),
+                                 fail_silently=True)
+
+    # get the preferred and other tasks, preserve key order with srteddict for view
+    context = {
+        'tasks': SortedDict({}),
+        'checked': {},
+        'attending': {},
+        'is_dr_manhattan': False,
+        'setup_for_current_year_complete': getattr(settings, 'SETUP_FOR_CURRENT_YEAR_COMPLETE', False),
+    }
+    # get the categories the volunteer is interested in
+    categories_by_task_pref = {
+        # 'preferred tasks': [],
+        'tasks': TaskCategory.objects.filter(active=True),
+    }
+    context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
+    context['user'] = request.user
+    for category_group in context['tasks']:
+        for day in context['tasks'][category_group]:
+            context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])
+            for category in context['tasks'][category_group][day]:
+                dct = ok_tasks.filter(template__category=category, date=day)
+                context['tasks'][category_group][day][category] = dct
+
+    # Sign up during the event
+    context['form'] = signup_form
+    # mark checked, attending tasks
+    for task in current_tasks:
+        context['attending'][task.id] = False
+
+    return render(request, 'volunteers/event_sign_on.html', context)
 
 
 @login_required

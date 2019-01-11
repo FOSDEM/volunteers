@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^task/(?P<task_id>\d+)/$', task_detailed, name='task_detailed'),
     url(r'^talk/(?P<talk_id>\d+)/$', talk_detailed, name='talk_detailed'),
     url(r'^tasks/', task_list, name='task_list'),
+    url(r'^event_sign_on/', event_sign_on, name='event_sign_on'),
     url(r'^talks/', talk_list, name='talk_list'),
     url(r'^category_schedule/', category_schedule_list, name='category_schedule_list'),
     url(r'^task_schedule/(?P<template_id>\d+)/$', task_schedule, name='task_schedule'),

@@ -1,0 +1,123 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load volunteer_extras %}
+
+{% block content_title %}<h2 class="content-title">{% trans 'Sign on' %}</h2>{% endblock %}
+
+{% block content %}
+    {% for title, days in tasks.items %}
+        <form action="" method="post" style="width: auto">
+            {% csrf_token %}
+            <fieldset style="width: 500px; margin-left: auto; margin-right: auto">
+                <legend></legend>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field.errors }}
+                    {% comment %} Displaying checkboxes differently {% endcomment %}
+                    {% if field.name == 'tos' %}
+                        <p class="checkbox">
+                            <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
+                        </p>
+                    {% else %}
+                        <p>
+                            {{ field.label_tag }}
+                            {{ field }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+            <fieldset>
+                <legend class="task_list">{% trans title %}</legend>
+                <table class="task_list">
+                    <thead>
+                    <tr class="table_top">
+                        <th width="10%">{% trans "I'm in" %}!</th>
+                        <th width="55%">{% trans 'Task' %}</th>
+                        <th width="20%">{% trans 'When' %}</th>
+                        <th width="15%">{% trans 'Volunteers' %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for day, categories in days.items %}
+                        {% if categories.items %}
+                            {% ifchanged %}
+                            {% else %}
+                                <tr class="row-hide">
+                                    <th class="no_vert_border">&nbsp;</th>
+                                    <th class="no_vert_border">&nbsp;</th>
+                                    <th class="no_vert_border">&nbsp;</th>
+                                    <th class="no_vert_border">&nbsp;</th>
+                                </tr>
+                            {% endifchanged %}
+                            <tr class="day">
+                                <th class="no_vert_border">{{ day|date:"l" }}</th>
+                                <th class="no_vert_border">&nbsp;</th>
+                                <th class="no_vert_border">&nbsp;</th>
+                                <th class="no_vert_border">&nbsp;</th>
+                            </tr>
+                            {% for category, category_tasks in categories.items %}
+                                {% if category_tasks %}
+                                    {% ifchanged %}
+                                    {% else %}
+                                        <tr class="row-hide">
+                                            <th class="no_vert_border">&nbsp;</th>
+                                            <th class="no_vert_border">&nbsp;</th>
+                                            <th class="no_vert_border">&nbsp;</th>
+                                            <th class="no_vert_border">&nbsp;</th>
+                                        </tr>
+                                    {% endifchanged %}
+                                    <tr class="category">
+                                        <th class="no_vert_border">&nbsp;</th>
+                                        <th class="no_vert_border">{{ category.name }}</th>
+                                        <th class="no_vert_border">&nbsp;</th>
+                                        <th class="no_vert_border">&nbsp;</th>
+                                    </tr>
+                                    {% for task in category_tasks %}
+                                        <tr>
+                                            <td data-title="{% trans 'I am in' %}!">
+                                                <input type="checkbox" name="task"
+                                                       value="{{ task.id }}" {{ checked|get_item:task.id }} />
+                                            </td>
+                                            {% if attending|get_item:task.id == True %}
+                                                <td class="task-name special-task">{{ task.name }} <span
+                                                        class="small_note">(Hey, you're attending this!)</span>
+                                                </td>
+                                            {% else %}
+                                                <td data-title="{% trans 'Task' %}" class="task-name"><a
+                                                        href="{% url 'task_detailed' task.id %}">{{ task.name }}</a>
+                                                </td>
+                                            {% endif %}
+                                            <td data-title="{% trans 'When' %}">{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }}
+                                                - {{ task.end_time|time:"H:i" }}</td>
+                                            {% if task.assigned_volunteers == task.nbr_volunteers_max %}
+                                                <td data-title="{% trans 'Volunteers' %}" class="task-volunteers blue"
+                                                    title="{% trans 'Full' %}
+                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name }} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
+                                                    {% elif task.assigned_volunteers >= task.nbr_volunteers %}
+                                                <td data-title="{% trans 'Volunteers' %}" class="task-volunteers green"
+                                                    title="{% trans 'Staffed' %}
+                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name }} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
+                                                    {% elif task.assigned_volunteers >= task.nbr_volunteers_min %}
+                                                <td data-title="{% trans 'Volunteers' %}" class="task-volunteers gray"
+                                                    title="{% trans 'Manageable' %}
+                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name }} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
+                                                    {% else %}
+                                                <td data-title="{% trans 'Volunteers' %}" class="task-volunteers red"
+                                                    title="{% trans 'More volunteers needed' %}
+                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name }} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
+                                            {% endif %}
+                                            {{ task.assigned_volunteers }}/{{ task.nbr_volunteers }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </fieldset>
+            <input type="submit" value="{% trans "Submit" %}"/>
+        </form>
+    {% endfor %}
+{% endblock %}
