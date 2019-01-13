@@ -279,6 +279,8 @@ def event_sign_on(request):
                 VolunteerTask.objects.get_or_create(task=task, volunteer=volunteer)
             # Send tasks
             volunteer.mail_schedule()
+            # Send reset password mail
+            volunteer.mail_user_created_for_you()
             # show success message when enabled
             if userena_settings.USERENA_USE_MESSAGES:
                 messages.success(request, _('Tasks for {0} have been updated.'.format(user.username)),

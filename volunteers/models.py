@@ -534,7 +534,12 @@ class Volunteer(UserenaLanguageBaseProfile):
                 task.end_time,
                 task.name,
             )])
-        message_txt = '\n'.join(message_header + message_body)
+        message_footer = [
+            '',
+            'Kind regards,',
+            'FOSDEM Volunteers Team'
+        ]
+        message_txt = '\n'.join(message_header + message_body + message_footer)
         # Uncommenting html stuff for now; it's only in django development ATM
         # message_html = '<br/>'.join(message_header)
         # message_html += '<ul style="font-family: Courier New, monospace"><li>'
@@ -544,6 +549,20 @@ class Volunteer(UserenaLanguageBaseProfile):
         #     [self.user.email], html_message=message_html, fail_silently=False)
         send_mail(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
                   [self.user.email], fail_silently=False)
+
+    def mail_user_created_for_you(self):
+        subject = 'FOSDEM Volunteers: user created for you'
+        message = [
+            'Dear {0},'.format(self.user.first_name),
+            '',
+            'An account was created on volunteers.fosdem.org for you, probably during FOSDEM.',
+            'Please reset your password via https://volunteers.fosdem.org/volunteers/password/reset/ .',
+            '',
+            'Kind regards,',
+            'FOSDEM Volunteers Team'
+        ]
+        send_mail(subject, '\n'.join(message), settings.DEFAULT_FROM_EMAIL, [self.user.email],
+                  fail_silently=False)
 
     def check_mugshot(self):
         mugshot_url = self.get_mugshot_url()
