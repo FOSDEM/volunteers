@@ -1,6 +1,6 @@
 from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
     Talk, Edition
-from forms import EditProfileForm, SignupForm
+from forms import EditProfileForm, SignupForm, EventSignupForm
 
 from django.contrib import messages
 from django.http import HttpResponse
@@ -255,20 +255,18 @@ def event_sign_on(request):
     current_tasks = Task.objects.filter(edition=Edition.get_current())
     ok_tasks = current_tasks
     days = sorted(list(set([x.date for x in current_tasks])))
-    signup_form = SignupForm
+    signup_form = EventSignupForm
     # when the user submitted the form
     if request.method == 'POST':
         # create volunteer
         form = signup_form(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save(activation_required=True)
+            user = form.save()
 
             # Send the signup complete signal
             userena_signals.signup_complete.send(sender=None, user=user)
-            print(user)
 
             volunteer = Volunteer.objects.get(user=user)
-            print(volunteer)
             # get the checked tasks
             task_ids = request.POST.getlist('task')
 
@@ -279,7 +277,8 @@ def event_sign_on(request):
             # checked boxes, add the volunteer to the tasks when he/she is not added
             for task in current_tasks.filter(id__in=task_ids):
                 VolunteerTask.objects.get_or_create(task=task, volunteer=volunteer)
-
+            # Send tasks
+            volunteer.mail_schedule()
             # show success message when enabled
             if userena_settings.USERENA_USE_MESSAGES:
                 messages.success(request, _('Tasks for {0} have been updated.'.format(user.username)),
@@ -423,7 +422,8 @@ def signup(request, signup_form=SignupForm,
 
             return redirect(redirect_to)
 
-    if not extra_context: extra_context = dict()
+    if not extra_context:
+        extra_context = dict()
     extra_context['form'] = form
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
 
