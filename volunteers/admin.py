@@ -20,8 +20,6 @@ from volunteers.models import VolunteerStatus
 from volunteers.models import VolunteerTask
 from volunteers.models import VolunteerCategory
 
-import datetime
-
 
 class DayListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
@@ -83,7 +81,10 @@ class TaskCategoryFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if not self.value() or self.value() == 0:
             return queryset
-        return Volunteer.objects.filter(tasks__edition_id=Edition.get_current(), tasks__template_id=self.value())
+        return Volunteer.objects.filter(
+            tasks__edition_id=Edition.get_current(),
+            tasks__template_id=self.value()
+        ).distinct()
 
 
 class TaskFilter(admin.SimpleListFilter):
@@ -103,7 +104,7 @@ class TaskFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if not self.value() or self.value() == 0:
             return queryset
-        return Volunteer.objects.filter(tasks__id=self.value())
+        return Volunteer.objects.filter(tasks__id=self.value()).distinct()
 
 
 class MyVolunteersFilter(admin.SimpleListFilter):
@@ -117,8 +118,28 @@ class MyVolunteersFilter(admin.SimpleListFilter):
         return tasks
 
     def queryset(self, request, queryset):
-        return Volunteer.objects.filter(tasks__template__id=self.value(),
-                                        tasks__edition_id=Edition.get_current())
+        return Volunteer.objects.filter(
+            tasks__template__id=self.value(),
+            tasks__edition_id=Edition.get_current()
+        ).distinct()
+
+
+class LastYearVolunteersNoTaskFilter(admin.SimpleListFilter):
+    title = 'last year volunteers without tasks'
+    parameter_name = 'volunteers_no_task'
+
+    def lookups(self, request, model_admin):
+        edition = Edition.get_previous()
+        return [
+            (edition.id, edition.name)
+        ]
+
+    def queryset(self, request, queryset):
+        return Volunteer.objects.filter(
+            tasks__edition=Edition.get_previous()
+        ).exclude(
+            tasks__edition=Edition.get_current()
+        ).distinct()
 
 
 class EditionFilter(admin.SimpleListFilter):
@@ -288,7 +309,8 @@ class VolunteerAdmin(admin.ModelAdmin):
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['full_name', 'mobile_nbr', 'email', 'private_staff_rating', 'private_staff_notes']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = [MyVolunteersFilter, TaskCategoryFilter, TaskFilter, 'private_staff_rating', SignupFilter]
+    list_filter = [MyVolunteersFilter, TaskCategoryFilter, TaskFilter, 'private_staff_rating',
+                   LastYearVolunteersNoTaskFilter, SignupFilter]
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '20'})},

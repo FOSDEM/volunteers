@@ -72,6 +72,14 @@ class Edition(models.Model):
         return retval
 
     @classmethod
+    def get_previous(cls):
+        today = datetime.date.today()
+        previous = cls.objects.filter(end_date__lt=today)
+        if previous:
+            return previous[0]
+        return False
+
+    @classmethod
     def penta_create_or_update(cls, xml):
         ed_name = xml.find('title').text
         start_date = parse_date(xml.find('start').text)
@@ -466,8 +474,9 @@ class Volunteer(UserenaLanguageBaseProfile):
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
-    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True, \
-                                  help_text="We won't share this, but we need it in case we need to contact you in a pinch during the event.")
+    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True,
+                                  help_text="We won't share this, but we need it in case we"
+                                            " need to contact you in a pinch during the event.")
     private_staff_rating = models.IntegerField(null=True, blank=True, choices=ratings)
     private_staff_notes = models.TextField(null=True, blank=True)
 
