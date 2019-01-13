@@ -96,7 +96,7 @@ class TaskFilter(admin.SimpleListFilter):
             day = task.date.strftime('%a')
             start = task.start_time.strftime('%H:%M')
             end = task.end_time.strftime('%H:%M')
-            name = '{0} ({1} {2} - {3})'.format(task.name, day, start, end)
+            name = u'{0} ({1} {2} - {3})'.format(task.name, day, start, end)
             tasks.append((task.id, name))
         return tasks
 
@@ -288,7 +288,7 @@ class VolunteerAdmin(admin.ModelAdmin):
     inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['full_name', 'mobile_nbr', 'email', 'private_staff_rating', 'private_staff_notes']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = [MyVolunteersFilter, TaskCategoryFilter, TaskFilter, 'private_staff_rating']
+    list_filter = [MyVolunteersFilter, TaskCategoryFilter, TaskFilter, 'private_staff_rating', SignupFilter]
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '20'})},
