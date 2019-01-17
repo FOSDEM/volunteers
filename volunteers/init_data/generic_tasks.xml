@@ -81,41 +81,6 @@ Meeting point: K infodesk, 17:30. If you are late, please call Geert Goossens at
         <nbr_volunteers_min>5</nbr_volunteers_min>
         <nbr_volunteers_max>10</nbr_volunteers_max>
     </task>
-    <task template="Transportation">
-        <name>Transportation Buildup</name>
-        <counter>1</counter>
-        <description>Organising an event requires lots of stuff to be brought on-site. Things like scaffolding, the O'Reilly books, T-shirts, network gear, ... - some of this stuff may be heavy, so if yo enlist for this, make sure you're OK with lifting potentially heavy objects.
-
-While having a mobile phone number is strongly encouraged for any volunteer, it's mandatory for those signing up for this task as the drivers of the vans need a way to contact you to pick you up somewhere along the way, or when you're running late. ;)</description>
-        <day>-1</day>
-        <start_time>10:00</start_time>
-        <end_time>20:00</end_time>
-        <nbr_volunteers>2</nbr_volunteers>
-        <nbr_volunteers_min>2</nbr_volunteers_min>
-        <nbr_volunteers_max>2</nbr_volunteers_max>
-    </task>
-    <task template="Transportation">
-        <name>Transportation Cleanup</name>
-        <counter>1</counter>
-        <description>On Sunday evening, we load all the stuff that needs to be returned back into the vans. The vans will be stalled somewhere overnight so the cargo can be returned the next day. It helps to keep items that go to the same or geographically close locations in the same van, unless everything fits in one.</description>
-        <day>1</day>
-        <start_time>17:30</start_time>
-        <end_time>22:00</end_time>
-        <nbr_volunteers>2</nbr_volunteers>
-        <nbr_volunteers_min>2</nbr_volunteers_min>
-        <nbr_volunteers_max>2</nbr_volunteers_max>
-    </task>
-    <task template="Transportation">
-        <name>Transportation Return</name>
-        <counter>1</counter>
-        <description>Returning all the things that need to be returned, gas up the van and return to Dockx. The van can be gassed up at the petrol station near Dockx.</description>
-        <day>1</day>
-        <start_time>08:00</start_time>
-        <end_time>14:00</end_time>
-        <nbr_volunteers>2</nbr_volunteers>
-        <nbr_volunteers_min>2</nbr_volunteers_min>
-        <nbr_volunteers_max>2</nbr_volunteers_max>
-    </task>
     <task template="Cleanup">
         <name>Cleanup</name>
         <counter>1</counter>
