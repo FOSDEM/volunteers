@@ -277,7 +277,7 @@ class TalkAdmin(admin.ModelAdmin):
 
 class TaskCategoryAdmin(admin.ModelAdmin):
     fields = ['name', 'description']
-    inlines = (VolunteerCategoryInline,)
+#    inlines = (VolunteerCategoryInline,)
     list_display = ['link', 'name', 'assigned_volunteers', 'active']
     list_editable = ['name', 'active']
 
@@ -296,7 +296,7 @@ class TaskAdmin(admin.ModelAdmin):
         (None, {'fields': ['talk', 'template']}),
         (None, {'fields': ['description']}),
     ]
-    inlines = (VolunteerTaskInline,)
+#    inlines = (VolunteerTaskInline,)
     list_display = ['link', 'edition', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers',
                     'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
     list_editable = ['name', 'date', 'start_time', 'end_time', 'nbr_volunteers', 'nbr_volunteers_min',
@@ -306,7 +306,7 @@ class TaskAdmin(admin.ModelAdmin):
 
 class VolunteerAdmin(admin.ModelAdmin):
     fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes']
-    inlines = (VolunteerCategoryInline, VolunteerTaskInline)
+#    inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['full_name', 'mobile_nbr', 'email', 'private_staff_rating', 'private_staff_notes']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
     list_filter = [MyVolunteersFilter, TaskCategoryFilter, TaskFilter, 'private_staff_rating',
