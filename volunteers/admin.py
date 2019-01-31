@@ -126,6 +126,22 @@ class MyVolunteersFilter(admin.SimpleListFilter):
         ).distinct()
 
 
+class ThisYearsVolunteersFilter(admin.SimpleListFilter):
+    title = 'volunteers for this edition'
+    parameter_name = 'this_edition'
+
+    def lookups(self, request, model_admin):
+        edition = Edition.get_current()
+        return ((edition.id, edition.name))
+
+    def queryset(self, request, queryset):
+        if not self.value() or self.value() == 0:
+            return queryset
+        return Volunteer.objects.filter(
+            tasks__edition_id=Edition.get_current()
+        ).distinct()
+
+
 class LastYearVolunteersNoTaskFilter(admin.SimpleListFilter):
     title = 'last year volunteers without tasks'
     parameter_name = 'volunteers_no_task'
@@ -313,7 +329,8 @@ class VolunteerAdmin(admin.ModelAdmin):
 #    inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['full_name', 'mobile_nbr', 'email', 'private_staff_rating', 'private_staff_notes']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
-    list_filter = [MyVolunteersFilter, TaskCategoryFilter, TaskFilter, 'private_staff_rating']
+    list_filter = [MyVolunteersFilter, TaskCategoryFilter, ThisYearsVolunteersFilter,
+                   TaskFilter, 'private_staff_rating']
     readonly_fields = ['full_name', 'email']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '20'})},
