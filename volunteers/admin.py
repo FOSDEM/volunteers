@@ -132,7 +132,7 @@ class ThisYearsVolunteersFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         edition = Edition.get_current()
-        return ((edition.id, edition.name))
+        return [(edition.id, edition.name)]
 
     def queryset(self, request, queryset):
         if not self.value() or self.value() == 0:
