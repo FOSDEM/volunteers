@@ -118,6 +118,8 @@ class MyVolunteersFilter(admin.SimpleListFilter):
         return tasks
 
     def queryset(self, request, queryset):
+        if not self.value() or self.value() == 0:
+            return queryset
         return Volunteer.objects.filter(
             tasks__template__id=self.value(),
             tasks__edition_id=Edition.get_current()
@@ -135,6 +137,8 @@ class LastYearVolunteersNoTaskFilter(admin.SimpleListFilter):
         ]
 
     def queryset(self, request, queryset):
+        if not self.value() or self.value() == 0:
+            return queryset
         return Volunteer.objects.filter(
             tasks__edition=Edition.get_previous()
         ).exclude(
