@@ -3,9 +3,15 @@
     <task template="Buildup">
         <name>Buildup</name>
         <counter>1</counter>
-        <description>Any bit of time you can spare on Friday will be helpful! Ideally you can be there from 12:00 until ready. Experience learns us we'll be ready between 18:30 and 22:00 (hard deadline, have to leave the building). Just come in as early you can! We'll have some pizza or other food in the evening. Deadline is 22:00. Some of us go to the beer event afterwards.
+        <description>Any bit of time you can spare on Friday will be helpful! Ideally you can be there from 12:00 until
+            ready. Experience learns us we'll be ready between 18:30 and 22:00 (hard deadline, have to leave the
+            building). Just come in as early you can! We'll have some pizza or other food in the evening. Deadline is
+            22:00. Some of us go to the beer event afterwards.
 
-This task includes many subtasks. Some require carrying heavy stuff around, some don't. We need to set up stands (tables, chairs), cover the walls in brown paper, put signalization in place, run power cords, ... There will be 3 work areas, each with their own coordinator.</description>
+            This task includes many subtasks. Some require carrying heavy stuff around, some don't. We need to set up
+            stands (tables, chairs), cover the walls in brown paper, put signalization in place, run power cords, ...
+            There will be 3 work areas, each with their own coordinator.
+        </description>
         <day>-1</day>
         <start_time>12:00</start_time>
         <end_time>22:00</end_time>
@@ -17,7 +23,8 @@ This task includes many subtasks. Some require carrying heavy stuff around, some
         <name>Signage buildup</name>
         <counter>1</counter>
         <description>
-Put up all signage. Outside, we place large plastic arrows on poles to guide visitors between buildings. Inside, it's paper signs, maps, arrows and anything that could help people to find their way.
+            Put up all signage. Outside, we place large plastic arrows on poles to guide visitors between buildings.
+            Inside, it's paper signs, maps, arrows and anything that could help people to find their way.
         </description>
         <day>-1</day>
         <start_time>12:00</start_time>
@@ -29,10 +36,12 @@ Put up all signage. Outside, we place large plastic arrows on poles to guide vis
     <task template="Signage">
         <name>Signage deployment</name>
         <counter>1</counter>
-        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the conference opens, we need to put them up everywhere. As we also have boards with specific (and different) content for Saturday and Sunday, these must be changed as well.
+        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the
+            conference opens, we need to put them up everywhere. As we also have boards with specific (and different)
+            content for Saturday and Sunday, these must be changed as well.
 
-Meet up at the K infodesk.
-</description>
+            Meet up at the K infodesk.
+        </description>
         <day>0</day>
         <start_time>08:00</start_time>
         <end_time>08:30</end_time>
@@ -43,10 +52,12 @@ Meet up at the K infodesk.
     <task template="Signage">
         <name>Signage deployment</name>
         <counter>2</counter>
-        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the conference opens, we need to put them up everywhere. As we also have boards with specific (and different) content for Saturday and Sunday, these must be changed as well.
+        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the
+            conference opens, we need to put them up everywhere. As we also have boards with specific (and different)
+            content for Saturday and Sunday, these must be changed as well.
 
-Meet up at the K infodesk.
-</description>
+            Meet up at the K infodesk.
+        </description>
         <day>1</day>
         <start_time>08:00</start_time>
         <end_time>08:30</end_time>
@@ -57,13 +68,16 @@ Meet up at the K infodesk.
     <task template="Cleanup">
         <name>Cleanup</name>
         <counter>1</counter>
-        <description>We need to leave the premises in a presentable state. Everything we bring and set up must be torn down and removed. All signalization removed, network torn down (go wild; we don't reuse the cables!), tables and chairs stacked so the rental company can load them up when they retrieve them, the floors wiped, ...
+        <description>We need to leave the premises in a presentable state. Everything we bring and set up must be torn
+            down and removed. All signalization removed, network torn down (go wild; we don't reuse the cables!), tables
+            and chairs stacked so the rental company can load them up when they retrieve them, the floors wiped, ...
 
-Don't damage the building, but make sure none of our stuff remains behind.
+            Don't damage the building, but make sure none of our stuff remains behind.
 
-Normally we're finished around 9pm, but we stay until we're done.
+            Normally we're finished around 9pm, but we stay until we're done.
 
-As many volunteers as possible! That way, it won't take too long. :)</description>
+            As many volunteers as possible! That way, it won't take too long. :)
+        </description>
         <day>1</day>
         <start_time>18:00</start_time>
         <end_time>22:00</end_time>
@@ -74,12 +88,14 @@ As many volunteers as possible! That way, it won't take too long. :)</descriptio
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>1</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>0</day>
         <start_time>09:30</start_time>
         <end_time>12:00</end_time>
@@ -91,12 +107,14 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>2</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>0</day>
         <start_time>11:45</start_time>
         <end_time>14:30</end_time>
@@ -107,12 +125,14 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>3</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>0</day>
         <start_time>14:15</start_time>
         <end_time>17:00</end_time>
@@ -123,12 +143,14 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>4</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>0</day>
         <start_time>16:45</start_time>
         <end_time>19:30</end_time>
@@ -139,12 +161,14 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>5</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>1</day>
         <start_time>08:30</start_time>
         <end_time>11:00</end_time>
@@ -155,12 +179,14 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>6</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>1</day>
         <start_time>10:45</start_time>
         <end_time>14:00</end_time>
@@ -171,12 +197,14 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>7</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>1</day>
         <start_time>13:45</start_time>
         <end_time>17:00</end_time>
@@ -187,12 +215,14 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Cloak Room">
         <name>Cloak Room</name>
         <counter>8</counter>
-        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy at the start and end of the day; in between it's quite relaxed.
+        <description>During the event, we offer visitors a place to leave their coats and luggage. It's usually very
+            busy at the start and end of the day; in between it's quite relaxed.
 
-You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
+            You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number
+            on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
-Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-</description>
+            Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
+        </description>
         <day>1</day>
         <start_time>16:45</start_time>
         <end_time>19:30</end_time>
@@ -203,9 +233,15 @@ Keep things organized: during rush hour you want to be able to find things quick
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>1</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>09:30</start_time>
         <end_time>12:00</end_time>
@@ -216,9 +252,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>2</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>12:00</start_time>
         <end_time>14:30</end_time>
@@ -229,9 +271,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>3</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>14:30</start_time>
         <end_time>17:00</end_time>
@@ -242,9 +290,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>4</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>17:00</start_time>
         <end_time>18:30</end_time>
@@ -255,9 +309,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>5</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>08:30</start_time>
         <end_time>11:00</end_time>
@@ -268,9 +328,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>6</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>11:00</start_time>
         <end_time>14:00</end_time>
@@ -281,9 +347,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>7</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>14:00</start_time>
         <end_time>17:00</end_time>
@@ -294,9 +366,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk H</name>
         <counter>8</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>17:00</start_time>
         <end_time>18:30</end_time>
@@ -307,9 +385,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>1</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>09:30</start_time>
         <end_time>12:00</end_time>
@@ -320,9 +404,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>2</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>12:00</start_time>
         <end_time>14:30</end_time>
@@ -333,9 +423,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>3</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>14:30</start_time>
         <end_time>17:00</end_time>
@@ -346,9 +442,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>4</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>0</day>
         <start_time>17:00</start_time>
         <end_time>18:30</end_time>
@@ -359,9 +461,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>5</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>08:30</start_time>
         <end_time>11:00</end_time>
@@ -372,9 +480,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>6</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>11:00</start_time>
         <end_time>14:00</end_time>
@@ -385,9 +499,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>7</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>14:00</start_time>
         <end_time>17:00</end_time>
@@ -398,9 +518,15 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Infodesk">
         <name>Infodesk K</name>
         <counter>8</counter>
-        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K, you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
+        <description>The infodesk is about helping out fellow visitors who have questions, sell T-shirts, ... Must be a
+            good English speaker, but if you know other languages besides that it certainly won’t hurt. At infodesk K,
+            you are working alongside experienced staff. At infodesk H, you might be thrown to the lions :)
 
-The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later, that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone to cover you.</description>
+            The hours are a bit flexible. If you have to leave 10 minutes early, or if you arrive 10 minutes later,
+            that's not an issue, AS LONG as you make sure you're covered. Usually the infodesk crew kind of
+            self-organises a bit so that it's possible to take a break to go see a talk by making sure there's someone
+            to cover you.
+        </description>
         <day>1</day>
         <start_time>17:00</start_time>
         <end_time>18:30</end_time>
@@ -411,9 +537,13 @@ The hours are a bit flexible. If you have to leave 10 minutes early, or if you a
     <task template="Network Buildup">
         <name>Network Buildup</name>
         <counter>1</counter>
-        <description>Network buildup starts on Friday around noon and is expected to end around 20:00. We usually don't make that deadline, so please be prepared to stay a bit longer. :)
+        <description>Network buildup starts on Friday around noon and is expected to end around 20:00. We usually don't
+            make that deadline, so please be prepared to stay a bit longer. :)
 
-Your tasks will mainly consist of rolling out, neatly securing and crimping UTP cables. People with experience crimping cables are very welcome to help out! Once all cables have been laid down, the access points need to be installed and secured.</description>
+            Your tasks will mainly consist of rolling out, neatly securing and crimping UTP cables. People with
+            experience crimping cables are very welcome to help out! Once all cables have been laid down, the access
+            points need to be installed and secured.
+        </description>
         <day>-1</day>
         <start_time>12:00</start_time>
         <end_time>22:00</end_time>
@@ -425,53 +555,65 @@ Your tasks will mainly consist of rolling out, neatly securing and crimping UTP 
         <name>Heralding Lightning Talks</name>
         <day>0</day>
         <counter>1</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>11:30</start_time>
         <end_time>13:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -482,53 +624,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>0</day>
         <counter>2</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>13:00</start_time>
         <end_time>14:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -539,53 +693,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>0</day>
         <counter>3</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>14:00</start_time>
         <end_time>15:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -596,53 +762,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>0</day>
         <counter>4</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>15:00</start_time>
         <end_time>16:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -653,53 +831,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>0</day>
         <counter>5</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>16:00</start_time>
         <end_time>17:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -710,53 +900,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>0</day>
         <counter>6</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>17:00</start_time>
         <end_time>18:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -767,110 +969,134 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>0</day>
         <counter>7</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>18:00</start_time>
         <end_time>19:30</end_time>
         <nbr_volunteers>1</nbr_volunteers>
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
-       <task template="Heralding Lightning Talks">
+    <task template="Heralding Lightning Talks">
         <name>Heralding Lightning Talks</name>
         <day>1</day>
         <counter>8</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>09:30</start_time>
         <end_time>11:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -881,53 +1107,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>1</day>
         <counter>9</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>11:00</start_time>
         <end_time>12:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -938,53 +1176,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>1</day>
         <counter>10</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>13:00</start_time>
         <end_time>14:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -995,53 +1245,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>1</day>
         <counter>11</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>14:00</start_time>
         <end_time>15:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1052,53 +1314,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>1</day>
         <counter>12</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>15:00</start_time>
         <end_time>16:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1109,53 +1383,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>1</day>
         <counter>13</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>16:00</start_time>
         <end_time>17:30</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1166,53 +1452,65 @@ There will also be sheets available with instructions/reminders.</description>
         <name>Heralding Lightning Talks</name>
         <day>1</day>
         <counter>14</counter>
-        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a large room that can host up to 300 people.
+        <description>Lightning talks are aimed at projects that do not fit in one of the devrooms. Each selected speaker
+            gets exactly 15 minutes to present the project or any aspect of it. All the lightning talks happen in a
+            large room that can host up to 300 people.
 
-The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
+            The lightningtalk schedule is quite busy: https://fosdem.org/2017/schedule/track/lightning_talks/
 
-Each talk is 15 minutes, with 5 minute breaks in between.
-
-
-= Heralding =
-
-Your task as moderator is to guarantee that the schedule timing is respected. You will also help the speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of the talk.  If you wish, you may also briefly introduce each speaker.
-
-You will also be backup for video.
-
-Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very varied, so it's usually very interesting to moderate.
+            Each talk is 15 minutes, with 5 minute breaks in between.
 
 
-= Video =
+            = Heralding =
 
-Your task as video volunteer is to check if the video's are being recorded correct and if the camera is pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+            Your task as moderator is to guarantee that the schedule timing is respected. You will also help the
+            speakers in setting up their presentation and microphone/pointer, and thank them with a gift at the end of
+            the talk. If you wish, you may also briefly introduce each speaker.
 
-You will also be backup for heralding.
+            You will also be backup for video.
 
-
-= Speakers =
-
-The speakers are given the following instructions:
-
-We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no deviation from the time schedule. The moderator's most important task is to make sure that the time schedule is respected. You have to stay focussed on the clock and how much time the speaker has left and give them clues.
-
-To ensure a smooth switch between speakers, please:
-* Attend the lightningtalk before you (= 20 minutes before your talk)
-* There are 5 minute breaks for speaker switches:
-** You can copy your slides from a USB key onto the presentation PC
-** You can use your own laptop, but have a fallback on USB
-** We will give you a microphone and pointer device
-* We will shortly introduce your talk
-* Then, we will set a kitchen timer to exactly 15 minutes
-
-When the kitchen timer rings, your speaking time is over!
-
-We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+            Strong points for this task are that you are not afraid to speak to a large audience ( or want to overcome
+            it :-) ) and that you like to meet and help different open source developers/speakers. The topics are very
+            varied, so it's usually very interesting to moderate.
 
 
-= Briefing =
+            = Video =
 
-You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow volunteers.
-There will also be sheets available with instructions/reminders.</description>
+            Your task as video volunteer is to check if the video's are being recorded correct and if the camera is
+            pointed towards the presenter. Ideally, you don't have to touch it and it all work fine.
+
+            You will also be backup for heralding.
+
+
+            = Speakers =
+
+            The speakers are given the following instructions:
+
+            We have a lot of talks, each allocated a short timeslot. To make this work, it is crucial that there is no
+            deviation from the time schedule. The moderator's most important task is to make sure that the time schedule
+            is respected. You have to stay focussed on the clock and how much time the speaker has left and give them
+            clues.
+
+            To ensure a smooth switch between speakers, please:
+            * Attend the lightningtalk before you (= 20 minutes before your talk)
+            * There are 5 minute breaks for speaker switches:
+            ** You can copy your slides from a USB key onto the presentation PC
+            ** You can use your own laptop, but have a fallback on USB
+            ** We will give you a microphone and pointer device
+            * We will shortly introduce your talk
+            * Then, we will set a kitchen timer to exactly 15 minutes
+
+            When the kitchen timer rings, your speaking time is over!
+
+            We will close your talk with a thank you word. You can suggest people with questions to meet you in front.
+
+
+            = Briefing =
+
+            You will be briefed by the lightningtalk organizer prior to moderation or will be briefed by fellow
+            volunteers.
+            There will also be sheets available with instructions/reminders.
+        </description>
         <start_time>12:00</start_time>
         <end_time>13:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1220,16 +1518,22 @@ There will also be sheets available with instructions/reminders.</description>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
     <task template="Beer event token selling">
-<name>Beer Event token selling/admissions steward</name>
+        <name>Beer Event token selling/admissions steward</name>
         <day>-1</day>
         <counter>1</counter>
-        <description>The beer event is (one of) the greatest FOSDEM-side-activities. During Friday night, the Delirium Café is ours and we organize a world-famous beer event with equally famous Belgian beers.
+        <description>The beer event is (one of) the greatest FOSDEM-side-activities. During Friday night, the Delirium
+            Café is ours and we organize a world-famous beer event with equally famous Belgian beers.
 
-Your role is to separate those who are allowed to enter from those who are not. The café is reserved exclusively for FOSDEM use, and while the security knows this, they don't speak English or know what FOSDEM is. So your role will be to check whether a visitor is indeed FOSDEM-related, and if so, to stamp their wrists in order for them to gain continued entry.
+            Your role is to separate those who are allowed to enter from those who are not. The café is reserved
+            exclusively for FOSDEM use, and while the security knows this, they don't speak English or know what FOSDEM
+            is. So your role will be to check whether a visitor is indeed FOSDEM-related, and if so, to stamp their
+            wrists in order for them to gain continued entry.
 
-You'll also be responsible for selling the tokens visitors can buy beer (or other drinks) with.
+            You'll also be responsible for selling the tokens visitors can buy beer (or other drinks) with.
 
-Perks of the job are plentiful. You'll meet a great amount of interesting people, have guaranteed access to Delirium and we'll ensure your throat never goes dry.</description>
+            Perks of the job are plentiful. You'll meet a great amount of interesting people, have guaranteed access to
+            Delirium and we'll ensure your throat never goes dry.
+        </description>
         <start_time>17:45</start_time>
         <end_time>23:59</end_time>
         <nbr_volunteers>6</nbr_volunteers>
@@ -1237,16 +1541,22 @@ Perks of the job are plentiful. You'll meet a great amount of interesting people
         <nbr_volunteers_max>16</nbr_volunteers_max>
     </task>
     <task template="Beer event token selling">
-<name>Beer Event token selling/admissions steward</name>
+        <name>Beer Event token selling/admissions steward</name>
         <day>0</day>
         <counter>2</counter>
-        <description>The beer event is (one of) the greatest FOSDEM-side-activities. During Friday night, the Delirium Café is ours and we organize a world-famous beer event with equally famous Belgian beers.
+        <description>The beer event is (one of) the greatest FOSDEM-side-activities. During Friday night, the Delirium
+            Café is ours and we organize a world-famous beer event with equally famous Belgian beers.
 
-Your role is to separate those who are allowed to enter from those who are not. The café is reserved exclusively for FOSDEM use, and while the security knows this, they don't speak English or know what FOSDEM is. So your role will be to check whether a visitor is indeed FOSDEM-related, and if so, to stamp their wrists in order for them to gain continued entry.
+            Your role is to separate those who are allowed to enter from those who are not. The café is reserved
+            exclusively for FOSDEM use, and while the security knows this, they don't speak English or know what FOSDEM
+            is. So your role will be to check whether a visitor is indeed FOSDEM-related, and if so, to stamp their
+            wrists in order for them to gain continued entry.
 
-You'll also be responsible for selling the tokens visitors can buy beer (or other drinks) with.
+            You'll also be responsible for selling the tokens visitors can buy beer (or other drinks) with.
 
-Perks of the job are plentiful. You'll meet a great amount of interesting people, have guaranteed access to Delirium and we'll ensure your throat never goes dry.</description>
+            Perks of the job are plentiful. You'll meet a great amount of interesting people, have guaranteed access to
+            Delirium and we'll ensure your throat never goes dry.
+        </description>
         <start_time>00:00</start_time>
         <end_time>03:00</end_time>
         <nbr_volunteers>6</nbr_volunteers>
@@ -1257,13 +1567,20 @@ Perks of the job are plentiful. You'll meet a great amount of interesting people
         <name>Video K1.105 (La Fontaine)</name>
         <day>0</day>
         <counter>1</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>10:45</start_time>
         <end_time>13:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1274,13 +1591,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video K1.105 (La Fontaine)</name>
         <day>0</day>
         <counter>2</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>12:45</start_time>
         <end_time>15:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1291,13 +1615,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video K1.105 (La Fontaine)</name>
         <day>0</day>
         <counter>3</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>14:45</start_time>
         <end_time>17:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1308,13 +1639,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video K1.105 (La Fontaine)</name>
         <day>0</day>
         <counter>4</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>16:45</start_time>
         <end_time>18:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1325,13 +1663,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>0</day>
         <counter>1</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>11:45</start_time>
         <end_time>14:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1342,13 +1687,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>0</day>
         <counter>2</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>13:45</start_time>
         <end_time>16:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1359,13 +1711,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>0</day>
         <counter>3</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>15:45</start_time>
         <end_time>18:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1376,30 +1735,44 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>0</day>
         <counter>4</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>17:45</start_time>
         <end_time>19:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
-     <task template="Video">
+    <task template="Video">
         <name>Video K1.105 (La Fontaine)</name>
         <day>1</day>
         <counter>5</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>09:45</start_time>
         <end_time>12:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1410,13 +1783,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video K1.105 (La Fontaine)</name>
         <day>1</day>
         <counter>6</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>11:45</start_time>
         <end_time>14:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1427,13 +1807,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video K1.105 (La Fontaine)</name>
         <day>1</day>
         <counter>7</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>13:45</start_time>
         <end_time>16:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1444,13 +1831,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video K1.105 (La Fontaine)</name>
         <day>1</day>
         <counter>8</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>15:45</start_time>
         <end_time>17:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1461,13 +1855,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>1</day>
         <counter>5</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>09:45</start_time>
         <end_time>12:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1478,13 +1879,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>1</day>
         <counter>6</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>11:45</start_time>
         <end_time>14:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1495,13 +1903,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>1</day>
         <counter>7</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>13:45</start_time>
         <end_time>16:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1512,13 +1927,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video H.2215 (Ferrer)</name>
         <day>1</day>
         <counter>8</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>15:45</start_time>
         <end_time>17:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1529,9 +1951,15 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video subtitling</name>
         <day>0</day>
         <counter>1</counter>
-        <description>We try to be an inclusive and accessible conference, and videoing tasks is a big part of that. We've also started to subtitle a part of the video's, starting with the Keynote and Main Track video's. For this job, you don't have to be on site, but need to be a fluent speaker of English, as you'll have to understand all speakers. For most of them, English is not their first or even second language.
+        <description>We try to be an inclusive and accessible conference, and videoing tasks is a big part of that.
+            We've also started to subtitle a part of the video's, starting with the Keynote and Main Track video's. For
+            this job, you don't have to be on site, but need to be a fluent speaker of English, as you'll have to
+            understand all speakers. For most of them, English is not their first or even second language.
 
-We start on Saturday evening, after all tasks have finished. More information will be provided to you by the Video team, but you'll need a decent uplink, web browser and Github account. The software used is Amara (https://amara.org). </description>
+            We start on Saturday evening, after all tasks have finished. More information will be provided to you by the
+            Video team, but you'll need a decent uplink, web browser and Github account. The software used is Amara
+            (https://amara.org).
+        </description>
         <start_time>19:00</start_time>
         <end_time>22:00</end_time>
         <nbr_volunteers>4</nbr_volunteers>
@@ -1542,9 +1970,15 @@ We start on Saturday evening, after all tasks have finished. More information wi
         <name>Video subtitling</name>
         <day>1</day>
         <counter>2</counter>
-        <description>We try to be an inclusive and accessible conference, and videoing tasks is a big part of that. We've also started to subtitle a part of the video's, starting with the Keynote and Main Track video's. For this job, you don't have to be on site, but need to be a fluent speaker of English, as you'll have to understand all speakers. For most of them, English is not their first or even second language.
+        <description>We try to be an inclusive and accessible conference, and videoing tasks is a big part of that.
+            We've also started to subtitle a part of the video's, starting with the Keynote and Main Track video's. For
+            this job, you don't have to be on site, but need to be a fluent speaker of English, as you'll have to
+            understand all speakers. For most of them, English is not their first or even second language.
 
-We start on Saturday evening, after all tasks have finished. More information will be provided to you by the Video team, but you'll need a decent uplink, web browser and Github account. The software used is Amara (https://amara.org). </description>
+            We start on Saturday evening, after all tasks have finished. More information will be provided to you by the
+            Video team, but you'll need a decent uplink, web browser and Github account. The software used is Amara
+            (https://amara.org).
+        </description>
         <start_time>19:00</start_time>
         <end_time>22:00</end_time>
         <nbr_volunteers>4</nbr_volunteers>
@@ -1555,13 +1989,20 @@ We start on Saturday evening, after all tasks have finished. More information wi
         <name>Video Janson</name>
         <day>0</day>
         <counter>1</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>09:45</start_time>
         <end_time>11:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1572,13 +2013,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video Janson</name>
         <day>0</day>
         <counter>2</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>10:45</start_time>
         <end_time>13:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1589,13 +2037,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video Janson</name>
         <day>0</day>
         <counter>3</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>12:45</start_time>
         <end_time>15:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1606,13 +2061,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video Janson</name>
         <day>0</day>
         <counter>4</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>14:45</start_time>
         <end_time>17:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1623,47 +2085,68 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video Janson</name>
         <day>0</day>
         <counter>5</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>16:45</start_time>
         <end_time>19:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
-<task template="Video">
+    <task template="Video">
         <name>Video Janson</name>
         <day>1</day>
         <counter>6</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>08:45</start_time>
         <end_time>10:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
     </task>
-     <task template="Video">
+    <task template="Video">
         <name>Video Janson</name>
         <day>1</day>
         <counter>7</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>09:45</start_time>
         <end_time>12:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1674,13 +2157,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video Janson</name>
         <day>1</day>
         <counter>8</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>11:45</start_time>
         <end_time>14:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1691,13 +2181,20 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video Janson</name>
         <day>1</day>
         <counter>9</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>13:45</start_time>
         <end_time>16:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
@@ -1708,17 +2205,234 @@ Please arrive at least 20 minutes early and make your way to the Volunteer desk 
         <name>Video Janson</name>
         <day>1</day>
         <counter>10</counter>
-        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since several years we've taken to filming (most of) the talks and putting them on our website for viewing afterwards.
+        <description>Not everyone can attend FOSDEM, and even those that attend can't make it to every talk. So, since
+            several years we've taken to filming (most of) the talks and putting them on our website for viewing
+            afterwards.
 
-But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video team.
+            But we can't do it alone. There are lots of rooms to video, and lots of videos to process. Because this task
+            is not as easy as it might seem, you will be coached and trained by more experienced volunteers. Your main
+            job will be filming the talks in the main track rooms; most of the other stuff will be handled by the Video
+            team.
 
-A complete manual is also available at https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
+            A complete manual is also available at
+            https://github.com/FOSDEM/video/blob/master/instructions/FOSDEM_AV_manual.pdf.
 
-Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.</description>
+            Please arrive at least 20 minutes early and make your way to the Volunteer desk at the K Infodesk.
+        </description>
         <start_time>15:45</start_time>
         <end_time>18:00</end_time>
         <nbr_volunteers>1</nbr_volunteers>
         <nbr_volunteers_min>1</nbr_volunteers_min>
         <nbr_volunteers_max>2</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>1</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>0</day>
+        <start_time>09:00</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>2</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>0</day>
+        <start_time>11:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>3</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>0</day>
+        <start_time>13:00</start_time>
+        <end_time>15:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>4</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>0</day>
+        <start_time>15:00</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>5</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>0</day>
+        <start_time>17:00</start_time>
+        <end_time>19:30</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>6</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>1</day>
+        <start_time>08:00</start_time>
+        <end_time>10:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>7</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>1</day>
+        <start_time>10:00</start_time>
+        <end_time>12:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>8</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>1</day>
+        <start_time>12:00</start_time>
+        <end_time>14:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>9</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>1</day>
+        <start_time>14:00</start_time>
+        <end_time>16:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>10</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+
+            Meeting place is the K infodesk.
+        </description>
+        <day>1</day>
+        <start_time>16:00</start_time>
+        <end_time>18:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
     </task>
 </generic_tasks>
