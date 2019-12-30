@@ -16,13 +16,9 @@ This task includes many subtasks. Some require carrying heavy stuff around, some
     <task template="Signage">
         <name>Signage buildup</name>
         <counter>1</counter>
-        <description>Exterior signage buildup. What needs to be done:
-*  drag signs (flipboards,...) outside across campus
-* (duct) tape laminated paper signs all across campus
-
-Hints:
-* Bring a decent jacket to protect yourself from the elements (rain forecasted!).
-* Ideally, you also want gloves with the fingertips cut off (for handling tape). We will have some of those, but not enough for everyone!</description>
+        <description>
+Put up all signage. Outside, we place large plastic arrows on poles to guide visitors between buildings. Inside, it's paper signs, maps, arrows and anything that could help people to find their way.
+        </description>
         <day>-1</day>
         <start_time>12:00</start_time>
         <end_time>18:00</end_time>
@@ -33,53 +29,30 @@ Hints:
     <task template="Signage">
         <name>Signage deployment</name>
         <counter>1</counter>
-        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the conference opens, we need to put them up everywhere.
+        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the conference opens, we need to put them up everywhere. As we also have boards with specific (and different) content for Saturday and Sunday, these must be changed as well.
 
-Hints:
-* Bring a decent jacket to protect yourself from the elements (rain forecasted!).
-* Ideally, you also want gloves with the fingertips cut off (for handling tape). We will have some of those, but not enough for everyone!
-
-Meeting point: K infodesk, 07:30. If you are late, please call Geert Goossens at +32 474 68 60 64 for instructions.</description>
+Meet up at the K infodesk.
+</description>
         <day>0</day>
-        <start_time>07:30</start_time>
+        <start_time>08:00</start_time>
         <end_time>08:30</end_time>
-        <nbr_volunteers>6</nbr_volunteers>
-        <nbr_volunteers_min>4</nbr_volunteers_min>
-        <nbr_volunteers_max>10</nbr_volunteers_max>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
     </task>
-        <task template="Signage">
+    <task template="Signage">
         <name>Signage deployment</name>
-        <counter>1</counter>
-        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the conference opens, we need to put them up everywhere.
+        <counter>2</counter>
+        <description>We keep some of our signs inside during the night, to protect them from the elements. Before the conference opens, we need to put them up everywhere. As we also have boards with specific (and different) content for Saturday and Sunday, these must be changed as well.
 
-Hints:
-* Bring a decent jacket to protect yourself from the elements (rain forecasted!).
-* Ideally, you also want gloves with the fingertips cut off (for handling tape). We will have some of those, but not enough for everyone!
-
-Meeting point: K infodesk, 07:30. If you are late, please call Geert Goossens at +32 474 68 60 64 for instructions.</description>
+Meet up at the K infodesk.
+</description>
         <day>1</day>
-        <start_time>07:30</start_time>
+        <start_time>08:00</start_time>
         <end_time>08:30</end_time>
-        <nbr_volunteers>6</nbr_volunteers>
-        <nbr_volunteers_min>4</nbr_volunteers_min>
-        <nbr_volunteers_max>10</nbr_volunteers_max>
-    </task>
-        <task template="Signage">
-        <name>Devroom schedule change</name>
-        <counter>1</counter>
-        <description>Change the devroom schedules for the next day and move all signs inside so they're protected from the elements.
-
-Hints:
-* Bring a decent jacket to protect yourself from the elements (rain forecasted!).
-* Ideally, you also want gloves with the fingertips cut off (for handling tape). We will have some of those, but not enough for everyone!
-
-Meeting point: K infodesk, 17:30. If you are late, please call Geert Goossens at +32 474 68 60 64 for instructions.</description>
-        <day>0</day>
-        <start_time>17:30</start_time>
-        <end_time>18:30</end_time>
-        <nbr_volunteers>10</nbr_volunteers>
-        <nbr_volunteers_min>5</nbr_volunteers_min>
-        <nbr_volunteers_max>10</nbr_volunteers_max>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
     </task>
     <task template="Cleanup">
         <name>Cleanup</name>
@@ -106,15 +79,7 @@ As many volunteers as possible! That way, it won't take too long. :)</descriptio
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>0</day>
         <start_time>09:30</start_time>
         <end_time>12:00</end_time>
@@ -131,15 +96,7 @@ IMPORTANT Notes
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>0</day>
         <start_time>11:45</start_time>
         <end_time>14:30</end_time>
@@ -155,15 +112,7 @@ IMPORTANT Notes
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>0</day>
         <start_time>14:15</start_time>
         <end_time>17:00</end_time>
@@ -179,15 +128,7 @@ IMPORTANT Notes
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>0</day>
         <start_time>16:45</start_time>
         <end_time>19:30</end_time>
@@ -203,15 +144,7 @@ IMPORTANT Notes
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>1</day>
         <start_time>08:30</start_time>
         <end_time>11:00</end_time>
@@ -227,15 +160,7 @@ IMPORTANT Notes
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>1</day>
         <start_time>10:45</start_time>
         <end_time>14:00</end_time>
@@ -251,15 +176,7 @@ IMPORTANT Notes
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>1</day>
         <start_time>13:45</start_time>
         <end_time>17:00</end_time>
@@ -275,15 +192,7 @@ IMPORTANT Notes
 You take the person's coat and/or luggage or other small items for storage, and pin a ticket with a number on it. The other half of the ticket is given to the visitor, so he can reclaim his stuff later.
 
 Keep things organized: during rush hour you want to be able to find things quickly because rush is hell.
-
-
-Location
-
-    If the cloakroom is still closed in the morning, try to find somebody of the regular fosdem staff who can contact security to open the room up for us. Jan-Frederik can be reached on +32.496.959400, Juan on +32.496.737018 and Bart on +32.498.409653
-
-IMPORTANT Notes
-
-    Since this is in between offices of profs and other University staff, please keep it tidy and keep the noise down, especially during setup on friday!!!!. Try not to damage any walls ;)</description>
+</description>
         <day>1</day>
         <start_time>16:45</start_time>
         <end_time>19:30</end_time>
