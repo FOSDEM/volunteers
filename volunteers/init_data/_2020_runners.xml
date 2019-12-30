@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tasks>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>1</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>09:00</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>2</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>11:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>3</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>13:00</start_time>
+        <end_time>15:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>4</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>15:00</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>5</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>17:00</start_time>
+        <end_time>19:30</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>6</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>1</day>
+        <start_time>08:00</start_time>
+        <end_time>10:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>7</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>10:00</start_time>
+        <end_time>12:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>8</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>12:00</start_time>
+        <end_time>14:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>9</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>14:00</start_time>
+        <end_time>16:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Volunteer pool</name>
+        <counter>10</counter>
+        <description>
+            A small pool of available "on-call" volunteers to assist with any issue that might crop up. Most of the
+            time, it's small tasks that need doing (take X to Y in building Z), but it could also be replacing a
+            volunteer that didn't show up for a task. You'll probably learn more of the campus than you would think
+            possible.
+
+            You'll need some knowledge of the campus to work efficiently, so if you have that, you would be very
+            welcome!
+        </description>
+        <day>0</day>
+        <start_time>16:00</start_time>
+        <end_time>18:00</end_time>
+        <nbr_volunteers>6</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>8</nbr_volunteers_max>
+    </task>
+</tasks>
