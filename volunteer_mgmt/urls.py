@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from django.views.static import serve as django_static_serve
 import volunteers.views as views
 from volunteers.views import *
 from django.contrib import admin
@@ -35,6 +36,6 @@ urlpatterns = [
     url(r'^category_schedule/', category_schedule_list, name='category_schedule_list'),
     url(r'^task_schedule/(?P<template_id>\d+)/$', task_schedule, name='task_schedule'),
     url(r'^task_schedule_csv/(?P<template_id>\d+)/$', task_schedule_csv, name='task_schedule_csv'),
+    url(r'^media/(?P<path>.*)$', django_static_serve, {'document_root': settings.MEDIA_ROOT, 'show_indexes': True }),
 
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
