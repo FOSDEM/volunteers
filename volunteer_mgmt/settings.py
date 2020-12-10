@@ -32,7 +32,7 @@ except IOError:
         print("No secret key file present. Creating...")
         SECRET_KEY = ''.join(
             [random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
-        secret = file(SECRET_FILE, 'w')
+        secret = open(SECRET_FILE, 'w')
         secret.write(SECRET_KEY)
         secret.close()
         print("Secret key file {} has been created.".format(SECRET_FILE))
