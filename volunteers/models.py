@@ -66,9 +66,12 @@ class Edition(models.Model):
     def get_current(cls):
         retval = False
         today = datetime.date.today()
-        current = cls.objects.filter(visible_from__lte=today, visible_until__gte=today)
-        if current:
-            retval = current[0]
+        try:
+            current = cls.objects.filter(visible_from__lte=today, visible_until__gte=today)
+            if current:
+                retval = current[0]
+        except:
+            return False
         return retval
 
     @classmethod
