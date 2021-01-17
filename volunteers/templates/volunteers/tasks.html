@@ -84,9 +84,6 @@
     {% for title, days in tasks.items %}
     <fieldset>
         <legend class="task_list">{% trans title %} <span style="font-size: small; font-weight: normal;">
-            {% if user.is_authenticated %}{% if title == 'preferred tasks' %}
-            (<a class="larger-font" href="{% url 'userena_profile_edit' user.username %}">{% trans 'Change in profile' %}</a>)
-            {% endif %}{% endif %}
         </span></legend>
         <table class="task_list">
             <thead>

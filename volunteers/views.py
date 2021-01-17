@@ -212,13 +212,11 @@ def task_list(request):
     # get the categories the volunteer is interested in
     if volunteer:
         categories_by_task_pref = {
-            'preferred tasks': TaskCategory.objects.filter(volunteer=volunteer, active=True),
-            'other tasks': TaskCategory.objects.filter(active=True).exclude(volunteer=volunteer),
+            'tasks': TaskCategory.objects.filter(active=True),
         }
         context['volunteer'] = volunteer
         context['dr_manhattan_task_sets'] = dr_manhattan_task_sets
-        context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
-        context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
+        context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     else:
         categories_by_task_pref = {
             # 'preferred tasks': [],
