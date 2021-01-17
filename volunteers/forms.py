@@ -159,7 +159,7 @@ class EditProfileForm(forms.ModelForm):
         model = get_profile_model()
         exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating',
                    'private_staff_notes', 'categories']
-        fields = ['first_name', 'last_name', 'mobile_nbr', 'about_me', 'mugshot']
+        fields = ['first_name', 'last_name', 'penta_account_name', 'mobile_nbr', 'about_me', 'mugshot']
 
     def save(self, force_insert=False, force_update=False, commit=True):
         profile = super(EditProfileForm, self).save(commit=commit)
