@@ -271,7 +271,7 @@ class VolunteerCategoryInline(admin.TabularInline):
 
 
 class EditionAdmin(admin.ModelAdmin):
-    fields = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until']
+    fields = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until', 'digital_edition']
     list_display = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until']
 
 
