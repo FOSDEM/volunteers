@@ -1,19 +1,23 @@
-# django stuff
-Django
-gunicorn
-dj-static
-django-extensions
-
-# database stuff
-psycopg2
-dj_database_url
-
-# userena stuff
-xhtml2pdf
-vobject
+dj-database-url==0.5.0
+dj-static==0.0.6
+Django==1.11.29
+django-extensions==2.1.4
+django-guardian==1.4.9
+django-userena==2.0.1
+easy-thumbnails==2.5
+gunicorn==19.9.0
+html2text==2014.12.29
+html5lib==1.0.1
+Pillow==5.3.0
+psycopg2==2.7.6.1
+PyPDF2==1.26.0
+python-dateutil==2.7.5
+pytz==2018.7
 reportlab==3.5.9
-html5lib
-easy-thumbnails
-python-dateutil
-django-userena
-django-guardian
+six==1.11.0
+static3==0.7.0
+typing==3.6.6
+vobject==0.9.6.1
+webencodings==0.5.1
+xhtml2pdf==0.2.3
+
