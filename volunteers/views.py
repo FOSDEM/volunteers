@@ -1,4 +1,4 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
+from models import Volunteer, VolunteerTask, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
     Talk, Edition
 from forms import EditProfileForm, SignupForm, EventSignupForm
 
@@ -488,18 +488,6 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
         if form.is_valid():
             profile = form.save(commit=False)
             profile.save()
-            # # go trough all the task categories for this volunteer
-            # for category in TaskCategory.objects.all():
-            # 	exists = VolunteerCategory.objects.filter(volunteer=profile, category=category)
-            #     selected = form.cleaned_data.get('categories').filter(name=category.name)
-            #     # when the category does not exist and was selected, add it
-            #     if not exists and selected:
-            #         profilecategory = VolunteerCategory(volunteer=profile, category=category)
-            #         profilecategory.save()
-            #     # when the category exists and was deselected, delete it
-            #     elif exists and not selected:
-            #         profilecategory = VolunteerCategory.objects.filter(volunteer=profile, category=category)
-            #         profilecategory.delete()
 
             if userena_settings.USERENA_USE_MESSAGES:
                 messages.success(request, _('Your profile has been updated.'), fail_silently=True)

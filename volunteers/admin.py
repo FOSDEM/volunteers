@@ -18,7 +18,6 @@ from volunteers.models import Task
 from volunteers.models import Volunteer
 from volunteers.models import VolunteerStatus
 from volunteers.models import VolunteerTask
-from volunteers.models import VolunteerCategory
 
 
 class DayListFilter(admin.SimpleListFilter):
@@ -263,11 +262,6 @@ class VolunteerTaskInline(admin.TabularInline):
         if db_field.name == 'task':
             field.queryset = field.queryset.order_by('-edition__start_date', 'name')
         return field
-
-
-class VolunteerCategoryInline(admin.TabularInline):
-    model = VolunteerCategory
-    extra = 1
 
 
 class EditionAdmin(admin.ModelAdmin):

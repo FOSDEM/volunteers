@@ -274,7 +274,6 @@ class TaskCategory(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    volunteers = models.ManyToManyField('Volunteer', through='VolunteerCategory', blank=True, null=True)
     active = models.BooleanField(default=True)
 
     def assigned_volunteers(self):
@@ -476,13 +475,6 @@ class Volunteer(UserenaLanguageBaseProfile):
     )
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
-    # Categories in which they're interested to help out.
-    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True, \
-                                        help_text="""<br/><br/>
-        Indicate your preference for which kind of tasks you'd prefer to do.
-        The tasks belonging to this category will appear on top in the Tasks page, so you
-        can find them easily.<br/><br/>
-        Signing up for actual tasks does not happen here; that's done in the Tasks screen!""")
     # Tasks for which they've signed up.
     tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
@@ -672,17 +664,6 @@ class VolunteerTask(models.Model):
     volunteer = models.ForeignKey(Volunteer)
     task = models.ForeignKey(Task)
 
-
-class VolunteerCategory(models.Model):
-    class Meta:
-        verbose_name = _('VolunteerCategory')
-        verbose_name_plural = _('VolunteerCategories')
-
-    def __unicode__(self):
-        return self.category.name
-
-    volunteer = models.ForeignKey(Volunteer)
-    category = models.ForeignKey(TaskCategory)
 
 
 """
