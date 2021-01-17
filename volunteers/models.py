@@ -61,6 +61,7 @@ class Edition(models.Model):
     end_date = models.DateField()
     visible_from = models.DateField()
     visible_until = models.DateField()
+    digital_edition = models.BooleanField(default=False)
 
     @classmethod
     def get_current(cls):
@@ -137,24 +138,34 @@ class Edition(models.Model):
             rooms = day.findall('room')
             for room in rooms:
                 room_name = room.get('name')
-                # Lightning talks are done manually since the time slots are so small.
-                needs_heralding = False
-                needs_video = False
+                if edition.digital_edition:
+                    needs_hosting = False
+                    if room_name[0] in ['L', 'M']:
+                        needs_hosting = True
+                    events = room.findall('event')
+                    for event in events:
+                        talk = Talk.penta_create_or_update(event, edition, day_date)
+                        if needs_hosting:
+                            Task.create_or_update_from_talk(edition, talk, 'Hosting', [1, 2, 3])
+                else:
+                    # Lightning talks are done manually since the time slots are so small.
+                    needs_heralding = False
+                    needs_video = False
 
-                if room_name in ['Janson', 'K.1.105 (La Fontaine)']:
-                    needs_heralding = True
-                    needs_video = getattr(settings, 'IMPORT_VIDEO_TASKS', True)
+                    if room_name in ['Janson', 'K.1.105 (La Fontaine)']:
+                        needs_heralding = True
+                        needs_video = getattr(settings, 'IMPORT_VIDEO_TASKS', True)
 
-                events = room.findall('event')
-                for event in events:
-                    talk = Talk.penta_create_or_update(event, edition, day_date)
-                    ######################
-                    # Tasks, if required #
-                    ######################
-                    if needs_heralding:
-                        Task.create_or_update_from_talk(edition, talk, 'Heralding', [3, 2, 5])
-                    if needs_video:
-                        Task.create_or_update_from_talk(edition, talk, 'Video', [1, 1, 1])
+                    events = room.findall('event')
+                    for event in events:
+                        talk = Talk.penta_create_or_update(event, edition, day_date)
+                        ######################
+                        # Tasks, if required #
+                        ######################
+                        if needs_heralding:
+                            Task.create_or_update_from_talk(edition, talk, 'Heralding', [3, 2, 5])
+                        if needs_video:
+                            Task.create_or_update_from_talk(edition, talk, 'Video', [1, 1, 1])
 
 
 """
@@ -479,6 +490,8 @@ class Volunteer(UserenaLanguageBaseProfile):
                                             " need to contact you in a pinch during the event.")
     private_staff_rating = models.IntegerField(null=True, blank=True, choices=ratings)
     private_staff_notes = models.TextField(null=True, blank=True)
+    penta_account_name = models.TextField('Your Pentabarf account name (penta.fosdem.org)', null=True,
+                                          blank=True, max_length=256, help_text="We need this to link your volunteers account from Pentabarf to participate in heralding/hosting a digital edition.")
 
     # Just here for the admin interface.
     def full_name(self):
