@@ -14,6 +14,7 @@ from django.core.urlresolvers import reverse
 from collections import OrderedDict as SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Count
 
 from userena.utils import get_user_model
 from userena.forms import SignupFormOnlyEmail
@@ -97,7 +98,7 @@ def talk_list(request):
     context = {'tracks': {}, 'checked': {}}
     tracks = Track.objects.filter(edition=Edition.get_current())
     for track in tracks:
-        context['tracks'][track.title] = Talk.objects.filter(track=track)
+        context['tracks'][track.title] = Talk.objects.prefetch_related("volunteers").filter(track=track)
 
     # mark checked, attending talks
     for talk in Talk.objects.filter(volunteers=volunteer):
@@ -118,7 +119,7 @@ def category_schedule_list(request):
 @login_required
 def task_schedule(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
+    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
                                                                                            'end_time')
     context = {
         'template': template,
@@ -132,7 +133,7 @@ def task_schedule(request, template_id):
 @login_required
 def task_schedule_csv(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
+    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
                                                                                            'end_time')
     response = HttpResponse(content_type='text/csv')
     filename = "schedule_%s.csv" % template.name
@@ -167,12 +168,18 @@ def task_schedule_csv(request, template_id):
 
 def task_list(request):
     # get the signed in volunteer
+
+    current_tasks = Task.objects.annotate(
+        volunteers__count=Count("volunteer")).filter(
+        edition=Edition.get_current())
+
     if request.user.is_authenticated():
         volunteer = Volunteer.objects.get(user=request.user)
+        current_tasks = current_tasks.prefetch_related("volunteers")
     else:
         volunteer = None
         is_dr_manhattan = False
-    current_tasks = Task.objects.filter(edition=Edition.get_current())
+
     if volunteer:
         is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
         dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
