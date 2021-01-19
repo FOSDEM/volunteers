@@ -207,7 +207,7 @@ class Talk(models.Model):
         return self.title
 
     ext_id = models.CharField(max_length=16)  # ID from where we synchronise
-    track = models.ForeignKey(Track)
+    track = models.ForeignKey(Track, related_name="talks")
     title = models.CharField(max_length=256)
     speaker = models.CharField(max_length=128)
     description = models.TextField()
