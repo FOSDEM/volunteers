@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from userena.models import UserenaLanguageBaseProfile
 
+import functools
+
 import datetime
 # from dateutil import relativedelta
 import hashlib
@@ -374,9 +376,9 @@ class Task(models.Model):
         # You should request tasks with Task.objects.annotate(volunteers_count=Count(volunteers)
         # note: in a more recent django version this construct is no longer
         # required and we can just return self.volunteers__count
-        return self.volunteers__count
+
         if hasattr(self, "volunteers__count"):
-            return self.volunteers_count
+            return self.volunteers__count
         else:
             return self.volunteers_set.count()
 
