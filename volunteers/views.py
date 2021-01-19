@@ -82,10 +82,8 @@ def talk_list(request):
             # add the volunteer to the talk when he/she is not added
             VolunteerTalk.objects.get_or_create(talk=talk, volunteer=volunteer)
 
-        # go trough all the not checked tasks
-        for talk in Talk.objects.exclude(id__in=talk_ids):
-            # delete him/her
-            VolunteerTalk.objects.filter(talk=talk, volunteer=volunteer).delete()
+        # delete all the not checked talks
+        VolunteerTalk.objects.filter(volunteer=volunteer).exclude(talk_id__in=talk_ids).delete()
 
         # show success message when enabled
         if userena_settings.USERENA_USE_MESSAGES:
