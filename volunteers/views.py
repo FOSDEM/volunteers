@@ -192,8 +192,7 @@ def task_list(request):
         task_ids = request.POST.getlist('task')
 
         # unchecked boxes, delete him/her from the task
-        for task in current_tasks.exclude(id__in=task_ids):
-            VolunteerTask.objects.filter(task=task, volunteer=volunteer).delete()
+        VolunteerTask.objects.exclude(task_id__in=task_ids).filter(volunteer=volunteer).delete()
 
         # checked boxes, add the volunteer to the tasks when he/she is not added
         for task in current_tasks.filter(id__in=task_ids):
