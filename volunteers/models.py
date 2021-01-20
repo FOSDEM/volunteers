@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from userena.models import UserenaLanguageBaseProfile
 
+import functools
+
 import datetime
 # from dateutil import relativedelta
 import hashlib
@@ -205,7 +207,7 @@ class Talk(models.Model):
         return self.title
 
     ext_id = models.CharField(max_length=16)  # ID from where we synchronise
-    track = models.ForeignKey(Track)
+    track = models.ForeignKey(Track, related_name="talks")
     title = models.CharField(max_length=256)
     speaker = models.CharField(max_length=128)
     description = models.TextField()
@@ -370,7 +372,16 @@ class Task(models.Model):
     talk = models.ForeignKey(Talk, blank=True, null=True)
 
     def assigned_volunteers(self):
-        return self.volunteer_set.count()
+        # use the annotated volunteers_count if available
+        # You should request tasks with Task.objects.annotate(volunteers_count=Count(volunteers)
+        # note: in a more recent django version this construct is no longer
+        # required and we can just return self.volunteers__count
+
+        if hasattr(self, "volunteers__count"):
+            return self.volunteers__count
+        else:
+            return self.volunteers_set.count()
+
 
     def link(self):
         return 'Link'
