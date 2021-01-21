@@ -736,19 +736,20 @@ class VolunteerTalk(models.Model):
 def save_penta(sender, instance, **kwargs):
     if instance.task.talk_id is None:
         return
-    talk_id = instance.task.talk_id
+    talk_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
     try:
         with connections['pentabarf'].cursor() as cursor:
-            cursor.execute("insert into event_person (event_id, person_id, event_role,remark) VALUES (%s,(select person_id from auth.account where login_name = '%s'),'host','volunteer');", (talk_id, account_name))
+            cursor.execute("insert into event_person (event_id, person_id, event_role,remark) VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer');", (talk_id, account_name))
     except Exception as err:
         logger.exception(err)
 
 @receiver(post_delete, sender=VolunteerTalk)
 def show_volunteertalk(sender, instance, **kwargs):
+    print(__name__)
     if instance.task.talk_id is None:
         return
-    talk_id = instance.task.talk_id
+    talk_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
     try:
         with connections['pentabarf'].cursor() as cursor:
