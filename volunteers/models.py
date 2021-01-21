@@ -18,8 +18,6 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db import connections
 
-logger = logging.getLogger(__name__)
-
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
     return datetime.datetime.strptime(date_str, format)
@@ -736,23 +734,26 @@ class VolunteerTalk(models.Model):
 def save_penta(sender, instance, **kwargs):
     if instance.task.talk_id is None:
         return
-    talk_id = instance.task.talk.ext_id
+    event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
     try:
         with connections['pentabarf'].cursor() as cursor:
-            cursor.execute("insert into event_person (event_id, person_id, event_role,remark) VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer');", (talk_id, account_name))
+            cursor.execute("insert into event_person (event_id, person_id, event_role,remark) VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer');", (event_id, account_name))
     except Exception as err:
+        logger = logging.getLogger("pentabarf")
+        logger.debug("Failing in insert: %s, %s" % (event_id, account_name))
         logger.exception(err)
 
 @receiver(post_delete, sender=VolunteerTalk)
 def show_volunteertalk(sender, instance, **kwargs):
-    print(__name__)
     if instance.task.talk_id is None:
         return
-    talk_id = instance.task.talk.ext_id
+    event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
     try:
         with connections['pentabarf'].cursor() as cursor:
-            cursor.execute("delete from event_person where event_id=%s and person_id=(select person_id from auth.account where login_name = %s) and event_role='host' and remark='volunteer';", (talk_id, account_name))
+            cursor.execute("delete from event_person where event_id=%s and person_id=(select person_id from auth.account where login_name = %s) and event_role='host' and remark='volunteer';", (event_id, account_name))
     except Exception as err:
+        logger = logging.getLogger("pentabarf")
+        logger.debug("Failing in delete: %s, %s" % (event_id, account_name))
         logger.exception(err)
