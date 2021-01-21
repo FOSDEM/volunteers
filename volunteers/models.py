@@ -736,24 +736,26 @@ def save_penta(sender, instance, **kwargs):
         return
     event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
+    
+    logger = logging.getLogger("pentabarf")
+    logger.debug("Values in insert: %s, %s" % (event_id, account_name))
     try:
         with connections['pentabarf'].cursor() as cursor:
             cursor.execute("insert into event_person (event_id, person_id, event_role,remark) VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer');", (event_id, account_name))
     except Exception as err:
-        logger = logging.getLogger("pentabarf")
-        logger.debug("Failing in insert: %s, %s" % (event_id, account_name))
         logger.exception(err)
 
-@receiver(post_delete, sender=VolunteerTalk)
-def show_volunteertalk(sender, instance, **kwargs):
+@receiver(post_delete, sender=VolunteerTask)
+def delete_volunteertask(sender, instance, **kwargs):
     if instance.task.talk_id is None:
         return
     event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
+    
+    logger = logging.getLogger("pentabarf")
+    logger.debug("Values in delete: %s, %s" % (event_id, account_name))
     try:
         with connections['pentabarf'].cursor() as cursor:
             cursor.execute("delete from event_person where event_id=%s and person_id=(select person_id from auth.account where login_name = %s) and event_role='host' and remark='volunteer';", (event_id, account_name))
     except Exception as err:
-        logger = logging.getLogger("pentabarf")
-        logger.debug("Failing in delete: %s, %s" % (event_id, account_name))
         logger.exception(err)
