@@ -36,13 +36,19 @@ from cgi import escape
 def check_profile_completeness(request, volunteer):
     if request.user != volunteer.user:
         return True
+
+    if not volunteer.penta_account_name:
+        messages.warning(request, _(
+            "Hey there! If you want to be a host for a talk, you must register on <a href='https://penta.fosdem.org/submission/'>Pentabarf</a>"),
+                         fail_silently=True)
+
+    if not volunteer.mobile_nbr:
+        messages.warning(request, _(
+            "Hey there! It seems you didn't give us a phone number. Please update your profile, to make sure we can contact you if the network fails..."),
+                         fail_silently=True)
     if not volunteer.check_mugshot():
         messages.warning(request, _(
             "Looks like we don't have your beautiful smile in our system. Be so kind to upload a mugshot in your profile page. :)"),
-                         fail_silently=True)
-    if not volunteer.mobile_nbr:
-        messages.warning(request, _(
-            "Hey there! It seems you didn't give us a phone number. Please update your profile, or be the last to know the pizza's here..."),
                          fail_silently=True)
 
 
