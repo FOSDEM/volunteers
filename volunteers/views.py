@@ -36,13 +36,19 @@ from cgi import escape
 def check_profile_completeness(request, volunteer):
     if request.user != volunteer.user:
         return True
+
+    if not volunteer.penta_account_name:
+        messages.warning(request, _(
+            "Hey there! If you want to be a host for a talk, you must register on <a href='https://penta.fosdem.org/submission/'>Pentabarf</a>"),
+                         fail_silently=True)
+
+    if not volunteer.mobile_nbr:
+        messages.warning(request, _(
+            "Hey there! It seems you didn't give us a phone number. Please update your profile, to make sure we can contact you if the network fails..."),
+                         fail_silently=True)
     if not volunteer.check_mugshot():
         messages.warning(request, _(
             "Looks like we don't have your beautiful smile in our system. Be so kind to upload a mugshot in your profile page. :)"),
-                         fail_silently=True)
-    if not volunteer.mobile_nbr:
-        messages.warning(request, _(
-            "Hey there! It seems you didn't give us a phone number. Please update your profile, or be the last to know the pizza's here..."),
                          fail_silently=True)
 
 
@@ -217,13 +223,11 @@ def task_list(request):
     # get the categories the volunteer is interested in
     if volunteer:
         categories_by_task_pref = {
-            'preferred tasks': TaskCategory.objects.filter(volunteer=volunteer, active=True),
-            'other tasks': TaskCategory.objects.filter(active=True).exclude(volunteer=volunteer),
+            'tasks': TaskCategory.objects.filter(active=True),
         }
         context['volunteer'] = volunteer
         context['dr_manhattan_task_sets'] = dr_manhattan_task_sets
-        context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
-        context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
+        context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     else:
         categories_by_task_pref = {
             # 'preferred tasks': [],
@@ -231,6 +235,8 @@ def task_list(request):
         }
         context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     context['user'] = request.user
+
+    context['user_in_penta'] = hasattr(request.user, 'volunteer') and len(request.user.volunteer.penta_account_name)>0
     for category_group in context['tasks']:
         for day in context['tasks'][category_group]:
             context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])

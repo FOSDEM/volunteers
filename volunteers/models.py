@@ -1,12 +1,3 @@
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from userena.models import UserenaLanguageBaseProfile
-
-import functools
-
 import datetime
 # from dateutil import relativedelta
 import hashlib
@@ -15,7 +6,17 @@ import os
 import urllib
 import vobject
 import xml.etree.ElementTree as ET
+import logging
 
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from userena.models import UserenaLanguageBaseProfile
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+from django.db import connections
 
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
@@ -728,3 +729,33 @@ class VolunteerTalk(models.Model):
 
     volunteer = models.ForeignKey(Volunteer)
     talk = models.ForeignKey(Talk)
+
+@receiver(post_save, sender=VolunteerTask)
+def save_penta(sender, instance, **kwargs):
+    if instance.task.talk_id is None:
+        return
+    event_id = instance.task.talk.ext_id
+    account_name = instance.volunteer.penta_account_name
+    
+    logger = logging.getLogger("pentabarf")
+    logger.debug("Values in insert: %s, %s" % (event_id, account_name))
+    try:
+        with connections['pentabarf'].cursor() as cursor:
+            cursor.execute("insert into event_person (event_id, person_id, event_role,remark) VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer');", (event_id, account_name))
+    except Exception as err:
+        logger.exception(err)
+
+@receiver(post_delete, sender=VolunteerTask)
+def delete_volunteertask(sender, instance, **kwargs):
+    if instance.task.talk_id is None:
+        return
+    event_id = instance.task.talk.ext_id
+    account_name = instance.volunteer.penta_account_name
+    
+    logger = logging.getLogger("pentabarf")
+    logger.debug("Values in delete: %s, %s" % (event_id, account_name))
+    try:
+        with connections['pentabarf'].cursor() as cursor:
+            cursor.execute("delete from event_person where event_id=%s and person_id=(select person_id from auth.account where login_name = %s) and event_role='host' and remark='volunteer';", (event_id, account_name))
+    except Exception as err:
+        logger.exception(err)
