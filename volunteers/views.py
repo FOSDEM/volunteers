@@ -223,13 +223,11 @@ def task_list(request):
     # get the categories the volunteer is interested in
     if volunteer:
         categories_by_task_pref = {
-            'preferred tasks': TaskCategory.objects.filter(volunteer=volunteer, active=True),
-            'other tasks': TaskCategory.objects.filter(active=True).exclude(volunteer=volunteer),
+            'tasks': TaskCategory.objects.filter(active=True),
         }
         context['volunteer'] = volunteer
         context['dr_manhattan_task_sets'] = dr_manhattan_task_sets
-        context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
-        context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
+        context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     else:
         categories_by_task_pref = {
             # 'preferred tasks': [],
@@ -237,6 +235,8 @@ def task_list(request):
         }
         context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     context['user'] = request.user
+
+    context['user_in_penta'] = hasattr(request.user, 'volunteer') and len(request.user.volunteer.penta_account_name)>0
     for category_group in context['tasks']:
         for day in context['tasks'][category_group]:
             context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])
