@@ -9,7 +9,7 @@
 {% if user.is_authenticated and not user_in_penta %}
     <p class="faq">
     <h3>Register in pentabarf!</h3>
-        Please register an account in <a href="https://penta.fosdem.org/submission">pentabarf</a> and add it to <a href="/volunteers/jef/edit/">your details</a> to enable hosting talks.
+    Please register an account in <a href="https://penta.fosdem.org/submission">pentabarf</a> and add it to <a href="/volunteers/{{ user.username }}/edit/">your details</a> to enable hosting talks.
     <br />
     </p>
 
