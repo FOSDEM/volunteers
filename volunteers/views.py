@@ -236,7 +236,7 @@ def task_list(request):
         context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     context['user'] = request.user
 
-    context['user_in_penta'] = hasattr(request.user, 'volunteer') and len(request.user.volunteer.penta_account_name)>0
+    context['user_in_penta'] = hasattr(request.user, 'volunteer') and request.user.volunteer.penta_account_name is not None and len(request.user.volunteer.penta_account_name)>0
     for category_group in context['tasks']:
         for day in context['tasks'][category_group]:
             context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])
