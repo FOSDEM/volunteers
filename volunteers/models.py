@@ -381,7 +381,7 @@ class Task(models.Model):
         if hasattr(self, "volunteers__count"):
             return self.volunteers__count
         else:
-            return self.volunteers_set.count()
+            return self.volunteers.count()
 
 
     def link(self):
