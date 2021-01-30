@@ -146,7 +146,7 @@ class Edition(models.Model):
                 room_name = room.get('name')
                 if edition.digital_edition:
                     needs_hosting = False
-                    if room_name[0] in ['L', 'M']:
+                    if room_name[0] in ['L', 'M'] or room_name in ["D.blockchain"]:
                         needs_hosting = True
                     events = room.findall('event')
                     for event in events:
