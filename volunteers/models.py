@@ -7,7 +7,6 @@ import urllib
 import vobject
 import xml.etree.ElementTree as ET
 import logging
-from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
