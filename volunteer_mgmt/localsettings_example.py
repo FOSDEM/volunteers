@@ -26,6 +26,13 @@ else:
             # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
             # Set to empty string for default.
             # 'PORT': '5432',
+        },
+        'pentabarf': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'penta',
+            'USER': 'volunteers',
+            'PASSWORD': 'volunteers',
+            'HOST': '127.0.0.1'
         }
     }
 

@@ -7,6 +7,7 @@ import urllib
 import vobject
 import xml.etree.ElementTree as ET
 import logging
+from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -17,6 +18,7 @@ from userena.models import UserenaLanguageBaseProfile
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db import connections
+
 
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
@@ -383,7 +385,6 @@ class Task(models.Model):
         else:
             return self.volunteers.count()
 
-
     def link(self):
         return 'Link'
 
@@ -730,20 +731,35 @@ class VolunteerTalk(models.Model):
     volunteer = models.ForeignKey(Volunteer)
     talk = models.ForeignKey(Talk)
 
+
 @receiver(post_save, sender=VolunteerTask)
 def save_penta(sender, instance, **kwargs):
-    if instance.task.talk_id is None:
+    if instance.task.talk_id is None and instance.task.template.name.lower() not in ['Infodesk'.lower()]:
         return
-    event_id = instance.task.talk.ext_id
+    if instance.task.template.name.lower() in ['Infodesk'.lower()]:
+        # Harcoded because this works and will save me time
+        if instance.task.date.weekday() == datetime.datetime.strptime('2021-02-06', '%Y-%m-%d').weekday():
+            # Saturday
+            event_id = '11762'
+        else:
+            # Sunday
+            event_id = '11763'
+    else:
+        event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
     
     logger = logging.getLogger("pentabarf")
     logger.debug("Values in insert: %s, %s" % (event_id, account_name))
     try:
         with connections['pentabarf'].cursor() as cursor:
-            cursor.execute("insert into event_person (event_id, person_id, event_role,remark) VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer');", (event_id, account_name))
+            cursor.execute("""
+            insert into event_person (event_id, person_id, event_role,remark)
+            VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer')
+            on conflict on constraint event_person_event_id_person_id_event_role_key do nothing;
+            """, (event_id, account_name))
     except Exception as err:
         logger.exception(err)
+
 
 @receiver(post_delete, sender=VolunteerTask)
 def delete_volunteertask(sender, instance, **kwargs):
