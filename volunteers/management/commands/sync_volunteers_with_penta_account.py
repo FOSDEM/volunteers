@@ -8,10 +8,10 @@ import logging
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        for task in Task.objects.get(edition=Edition.get_current()):
+        for task in Task.objects.filter(edition=Edition.get_current()):
             if task.talk_id is None and task.template.name.lower() not in ['Infodesk'.lower()]:
                 continue
-            for volunteer in task.volunteers:
+            for volunteer in task.volunteers.all():
                 if not volunteer.penta_account_name:
                     continue
                 if task.template.name.lower() in ['Infodesk'.lower()]:
