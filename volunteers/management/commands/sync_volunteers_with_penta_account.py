@@ -7,7 +7,7 @@ import logging
 
 class Command(BaseCommand):
 
-    def handle(self, *args, *options):
+    def handle(self, *args, **options):
         for task in Task.objects.get(edition=Edition.get_current()):
             if task.talk_id is None and task.template.name.lower() not in ['Infodesk'.lower()]:
                 continue
