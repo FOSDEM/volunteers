@@ -5,7 +5,17 @@
 {% block content_title %}<h2 class="content-title">{% trans 'Tasks' %}</h2>{% endblock %}
 
 {% block content %}
+
+{% if user.is_authenticated and not user_in_penta %}
+    <p class="faq">
+    <h3>Register in pentabarf!</h3>
+    Please register an account in <a href="https://penta.fosdem.org/submission">pentabarf</a> and add it to <a href="/volunteers/{{ user.username }}/edit/">your details</a> to enable hosting talks.
+    <br />
+    </p>
+
+{% endif %}
 {% if user.is_authenticated %}<a class="larger-font" href="{% url 'task_list_detailed' user.username %}" title="View schedule">View your schedule</a>{% endif %}
+
 <form class="task_list" action="{% url 'task_list' %}" method="post">{% csrf_token %}
     {% if is_dr_manhattan %}
     <fieldset>
@@ -32,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for task_set in dr_manhattan_tasks %}
+                {% for task_set in dr_manhattan_task_sets %}
                     <tr class="task_set_alert">
                         <th class="no_vert_border">&nbsp;</th>
                         <th class="no_vert_border">Problematic tasks #{{ forloop.counter }}:</th>
@@ -41,7 +51,7 @@
                     </tr>
                     {% for task in task_set %}
                     <tr>
-                        <td {% if user.is_authenticated %}data-title="{% trans 'I am in' %}!"{% endif %}>{% if user.is_authenticated %}<input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} />{% endif %}</td>
+                        <td {% if user.is_authenticated %}data-title="{% trans 'I am in' %}!"{% endif %}>{% if user_in_penta%}<input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} />{% endif %}</td>
                         {% if attending|get_item:task.id == True %}
                         <td class="task-name special-task">{{ task.name }} <span class="small_note">(Hey, you're attending this!)</span></td>
                         {% else %}
@@ -134,7 +144,10 @@
                     </tr>
                         {% for task in category_tasks %}
                         <tr>
-                            <td {% if user.is_authenticated %}data-title="{% trans 'I am in' %}!"{% endif %}>{% if user.is_authenticated %}<input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }} />{% endif %}</td>
+                            <td {% if user.is_authenticated %}data-title="{% trans 'I am in' %}!"{% endif %}>
+                                {% if user_in_penta or not task.talk %}<input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }}  />{% endif %}
+                                {% if not user_in_penta and task.talk %}<input type="checkbox" name="task" value="{{ task.id }}" title="register penta account before subscribing" disabled />{% endif %}
+                            </td>
                             {% if attending|get_item:task.id == True %}
                             <td class="task-name special-task">{{ task.name }} <span class="small_note">(Hey, you're attending this!)</span></td>
                             {% else %}

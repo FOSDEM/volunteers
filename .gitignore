@@ -9,3 +9,8 @@ schedule*.xml
 .directory
 start.sh
 secret.txt
+
+.idea
+
+logs
+static

@@ -1,10 +1,3 @@
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from userena.models import UserenaLanguageBaseProfile
-
 import datetime
 # from dateutil import relativedelta
 import hashlib
@@ -13,6 +6,17 @@ import os
 import urllib
 import vobject
 import xml.etree.ElementTree as ET
+import logging
+
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from userena.models import UserenaLanguageBaseProfile
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+from django.db import connections
 
 
 # Parse dates, times, DRY
@@ -61,14 +65,18 @@ class Edition(models.Model):
     end_date = models.DateField()
     visible_from = models.DateField()
     visible_until = models.DateField()
+    digital_edition = models.BooleanField(default=False)
 
     @classmethod
     def get_current(cls):
         retval = False
         today = datetime.date.today()
-        current = cls.objects.filter(visible_from__lte=today, visible_until__gte=today)
-        if current:
-            retval = current[0]
+        try:
+            current = cls.objects.filter(visible_from__lte=today, visible_until__gte=today)
+            if current:
+                retval = current[0]
+        except:
+            return False
         return retval
 
     @classmethod
@@ -137,24 +145,34 @@ class Edition(models.Model):
             rooms = day.findall('room')
             for room in rooms:
                 room_name = room.get('name')
-                # Lightning talks are done manually since the time slots are so small.
-                needs_heralding = False
-                needs_video = False
+                if edition.digital_edition:
+                    needs_hosting = False
+                    if room_name[0] in ['L', 'M'] or room_name in ["D.blockchain"]:
+                        needs_hosting = True
+                    events = room.findall('event')
+                    for event in events:
+                        talk = Talk.penta_create_or_update(event, edition, day_date)
+                        if needs_hosting:
+                            Task.create_or_update_from_talk(edition, talk, 'Hosting', [1, 2, 3])
+                else:
+                    # Lightning talks are done manually since the time slots are so small.
+                    needs_heralding = False
+                    needs_video = False
 
-                if room_name in ['Janson', 'K.1.105 (La Fontaine)']:
-                    needs_heralding = True
-                    needs_video = getattr(settings, 'IMPORT_VIDEO_TASKS', True)
+                    if room_name in ['Janson', 'K.1.105 (La Fontaine)']:
+                        needs_heralding = True
+                        needs_video = getattr(settings, 'IMPORT_VIDEO_TASKS', True)
 
-                events = room.findall('event')
-                for event in events:
-                    talk = Talk.penta_create_or_update(event, edition, day_date)
-                    ######################
-                    # Tasks, if required #
-                    ######################
-                    if needs_heralding:
-                        Task.create_or_update_from_talk(edition, talk, 'Heralding', [3, 2, 5])
-                    if needs_video:
-                        Task.create_or_update_from_talk(edition, talk, 'Video', [1, 1, 1])
+                    events = room.findall('event')
+                    for event in events:
+                        talk = Talk.penta_create_or_update(event, edition, day_date)
+                        ######################
+                        # Tasks, if required #
+                        ######################
+                        if needs_heralding:
+                            Task.create_or_update_from_talk(edition, talk, 'Heralding', [3, 2, 5])
+                        if needs_video:
+                            Task.create_or_update_from_talk(edition, talk, 'Video', [1, 1, 1])
 
 
 """
@@ -191,7 +209,7 @@ class Talk(models.Model):
         return self.title
 
     ext_id = models.CharField(max_length=16)  # ID from where we synchronise
-    track = models.ForeignKey(Track)
+    track = models.ForeignKey(Track, related_name="talks")
     title = models.CharField(max_length=256)
     speaker = models.CharField(max_length=128)
     description = models.TextField()
@@ -356,7 +374,15 @@ class Task(models.Model):
     talk = models.ForeignKey(Talk, blank=True, null=True)
 
     def assigned_volunteers(self):
-        return self.volunteer_set.count()
+        # use the annotated volunteers_count if available
+        # You should request tasks with Task.objects.annotate(volunteers_count=Count(volunteers)
+        # note: in a more recent django version this construct is no longer
+        # required and we can just return self.volunteers__count
+
+        if hasattr(self, "volunteers__count"):
+            return self.volunteers__count
+        else:
+            return self.volunteers.count()
 
     def link(self):
         return 'Link'
@@ -479,6 +505,8 @@ class Volunteer(UserenaLanguageBaseProfile):
                                             " need to contact you in a pinch during the event.")
     private_staff_rating = models.IntegerField(null=True, blank=True, choices=ratings)
     private_staff_notes = models.TextField(null=True, blank=True)
+    penta_account_name = models.TextField('Your Pentabarf account name (penta.fosdem.org)', null=True,
+                                          blank=True, max_length=256, help_text="We need this to link your volunteers account from Pentabarf to participate in heralding/hosting a digital edition.")
 
     # Just here for the admin interface.
     def full_name(self):
@@ -701,3 +729,48 @@ class VolunteerTalk(models.Model):
 
     volunteer = models.ForeignKey(Volunteer)
     talk = models.ForeignKey(Talk)
+
+
+@receiver(post_save, sender=VolunteerTask)
+def save_penta(sender, instance, **kwargs):
+    if instance.task.talk_id is None and instance.task.template.name.lower() not in ['Infodesk'.lower()]:
+        return
+    if instance.task.template.name.lower() in ['Infodesk'.lower()]:
+        # Harcoded because this works and will save me time
+        if instance.task.date.weekday() == datetime.datetime.strptime('2021-02-06', '%Y-%m-%d').weekday():
+            # Saturday
+            event_id = '11762'
+        else:
+            # Sunday
+            event_id = '11763'
+    else:
+        event_id = instance.task.talk.ext_id
+    account_name = instance.volunteer.penta_account_name
+    
+    logger = logging.getLogger("pentabarf")
+    logger.debug("Values in insert: %s, %s" % (event_id, account_name))
+    try:
+        with connections['pentabarf'].cursor() as cursor:
+            cursor.execute("""
+            insert into event_person (event_id, person_id, event_role,remark)
+            VALUES (%s,(select person_id from auth.account where login_name = %s),'host','volunteer')
+            on conflict on constraint event_person_event_id_person_id_event_role_key do nothing;
+            """, (event_id, account_name))
+    except Exception as err:
+        logger.exception(err)
+
+
+@receiver(post_delete, sender=VolunteerTask)
+def delete_volunteertask(sender, instance, **kwargs):
+    if instance.task.talk_id is None:
+        return
+    event_id = instance.task.talk.ext_id
+    account_name = instance.volunteer.penta_account_name
+    
+    logger = logging.getLogger("pentabarf")
+    logger.debug("Values in delete: %s, %s" % (event_id, account_name))
+    try:
+        with connections['pentabarf'].cursor() as cursor:
+            cursor.execute("delete from event_person where event_id=%s and person_id=(select person_id from auth.account where login_name = %s) and event_role='host' and remark='volunteer';", (event_id, account_name))
+    except Exception as err:
+        logger.exception(err)

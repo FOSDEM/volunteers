@@ -1,0 +1,17 @@
+[Unit]
+Description = FOSDEM Volunteers Tool
+After = network.target
+
+[Service]
+PermissionsStartOnly = true
+RuntimeDirectory = volunteers
+PIDFile = /run/volunteers/volunteers.pid
+User = fosdem_volunteers
+Group = fosdem_volunteers
+WorkingDirectory = /var/opt/app/fosdem_volunteers/tool
+ExecStart = /var/opt/app/fosdem_volunteers/venv/bin/gunicorn volunteer_mgmt.wsgi -b 127.0.0.1:5000 -w 8 --pid /run/volunteers/volunteers.pid
+ExecReload = /bin/kill -s HUP $MAINPID
+ExecStop = /bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy = multi-user.target

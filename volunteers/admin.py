@@ -69,7 +69,7 @@ class NumTasksFilter(admin.SimpleListFilter):
 
 
 class TaskCategoryFilter(admin.SimpleListFilter):
-    title = '{0} categories'.format(Edition.get_current().name)
+    title = '{0} categories'.format(Edition.get_current().name) if Edition.get_current() else None
     parameter_name = 'category'
 
     def lookups(self, request, model_admin):
@@ -88,7 +88,7 @@ class TaskCategoryFilter(admin.SimpleListFilter):
 
 
 class TaskFilter(admin.SimpleListFilter):
-    title = '{0} tasks'.format(Edition.get_current().name)
+    title = '{0} tasks'.format(Edition.get_current().name) if Edition.get_current() else None
     parameter_name = 'task'
 
     def lookups(self, request, model_admin):
@@ -271,7 +271,7 @@ class VolunteerCategoryInline(admin.TabularInline):
 
 
 class EditionAdmin(admin.ModelAdmin):
-    fields = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until']
+    fields = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until', 'digital_edition']
     list_display = ['name', 'start_date', 'end_date', 'visible_from', 'visible_until']
 
 
@@ -325,7 +325,8 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 class VolunteerAdmin(admin.ModelAdmin):
-    fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes']
+    fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes',
+              'penta_account_name']
 #    inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['full_name', 'mobile_nbr', 'email', 'private_staff_rating', 'private_staff_notes']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']

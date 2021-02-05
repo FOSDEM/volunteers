@@ -14,6 +14,7 @@ from django.core.urlresolvers import reverse
 from collections import OrderedDict as SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Count
 
 from userena.utils import get_user_model
 from userena.forms import SignupFormOnlyEmail
@@ -35,13 +36,19 @@ from cgi import escape
 def check_profile_completeness(request, volunteer):
     if request.user != volunteer.user:
         return True
+
+    if not volunteer.penta_account_name:
+        messages.warning(request, _(
+            "Hey there! If you want to be a host for a talk, you must register on <a href='https://penta.fosdem.org/submission/'>Pentabarf</a>"),
+                         fail_silently=True)
+
+    if not volunteer.mobile_nbr:
+        messages.warning(request, _(
+            "Hey there! It seems you didn't give us a phone number. Please update your profile, to make sure we can contact you if the network fails..."),
+                         fail_silently=True)
     if not volunteer.check_mugshot():
         messages.warning(request, _(
             "Looks like we don't have your beautiful smile in our system. Be so kind to upload a mugshot in your profile page. :)"),
-                         fail_silently=True)
-    if not volunteer.mobile_nbr:
-        messages.warning(request, _(
-            "Hey there! It seems you didn't give us a phone number. Please update your profile, or be the last to know the pizza's here..."),
                          fail_silently=True)
 
 
@@ -81,10 +88,8 @@ def talk_list(request):
             # add the volunteer to the talk when he/she is not added
             VolunteerTalk.objects.get_or_create(talk=talk, volunteer=volunteer)
 
-        # go trough all the not checked tasks
-        for talk in Talk.objects.exclude(id__in=talk_ids):
-            # delete him/her
-            VolunteerTalk.objects.filter(talk=talk, volunteer=volunteer).delete()
+        # delete all the not checked talks
+        VolunteerTalk.objects.filter(volunteer=volunteer).exclude(talk_id__in=talk_ids).delete()
 
         # show success message when enabled
         if userena_settings.USERENA_USE_MESSAGES:
@@ -95,9 +100,10 @@ def talk_list(request):
 
     # group the talks according to tracks
     context = {'tracks': {}, 'checked': {}}
-    tracks = Track.objects.filter(edition=Edition.get_current())
+    tracks = Track.objects.prefetch_related("talks").prefetch_related("talks__volunteers").prefetch_related("talks__volunteers__user").filter(edition=Edition.get_current())
+
     for track in tracks:
-        context['tracks'][track.title] = Talk.objects.filter(track=track)
+        context['tracks'][track.title] = track.talks.all()
 
     # mark checked, attending talks
     for talk in Talk.objects.filter(volunteers=volunteer):
@@ -118,7 +124,7 @@ def category_schedule_list(request):
 @login_required
 def task_schedule(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
+    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
                                                                                            'end_time')
     context = {
         'template': template,
@@ -132,7 +138,7 @@ def task_schedule(request, template_id):
 @login_required
 def task_schedule_csv(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
+    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
                                                                                            'end_time')
     response = HttpResponse(content_type='text/csv')
     filename = "schedule_%s.csv" % template.name
@@ -167,12 +173,18 @@ def task_schedule_csv(request, template_id):
 
 def task_list(request):
     # get the signed in volunteer
+
+    current_tasks = Task.objects.annotate(
+        volunteers__count=Count("volunteer")).filter(
+        edition=Edition.get_current())
+
     if request.user.is_authenticated():
         volunteer = Volunteer.objects.get(user=request.user)
+        current_tasks = current_tasks.prefetch_related("volunteers")
     else:
         volunteer = None
         is_dr_manhattan = False
-    current_tasks = Task.objects.filter(edition=Edition.get_current())
+
     if volunteer:
         is_dr_manhattan, dr_manhattan_task_sets = volunteer.detect_dr_manhattan()
         dr_manhattan_task_ids = [x.id for x in set.union(*dr_manhattan_task_sets)] if dr_manhattan_task_sets else []
@@ -187,8 +199,7 @@ def task_list(request):
         task_ids = request.POST.getlist('task')
 
         # unchecked boxes, delete him/her from the task
-        for task in current_tasks.exclude(id__in=task_ids):
-            VolunteerTask.objects.filter(task=task, volunteer=volunteer).delete()
+        VolunteerTask.objects.exclude(task_id__in=task_ids).filter(volunteer=volunteer).delete()
 
         # checked boxes, add the volunteer to the tasks when he/she is not added
         for task in current_tasks.filter(id__in=task_ids):
@@ -212,13 +223,11 @@ def task_list(request):
     # get the categories the volunteer is interested in
     if volunteer:
         categories_by_task_pref = {
-            'preferred tasks': TaskCategory.objects.filter(volunteer=volunteer, active=True),
-            'other tasks': TaskCategory.objects.filter(active=True).exclude(volunteer=volunteer),
+            'tasks': TaskCategory.objects.filter(active=True),
         }
         context['volunteer'] = volunteer
         context['dr_manhattan_task_sets'] = dr_manhattan_task_sets
-        context['tasks']['preferred tasks'] = SortedDict.fromkeys(days, {})
-        context['tasks']['other tasks'] = SortedDict.fromkeys(days, {})
+        context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     else:
         categories_by_task_pref = {
             # 'preferred tasks': [],
@@ -226,6 +235,8 @@ def task_list(request):
         }
         context['tasks']['tasks'] = SortedDict.fromkeys(days, {})
     context['user'] = request.user
+
+    context['user_in_penta'] = hasattr(request.user, 'volunteer') and request.user.volunteer.penta_account_name is not None and len(request.user.volunteer.penta_account_name)>0
     for category_group in context['tasks']:
         for day in context['tasks'][category_group]:
             context['tasks'][category_group][day] = SortedDict.fromkeys(categories_by_task_pref[category_group], [])
