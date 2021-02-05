@@ -1,6 +1,6 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
+from .models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
     Talk, Edition
-from forms import EditProfileForm, SignupForm, EventSignupForm
+from .forms import EditProfileForm, SignupForm, EventSignupForm
 
 from django.contrib import messages
 from django.http import HttpResponse
@@ -26,7 +26,7 @@ from userena.views import ExtraContextTemplateView, get_profile_model
 from guardian.decorators import permission_required_or_403
 
 import csv
-import cStringIO as StringIO
+import io as StringIO
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.template import Context
@@ -155,7 +155,7 @@ def task_schedule_csv(request, template_id):
             task.end_time.strftime('%H:%M'),
             '', '', '', '',
         ]
-        writer.writerow([unicode(s).encode("utf-8") for s in row])
+        writer.writerow([str(s).encode("utf-8") for s in row])
         volunteers = Volunteer.objects.filter(tasks=task)
         for number, volunteer in enumerate(volunteers):
             row = [
@@ -165,9 +165,9 @@ def task_schedule_csv(request, template_id):
                 volunteer.user.email,
                 volunteer.mobile_nbr,
             ]
-            writer.writerow([unicode(s).encode("utf-8") for s in row])
+            writer.writerow([str(s).encode("utf-8") for s in row])
         row = [''] * 9
-        writer.writerow([unicode(s).encode("utf-8") for s in row])
+        writer.writerow([str(s).encode("utf-8") for s in row])
     return response
 
 

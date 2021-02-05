@@ -35,7 +35,7 @@ except IOError:
         secret = open(SECRET_FILE, 'w')
         secret.write(SECRET_KEY)
         secret.close()
-        print("Secret key file {} has been created.".format(SECRET_FILE))
+        print(("Secret key file {} has been created.".format(SECRET_FILE)))
     except IOError:
         Exception('Please create a %s file with random characters \
         to generate your secret key!' % SECRET_FILE)
@@ -228,8 +228,10 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django.db.backends': {
+            'level': 'DEBUG'
+        }
     }
 }
 
-if os.path.isfile(settings_dir + '/localsettings.py'):
-    from localsettings import *
+from volunteer_mgmt.localsettings import *

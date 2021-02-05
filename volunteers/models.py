@@ -1,9 +1,9 @@
 import datetime
 # from dateutil import relativedelta
 import hashlib
-import httplib
+import http.client
 import os
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import vobject
 import xml.etree.ElementTree as ET
 import logging
@@ -127,7 +127,7 @@ class Edition(models.Model):
     @classmethod
     def sync_with_penta(cls):
         penta_url = settings.SCHEDULE_SYNC_URI
-        response = urllib.urlopen(penta_url)
+        response = urllib.request.urlopen(penta_url)
         penta_xml = response.read()
         root = ET.fromstring(penta_xml)
         ###########
@@ -615,7 +615,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         GRAVATAR_DOMAIN = 'gravatar.com'
         GRAVATAR_PATH = '/avatar/'
         gravatar_hash = hashlib.md5(self.user.email.strip().lower()).hexdigest()
-        query = urllib.urlencode({
+        query = urllib.parse.urlencode({
             'gravatar_id': gravatar_hash,
             's': 1,
             'default': '/'
@@ -625,15 +625,15 @@ class Volunteer(UserenaLanguageBaseProfile):
             if os.environ.get('HTTPS_PROXY'):
                 proxy_host, proxy_port = os.environ.get('HTTPS_PROXY').split('//')[1].split(':')
                 proxy_port = int(proxy_port)
-                conn = httplib.HTTPSConnection(proxy_host, proxy_port, timeout=5)
+                conn = http.client.HTTPSConnection(proxy_host, proxy_port, timeout=5)
                 conn.set_tunnel(GRAVATAR_DOMAIN)
             elif os.environ.get('HTTP_PROXY'):
                 proxy_host, proxy_port = os.environ.get('HTTP_PROXY').split('//')[1].split(':')
                 proxy_port = int(proxy_port)
-                conn = httplib.HTTPConnection(proxy_host, proxy_port, timeout=5)
+                conn = http.client.HTTPConnection(proxy_host, proxy_port, timeout=5)
                 conn.set_tunnel(GRAVATAR_DOMAIN)
             else:
-                conn = httplib.HTTPConnection(GRAVATAR_DOMAIN, timeout=5)
+                conn = http.client.HTTPConnection(GRAVATAR_DOMAIN, timeout=5)
             conn.request('HEAD', full_path)
             response = conn.getresponse()
             if response.status == 302:
