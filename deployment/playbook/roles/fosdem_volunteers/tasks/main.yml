@@ -32,7 +32,7 @@
 - name: Add gunicorn to venv
   pip:
     virtualenv: "{{base_dir}}/venv3"
-    requirements: "gunicorn"
+    name: gunicorn
   become: yes
   become_user: "{{app_user}}"
 - name: Create media directory
@@ -47,14 +47,14 @@
   django_manage:
     app_path: "{{base_dir}}/tool"
     command: migrate
-    virtualenv: "{{base_dir}}/venv"
+    virtualenv: "{{base_dir}}/venv3"
   become: yes
   become_user: "{{app_user}}"
 - name: Collect static files
   django_manage:
     app_path: "{{base_dir}}/tool"
     command: collectstatic
-    virtualenv: "{{base_dir}}/venv"
+    virtualenv: "{{base_dir}}/venv3"
   become: yes
   become_user: "{{app_user}}"
 - name: Create systemd service file
