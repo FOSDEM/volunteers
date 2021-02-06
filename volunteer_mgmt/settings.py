@@ -6,7 +6,6 @@ import os
 import random
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 
 settings_dir = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
@@ -134,12 +133,14 @@ STATICFILES_FINDERS = (
 # )
 TEMPLATES = [
     {
+
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
         'DIRS': [
             os.path.join(PROJECT_ROOT, 'templates/')
         ],
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
