@@ -10,13 +10,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from collections import OrderedDict as SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
+from django.contrib.auth import get_user_model
 
-from userena.utils import get_user_model
 from userena.forms import SignupFormOnlyEmail
 from userena.decorators import secure_required
 from userena import signals as userena_signals
@@ -178,7 +178,7 @@ def task_list(request):
         volunteers__count=Count("volunteer")).filter(
         edition=Edition.get_current())
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         volunteer = Volunteer.objects.get(user=request.user)
         current_tasks = current_tasks.prefetch_related("volunteers")
     else:

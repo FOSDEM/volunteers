@@ -17,7 +17,7 @@ from userena.models import UserenaLanguageBaseProfile
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db import connections
-
+from django.db.models import PROTECT, CASCADE
 
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
@@ -192,7 +192,7 @@ class Track(models.Model):
 
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
-    edition = models.ForeignKey(Edition, default=Edition.get_current())
+    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
     date = models.DateField()
     start_time = models.TimeField()
     # end_time = models.TimeField()
@@ -209,7 +209,7 @@ class Talk(models.Model):
         return self.title
 
     ext_id = models.CharField(max_length=16)  # ID from where we synchronise
-    track = models.ForeignKey(Track, related_name="talks")
+    track = models.ForeignKey(Track, related_name="talks", on_delete=CASCADE)
     title = models.CharField(max_length=256)
     speaker = models.CharField(max_length=128)
     description = models.TextField()
@@ -317,8 +317,8 @@ class TaskTemplate(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    category = models.ForeignKey(TaskCategory)
-    primary = models.ForeignKey(User, default=1, limit_choices_to={'is_staff': True})
+    category = models.ForeignKey(TaskCategory, on_delete=PROTECT)
+    primary = models.ForeignKey(User, default=1, limit_choices_to={'is_staff': True}, on_delete=PROTECT)
 
     def link(self):
         return 'Link'
@@ -366,12 +366,12 @@ class Task(models.Model):
     nbr_volunteers = models.IntegerField(default=0)
     nbr_volunteers_min = models.IntegerField(default=0)
     nbr_volunteers_max = models.IntegerField(default=0)
-    edition = models.ForeignKey(Edition, default=Edition.get_current())
-    template = models.ForeignKey(TaskTemplate)
+    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
+    template = models.ForeignKey(TaskTemplate, on_delete=PROTECT)
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True)
     # Only for heralding, or possible future tasks related
     # to a specific talk.
-    talk = models.ForeignKey(Talk, blank=True, null=True)
+    talk = models.ForeignKey(Talk, blank=True, null=True, on_delete=CASCADE)
 
     def assigned_volunteers(self):
         # use the annotated volunteers_count if available
@@ -487,7 +487,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         (5, 'Superb'),
     )
 
-    user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
+    user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer', on_delete=CASCADE)
     # Categories in which they're interested to help out.
     categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, \
                                         help_text="""<br/><br/>
@@ -664,8 +664,8 @@ class VolunteerStatus(models.Model):
                                    'Yes' if self.active else 'No')
 
     active = models.BooleanField()
-    volunteer = models.ForeignKey(Volunteer)
-    edition = models.ForeignKey(Edition, default=Edition.get_current())
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
 
 
 """
@@ -681,8 +681,8 @@ class VolunteerTask(models.Model):
     def __str__(self):
         return self.task.name
 
-    volunteer = models.ForeignKey(Volunteer)
-    task = models.ForeignKey(Task)
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    task = models.ForeignKey(Task, on_delete=CASCADE)
 
 
 class VolunteerCategory(models.Model):
@@ -693,8 +693,8 @@ class VolunteerCategory(models.Model):
     def __str__(self):
         return self.category.name
 
-    volunteer = models.ForeignKey(Volunteer)
-    category = models.ForeignKey(TaskCategory)
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    category = models.ForeignKey(TaskCategory, on_delete=PROTECT)
 
 
 """
@@ -710,8 +710,8 @@ class VolunteerLanguage(models.Model):
     def __str__(self):
         return language.name.name
 
-    volunteer = models.ForeignKey(Volunteer)
-    language = models.ForeignKey(Language)
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    language = models.ForeignKey(Language, on_delete=CASCADE)
 
 
 """
@@ -727,8 +727,8 @@ class VolunteerTalk(models.Model):
     def __str__(self):
         return self.talk.name
 
-    volunteer = models.ForeignKey(Volunteer)
-    talk = models.ForeignKey(Talk)
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    talk = models.ForeignKey(Talk, on_delete=CASCADE)
 
 
 @receiver(post_save, sender=VolunteerTask)

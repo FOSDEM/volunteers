@@ -43,7 +43,7 @@ GENERIC_TASKS_FILE = 'volunteers/init_data/generic_tasks.xml'
 
 # Userena settings
 SITE_ID = 1
-ANONYMOUS_USER_ID = -1
+ANONYMOUS_USER_NAME = 'Anonymous'
 USERENA_MUGSHOT_SIZE = 140
 USERENA_DISABLE_PROFILE_LIST = False
 AUTH_PROFILE_MODULE = 'volunteers.Volunteer'
@@ -151,7 +151,7 @@ TEMPLATES = [
     }
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -160,6 +160,9 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'userena.middleware.UserenaLocaleMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -189,15 +192,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    'django_extensions',  # not sure if necessary, was an untracked change on live server
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'volunteers',
     'userena',
     'guardian',
-    'gunicorn',
-    'easy_thumbnails',
-    'userena.contrib.umessages',
+    'easy_thumbnails'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

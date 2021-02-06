@@ -1,15 +1,17 @@
-from volunteers.models import VolunteerTask, TaskCategory
+import random
+import string
+import re
 
 from django import forms
 from django.utils.translation import ugettext as _
-import re
+from django.contrib.auth import get_user_model
+
 
 from userena.models import UserenaSignup
 from userena import settings as userena_settings
-from userena.utils import get_profile_model, get_user_model
-import random
-import string
+from userena.utils import get_profile_model
 
+from volunteers.models import VolunteerTask, TaskCategory
 
 class AddTasksForm(forms.Form):
     tasks = forms.ModelMultipleChoiceField(queryset=VolunteerTask.objects.none(), widget=forms.CheckboxSelectMultiple())
