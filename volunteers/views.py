@@ -1,6 +1,6 @@
-from models import Volunteer, VolunteerTask, VolunteerCategory, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
+from .models import Volunteer, VolunteerTask, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
     Talk, Edition
-from forms import EditProfileForm, SignupForm, EventSignupForm
+from .forms import EditProfileForm, SignupForm, EventSignupForm
 
 from django.contrib import messages
 from django.http import HttpResponse
@@ -10,13 +10,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from collections import OrderedDict as SortedDict
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
+from django.contrib.auth import get_user_model
 
-from userena.utils import get_user_model
 from userena.forms import SignupFormOnlyEmail
 from userena.decorators import secure_required
 from userena import signals as userena_signals
@@ -26,7 +26,7 @@ from userena.views import ExtraContextTemplateView, get_profile_model
 from guardian.decorators import permission_required_or_403
 
 import csv
-import cStringIO as StringIO
+import io as StringIO
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.template import Context
@@ -155,7 +155,7 @@ def task_schedule_csv(request, template_id):
             task.end_time.strftime('%H:%M'),
             '', '', '', '',
         ]
-        writer.writerow([unicode(s).encode("utf-8") for s in row])
+        writer.writerow([str(s).encode("utf-8") for s in row])
         volunteers = Volunteer.objects.filter(tasks=task)
         for number, volunteer in enumerate(volunteers):
             row = [
@@ -165,9 +165,9 @@ def task_schedule_csv(request, template_id):
                 volunteer.user.email,
                 volunteer.mobile_nbr,
             ]
-            writer.writerow([unicode(s).encode("utf-8") for s in row])
+            writer.writerow([str(s).encode("utf-8") for s in row])
         row = [''] * 9
-        writer.writerow([unicode(s).encode("utf-8") for s in row])
+        writer.writerow([str(s).encode("utf-8") for s in row])
     return response
 
 
@@ -178,7 +178,7 @@ def task_list(request):
         volunteers__count=Count("volunteer")).filter(
         edition=Edition.get_current())
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         volunteer = Volunteer.objects.get(user=request.user)
         current_tasks = current_tasks.prefetch_related("volunteers")
     else:
@@ -333,11 +333,12 @@ def render_to_pdf(request, template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
     html = template.render(context_dict)
-    result = StringIO.StringIO()
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
 
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
-    if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest = response)
+    if not pisa_status.err:
+        return response
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
 
@@ -425,7 +426,7 @@ def signup(request, signup_form=SignupForm,
                 redirect_to = reverse('userena_signup_complete', kwargs={'username': user.username})
 
             # A new signed user should logout the old one.
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 logout(request)
 
             if (userena_settings.USERENA_SIGNIN_AFTER_SIGNUP and
@@ -501,18 +502,6 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
         if form.is_valid():
             profile = form.save(commit=False)
             profile.save()
-            # # go trough all the task categories for this volunteer
-            # for category in TaskCategory.objects.all():
-            # 	exists = VolunteerCategory.objects.filter(volunteer=profile, category=category)
-            #     selected = form.cleaned_data.get('categories').filter(name=category.name)
-            #     # when the category does not exist and was selected, add it
-            #     if not exists and selected:
-            #         profilecategory = VolunteerCategory(volunteer=profile, category=category)
-            #         profilecategory.save()
-            #     # when the category exists and was deselected, delete it
-            #     elif exists and not selected:
-            #         profilecategory = VolunteerCategory.objects.filter(volunteer=profile, category=category)
-            #         profilecategory.delete()
 
             if userena_settings.USERENA_USE_MESSAGES:
                 messages.success(request, _('Your profile has been updated.'), fail_silently=True)

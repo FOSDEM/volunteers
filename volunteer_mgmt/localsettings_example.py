@@ -1,4 +1,3 @@
-TEMPLATE_DEBUG = True
 USE_X_FORWARDED_HOST = True
 
 # Admins

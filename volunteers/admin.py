@@ -18,7 +18,6 @@ from volunteers.models import Task
 from volunteers.models import Volunteer
 from volunteers.models import VolunteerStatus
 from volunteers.models import VolunteerTask
-from volunteers.models import VolunteerCategory
 
 
 class DayListFilter(admin.SimpleListFilter):
@@ -63,7 +62,7 @@ class NumTasksFilter(admin.SimpleListFilter):
         elif val == 1:
             min_tasks, max_tasks = (1, 5)
         else:
-            min_tasks, max_tasks = (6, sys.maxint)
+            min_tasks, max_tasks = (6, sys.maxsize)
         return queryset.annotate(num_tasks=Count('tasks')). \
             filter(num_tasks__gte=min_tasks, num_tasks__lte=max_tasks)
 
@@ -97,7 +96,7 @@ class TaskFilter(admin.SimpleListFilter):
             day = task.date.strftime('%a')
             start = task.start_time.strftime('%H:%M')
             end = task.end_time.strftime('%H:%M')
-            name = u'{0} ({1} {2} - {3})'.format(task.name, day, start, end)
+            name = '{0} ({1} {2} - {3})'.format(task.name, day, start, end)
             tasks.append((task.id, name))
         return tasks
 
@@ -263,11 +262,6 @@ class VolunteerTaskInline(admin.TabularInline):
         if db_field.name == 'task':
             field.queryset = field.queryset.order_by('-edition__start_date', 'name')
         return field
-
-
-class VolunteerCategoryInline(admin.TabularInline):
-    model = VolunteerCategory
-    extra = 1
 
 
 class EditionAdmin(admin.ModelAdmin):

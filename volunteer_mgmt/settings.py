@@ -6,7 +6,6 @@ import os
 import random
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 
 settings_dir = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
@@ -35,7 +34,7 @@ except IOError:
         secret = open(SECRET_FILE, 'w')
         secret.write(SECRET_KEY)
         secret.close()
-        print("Secret key file {} has been created.".format(SECRET_FILE))
+        print(("Secret key file {} has been created.".format(SECRET_FILE)))
     except IOError:
         Exception('Please create a %s file with random characters \
         to generate your secret key!' % SECRET_FILE)
@@ -44,7 +43,7 @@ GENERIC_TASKS_FILE = 'volunteers/init_data/generic_tasks.xml'
 
 # Userena settings
 SITE_ID = 1
-ANONYMOUS_USER_ID = -1
+ANONYMOUS_USER_NAME = 'Anonymous'
 USERENA_MUGSHOT_SIZE = 140
 USERENA_DISABLE_PROFILE_LIST = False
 AUTH_PROFILE_MODULE = 'volunteers.Volunteer'
@@ -134,12 +133,14 @@ STATICFILES_FINDERS = (
 # )
 TEMPLATES = [
     {
+
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
         'DIRS': [
             os.path.join(PROJECT_ROOT, 'templates/')
         ],
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -150,7 +151,7 @@ TEMPLATES = [
     }
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -159,6 +160,9 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'userena.middleware.UserenaLocaleMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -188,15 +192,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    'django_extensions',  # not sure if necessary, was an untracked change on live server
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'volunteers',
     'userena',
     'guardian',
-    'gunicorn',
-    'easy_thumbnails',
-    'userena.contrib.umessages',
+    'easy_thumbnails'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -228,8 +229,10 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django.db.backends': {
+            'level': 'DEBUG'
+        }
     }
 }
 
-if os.path.isfile(settings_dir + '/localsettings.py'):
-    from localsettings import *
+from volunteer_mgmt.localsettings import *

@@ -3,9 +3,9 @@
     name: "{{item}}"
     state: present
   with_items:
-    - python2.7
+    - python3.5
     - nginx
-    - python-pip
+    - python3-pip
 - name: "Create system user {{app_user}}"
   user:
     name: "{{app_user}}"
@@ -24,9 +24,15 @@
   become_user: "{{app_user}}"
 - name: Install dependencies inside a virtual environment
   pip:
-    virtualenv: "{{base_dir}}/venv"
-    virtualenv_python: python2.7
+    virtualenv: "{{base_dir}}/venv3"
+    virtualenv_python: python3
     requirements: "{{base_dir}}/tool/requirements.txt"
+  become: yes
+  become_user: "{{app_user}}"
+- name: Add gunicorn to venv
+  pip:
+    virtualenv: "{{base_dir}}/venv3"
+    name: gunicorn
   become: yes
   become_user: "{{app_user}}"
 - name: Create media directory
@@ -41,14 +47,14 @@
   django_manage:
     app_path: "{{base_dir}}/tool"
     command: migrate
-    virtualenv: "{{base_dir}}/venv"
+    virtualenv: "{{base_dir}}/venv3"
   become: yes
   become_user: "{{app_user}}"
 - name: Collect static files
   django_manage:
     app_path: "{{base_dir}}/tool"
     command: collectstatic
-    virtualenv: "{{base_dir}}/venv"
+    virtualenv: "{{base_dir}}/venv3"
   become: yes
   become_user: "{{app_user}}"
 - name: Create systemd service file
@@ -68,7 +74,4 @@
     dest: /etc/nginx/conf.d/fosdem_volunteers.conf
     src: nginx.conf.j2
   become: yes
-- name: Reload nginx
-  service:
-    name: nginx
-    state: reloaded
+  register: Reload nginx

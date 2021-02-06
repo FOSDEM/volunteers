@@ -1,9 +1,9 @@
 import datetime
 # from dateutil import relativedelta
 import hashlib
-import httplib
+import http.client
 import os
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import vobject
 import xml.etree.ElementTree as ET
 import logging
@@ -17,7 +17,7 @@ from userena.models import UserenaLanguageBaseProfile
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db import connections
-
+from django.db.models import PROTECT, CASCADE
 
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
@@ -57,7 +57,7 @@ class Edition(models.Model):
         verbose_name_plural = _('Editions')
         ordering = ['-start_date']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=128)
@@ -127,7 +127,7 @@ class Edition(models.Model):
     @classmethod
     def sync_with_penta(cls):
         penta_url = settings.SCHEDULE_SYNC_URI
-        response = urllib.urlopen(penta_url)
+        response = urllib.request.urlopen(penta_url)
         penta_xml = response.read()
         root = ET.fromstring(penta_xml)
         ###########
@@ -187,12 +187,12 @@ class Track(models.Model):
         verbose_name_plural = _('Tracks')
         ordering = ['date', 'start_time', 'title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
-    edition = models.ForeignKey(Edition, default=Edition.get_current())
+    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
     date = models.DateField()
     start_time = models.TimeField()
     # end_time = models.TimeField()
@@ -205,18 +205,18 @@ class Talk(models.Model):
         verbose_name_plural = _('Talks')
         ordering = ['date', 'start_time', '-end_time', 'title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     ext_id = models.CharField(max_length=16)  # ID from where we synchronise
-    track = models.ForeignKey(Track, related_name="talks")
+    track = models.ForeignKey(Track, related_name="talks", on_delete=CASCADE)
     title = models.CharField(max_length=256)
     speaker = models.CharField(max_length=128)
     description = models.TextField()
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True, null=True)
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True)
 
     def assigned_volunteers(self):
         return self.volunteers.count()
@@ -273,12 +273,11 @@ class TaskCategory(models.Model):
         verbose_name_plural = _('Task Categories')
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    volunteers = models.ManyToManyField('Volunteer', through='VolunteerCategory', blank=True, null=True)
     active = models.BooleanField(default=True)
 
     def assigned_volunteers(self):
@@ -312,13 +311,13 @@ class TaskTemplate(models.Model):
         verbose_name_plural = _('Task Templates')
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    category = models.ForeignKey(TaskCategory)
-    primary = models.ForeignKey(User, default=1, limit_choices_to={'is_staff': True})
+    category = models.ForeignKey(TaskCategory, on_delete=PROTECT)
+    primary = models.ForeignKey(User, default=1, limit_choices_to={'is_staff': True}, on_delete=PROTECT)
 
     def link(self):
         return 'Link'
@@ -349,7 +348,7 @@ class Task(models.Model):
         verbose_name_plural = _('Tasks')
         ordering = ['date', 'start_time', '-end_time', 'name']
 
-    def __unicode__(self):
+    def __str__(self):
         day = self.date.strftime('%a')
         start = self.start_time.strftime('%H:%M')
         end = self.end_time.strftime('%H:%M')
@@ -366,12 +365,12 @@ class Task(models.Model):
     nbr_volunteers = models.IntegerField(default=0)
     nbr_volunteers_min = models.IntegerField(default=0)
     nbr_volunteers_max = models.IntegerField(default=0)
-    edition = models.ForeignKey(Edition, default=Edition.get_current())
-    template = models.ForeignKey(TaskTemplate)
-    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True, null=True)
+    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
+    template = models.ForeignKey(TaskTemplate, on_delete=PROTECT)
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True)
     # Only for heralding, or possible future tasks related
     # to a specific talk.
-    talk = models.ForeignKey(Talk, blank=True, null=True)
+    talk = models.ForeignKey(Talk, blank=True, null=True, on_delete=CASCADE)
 
     def assigned_volunteers(self):
         # use the annotated volunteers_count if available
@@ -457,7 +456,7 @@ class Language(models.Model):
         verbose_name = _('Language')
         verbose_name_plural = _('Languages')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=128)
@@ -475,7 +474,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         verbose_name_plural = _('Volunteers')
         ordering = ['user__first_name', 'user__last_name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 
     ratings = (
@@ -487,17 +486,11 @@ class Volunteer(UserenaLanguageBaseProfile):
         (5, 'Superb'),
     )
 
-    user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
+    user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer', on_delete=CASCADE)
     # Categories in which they're interested to help out.
-    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True, \
-                                        help_text="""<br/><br/>
-        Indicate your preference for which kind of tasks you'd prefer to do.
-        The tasks belonging to this category will appear on top in the Tasks page, so you
-        can find them easily.<br/><br/>
-        Signing up for actual tasks does not happen here; that's done in the Tasks screen!""")
     # Tasks for which they've signed up.
-    tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
-    editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
+    tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True)
+    editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
     mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True,
@@ -614,8 +607,8 @@ class Volunteer(UserenaLanguageBaseProfile):
         # Code lifted from http://mcnearney.net/blog/2010/2/14/creating-django-gravatar-template-tag-part-1/
         GRAVATAR_DOMAIN = 'gravatar.com'
         GRAVATAR_PATH = '/avatar/'
-        gravatar_hash = hashlib.md5(self.user.email.strip().lower()).hexdigest()
-        query = urllib.urlencode({
+        gravatar_hash = hashlib.md5(self.user.email.encode('utf-8').strip().lower()).hexdigest()
+        query = urllib.parse.urlencode({
             'gravatar_id': gravatar_hash,
             's': 1,
             'default': '/'
@@ -625,15 +618,15 @@ class Volunteer(UserenaLanguageBaseProfile):
             if os.environ.get('HTTPS_PROXY'):
                 proxy_host, proxy_port = os.environ.get('HTTPS_PROXY').split('//')[1].split(':')
                 proxy_port = int(proxy_port)
-                conn = httplib.HTTPSConnection(proxy_host, proxy_port, timeout=5)
+                conn = http.client.HTTPSConnection(proxy_host, proxy_port, timeout=5)
                 conn.set_tunnel(GRAVATAR_DOMAIN)
             elif os.environ.get('HTTP_PROXY'):
                 proxy_host, proxy_port = os.environ.get('HTTP_PROXY').split('//')[1].split(':')
                 proxy_port = int(proxy_port)
-                conn = httplib.HTTPConnection(proxy_host, proxy_port, timeout=5)
+                conn = http.client.HTTPConnection(proxy_host, proxy_port, timeout=5)
                 conn.set_tunnel(GRAVATAR_DOMAIN)
             else:
-                conn = httplib.HTTPConnection(GRAVATAR_DOMAIN, timeout=5)
+                conn = http.client.HTTPConnection(GRAVATAR_DOMAIN, timeout=5)
             conn.request('HEAD', full_path)
             response = conn.getresponse()
             if response.status == 302:
@@ -658,14 +651,14 @@ class VolunteerStatus(models.Model):
         verbose_name = _('Volunteer Status')
         verbose_name_plural = _('Volunteer Statuses')
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s - %s: %s' % (self.volunteer.user.first_name,
                                    self.volunteer.user.last_name, self.edition.year,
                                    'Yes' if self.active else 'No')
 
     active = models.BooleanField()
-    volunteer = models.ForeignKey(Volunteer)
-    edition = models.ForeignKey(Edition, default=Edition.get_current())
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
 
 
 """
@@ -678,23 +671,11 @@ class VolunteerTask(models.Model):
         verbose_name = _('VolunteerTask')
         verbose_name_plural = _('VolunteerTasks')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.task.name
 
-    volunteer = models.ForeignKey(Volunteer)
-    task = models.ForeignKey(Task)
-
-
-class VolunteerCategory(models.Model):
-    class Meta:
-        verbose_name = _('VolunteerCategory')
-        verbose_name_plural = _('VolunteerCategories')
-
-    def __unicode__(self):
-        return self.category.name
-
-    volunteer = models.ForeignKey(Volunteer)
-    category = models.ForeignKey(TaskCategory)
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    task = models.ForeignKey(Task, on_delete=CASCADE)
 
 
 """
@@ -707,11 +688,11 @@ class VolunteerLanguage(models.Model):
         verbose_name = _('VolunteerLanguage')
         verbose_name_plural = _('VolunteerLanguages')
 
-    def __unicode__(self):
+    def __str__(self):
         return language.name.name
 
-    volunteer = models.ForeignKey(Volunteer)
-    language = models.ForeignKey(Language)
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    language = models.ForeignKey(Language, on_delete=CASCADE)
 
 
 """
@@ -724,11 +705,11 @@ class VolunteerTalk(models.Model):
         verbose_name = _('VolunteerTalk')
         verbose_name_plural = _('VolunteerTalks')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.talk.name
 
-    volunteer = models.ForeignKey(Volunteer)
-    talk = models.ForeignKey(Talk)
+    volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
+    talk = models.ForeignKey(Talk, on_delete=CASCADE)
 
 
 @receiver(post_save, sender=VolunteerTask)
@@ -746,7 +727,7 @@ def save_penta(sender, instance, **kwargs):
     else:
         event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
-    
+
     logger = logging.getLogger("pentabarf")
     logger.debug("Values in insert: %s, %s" % (event_id, account_name))
     try:
@@ -766,7 +747,7 @@ def delete_volunteertask(sender, instance, **kwargs):
         return
     event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
-    
+
     logger = logging.getLogger("pentabarf")
     logger.debug("Values in delete: %s, %s" % (event_id, account_name))
     try:
