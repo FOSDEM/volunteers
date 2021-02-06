@@ -9,8 +9,8 @@ Development setup
 After cloning the repo do these steps:
 
 
-1) Create a python environment using python 2.7 (we are about to update that)
-   eg: `virtualenv -p /usr/bin/python2.7 ./venv`
+1) Create a python environment using python3
+   eg: `virtualenv -p /usr/bin/python3 ./venv`
    and activate this environment whenever working on the project (all other steps assume this)
    ```
    ./venv/bin/activate
