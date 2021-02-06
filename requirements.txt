@@ -4,6 +4,6 @@ django-userena-ce==5.1.0
 easy-thumbnails==2.5
 psycopg2-binary
 xhtml2pdf==0.2.5
-vobject
 vobject==0.9.6.1
 dj-static
+reportlab==3.5.0
