@@ -614,7 +614,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         # Code lifted from http://mcnearney.net/blog/2010/2/14/creating-django-gravatar-template-tag-part-1/
         GRAVATAR_DOMAIN = 'gravatar.com'
         GRAVATAR_PATH = '/avatar/'
-        gravatar_hash = hashlib.md5(self.user.email.strip().lower()).hexdigest()
+        gravatar_hash = hashlib.md5(self.user.email.encode('utf-8').strip().lower()).hexdigest()
         query = urllib.parse.urlencode({
             'gravatar_id': gravatar_hash,
             's': 1,
@@ -746,7 +746,7 @@ def save_penta(sender, instance, **kwargs):
     else:
         event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
-    
+
     logger = logging.getLogger("pentabarf")
     logger.debug("Values in insert: %s, %s" % (event_id, account_name))
     try:
@@ -766,7 +766,7 @@ def delete_volunteertask(sender, instance, **kwargs):
         return
     event_id = instance.task.talk.ext_id
     account_name = instance.volunteer.penta_account_name
-    
+
     logger = logging.getLogger("pentabarf")
     logger.debug("Values in delete: %s, %s" % (event_id, account_name))
     try:
