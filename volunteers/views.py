@@ -426,7 +426,7 @@ def signup(request, signup_form=SignupForm,
                 redirect_to = reverse('userena_signup_complete', kwargs={'username': user.username})
 
             # A new signed user should logout the old one.
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 logout(request)
 
             if (userena_settings.USERENA_SIGNIN_AFTER_SIGNUP and
