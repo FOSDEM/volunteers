@@ -22,6 +22,7 @@
     version: master
   become: yes
   become_user: "{{app_user}}"
+  notify: Restart fosdem_volunteers
 - name: Install dependencies inside a virtual environment
   pip:
     virtualenv: "{{base_dir}}/venv3"
@@ -41,8 +42,14 @@
     state: directory
   become: yes
   become_user: "{{app_user}}"
+- name: Check if localsettings exists
+  stat:
+    path: "{{ base_dir }}/tool/volunteer_mgmt"
+  register: localsettings
 - pause:
     prompt: "Please create localsettings.py in {{base_dir}}/tool/volunteer_mgmt"
+  when: not localsettings.stat.exists
+  notify: Restart fosdem_volunteers
 - name: Run migrations
   django_manage:
     app_path: "{{base_dir}}/tool"
@@ -62,16 +69,10 @@
     dest: /etc/systemd/system/fosdem_volunteers.service
     src: volunteers.service.j2
   become: yes
-- name: Start volunteers tool
-  systemd:
-    name: fosdem_volunteers
-    state: started
-    enabled: yes
-    daemon_reload: yes
-  become: yes
+  notify: Restart fosdem_volunteers
 - name: Install nginx configuration file
   template:
     dest: /etc/nginx/conf.d/fosdem_volunteers.conf
     src: nginx.conf.j2
   become: yes
-  register: Reload nginx
+  notify: Reload nginx

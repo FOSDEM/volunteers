@@ -6,3 +6,8 @@
     enabled: yes
     daemon_reload: yes
 
+- name: Restart fosdem_volunteers
+  systemd:
+    name: fosdem_volunteers
+    state: restarted
+    daemon_reload: yes
