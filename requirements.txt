@@ -19,5 +19,5 @@ static3==0.7.0
 typing==3.6.6
 vobject==0.9.6.1
 webencodings==0.5.1
-xhtml2pdf==0.2.3
+xhtml2pdf==0.2.5
 

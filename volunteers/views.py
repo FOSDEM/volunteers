@@ -333,11 +333,12 @@ def render_to_pdf(request, template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
     html = template.render(context_dict)
-    result = StringIO.StringIO()
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
 
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
-    if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest = response)
+    if not pisa_status.err:
+        return response
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
 
