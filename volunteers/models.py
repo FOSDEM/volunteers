@@ -57,7 +57,7 @@ class Edition(models.Model):
         verbose_name_plural = _('Editions')
         ordering = ['-start_date']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=128)
@@ -187,7 +187,7 @@ class Track(models.Model):
         verbose_name_plural = _('Tracks')
         ordering = ['date', 'start_time', 'title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     title = models.CharField(max_length=128)
@@ -205,7 +205,7 @@ class Talk(models.Model):
         verbose_name_plural = _('Talks')
         ordering = ['date', 'start_time', '-end_time', 'title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     ext_id = models.CharField(max_length=16)  # ID from where we synchronise
@@ -273,7 +273,7 @@ class TaskCategory(models.Model):
         verbose_name_plural = _('Task Categories')
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=50)
@@ -312,7 +312,7 @@ class TaskTemplate(models.Model):
         verbose_name_plural = _('Task Templates')
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=50)
@@ -349,7 +349,7 @@ class Task(models.Model):
         verbose_name_plural = _('Tasks')
         ordering = ['date', 'start_time', '-end_time', 'name']
 
-    def __unicode__(self):
+    def __str__(self):
         day = self.date.strftime('%a')
         start = self.start_time.strftime('%H:%M')
         end = self.end_time.strftime('%H:%M')
@@ -457,7 +457,7 @@ class Language(models.Model):
         verbose_name = _('Language')
         verbose_name_plural = _('Languages')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     name = models.CharField(max_length=128)
@@ -475,7 +475,7 @@ class Volunteer(UserenaLanguageBaseProfile):
         verbose_name_plural = _('Volunteers')
         ordering = ['user__first_name', 'user__last_name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 
     ratings = (
@@ -658,7 +658,7 @@ class VolunteerStatus(models.Model):
         verbose_name = _('Volunteer Status')
         verbose_name_plural = _('Volunteer Statuses')
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s - %s: %s' % (self.volunteer.user.first_name,
                                    self.volunteer.user.last_name, self.edition.year,
                                    'Yes' if self.active else 'No')
@@ -678,7 +678,7 @@ class VolunteerTask(models.Model):
         verbose_name = _('VolunteerTask')
         verbose_name_plural = _('VolunteerTasks')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.task.name
 
     volunteer = models.ForeignKey(Volunteer)
@@ -690,7 +690,7 @@ class VolunteerCategory(models.Model):
         verbose_name = _('VolunteerCategory')
         verbose_name_plural = _('VolunteerCategories')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.category.name
 
     volunteer = models.ForeignKey(Volunteer)
@@ -707,7 +707,7 @@ class VolunteerLanguage(models.Model):
         verbose_name = _('VolunteerLanguage')
         verbose_name_plural = _('VolunteerLanguages')
 
-    def __unicode__(self):
+    def __str__(self):
         return language.name.name
 
     volunteer = models.ForeignKey(Volunteer)
@@ -724,7 +724,7 @@ class VolunteerTalk(models.Model):
         verbose_name = _('VolunteerTalk')
         verbose_name_plural = _('VolunteerTalks')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.talk.name
 
     volunteer = models.ForeignKey(Volunteer)
