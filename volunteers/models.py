@@ -216,7 +216,7 @@ class Talk(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True, null=True)
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTalk', blank=True)
 
     def assigned_volunteers(self):
         return self.volunteers.count()
@@ -278,7 +278,7 @@ class TaskCategory(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
-    volunteers = models.ManyToManyField('Volunteer', through='VolunteerCategory', blank=True, null=True)
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerCategory', blank=True)
     active = models.BooleanField(default=True)
 
     def assigned_volunteers(self):
@@ -368,7 +368,7 @@ class Task(models.Model):
     nbr_volunteers_max = models.IntegerField(default=0)
     edition = models.ForeignKey(Edition, default=Edition.get_current())
     template = models.ForeignKey(TaskTemplate)
-    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True, null=True)
+    volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True)
     # Only for heralding, or possible future tasks related
     # to a specific talk.
     talk = models.ForeignKey(Talk, blank=True, null=True)
@@ -489,15 +489,15 @@ class Volunteer(UserenaLanguageBaseProfile):
 
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='volunteer')
     # Categories in which they're interested to help out.
-    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, null=True, \
+    categories = models.ManyToManyField(TaskCategory, through='VolunteerCategory', blank=True, \
                                         help_text="""<br/><br/>
         Indicate your preference for which kind of tasks you'd prefer to do.
         The tasks belonging to this category will appear on top in the Tasks page, so you
         can find them easily.<br/><br/>
         Signing up for actual tasks does not happen here; that's done in the Tasks screen!""")
     # Tasks for which they've signed up.
-    tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True, null=True)
-    editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True, null=True)
+    tasks = models.ManyToManyField(Task, through='VolunteerTask', blank=True)
+    editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
     mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True,
