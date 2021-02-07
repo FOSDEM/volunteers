@@ -131,8 +131,9 @@
                         {% for task in category_tasks %}
                         <tr>
                             <td {% if user.is_authenticated %}data-title="{% trans 'I am in' %}!"{% endif %}>
-                                {% if user_in_penta or not task.talk %}<input type="checkbox" name="task" value="{{ task.id }}" {{ checked|get_item:task.id }}  />{% endif %}
-                                {% if not user_in_penta and task.talk %}<input type="checkbox" name="task" value="{{ task.id }}" title="register penta account before subscribing" disabled />{% endif %}
+                                {% if not user_in_penta %}<input type="checkbox" name="task" value="{{ task.id }}" title="register penta account before subscribing" disabled />{% else %}
+                                <input type="checkbox" name="task" value="{{ task.id }}" {% if task.status == "FULL" %}title="task FULL" disabled{% endif %}  {{ checked|get_item:task.id }} />{% endif %}
+
                             </td>
                             {% if attending|get_item:task.id == True %}
                             <td class="task-name special-task">{{ task.name }} <span class="small_note">(Hey, you're attending this!)</span></td>
