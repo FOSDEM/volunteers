@@ -22,6 +22,7 @@
     version: master
   become: yes
   become_user: "{{app_user}}"
+  register: app_updated
   notify: Restart fosdem_volunteers
 - name: Install dependencies inside a virtual environment
   pip:
@@ -64,6 +65,7 @@
     virtualenv: "{{base_dir}}/venv3"
   become: yes
   become_user: "{{app_user}}"
+  when: app_updated.changed
 - name: Create systemd service file
   template:
     dest: /etc/systemd/system/fosdem_volunteers.service
