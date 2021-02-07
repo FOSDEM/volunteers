@@ -51,13 +51,6 @@
     prompt: "Please create localsettings.py in {{base_dir}}/tool/volunteer_mgmt"
   when: not localsettings.stat.exists
   notify: Restart fosdem_volunteers
-- name: Run migrations
-  django_manage:
-    app_path: "{{base_dir}}/tool"
-    command: migrate
-    virtualenv: "{{base_dir}}/venv3"
-  become: yes
-  become_user: "{{app_user}}"
 - name: Run migrations/Collect static files
   django_manage:
     app_path: "{{base_dir}}/tool"
@@ -67,7 +60,7 @@
   become_user: "{{app_user}}"
   with_items:
     - migrate
-    - collect_static
+    - collectstatic
   when: app_updated.changed
 - name: Create systemd service file
   template:
