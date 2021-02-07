@@ -322,7 +322,7 @@ class VolunteerAdmin(admin.ModelAdmin):
     fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes',
               'penta_account_name']
 #    inlines = (VolunteerCategoryInline, VolunteerTaskInline)
-    list_display = ['full_name', 'mobile_nbr', 'email', 'private_staff_rating', 'private_staff_notes']
+    list_display = ['full_name', 'mobile_nbr', 'penta_account_name', 'email', 'private_staff_rating', 'private_staff_notes']
     list_editable = ['private_staff_rating', 'private_staff_notes', 'mobile_nbr']
     list_filter = [MyVolunteersFilter, TaskCategoryFilter, ThisYearsVolunteersFilter,
                    TaskFilter, 'private_staff_rating']
