@@ -19,8 +19,6 @@ from django.dispatch import receiver
 from django.db import connections
 from django.db.models import PROTECT, CASCADE
 
-from phonenumber_field.modelfields import PhoneNumberField
-
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
     return datetime.datetime.strptime(date_str, format)
@@ -516,7 +514,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
-    mobile_nbr = PhoneNumberField('Mobile Phone', max_length=30, blank=True, null=True,
+    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True,
                                   help_text="We won't share this, but we need it in case we"
                                             " need to contact you in a pinch during the event.")
     private_staff_rating = models.IntegerField(null=True, blank=True, choices=ratings)
