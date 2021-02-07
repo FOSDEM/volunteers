@@ -13,4 +13,4 @@ secret.txt
 .idea
 
 logs
-static
+static/*

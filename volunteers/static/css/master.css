@@ -5,7 +5,6 @@ breadandpepper.com
 ................................... */
 
 @import "reset.css";
-@import url(https://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
 
 /*  Main elements
 ................................... */
@@ -117,7 +116,7 @@ html, body {
 #intro {
     padding: 30px 20px;
     min-height: 200px;
-    background: #e7e2de url(https://fosdem.org/2014/assets/style/bg-visual-panel-73f1975ffc7435da092f7de492966249bd09606d7e9d6241cc31591203c5a2d6.png) no-repeat 90px 40px;
+    background: #e7e2de url(../img/fosdem_wheel.png) no-repeat 90px 40px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
