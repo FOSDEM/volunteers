@@ -58,13 +58,16 @@
     virtualenv: "{{base_dir}}/venv3"
   become: yes
   become_user: "{{app_user}}"
-- name: Collect static files
+- name: Run migrations/Collect static files
   django_manage:
     app_path: "{{base_dir}}/tool"
-    command: collectstatic
+    command: "{{ item }}"
     virtualenv: "{{base_dir}}/venv3"
   become: yes
   become_user: "{{app_user}}"
+  with_items:
+    - migrate
+    - collect_static
   when: app_updated.changed
 - name: Create systemd service file
   template:
