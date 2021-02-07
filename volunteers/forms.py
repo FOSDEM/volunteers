@@ -162,6 +162,9 @@ class EditProfileForm(forms.ModelForm):
         exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating',
                    'private_staff_notes', 'categories']
         fields = ['first_name', 'last_name', 'penta_account_name', 'mobile_nbr', 'about_me', 'mugshot']
+        help_texts = {
+                "mugshot": _("A personal image displayed in your profile. Max 2MB.")
+                }
 
     def save(self, force_insert=False, force_update=False, commit=True):
         profile = super(EditProfileForm, self).save(commit=commit)
