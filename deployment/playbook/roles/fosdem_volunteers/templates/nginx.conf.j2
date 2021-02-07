@@ -21,7 +21,7 @@ server {
     }
 
     location /media {
-        alias  {{ base_dir }}/tool/media;
+        alias  {{ base_dir }}/tool/public/media;
         if ($query_string) {
             expires max;
         }
