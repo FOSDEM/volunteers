@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block title %}{% trans "Disabled account" %}{% endblock %}
-{% block content_title %}<h2 class="huge-font">{% trans "Your account has been disabled" %}</h2>{% endblock %}
+{% block content_title %}<h2 class="huge-font">{% trans "Your account is not enabled" %}</h2>{% endblock %}
 {% block content %}
-<p class="huge-font">{% trans "It seems your account has been disabled." %}</p>
-<p class="huge-font">{% trans "If you feel that injustice has been done to you, feel free to contact the administrators to find out why" %}</p>
+<p class="huge-font">{% trans "Your account is not yet enabled. You should have received a signup link via email to enable your account." %}</p>
+<p class="huge-font">{% trans "If you can not retrieve the link, get in touch with the administrators at volunteer-admin AT lists.fosdem.org" %}</p>
 {% endblock %} 
