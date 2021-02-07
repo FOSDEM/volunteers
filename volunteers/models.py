@@ -19,6 +19,8 @@ from django.dispatch import receiver
 from django.db import connections
 from django.db.models import PROTECT, CASCADE
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
     return datetime.datetime.strptime(date_str, format)
@@ -192,7 +194,7 @@ class Track(models.Model):
 
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
-    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
+    edition = models.ForeignKey(Edition, default=Edition.get_current().pk if Edition.get_current() else None, on_delete=PROTECT)
     date = models.DateField()
     start_time = models.TimeField()
     # end_time = models.TimeField()
@@ -365,7 +367,7 @@ class Task(models.Model):
     nbr_volunteers = models.IntegerField(default=0)
     nbr_volunteers_min = models.IntegerField(default=0)
     nbr_volunteers_max = models.IntegerField(default=0)
-    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
+    edition = models.ForeignKey(Edition, default=Edition.get_current().pk if Edition.get_current() else None, on_delete=PROTECT)
     template = models.ForeignKey(TaskTemplate, on_delete=PROTECT)
     volunteers = models.ManyToManyField('Volunteer', through='VolunteerTask', blank=True)
     # Only for heralding, or possible future tasks related
@@ -466,6 +468,7 @@ class Task(models.Model):
             "NEEDED": "red"
         }
         return colors[self.status]
+
 """
 table to contain the language names and ISO codes
 """
@@ -513,13 +516,14 @@ class Volunteer(UserenaLanguageBaseProfile):
     editions = models.ManyToManyField(Edition, through='VolunteerStatus', blank=True)
     signed_up = models.DateField(default=datetime.date.today)
     about_me = models.TextField(_('about me'), blank=True)
-    mobile_nbr = models.CharField('Mobile Phone', max_length=30, blank=True, null=True,
+    mobile_nbr = PhoneNumberField('Mobile Phone', max_length=30, blank=True, null=True,
                                   help_text="We won't share this, but we need it in case we"
                                             " need to contact you in a pinch during the event.")
     private_staff_rating = models.IntegerField(null=True, blank=True, choices=ratings)
     private_staff_notes = models.TextField(null=True, blank=True)
     penta_account_name = models.TextField('Your Pentabarf account name (penta.fosdem.org)', null=True,
                                           blank=True, max_length=256, help_text="We need this to link your volunteers account from Pentabarf to participate in heralding/hosting a digital edition.")
+
 
     # Just here for the admin interface.
     def full_name(self):
@@ -678,7 +682,7 @@ class VolunteerStatus(models.Model):
 
     active = models.BooleanField()
     volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
-    edition = models.ForeignKey(Edition, default=Edition.get_current(), on_delete=PROTECT)
+    edition = models.ForeignKey(Edition, default=Edition.get_current().pk if Edition.get_current() else None, on_delete=PROTECT)
 
 
 """
