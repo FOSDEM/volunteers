@@ -445,7 +445,27 @@ class Task(models.Model):
         task.save()
         return task
 
+    @property
+    def status(self):
+        """ Give status of a task"""
+        if self.assigned_volunteers() >= self.nbr_volunteers_max:
+            return "FULL"
+        if self.assigned_volunteers() >= self.nbr_volunteers:
+            return "OK"
+        if self.assigned_volunteers() >= self.nbr_volunteers_min:
+            return "MANAGEABLE"
+        else:
+            return "NEEDED"
 
+    @property
+    def status_color(self):
+        colors = {
+            "FULL": "blue",
+            "OK": "green",
+            "MANAGEABLE": "grey",
+            "NEEDED": "red"
+        }
+        return colors[self.status]
 """
 table to contain the language names and ISO codes
 """

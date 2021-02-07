@@ -58,20 +58,9 @@
                         <td data-title="{% trans 'Task' %}" class="task-name"><a href="{% url 'task_detailed' task.id %}">{{ task.name }}</a></td>
                         {% endif %}
                         <td data-title="{% trans 'When' %}" >{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
-                        {% if task.assigned_volunteers >= task.nbr_volunteers_max %}
-                        <td data-title="{% trans 'Volunteers' %}" class="task-volunteers blue" title="{% trans 'Full' %}
+                        <td data-title="{% trans 'Volunteers' %}" class="task-volunteers {{ task.status_color }}" title="{% trans task.status %}
                         {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
-                        {% elif task.assigned_volunteers >= task.nbr_volunteers %}
-                        <td data-title="{% trans 'Volunteers' %}" class="task-volunteers green" title="{% trans 'Staffed' %}
-                        {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
-                        {% elif task.assigned_volunteers >= task.nbr_volunteers_min %}
-                        <td data-title="{% trans 'Volunteers' %}" class="task-volunteers gray" title="{% trans 'Manageable' %}
-                        {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
-                        {% else %}
-                        <td data-title="{% trans 'Volunteers' %}" class="task-volunteers red" title="{% trans 'More volunteers needed' %}
-                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %} {% endif%}">
-                        {% endif %}
-                        {{task.assigned_volunteers}}/{{ task.nbr_volunteers }}</td>
+                        {{ task.assigned_volunteers }}/{{ task.nbr_volunteers }}</td>
                     </tr>
                     {% endfor %}
                 {% endfor %}
@@ -151,20 +140,10 @@
                             <td data-title="{% trans 'Task' %}" class="task-name"><a href="{% url 'task_detailed' task.id %}">{{ task.name }}</a></td>
                             {% endif %}
                             <td data-title="{% trans 'When' %}">{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
-                            {% if task.assigned_volunteers == task.nbr_volunteers_max %}
-                            <td data-title="{% trans 'Volunteers' %}" class="task-volunteers blue" title="{% trans 'Full' %}
+
+                            <td data-title="{% trans 'Volunteers' %}" class="task-volunteers {{ task.status_color }}" title="{% trans task.status %}
                             {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
-                            {% elif task.assigned_volunteers >= task.nbr_volunteers %}
-                            <td data-title="{% trans 'Volunteers' %}" class="task-volunteers green" title="{% trans 'Staffed' %}
-                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
-                            {% elif task.assigned_volunteers >= task.nbr_volunteers_min %}
-                            <td data-title="{% trans 'Volunteers' %}" class="task-volunteers gray" title="{% trans 'Manageable' %}
-                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
-                            {% else %}
-                            <td data-title="{% trans 'Volunteers' %}" class="task-volunteers red" title="{% trans 'More volunteers needed' %}
-                            {% if user.is_authenticated %}<br/><br/>Signed up:<br/>{% for volunteer in task.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}{% endif %}">
-                            {% endif %}
-                            {{task.assigned_volunteers}}/{{ task.nbr_volunteers }}</td>
+                            {{ task.assigned_volunteers }}/{{ task.nbr_volunteers }}</td>
                         </tr>
                         {% endfor %}
                     {% endif %}
