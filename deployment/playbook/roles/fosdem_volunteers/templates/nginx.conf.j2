@@ -6,15 +6,8 @@ server {
 
     root {{ base_dir }}/tool;
 
-    location /static/admin {
-        alias  {{ base_dir }}/tool/admin;
-        if ($query_string) {
-            expires max;
-        }
-    }
-
     location /static {
-        alias  {{ base_dir }}/tool/volunteers/static;
+        alias  {{ base_dir }}/tool/public/static;
         if ($query_string) {
             expires max;
         }
