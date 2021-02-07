@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: volunteers
   roles:
     - role: fosdem_volunteers
       vars:
