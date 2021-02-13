@@ -16,7 +16,6 @@
                     <th>{% trans 'Title' %}</th>
                     <th>{% trans 'When' %}</th>
                     <th>{% trans 'Speaker' %}</th>
-                    <th class="numeric">{% trans 'Attending' %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +25,6 @@
                     <td data-title="{% trans 'Title' %}"><a href="{% url 'talk_detailed' talk.id %}">{{ talk.title }}</a></td>
                     <td data-title="{% trans 'When' %}">{{ talk.date|date:"D" }}, {{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}</td>
                     <td data-title="{% trans 'Speaker' %}">{{ talk.speaker }}</td>
-                    <td data-title="{% trans 'Attending' %}" class="numeric talk-volunteers" title="Attending:<br/>{% for volunteer in talk.volunteers.all %}* {{ volunteer.user.first_name }} {{ volunteer.user.last_name}} ({{ volunteer.user }})<br/>{% endfor %}">{{ talk.assigned_volunteers }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
