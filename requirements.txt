@@ -1,9 +1,8 @@
 Django==2.2.18
 django-guardian
-django-userena-ce==5.1.0
+django-userena-ce==6.0.1
 easy-thumbnails==2.5
 psycopg2-binary
 xhtml2pdf==0.2.5
-vobject
 vobject==0.9.6.1
 dj-static
