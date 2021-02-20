@@ -3,33 +3,38 @@
 {% load volunteer_extras %}
 
 {% block content_title %}<h2 class="content-title">{% trans 'Talks' %}</h2>{% endblock %}
-
 {% block content %}
 <form class="task_list" action="/talks/" method="post">{% csrf_token %}
-    {% for track, talks in tracks.items %}
-    <fieldset>
-        <legend class="talk_list">{{ track }}</legend>
-        <table class="talk_list">
-            <thead>
-                <tr>
-                    <th>{% trans "I'm Going" %}!</th>
-                    <th>{% trans 'Title' %}</th>
-                    <th>{% trans 'When' %}</th>
-                    <th>{% trans 'Speaker' %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for talk in talks %}
-                <tr>
-                    <td data-title="{% trans 'Going' %}!"><input type="checkbox" name="talk" value="{{ talk.id }}" {{ checked|get_item:talk.id }} /></td>
-                    <td data-title="{% trans 'Title' %}"><a href="{% url 'talk_detailed' talk.id %}">{{ talk.title }}</a></td>
-                    <td data-title="{% trans 'When' %}">{{ talk.date|date:"D" }}, {{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}</td>
-                    <td data-title="{% trans 'Speaker' %}">{{ talk.speaker }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </fieldset>
+    {% for talk in talks %}
+        {% with next=talks|next:forloop.counter0 %}
+        {% with previous=talks|previous:forloop.counter0 %}
+        {% if talk.track != previous.track %}
+        <fieldset>
+            <legend class="talk_list">{{ talk.track.title }}</legend>
+            <table class="talk_list">
+                <thead>
+                    <tr>
+                        <th>{% trans "I'm Going" %}!</th>
+                        <th>{% trans 'Title' %}</th>
+                        <th>{% trans 'When' %}</th>
+                        <th>{% trans 'Speaker' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+        {% endif %}
+                    <tr>
+                        <td data-title="{% trans 'Going' %}!"><input type="checkbox" name="talk" value="{{ talk.id }}" {{ checked|get_item:talk.id }} /></td>
+                        <td data-title="{% trans 'Title' %}"><a href="{% url 'talk_detailed' talk.id %}">{{ talk.title }}</a></td>
+                        <td data-title="{% trans 'When' %}">{{ talk.date|date:"D" }}, {{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}</td>
+                        <td data-title="{% trans 'Speaker' %}">{{ talk.speaker }}</td>
+                    </tr>
+        {% if talk.track != next.track %}
+                </tbody>
+            </table>
+        </fieldset>
+        {% endif %}
+            {% endwith %}
+    {% endwith %}
     {% endfor %}
     <input type="submit" value="{% trans "Save changes" %}" />
 </form>

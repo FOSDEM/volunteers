@@ -99,11 +99,11 @@ def talk_list(request):
         return redirect('talk_list')
 
     # group the talks according to tracks
-    context = {'tracks': {}, 'checked': {}}
-    tracks = Track.objects.prefetch_related("talks").filter(edition=Edition.get_current())
+    context = {'talks': [], 'checked': {}}
 
-    for track in tracks:
-        context['tracks'][track.title] = track.talks.all()
+    talks = Talk.objects.select_related('track').filter(track__edition=Edition.get_current()).order_by('track__title', 'date', 'start_time')
+
+    context['talks'] = talks
 
     # mark checked, attending talks
     for talk in Talk.objects.filter(volunteers=volunteer):
