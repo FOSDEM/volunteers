@@ -317,6 +317,49 @@ class TaskAdmin(admin.ModelAdmin):
                      'nbr_volunteers_max']
     list_filter = [EditionFilter, DayListFilter, 'template', 'talk__track']
 
+    actions = ['mass_mail_volunteer']
+
+    # Mass mail action
+    class MassMailForm(Form):
+
+        _selected_action = CharField(widget=MultipleHiddenInput)
+        subject = CharField()
+        message = CharField(widget=Textarea)
+    def mass_mail_volunteer(self, request, queryset):
+        if not request.user.is_staff:
+            raise PermissionDenied
+        form = None
+
+        volunteers = Volunteer.objects.filter(task__in=queryset).distinct()
+
+        if 'send' in request.POST:
+            form = self.MassMailForm(request.POST)
+            if form.is_valid():
+                subject = form.cleaned_data['subject']
+                message = form.cleaned_data['message']
+                count = 0
+                plural = ''
+                for volunteer in volunteers:
+                    if volunteer.user.email:
+                        # Would have preferred to collect the mails in volunteer_mails list,
+                        # then send one mail outside this loop, but we don't want volunteers
+                        # to see each other's email addresses for privacy reasons, which means
+                        # BCC, which means it will get sent out as separate mails anyway.
+                        send_mass_mail(((subject, message, settings.DEFAULT_FROM_EMAIL, [volunteer.user.email]),),
+                                       fail_silently=False)
+                        count += 1
+                if count > 1:
+                    plural = 's'
+                self.message_user(request,
+                                  'Mail with subject "{}" sent to  {} volunteer{}.'.format(subject, count, plural))
+                return HttpResponseRedirect(request.get_full_path())
+        if not form:
+            form = self.MassMailForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            return render(request, 'admin/massmail.html', {'volunteers': volunteers,
+                                                           'massmail_form': form,
+                                                           })
+
+    mass_mail_volunteer.short_description = "Send mass mail"
 
 class VolunteerAdmin(admin.ModelAdmin):
     fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes',
