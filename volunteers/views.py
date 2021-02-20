@@ -180,7 +180,7 @@ def task_list(request):
 
     if request.user.is_authenticated:
         volunteer = Volunteer.objects.get(user=request.user)
-        current_tasks = current_tasks.prefetch_related("volunteers")
+        current_tasks = current_tasks.prefetch_related("volunteers").prefetch_related("volunteers__user")
     else:
         volunteer = None
         is_dr_manhattan = False
