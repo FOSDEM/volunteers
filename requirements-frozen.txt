@@ -1,6 +1,6 @@
 arabic-reshaper==2.1.1
 dj-static==0.0.6
-Django==2.2.18
+Django==2.2.24
 django-guardian==2.3.0
 django-userena-ce==6.0.1
 easy-thumbnails==2.5

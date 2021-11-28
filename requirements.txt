@@ -1,4 +1,4 @@
-Django==2.2.18
+Django==2.2.24
 django-guardian
 django-userena-ce==6.0.1
 easy-thumbnails==2.5
