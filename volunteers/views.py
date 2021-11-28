@@ -26,11 +26,11 @@ from userena.views import ExtraContextTemplateView, get_profile_model
 from guardian.decorators import permission_required_or_403
 
 import csv
-import io as StringIO
+
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.template import Context
-from cgi import escape
+from django.utils.html import escape
 
 
 def check_profile_completeness(request, volunteer):
