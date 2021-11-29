@@ -17,6 +17,5 @@ reportlab==3.5.59
 six==1.15.0
 sqlparse==0.4.1
 static3==0.7.0
-vobject==0.9.6.1
 webencodings==0.5.1
 xhtml2pdf==0.2.5
