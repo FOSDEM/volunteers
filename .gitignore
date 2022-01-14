@@ -14,3 +14,9 @@ secret.txt
 
 logs
 static/*
+
+public/
+penta.db
+volunteers.db
+.coverage
+coverage.xml
