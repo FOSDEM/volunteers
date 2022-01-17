@@ -711,7 +711,7 @@ class VolunteerTalk(models.Model):
         verbose_name_plural = _('VolunteerTalks')
 
     def __str__(self):
-        return self.talk.name
+        return self.talk.title
 
     volunteer = models.ForeignKey(Volunteer, on_delete=CASCADE)
     talk = models.ForeignKey(Talk, on_delete=CASCADE)
