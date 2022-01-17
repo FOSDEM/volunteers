@@ -74,3 +74,11 @@
     src: nginx.conf.j2
   become: yes
   notify: Reload nginx
+- name: Create cronjob to sync penta (hourly)
+  become_user: "{{app_user}}"
+  cron:
+    name: Sync with penta
+    job: "{{base_dir}}/venv3/bin/python {{base_dir}}/tool/manage.py sync_with_penta"
+    minute: 0
+  tags:
+  - cron
