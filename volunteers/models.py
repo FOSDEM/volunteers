@@ -4,7 +4,6 @@ import hashlib
 import http.client
 import os
 import urllib.request, urllib.parse, urllib.error
-import vobject
 import xml.etree.ElementTree as ET
 import logging
 
@@ -555,22 +554,6 @@ class Volunteer(UserenaLanguageBaseProfile):
                         retval[1].append(set([item, task]))
             schedule[task.date].append(task)
         return retval
-
-    def vcard(self):
-        card = vobject.vCard()
-        card_props = [
-            ('n', vobject.vcard.Name(family=self.user.last_name, given=self.user.first_name)),
-            ('fn', '%s %s' % (self.user.first_name, self.user.last_name)),
-            ('email', self.user.email),
-            ('tel', self.mobile_nbr, 'cell'),
-            ('categories', ['FOSDEM Volunteer']),
-        ]
-        for card_prop in card_props:
-            vkey = card.add(card_prop[0])
-            vkey.value = card_prop[1]
-            if len(card_prop) > 2:
-                vkey.type_param = card_prop[2]
-        return card.serialize()
 
     def mail_schedule(self):
         subject = "FOSDEM Volunteers: your schedule"

@@ -374,7 +374,7 @@ class VolunteerAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size': '20'})},
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 20})},
     }
-    actions = ['mass_mail_volunteer', 'vcard_export', 'mail_schedule']
+    actions = ['mass_mail_volunteer', 'mail_schedule']
 
     # Mass mail action
     class MassMailForm(Form):
@@ -415,17 +415,6 @@ class VolunteerAdmin(admin.ModelAdmin):
                                                            })
 
     mass_mail_volunteer.short_description = "Send mass mail"
-
-    # vCard export
-    def vcard_export(self, request, queryset):
-        if not request.user.is_staff:
-            raise PermissionDenied
-        output = ''
-        for volunteer in queryset:
-            output += volunteer.vcard()
-        response = HttpResponse(output, mimetype='text/vcard')
-        response['Content-Disposition'] = 'attachment; filename=volunteers.vcard'
-        return response
 
     def mail_schedule(self, request, queryset):
         if not request.user.is_staff:
