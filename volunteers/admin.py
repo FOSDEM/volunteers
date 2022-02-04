@@ -303,6 +303,11 @@ class TaskTemplateAdmin(admin.ModelAdmin):
     list_filter = [CategoryActiveFilter]
 
 
+class VolunteerTaskAdmin(admin.ModelAdmin):
+    fields = ['volunteer', 'task']
+    list_display = ['link', 'volunteer__name', 'task__name']
+
+
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['edition', 'name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date',
@@ -360,6 +365,7 @@ class TaskAdmin(admin.ModelAdmin):
                                                            })
 
     mass_mail_volunteer.short_description = "Send mass mail"
+
 
 class VolunteerAdmin(admin.ModelAdmin):
     fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes',
@@ -446,3 +452,4 @@ admin.site.register(TaskTemplate, TaskTemplateAdmin)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Volunteer, VolunteerAdmin)
 admin.site.register(VolunteerStatus, VolunteerStatusAdmin)
+admin.site.register(VolunteerTask, VolunteerTaskAdmin)
