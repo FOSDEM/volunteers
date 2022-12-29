@@ -20,3 +20,4 @@ penta.db
 volunteers.db
 .coverage
 coverage.xml
+.vscode
