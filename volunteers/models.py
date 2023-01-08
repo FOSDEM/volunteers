@@ -282,9 +282,6 @@ class TaskCategory(models.Model):
     description = models.TextField()
     active = models.BooleanField(default=True)
 
-    def assigned_volunteers(self):
-        return self.volunteer_set.count()
-
     def link(self):
         return 'Link'
 

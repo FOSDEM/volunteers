@@ -292,7 +292,7 @@ class TalkAdmin(admin.ModelAdmin):
 class TaskCategoryAdmin(admin.ModelAdmin):
     fields = ['name', 'description']
 #    inlines = (VolunteerCategoryInline,)
-    list_display = ['link', 'name', 'assigned_volunteers', 'active']
+    list_display = ['link', 'name', 'active']
     list_editable = ['name', 'active']
 
 
