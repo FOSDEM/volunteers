@@ -305,7 +305,7 @@ class TaskTemplateAdmin(admin.ModelAdmin):
 
 class VolunteerTaskAdmin(admin.ModelAdmin):
     fields = ['volunteer', 'task']
-    list_display = ['volunteer__user__username', 'task__name']
+    #list_display = ['volunteer__user', 'task__name']
 
 
 class TaskAdmin(admin.ModelAdmin):
