@@ -16,12 +16,12 @@ After cloning the repo do these steps:
    eg: `virtualenv -p /usr/bin/python3 ./venv`
    and activate this environment whenever working on the project (all other steps assume this)
    ```
-   ./venv/bin/activate
+   source ./venv/bin/activate
    ```
 
 2) Install all dependencies in the environment:
    ```
-   pip install -r requirements.txt
+   pip install -r requirements-dev.txt
    ```
 
 3) create a `volunteer_mgmt/localsettings.py` file
