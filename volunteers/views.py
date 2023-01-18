@@ -39,7 +39,7 @@ def check_profile_completeness(request, volunteer):
 
     if not volunteer.penta_account_name:
         messages.warning(request, _(
-            "Hey there! If you want to be a host for a talk, you must register on <a href='https://penta.fosdem.org/submission/'>Pentabarf</a>"),
+            "Hey there! If you want to be a host for a talk, you must register on Pentabarf at https://penta.fosdem.org/submission/"),
                          fail_silently=True)
 
     if not volunteer.mobile_nbr:
