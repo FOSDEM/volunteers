@@ -16,12 +16,12 @@ class Command(BaseCommand):
                     continue
                 if task.template.name.lower() in ['Virtual Infodesk'.lower()]:
                     # Harcoded because this works and will save me time
-                    if task.date.weekday() == datetime.datetime.strptime('2022-02-05', '%Y-%m-%d').weekday():
+                    if task.date.weekday() == 5:
                         # Saturday
-                        event_id = '13010'
+                        event_id = '15078'
                     else:
                         # Sunday
-                        event_id = '13009'
+                        event_id = '15079'
                 else:
                     event_id = task.talk.ext_id
                 logger = logging.getLogger("pentabarf")
