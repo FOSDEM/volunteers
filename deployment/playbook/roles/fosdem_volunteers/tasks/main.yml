@@ -82,3 +82,11 @@
     minute: 0
   tags:
   - cron
+- name: Sync volunteers for infodesk with penta
+  become_user: "{{app_user}}"
+  cron:
+    name: Sync with penta
+    job: "{{base_dir}}/venv3/bin/python {{base_dir}}/tool/manage.py sync_volunteers_with_penta_account"
+    minute: 0
+  tags:
+  - cron
