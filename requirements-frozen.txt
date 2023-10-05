@@ -7,7 +7,7 @@ future==0.18.2
 gunicorn==20.0.4
 html2text==2014.12.29
 html5lib==1.1
-Pillow==8.1.0
+Pillow==10.0.1
 psycopg2-binary==2.8.6
 PyPDF2==1.26.0
 python-bidi==0.4.2
