@@ -3,9 +3,9 @@
     name: "{{item}}"
     state: present
   with_items:
-    - python3.5
+    - python
     - nginx
-    - python3-pip
+    - virtualenv
 - name: "Create system user {{app_user}}"
   user:
     name: "{{app_user}}"

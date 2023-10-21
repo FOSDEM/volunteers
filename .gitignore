@@ -21,3 +21,4 @@ volunteers.db
 .coverage
 coverage.xml
 .vscode
+deployment/playbook/.ansible_vault

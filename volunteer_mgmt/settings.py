@@ -54,7 +54,6 @@ USERENA_REGISTER_PROFILE = False
 
 _ = lambda s: s
 LANGUAGES = (
-    ('--', _('select here')),
     ('en', _('English')),
     ('fr', _('Francais')),
     ('de', _('Deutsch')),
