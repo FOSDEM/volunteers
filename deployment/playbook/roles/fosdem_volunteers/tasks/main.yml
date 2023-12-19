@@ -3,9 +3,8 @@
     name: "{{item}}"
     state: present
   with_items:
-    - python
     - nginx
-    - virtualenv
+    - python3-venv
 - name: "Create system user {{app_user}}"
   user:
     name: "{{app_user}}"
@@ -20,15 +19,13 @@
     repo: https://github.com/FOSDEM/volunteers.git
     dest: "{{base_dir}}/tool"
     version: master
-  become: yes
-  become_user: "{{app_user}}"
   register: app_updated
   notify: Restart fosdem_volunteers
 - name: Install dependencies inside a virtual environment
   pip:
     virtualenv: "{{base_dir}}/venv3"
     virtualenv_python: python3
-    requirements: "{{base_dir}}/tool/requirements.txt"
+    requirements: "{{base_dir}}/tool/requirements-frozen.txt"
   become: yes
   become_user: "{{app_user}}"
 - name: Add gunicorn to venv
@@ -62,6 +59,16 @@
     - migrate
     - collectstatic
   when: app_updated.changed
+- name: install the tmpfiles.d conf
+  become: true
+  copy:
+    content: d /run/volunteers 0755 {{ app_user }} {{ app_user }} - -
+    dest: /usr/lib/tmpfiles.d/fosdem_volunteers.conf
+
+- name: configure tmpfiles.d
+  become: true
+  command: systemd-tmpfiles --create
+
 - name: Create systemd service file
   template:
     dest: /etc/systemd/system/fosdem_volunteers.service

@@ -37,11 +37,6 @@ def check_profile_completeness(request, volunteer):
     if request.user != volunteer.user:
         return True
 
-    if not volunteer.penta_account_name:
-        messages.warning(request, _(
-            "Hey there! If you want to be a host for a talk, you must register on Pentabarf at https://penta.fosdem.org/submission/"),
-                         fail_silently=True)
-
     if not volunteer.mobile_nbr:
         messages.warning(request, _(
             "Hey there! It seems you didn't give us a phone number. Please update your profile, to make sure we can contact you if the network fails..."),
