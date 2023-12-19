@@ -18,7 +18,7 @@
 - [ ] mark their attendance there as well
 - [ ] view mugshots of other attendees there as well
 - [x] see the people assigned to a task (friends like to do things together) - implemented as tooltip
-- [x] see the the tasks a user has assigned himself to, on his profile (friends like to do things together)
+- [x] see the tasks a user has assigned himself to, on his profile (friends like to do things together)
 - [ ] print schedules for entire task templates (handy for staff members, to get an overview of "their" volunteers)
 - [ ] get an overview of who's supposed to be where for any given date/time, default to "now"
 - [ ] do anything else I might have overlooked
