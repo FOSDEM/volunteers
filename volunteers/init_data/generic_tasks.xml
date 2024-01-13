@@ -3,14 +3,16 @@
     <task template="Buildup">
         <name>Buildup</name>
         <counter>1</counter>
-        <description>Any bit of time you can spare on Friday will be helpful! Ideally you can be there from 12:00 until
-            ready. Experience learns us we'll be ready between 18:30 and 22:00 (hard deadline, have to leave the
-            building). Just come in as early you can! We'll have some pizza or other food in the evening. Deadline is
-            22:00. Some of us go to the beer event afterwards.
+        <description>
+Buildup is a great task for first-time volunteers, as you will get to know the conference, the volunteers and the staff very well. As a task, it is fairly simple: each year we have to convert five university buildings to a location fit for FOSDEM.
 
-            This task includes many subtasks. Some require carrying heavy stuff around, some don't. We need to set up
-            stands (tables, chairs), cover the walls in brown paper, put signalization in place, run power cords, ...
-            There will be 3 work areas, each with their own coordinator.
+There are many jobs to do: setting up stands, covering the wall with the famous brown paper, running cables, putting up signs, etc. While carrying heavy stuff around is sometimes required, other work requires a more delicate touch.
+
+We usually start at 12:00 and hope to finish before 19:00 (we have to leave the building at 22:00, so that's our deadline). Around that time, someone will bring food for everyone, usually Chinese.
+
+As you can imagine, this is a mammoth task, and more volunteers are always wanted. So if you can't make it at 12:00, come a little later. There will be enough work to do to keep you busy, don't worry!
+
+You can find more details on our wiki at https://github.com/FOSDEM/volunteers/wiki/Build%E2%80%90up .
         </description>
         <day>-1</day>
         <start_time>12:00</start_time>
@@ -68,15 +70,14 @@
     <task template="Cleanup">
         <name>Cleanup</name>
         <counter>1</counter>
-        <description>We need to leave the premises in a presentable state. Everything we bring and set up must be torn
-            down and removed. All signalization removed, network torn down (go wild; we don't reuse the cables!), tables
-            and chairs stacked so the rental company can load them up when they retrieve them, the floors wiped, ...
+        <description>
+            We need to leave the premises in a presentable state. Everything we bring and set up must be torn down and removed. All signalization removed, network torn down (go wild; we don't reuse the cables!), tables and chairs stacked so the rental company can load them up when they retrieve them, the floors wiped, ...
 
-            Don't damage the building, but make sure none of our stuff remains behind.
+Normally we're finished around 9pm, but we stay until we're done.
 
-            Normally we're finished around 9pm, but we stay until we're done.
-
-            As many volunteers as possible! That way, it won't take too long. :)
+As many volunteers as possible! That way, it won't take too long. :)
+        
+You can read more on our wiki at https://github.com/FOSDEM/volunteers/wiki/Clean%E2%80%90up .
         </description>
         <day>1</day>
         <start_time>18:00</start_time>
