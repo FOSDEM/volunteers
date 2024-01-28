@@ -5,6 +5,7 @@ import re
 from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 
 
 from userena.models import UserenaSignup
@@ -147,7 +148,10 @@ class SignupForm(forms.Form):
         new_user.save()
         return new_user
 
-
+def validate_matrix_id(value):
+    matrix_id_pattern = r'^@[a-zA-Z0-9._=-]+:[a-zA-Z0-9.-]+$'
+    if not re.match(matrix_id_pattern, value):
+        raise ValidationError('Invalid Matrix ID format')
 class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
     first_name = forms.CharField(label=_('First name'), max_length=30, required=True)
@@ -166,6 +170,10 @@ class EditProfileForm(forms.ModelForm):
                 "mugshot": _("A personal image displayed in your profile. Max 2MB.")
                 }
 
+    def clean(self):
+        data = super().clean()
+        if data.get("matrix_id"):
+            validate_matrix_id(data["matrix_id"])
     def save(self, force_insert=False, force_update=False, commit=True):
         profile = super(EditProfileForm, self).save(commit=commit)
         # Save first and last name
