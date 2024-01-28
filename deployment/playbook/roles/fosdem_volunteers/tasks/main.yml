@@ -87,7 +87,6 @@
     name: Sync with penta
     job: "{{base_dir}}/venv3/bin/python {{base_dir}}/tool/manage.py sync_with_penta"
     minute: 0
-    state: absent
   tags:
   - cron
 - name: Sync volunteers for infodesk with penta

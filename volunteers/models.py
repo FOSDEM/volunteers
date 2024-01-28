@@ -507,7 +507,7 @@ class Volunteer(UserenaLanguageBaseProfile):
     private_staff_notes = models.TextField(null=True, blank=True)
     penta_account_name = models.TextField('Your Pentabarf account name (penta.fosdem.org)', null=True,
                                           blank=True, max_length=256, help_text="We need this to link your volunteers account from Pentabarf to participate in heralding/hosting a digital edition.")
-
+    matrix_id = models.CharField('Matrix ID', null=True, blank=True, max_length=256, help_text='If you have a matrix account (mxid), you can specify it here. This is required for the virtual infodesk. The format is @username:homeserver.tld')
 
     # Just here for the admin interface.
     def full_name(self):
