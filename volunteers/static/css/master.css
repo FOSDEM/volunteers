@@ -1056,6 +1056,11 @@ ul.faq {
         display: block;
         text-align: center;
     }
+    
+    tbody td {
+        margin: 0.25rem 0.5rem;
+    }
+    
     table.task_list tbody tr.category th:nth-child(2) {
         padding-top: 40px;
         padding-bottom: 40px;
@@ -1063,11 +1068,19 @@ ul.faq {
         color: #0088cc;
         text-decoration: none;
     }
-
+    
     table.task_list tbody tr.day th:first-child {
         text-align: center;
         padding-top: 40px;
         padding-bottom: 40px;
+    }
+    
+    table.task_list tbody tr td:first-child {
+        margin-top: 1rem;
+    }
+    
+    table.task_list tbody tr td:last-child {
+        margin-bottom: 1rem;
     }
 
     form.task_list fieldset {
