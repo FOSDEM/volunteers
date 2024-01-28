@@ -151,7 +151,7 @@ class SignupForm(forms.Form):
 def validate_matrix_id(value):
     matrix_id_pattern = r'^@[a-zA-Z0-9._=-]+:[a-zA-Z0-9.-]+$'
     if not re.match(matrix_id_pattern, value):
-        raise ValidationError('Invalid Matrix ID format')
+        raise ValidationError('Invalid Matrix ID format. The format is @username:homeserver.tld')
 class EditProfileForm(forms.ModelForm):
     """ Base form used for fields that are always required """
     first_name = forms.CharField(label=_('First name'), max_length=30, required=True)
