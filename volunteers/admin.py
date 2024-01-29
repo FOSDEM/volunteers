@@ -359,7 +359,7 @@ class TaskAdmin(admin.ModelAdmin):
                                   'Mail with subject "{}" sent to  {} volunteer{}.'.format(subject, count, plural))
                 return HttpResponseRedirect(request.get_full_path())
         if not form:
-            form = self.MassMailForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            form = self.MassMailForm(initial={'_selected_action': request.POST.getlist("_selected_action")})
             return render(request, 'admin/massmail.html', {'volunteers': volunteers,
                                                            'massmail_form': form,
                                                            })
@@ -415,7 +415,7 @@ class VolunteerAdmin(admin.ModelAdmin):
                                   'Mail with subject "{}" sent to  {} volunteer{}.'.format(subject, count, plural))
                 return HttpResponseRedirect(request.get_full_path())
         if not form:
-            form = self.MassMailForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+            form = self.MassMailForm(initial={'_selected_action': request.POST.getlist("_selected_action")})
             return render(request, 'admin/massmail.html', {'volunteers': queryset,
                                                            'massmail_form': form,
                                                            })
