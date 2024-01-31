@@ -119,8 +119,7 @@ def category_schedule_list(request):
 @login_required
 def task_schedule(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
-                                                                                           'end_time')
+    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
     context = {
         'template': template,
         'tasks': SortedDict.fromkeys(tasks, {}),
@@ -133,8 +132,7 @@ def task_schedule(request, template_id):
 @login_required
 def task_schedule_csv(request, template_id):
     template = TaskTemplate.objects.filter(id=template_id)[0]
-    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time',
-                                                                                           'end_time')
+    tasks = Task.objects.annotate(volunteers__count=Count("volunteer")).filter(template=template, edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
     response = HttpResponse(content_type='text/csv')
     filename = "schedule_%s.csv" % template.name
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -171,7 +169,8 @@ def task_list(request):
 
     current_tasks = Task.objects.annotate(
         volunteers__count=Count("volunteer")).filter(
-        edition=Edition.get_current())
+        edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
+
 
     if request.user.is_authenticated:
         volunteer = Volunteer.objects.get(user=request.user)
@@ -340,7 +339,8 @@ def render_to_pdf(request, template_src, context_dict):
 @login_required
 def task_list_detailed(request, username):
     context = {}
-    current_tasks = Task.objects.filter(edition=Edition.get_current())
+    current_tasks = Task.objects.filter(edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
+
     # get the requested users tasks
     context['tasks'] = current_tasks.filter(volunteers__user__username=username)
     context['user'] = request.user
@@ -540,7 +540,8 @@ def profile_detail(request, username,
             Instance of the currently viewed ``Profile``.
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
-    current_tasks = Task.objects.filter(edition=Edition.get_current())
+    current_tasks = Task.objects.filter(edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
+
 
     profile_model = get_profile_model()
     try:
