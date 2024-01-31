@@ -123,7 +123,7 @@
                         {% for task in category_tasks %}
                         <tr>
                             <td {% if user.is_authenticated %}data-title="{% trans 'I am in' %}!"{% endif %}>
-                                <input type="checkbox" name="task" value="{{ task.id }}" {% if task.status == "FULL" %}title="task FULL" disabled{% endif %}  {{ checked|get_item:task.id }} />
+                                <input type="checkbox" name="task" value="{{ task.id }}" {% if task.status == "FULL" %}title="task FULL" {% endif %}{% if task.status == "FULL" and not checked|get_item:task.id %} disabled{% endif %}  {{ checked|get_item:task.id }} />
 
                             </td>
                             {% if attending|get_item:task.id == True %}
