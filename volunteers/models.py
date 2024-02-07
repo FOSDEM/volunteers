@@ -202,6 +202,7 @@ class Talk(models.Model):
     title = models.CharField(max_length=256)
     speaker = models.CharField(max_length=128)
     description = models.TextField()
+    fosdem_url = models.TextField(null=True)
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -238,6 +239,7 @@ class Talk(models.Model):
         talk.track = track
         talk.title = xml.find('title').text
         talk.description = xml.find('description').text or ''
+        talk.fosdem_url = xml.find('url').text
         talk.date = day_date
         (talk.start_time, talk.end_time) = (talk_start, talk_end)
         persons = xml.find('persons')
@@ -345,6 +347,7 @@ class Task(models.Model):
     # infodesk tasks if we do a simple name search in create_from_xml
     counter = models.CharField(max_length=2)
     description = models.TextField()
+    fosdem_url = models.TextField(null=True)
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -397,6 +400,7 @@ class Task(models.Model):
             task = cls(talk=talk, template=template)
         task.template = template
         task.name = '%s: %s' % (task_type, talk.title)
+        task.fosdem_url = talk.fosdem_url
         task.date = talk.date
         task.start_time = talk.start_time
         task.end_time = talk.end_time
@@ -421,6 +425,7 @@ class Task(models.Model):
         else:
             task = cls(name=name, counter=counter, template=template, edition=edition)
         task.description = xml.find('description').text
+        task.fosdem_url = xml.find('url').text
         day_offset = int(xml.find('day').text)
         task.date = edition.start_date + datetime.timedelta(days=day_offset)
         task.start_time = parse_time(xml.find('start_time').text)

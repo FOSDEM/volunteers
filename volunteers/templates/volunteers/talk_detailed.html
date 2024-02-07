@@ -16,7 +16,12 @@
             </tr>
             <tr>
                 <td>{{ talk.date|date:"D" }}, {{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}</td>
-                <td>{{ talk.title }}</td>
+                <td>
+                    {% if talk.fosdem_url %}
+                    <a href="{{talk.fosdem_url}}">{{ talk.title }}</a>
+                    {% else %}
+                    {{talk.title}}
+                    {% endif %}</td>
                 <td>
                 {% for volunteer in talk.volunteers.all %}
                     {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}, 
