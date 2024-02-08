@@ -25,8 +25,13 @@
                     {% endfor %}
                     {% else %}
                         {{ task.volunteer_set.count}}/{{ task.nbr_volunteers }}
-                    {% endif%}
-                <td>{{ task.talk }}</td>
+                    {% endif%}</td>
+                <td>
+                    {% if task.fosdem_url %}
+                    <a href="{{task.fosdem_url}}">{{ task.talk }}</a>
+                    {% else %}
+                    {{task.talk}}
+                    {% endif %}</td>
             </tr>
             <tr>
                 <th colspan="4" style="border-bottom: none;">&nbsp;</th>
