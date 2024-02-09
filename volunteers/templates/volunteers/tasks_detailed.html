@@ -25,10 +25,11 @@
         <table class="task_list">
             <thead>
                 <tr>
-                    <th width="20%">{% trans 'When' %}</th>
+                    <th width="10%">{% trans 'When' %}</th>
                     <th width="40%">{% trans 'Title' %}</th>
                     <th width="20%">{% trans 'Attending' %}</th>
                     <th width="20%">{% trans 'Talk' %}</th>
+                    <th width="10%">{% trans 'Location' %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,7 @@
                         {% if not forloop.last %},{% endif %}
                     {% endfor %}
                     <td data-title="{% trans 'Talk' %}">{{ task.talk }}</td>
+                    <td data-title="{% trans 'Location' %}">{{ task.location }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
