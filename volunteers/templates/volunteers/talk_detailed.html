@@ -13,6 +13,9 @@
                 <th width="20%">{% trans 'When' %}</th>
                 <th width="40%">{% trans 'Title' %}</th>
                 <th width="20%">{% trans 'Attending' %}</th>
+                {% if talk.location %}
+                <th width="20%">{% trans 'Location' %}</th>
+                {% endif %}
             </tr>
             <tr>
                 <td>{{ talk.date|date:"D" }}, {{ talk.start_time|time:"H:i" }} - {{ talk.end_time|time:"H:i" }}</td>
@@ -22,6 +25,10 @@
                     {% else %}
                     {{talk.title}}
                     {% endif %}</td>
+                <td>
+                {% if talk.location %}
+                <td>{{talk.location}}</td>
+                {% endif %}
                 <td>
                 {% for volunteer in talk.volunteers.all %}
                     {{ volunteer.user.first_name }} {{ volunteer.user.last_name }}, 

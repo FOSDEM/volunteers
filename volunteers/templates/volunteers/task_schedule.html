@@ -11,7 +11,8 @@
     {% for task, volunteers in tasks.items %}
     <h2 class="task-title">
         {{ task.name }} ({{task.assigned_volunteers}}/{{task.nbr_volunteers}})<br/>
-        {{ task.date|date:"l" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}
+        {{ task.date|date:"l" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}<br/>
+        {{ task.location }}
     </h2><br/>
     <table width="98%" class="task_schedule">
         <tr><td colspan="4">&nbsp;</td></tr>

@@ -311,15 +311,15 @@ class VolunteerTaskAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['edition', 'name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date',
-                           'start_time', 'end_time']}),
+                           'start_time', 'end_time', 'location']}),
         (None, {'fields': ['talk', 'template']}),
         (None, {'fields': ['description', 'fosdem_url']}),
     ]
 #    inlines = (VolunteerTaskInline,)
     list_display = ['link', 'edition', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers',
-                    'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max']
+                    'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'location']
     list_editable = ['name', 'date', 'start_time', 'end_time', 'nbr_volunteers', 'nbr_volunteers_min',
-                     'nbr_volunteers_max']
+                     'nbr_volunteers_max', 'location']
     list_filter = [EditionFilter, DayListFilter, 'template', 'talk__track']
 
     actions = ['mass_mail_volunteer']

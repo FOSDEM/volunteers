@@ -14,6 +14,9 @@
                 <th width="40%">{% trans 'Title' %}</th>
                 <th width="20%">{% trans 'Attending' %}</th>
                 <th width="20%">{% trans 'Talk' %}</th>
+                {% if task.location %}
+                <th width="20%">{% trans 'Location' %}</th>
+                {% endif %}
             </tr>
             <tr>
                 <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
@@ -32,6 +35,9 @@
                     {% else %}
                     {{task.talk}}
                     {% endif %}</td>
+                {% if task.location %}
+                <td>{{task.location}}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th colspan="4" style="border-bottom: none;">&nbsp;</th>
