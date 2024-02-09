@@ -347,7 +347,7 @@ class Task(models.Model):
     # infodesk tasks if we do a simple name search in create_from_xml
     counter = models.CharField(max_length=2)
     description = models.TextField()
-    fosdem_url = models.TextField(null=True)
+    fosdem_url = models.TextField(null=True, blank=True)
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()

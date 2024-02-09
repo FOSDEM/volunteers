@@ -281,7 +281,7 @@ class TrackAdmin(admin.ModelAdmin):
 class TalkAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['track', 'speaker', 'title']}),
-        (None, {'fields': ['description']}),
+        (None, {'fields': ['description', 'fosdem_url']}),
         (None, {'fields': ['date', 'start_time', 'end_time']}),
     ]
     list_display = ['link', 'title', 'track', 'date', 'start_time']
@@ -313,7 +313,7 @@ class TaskAdmin(admin.ModelAdmin):
         (None, {'fields': ['edition', 'name', 'nbr_volunteers', 'nbr_volunteers_min', 'nbr_volunteers_max', 'date',
                            'start_time', 'end_time']}),
         (None, {'fields': ['talk', 'template']}),
-        (None, {'fields': ['description']}),
+        (None, {'fields': ['description', 'fosdem_url']}),
     ]
 #    inlines = (VolunteerTaskInline,)
     list_display = ['link', 'edition', 'name', 'date', 'start_time', 'end_time', 'assigned_volunteers',
