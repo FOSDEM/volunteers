@@ -538,8 +538,9 @@ class Volunteer(UserenaLanguageBaseProfile):
             schedule[date] = []
         for task in current_tasks:
             for item in schedule[task.date]:
-                if item.start_time <= task.start_time < item.end_time \
-                        or item.start_time < task.end_time <= item.end_time:
+                if (item.start_time <= task.start_time < item.end_time \
+                    or item.start_time < task.end_time <= item.end_time) \
+                        and (item.name != task.name and item.location != task.location):
                     retval[0] = True
                     item_found = False
                     for task_set in retval[1]:
