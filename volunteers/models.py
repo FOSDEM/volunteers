@@ -203,7 +203,7 @@ class Talk(models.Model):
     speaker = models.CharField(max_length=128)
     description = models.TextField()
     fosdem_url = models.TextField(null=True)
-    location = models.CharField(max_length=128, null=True)
+    location = models.CharField(max_length=128, null=True, blank=True)
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -431,7 +431,7 @@ class Task(models.Model):
         task.description = xml.find('description').text
         if xml.find('url'):
             task.fosdem_url = xml.find('url').text
-        task.location = xml.find('location').text
+        task.location = xml.find('location').text if xml.find('location') else ''
         day_offset = int(xml.find('day').text)
         task.date = edition.start_date + datetime.timedelta(days=day_offset)
         task.start_time = parse_time(xml.find('start_time').text)
