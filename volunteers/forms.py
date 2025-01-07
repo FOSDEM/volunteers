@@ -14,19 +14,6 @@ from userena.utils import get_profile_model
 
 from volunteers.models import VolunteerTask, TaskCategory
 
-class AddTasksForm(forms.Form):
-    tasks = forms.ModelMultipleChoiceField(queryset=VolunteerTask.objects.none(), widget=forms.CheckboxSelectMultiple())
-
-
-class EditTasksForm(forms.Form):
-    date = forms.TimeField(label=_('Date'), required=True)
-    start_time = forms.TimeField(label=_('Start time'), required=True)
-    end_time = forms.TimeField(label=_('End time'), required=True)
-    name = forms.CharField(label=_('Name'), max_length=30, required=True)
-    location = forms.CharField(label=_('Location'), max_length=30, required=True)
-    description = forms.CharField(label=_('Description'), max_length=30, required=False, widget=forms.Textarea)
-    fosdem_url = forms.CharField(label=_('Fosdem URL'), max_length=100, required=False, widget=forms.Textarea)
-
 
 class EventSignupForm(forms.Form):
     first_name = forms.CharField(max_length=255, required=True, label=_('First name'))
