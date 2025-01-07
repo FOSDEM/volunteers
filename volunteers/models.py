@@ -429,7 +429,8 @@ class Task(models.Model):
         else:
             task = cls(name=name, counter=counter, template=template, edition=edition)
         task.description = xml.find('description').text
-        task.fosdem_url = xml.find('url').text
+        if xml.find('url'):
+            task.fosdem_url = xml.find('url').text
         task.location = xml.find('location').text
         day_offset = int(xml.find('day').text)
         task.date = edition.start_date + datetime.timedelta(days=day_offset)
