@@ -10,12 +10,12 @@
         <legend class="task_list">{% trans 'Task' %}</legend>
         <table class="task_list">
             <tr>
-                <th width="20%">{% trans 'When' %}</th>
-                <th width="40%">{% trans 'Title' %}</th>
-                <th width="20%">{% trans 'Attending' %}</th>
-                <th width="20%">{% trans 'Talk' %}</th>
+                <th>{% trans 'When' %}</th>
+                <th>{% trans 'Title' %}</th>
+                <th>{% trans 'Attending' %}</th>
+                <th>{% trans 'Talk' %}</th>
                 {% if task.location %}
-                <th width="20%">{% trans 'Location' %}</th>
+                <th>{% trans 'Location' %}</th>
                 {% endif %}
             </tr>
             <tr>
@@ -40,10 +40,10 @@
                 {% endif %}
             </tr>
             <tr>
-                <th colspan="4" style="border-bottom: none;">&nbsp;</th>
+                <th colspan="{{ task.location|yesno:'5,4' }}" style="border-bottom: none;">&nbsp;</th>
             </tr>
             <tr>
-                <td colspan="4">{{ task.description|linebreaksbr|urlize }}</td>
+                <td colspan="{{ task.location|yesno:'5,4' }}">{{ task.description|linebreaksbr|urlize }}</td>
             </tr>
         </table>
         <br>
