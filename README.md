@@ -9,7 +9,8 @@ Volunteers management system for conferences, originally written for FOSDEM.
 Development setup
 =================
 
-The tool has been tested on Python3.7 and Python3.10. Python3.13 is not currently supported.
+The tool has been tested on Python3.10 and Python3.11. Python3.13 is not currently supported.
+The production version of this uses Python3.11 (as of Jan 2025).
 
 After cloning the repo do these steps:
 
