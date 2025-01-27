@@ -218,7 +218,7 @@ class Talk(models.Model):
     @classmethod
     def penta_create_or_update(cls, xml, edition, day_date):
         event_id = xml.get('id')
-        talks = cls.objects.filter(ext_id=event_id)
+        talks = cls.objects.filter(ext_id=event_id, edition=edition)
         if len(talks):
             talk = talks[0]
         else:
@@ -383,7 +383,7 @@ class Task(models.Model):
     #        ideal, min, max
     @classmethod
     def create_or_update_from_talk(cls, edition, talk, task_type, volunteers):
-        tasks = cls.objects.filter(talk=talk, template__name=task_type)
+        tasks = cls.objects.filter(talk=talk, template__name=task_type, edition=edition)
         templates = TaskTemplate.objects.filter(name=task_type)
         if len(templates):
             template = templates[0]
