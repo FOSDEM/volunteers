@@ -235,4 +235,6 @@ LOGGING = {
     }
 }
 
+DATA_UPLOAD_MAX_NUMBER_FIELD=1500
+
 from volunteer_mgmt.localsettings import *
