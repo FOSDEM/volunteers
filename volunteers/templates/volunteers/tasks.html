@@ -27,11 +27,11 @@
         <table class="task_list">
             <thead>
                 <tr class="table_top_alert">
-                    <th width="10%">{% trans "I'm in" %}!</th>
-                    <th width="55%">{% trans 'Task' %}</th>
-                    <th width="20%">{% trans 'When' %}</th>
-                    <th width="15%">{% trans 'Volunteers' %}</th>
-                    <th width="15%">{% trans 'Location' %}</th>
+                    <th>{% trans "I'm in" %}!</th>
+                    <th>{% trans 'Task' %}</th>
+                    <th>{% trans 'When' %}</th>
+                    <th>{% trans 'Volunteers' %}</th>
+                    <th>{% trans 'Location' %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,11 +82,11 @@
         <table class="task_list">
             <thead>
                 <tr class="table_top">
-                    <th width="10%">{% trans "I'm in" %}!</th>
-                    <th width="55%">{% trans 'Task' %}</th>
-                    <th width="20%">{% trans 'When' %}</th>
-                    <th width="15%">{% trans 'Volunteers' %}</th>
-                    <th width="15%">{% trans 'Location' %}</th>
+                    <th>{% trans "I'm in" %}!</th>
+                    <th>{% trans 'Task' %}</th>
+                    <th>{% trans 'When' %}</th>
+                    <th>{% trans 'Volunteers' %}</th>
+                    <th>{% trans 'Location' %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -103,11 +103,7 @@
                 </tr>
                 {% endifchanged %}
                 <tr class="day">
-                    <th class="no_vert_border">{{ day|date:"l" }}</th>
-                    <th class="no_vert_border">&nbsp;</th>
-                    <th class="no_vert_border">&nbsp;</th>
-                    <th class="no_vert_border">&nbsp;</th>
-                    <th class="no_vert_border">&nbsp;</th>
+                    <th class="no_vert_border" colspan="5">{{ day|date:"l" }}</th>
                 </tr>
                     {% for category, category_tasks in categories.items %}
                     {% if category_tasks %}
