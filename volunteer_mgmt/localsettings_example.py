@@ -56,3 +56,6 @@ DEFAULT_FROM_EMAIL = 'volunteer-admin@lists.fosdem.org'
 
 SETUP_FOR_CURRENT_YEAR_COMPLETE = True
 IMPORT_VIDEO_TASKS = False
+
+# Only uncomment when used for development
+#DEBUG = True
