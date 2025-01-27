@@ -368,7 +368,7 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 class VolunteerAdmin(admin.ModelAdmin):
-    fields = ['user', 'full_name', 'email', 'mobile_nbr', 'private_staff_rating', 'private_staff_notes',
+    fields = ['user', 'full_name', 'email', 'mobile_nbr', 'matrix_id', 'private_staff_rating', 'private_staff_notes',
               'penta_account_name']
 #    inlines = (VolunteerCategoryInline, VolunteerTaskInline)
     list_display = ['full_name', 'mobile_nbr', 'matrix_id', 'email', 'private_staff_rating', 'private_staff_notes']
