@@ -146,9 +146,9 @@ def task_schedule_csv(request, template_id):
             task.date.strftime('%a'),
             task.start_time.strftime('%H:%M'),
             task.end_time.strftime('%H:%M'),
-            '', '', '', '',
+            '', '', '', '',''
         ]
-        writer.writerow([str(s).encode("utf-8") for s in row])
+        writer.writerow(row)
         volunteers = Volunteer.objects.filter(tasks=task)
         for number, volunteer in enumerate(volunteers):
             row = [
@@ -159,9 +159,9 @@ def task_schedule_csv(request, template_id):
                 volunteer.mobile_nbr,
                 volunteer.matrix_id
             ]
-            writer.writerow([str(s).encode("utf-8") for s in row])
-        row = [''] * 9
-        writer.writerow([str(s).encode("utf-8") for s in row])
+            writer.writerow(row)
+        row = [''] * 10
+        writer.writerow(row)
     return response
 
 
