@@ -138,7 +138,7 @@ def task_schedule_csv(request, template_id):
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
     writer = csv.writer(response)
-    writer.writerow(['Task', 'Volunteers', 'Day', 'Start', 'End', 'Volunteer', 'Nick', 'Email', 'Mobile'])
+    writer.writerow(['Task', 'Volunteers', 'Day', 'Start', 'End', 'Volunteer', 'Nick', 'Email', 'Mobile', 'Matrix_id'])
     for task in tasks:
         row = [
             task.name,
@@ -157,6 +157,7 @@ def task_schedule_csv(request, template_id):
                 volunteer.user.username,
                 volunteer.user.email,
                 volunteer.mobile_nbr,
+                volunteer.matrix_id
             ]
             writer.writerow([str(s).encode("utf-8") for s in row])
         row = [''] * 9
