@@ -10,7 +10,7 @@
         <legend class="task_list">{% trans 'Task' %}</legend>
         <table class="task_list">
             <tr>
-                <th>{% trans 'When' %}</th>
+                <th nowrap>{% trans 'When' %}</th>
                 <th>{% trans 'Title' %}</th>
                 <th>{% trans 'Attending' %}</th>
                 <th>{% trans 'Talk' %}</th>
@@ -19,7 +19,7 @@
                 {% endif %}
             </tr>
             <tr>
-                <td>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
+                <td nowrap>{{ task.date|date:"D" }}, {{ task.start_time|time:"H:i" }} - {{ task.end_time|time:"H:i" }}</td>
                 <td>{{ task.name }}</td>
                 <td>
                     {% if user.is_authenticated %}
