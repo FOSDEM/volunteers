@@ -51,6 +51,10 @@ def faq(request):
     return render(request, 'static/faq.html')
 
 
+def privacy_policy(request):
+    return render(request, 'static/privacy_policy.html')
+
+
 def promo(request):
     return render(request, 'static/promo.html')
 

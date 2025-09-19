@@ -1050,6 +1050,16 @@ ul.faq {
     padding-left: 1em;
 }
 
+ul.privacy-policy {
+    font-size: 0.9em;
+    line-height: 1.5em;
+    color: #444;
+    margin: 0 0 0.9em 0;
+    text-shadow: #ffffff 1px 1px 0;
+    list-style: circle;
+    padding-left: 1em;
+}
+
 
 @media only screen and (max-width: 1000px) {
     .mobile-intro {

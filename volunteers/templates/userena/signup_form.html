@@ -13,9 +13,9 @@
     {% for field in form %}
     {{ field.errors }}
     {% comment %} Displaying checkboxes differently {% endcomment %}
-    {% if field.name == 'tos' %}
+    {% if field.name == 'privacy_policy' %}
     <p class="checkbox">
-    <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
+    <label for="id_{{ field.name }}">{{ field }} I read and agree to <a target="_blank" rel="noopener noreferrer" href="{% url 'privacy_policy' %}">Privacy Policy</a> </label>
     </p>
     {% else %}
     <p>

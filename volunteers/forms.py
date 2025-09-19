@@ -62,6 +62,7 @@ class SignupForm(forms.Form):
 
         Validates that the requested username and e-mail is not already in use.
         Also requires the password to be entered twice.
+        Requires Privacy policy areement signed by the user.
     """
     USERNAME_RE = r'^[\.\w]+$'
     attrs_dict = {'class': 'required'}
@@ -76,6 +77,9 @@ class SignupForm(forms.Form):
                                 label=_("Create password"))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
                                 label=_("Repeat password"))
+    privacy_policy = forms.BooleanField(required=True, label=_("I read and agree to Privacy policy"),
+                                        help_text=_("You must agree to the Privacy policy terms and conditions."),
+                                    error_messages={'required': _('You must agree to the Privacy policy terms and conditions.')})
 
     def clean_username(self):
         """
