@@ -17,13 +17,21 @@ After cloning the repo do these steps:
 1) Create a python environment using python3. 
    eg: `virtualenv -p /usr/bin/python3 ./venv`
    and activate this environment whenever working on the project (all other steps assume this)
-   ```
+
+   ```console
    source ./venv/bin/activate
    ```
 
 2) Install all dependencies in the environment:
-   ```
+
+   ```console
    pip install -r requirements-dev.txt
+
+   ```
+   On debian these binary dependencies are required: 
+   
+   ```console
+   sudo apt install libxml2-dev libxslt1-dev
    ```
 
 3) create a `volunteer_mgmt/localsettings.py` file
