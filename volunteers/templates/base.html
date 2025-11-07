@@ -6,6 +6,7 @@
         <title>{% block title %}FOSDEM Volunteers - Conquer the chaos!{% endblock %}</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <script type="text/javascript" src="{% static "js/jquery-1.10.2.min.js" %}"></script>
         <script type="text/javascript" src="{% static "js/jquery-ui-1.10.3.min.js" %}"></script>
@@ -14,13 +15,52 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{% static "css/master.css" %}" />
         <link rel="stylesheet" href="{% static "css/jquery-ui-1.10.3.css" %}">
         <link rel="shortcut icon" type="image/ico" href="{% static "favicon.ico" %}" />
+        
+        <script>
+            // Dark mode toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                // Check for saved theme preference or default to light mode
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                updateToggleIcon(currentTheme);
+                
+                // Toggle theme when button is clicked
+                document.getElementById('theme-toggle').addEventListener('click', function() {
+                    const theme = document.documentElement.getAttribute('data-theme');
+                    const newTheme = theme === 'dark' ? 'light' : 'dark';
+                    
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    updateToggleIcon(newTheme);
+                });
+                
+                function updateToggleIcon(theme) {
+                    const toggleBtn = document.getElementById('theme-toggle');
+                    toggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                    toggleBtn.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+                }
+            });
+        </script>
     </head>
-    <body>
+    <body{% if messages %} class="has-messages"{% endif %}>
+        <!-- Dark Mode Toggle Button -->
+        <button id="theme-toggle" class="theme-toggle" title="Switch to dark mode">🌙</button>
+        
         {% if messages %}
         <div id="top">
           <ul class="messages">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                <span class="message-icon">
+                    {% if message.tags == "warning" %}⚠️
+                    {% elif message.tags == "error" %}❌
+                    {% elif message.tags == "success" %}✅
+                    {% elif message.tags == "info" %}ℹ️
+                    {% else %}📢{% endif %}
+                </span>
+                <span class="message-text">{{ message }}</span>
+                <button class="message-close" onclick="this.parentElement.style.display='none'">&times;</button>
+            </li>
             {% endfor %}
           </ul>
         </div>
@@ -88,7 +128,14 @@
                 {% block content %}{% endblock %}
             </div><!-- /content-container-->
 
-            <div id="footer"><p>Built by FOSDEM volunteers for FOSDEM volunteers!</p></div>
+            <div id="footer">
+                <p>Built by FOSDEM volunteers for FOSDEM volunteers!</p>
+                <div class="footer-links">
+                    <a href="https://github.com/FOSDEM/volunteers" target="_blank" rel="noopener">GitHub Repository</a>
+                    <a href="https://github.com/FOSDEM/volunteers/blob/master/LICENSE.md" target="_blank" rel="noopener">MIT License</a>
+                    <a href="https://fosdem.org" target="_blank" rel="noopener">FOSDEM.org</a>
+                </div>
+            </div>
         </div><!-- /container-->
     </body>
  </html>

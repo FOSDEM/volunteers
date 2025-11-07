@@ -27,7 +27,11 @@ from guardian.decorators import permission_required_or_403
 
 import csv
 
-from xhtml2pdf import pisa
+# PDF generation (optional for local development)
+try:
+    from xhtml2pdf import pisa
+except ImportError:
+    pisa = None
 from django.template.loader import get_template
 from django.template import Context
 from django.utils.html import escape
