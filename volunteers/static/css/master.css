@@ -37,6 +37,16 @@ breadandpepper.com
     --message-text: #c09853;
 }
 
+/* Prevent flash: temporarily suppress background/color transitions while theme is applied */
+html.disable-theme-transitions,
+html.disable-theme-transitions body,
+html.disable-theme-transitions #container,
+html.disable-theme-transitions .white-box,
+html.disable-theme-transitions .theme-toggle {
+    transition: none !important;
+}
+
+
 [data-theme="dark"] {
     --bg-primary: #1a1a1a;
     --bg-secondary: #2d2d2d;

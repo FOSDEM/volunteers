@@ -8,6 +8,37 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <!-- Apply saved theme immediately to avoid flash of incorrect theme during navigation -->
+        <script>
+            (function() {
+                try {
+                    // Temporarily disable transitions to avoid flashes
+                    document.documentElement.classList.add('disable-theme-transitions');
+
+                    var theme = localStorage.getItem('theme');
+                    if (theme) {
+                        document.documentElement.setAttribute('data-theme', theme);
+                    }
+
+                    // Remove the suppressing class shortly after DOM is ready to re-enable transitions
+                    function enableTransitions() {
+                        // Use a small timeout to ensure the style has been applied
+                        setTimeout(function() {
+                            document.documentElement.classList.remove('disable-theme-transitions');
+                        }, 50);
+                    }
+
+                    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                        enableTransitions();
+                    } else {
+                        document.addEventListener('DOMContentLoaded', enableTransitions);
+                    }
+                } catch (e) {
+                    /* ignore */
+                }
+            })();
+        </script>
+
         <script type="text/javascript" src="{% static "js/jquery-1.10.2.min.js" %}"></script>
         <script type="text/javascript" src="{% static "js/jquery-ui-1.10.3.min.js" %}"></script>
         <script type="text/javascript" src="{% static "js/main.js" %}"></script>
