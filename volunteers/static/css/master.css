@@ -842,6 +842,17 @@ ul.features li {
     margin: 10px 0 0 12px;
 }
 
+/* Reduce vertical spacing inside feature cards (name / email lines) */
+ul.features li p {
+    margin: 0 0 0.35em 0; /* tighter than the global p margin */
+    line-height: 1.4;
+}
+
+ul.features li p strong {
+    display: block;
+    margin-bottom: 0.15em; /* small gap after the name */
+}
+
 /*  blocks
 ................................... */
 
@@ -903,6 +914,13 @@ ul.blocks li {
     font-size: 0.9em;
     color: var(--text-secondary);
     line-height: 1.5;
+}
+
+/* Center the footer lead text (e.g. "Built by FOSDEM volunteers for FOSDEM volunteers!") */
+#footer p:first-child {
+    text-align: center !important;
+    margin: 0 0 12px 0;
+    color: var(--text-secondary);
 }
 
 #footer p:last-child {
