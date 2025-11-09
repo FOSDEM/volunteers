@@ -296,16 +296,17 @@ body {
 
 #details {
     margin: 0 0;
-    background-color: #fffeff;
+    background-color: var(--bg-primary);
     padding: 6px;
     text-align: left;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     border-radius: 7px;
-    -moz-box-shadow: 0 0 3px #999;
-    -webkit-box-shadow: 0 0 3px #999;
-    box-shadow: 0 0 3px #999;
+    -moz-box-shadow: 0 0 3px var(--shadow-color);
+    -webkit-box-shadow: 0 0 3px var(--shadow-color);
+    box-shadow: 0 0 3px var(--shadow-color);
     overflow: hidden;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #details img {
