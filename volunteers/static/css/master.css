@@ -1,3 +1,26 @@
+/* Modern card title for task schedule page */
+.task-title {
+    display: block;
+    background: var(--bg-primary);
+    color: var(--nav-bg);
+    border-radius: 10px 10px 0 0;
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 24px 0 0 0;
+    padding: 18px 24px 10px 24px;
+    box-shadow: 0 2px 8px var(--button-shadow);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    letter-spacing: 0.01em;
+    transition: background 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] .task-title {
+    background: var(--bg-secondary);
+    color: var(--nav-bg);
+    border-color: var(--border-color-secondary);
+    box-shadow: 0 2px 8px var(--button-shadow-hover);
+}
 /* @override http://localhost:8000/media/css/master.css */
 
 /*  WdeB
@@ -545,8 +568,8 @@ a#fork {
 ................................... */
 
 form {
-    margin: 20px auto 30px;
-    padding: 30px;
+    margin: 5px auto 5px;
+    padding: 10px;
     border-radius: 12px;
     width: 100%;
     box-sizing: border-box;
@@ -675,8 +698,8 @@ textarea {
 }
 
 input[type=submit], button[type=submit] {
-    padding: 16px 32px;
-    margin: 25px auto 10px;
+    padding: 15px 15px;
+    margin: 10px auto 10px;
     min-width: 200px;
     background: var(--nav-bg);
     display: block;
@@ -1326,13 +1349,6 @@ table.talk_list tr td, table.talk_list tr th {
     transition: background-color 0.2s ease;
 }
 
-/* Prevent wrapping for headers and first column (action buttons) */
-table.task_list th, table.talk_list th,
-table.task_list td:first-child, table.talk_list td:first-child,
-table.task_list td:nth-child(3), table.talk_list td:nth-child(3) /* When column */ {
-    white-space: nowrap;
-}
-
 table.task_list tr:hover, table.talk_list tr:hover {
     background-color: var(--bg-secondary);
 }
@@ -1492,19 +1508,28 @@ table.task_list .task-volunteers, table.talk_list .talk-volunteers {
 
 .task_schedule {
     vertical-align: top;
-    padding-top: 0.3em;
+    padding: 1em 1.5em;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
 }
 
 .task_schedule_head {
     vertical-align: top;
-    border-bottom: 1px solid black;
-    font-weight: bold;
+    background: var(--nav-bg);
+    color: #fff;
+    border-bottom: 2px solid var(--border-color-secondary);
+    font-weight: 700;
+    font-size: 1.05em;
+    padding: 0.7em 1.5em;
 }
 
 .task_schedule_head_avatar {
     width:40px;
     vertical-align: top;
-    border-bottom: 1px solid black;
+    background: var(--nav-bg);
+    color: #fff;
+    border-bottom: 2px solid var(--border-color-secondary);
 }
 
 /* Modern Content Styling - only for content areas, excluding navigation */
@@ -1628,8 +1653,23 @@ blockquote {
 }
 
 table.task_schedule {
-    margin: 10px;
-    padding: 15px 15px 12px;
+    margin: 20px 0;
+    padding: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--button-shadow);
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+table.task_schedule tr:first-child td {
+    border-top: none;
+}
+
+table.task_schedule tr:last-child td {
+    border-bottom: none;
 }
 
 
