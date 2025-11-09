@@ -766,7 +766,7 @@ a.larger-font, .white-box > *, #content-container > h1,
 #content-container > h2, #content-container > p:not(#xtra-info):not(.intro), 
 #content-container > div:not(form):not(#intro), #content-container > a:not(#xtra-info a) {
     text-align: left !important;
-    margin-left: 0;
+    margin-left: 10px;
 }
 
 p.forgot-password{
@@ -1461,6 +1461,11 @@ table.task_list .task-volunteers, table.talk_list .talk-volunteers {
 
 /* Responsive table improvements */
 @media (max-width: 768px) {
+    /* Make banner font size smaller on mobile */
+    ul.messages li {
+        font-size: 0.85em !important;
+        padding: 10px 10px !important;
+    }
     /* Hide desktop navbar on mobile */
     #nav {
         display: none !important;
@@ -1506,8 +1511,7 @@ table.task_list .task-volunteers, table.talk_list .talk-volunteers {
 #content-container ul:not(#profile-nav):not(#account_list), #content-container ol,
 .white-box ul:not(#profile-nav):not(#account_list), .white-box ol,
 .content-section ul:not(#profile-nav):not(#account_list), .content-section ol {
-    margin: 1.2em 0;
-    line-height: 1.6;
+    line-height: 1;
 }
 
 #content-container ul:not(#profile-nav):not(#account_list) li, #content-container ol li,
@@ -1523,16 +1527,6 @@ table.task_list .task-volunteers, table.talk_list .talk-volunteers {
 .content-section ul:not(#profile-nav):not(#account_list) li {
     list-style-type: none;
     position: relative;
-}
-
-#content-container ul:not(#profile-nav):not(#account_list) li::before,
-.white-box ul:not(#profile-nav):not(#account_list) li::before,
-.content-section ul:not(#profile-nav):not(#account_list) li::before {
-    content: "•";
-    color: var(--nav-bg);
-    font-weight: bold;
-    position: absolute;
-    left: -1.2em;
 }
 
 /* Enhanced content blocks */
@@ -1708,6 +1702,19 @@ ul.faq {
 }
 
 @media only screen and (max-width: 1000px) {
+    /* Make banner font size smaller on tablet and small screens */
+    ul.messages li {
+        font-size: 0.5em !important;
+        padding: 10px 10px !important;
+    }
+    /* Ensure #intro keeps purple background on tablets */
+    #intro {
+        background: var(--nav-bg) !important;
+    }
+    /* Hide xtra-info on tablet and smaller screens */
+    #xtra-info {
+        display: none !important;
+    }
     /* Hide desktop navbar on tablets and small screens */
     #nav {
         display: none !important;
@@ -2022,7 +2029,7 @@ ul.faq {
     #intro {
         border: none;
         text-align: center;
-        padding: 20px 15px 40px;
+        padding: 10px 15px 10px;
         margin: 15px 10px 25px;
         border-radius: 12px;
         box-shadow: 0 6px 20px var(--button-shadow);
@@ -2258,7 +2265,7 @@ ul.faq {
     }
 
     p.intro {
-        font-size: 2em;
+        font-size: 1.5em;
     }
     #intro, p.intro, h2.intro {
         margin: 0px;
@@ -2609,6 +2616,14 @@ ul.faq {
 
 /* Responsive dark mode toggle positioning */
 @media (max-width: 768px) {
+    /* Ensure #intro keeps purple background on mobile */
+    #intro {
+        background: var(--nav-bg) !important;
+    }
+    /* Also hide xtra-info on mobile screens */
+    #xtra-info {
+        display: none !important;
+    }
     .theme-toggle {
         bottom: 10px;
         right: 10px;
@@ -2640,12 +2655,8 @@ ul.faq {
 
     #footer .footer-links {
         flex-direction: column;
-        gap: 10px;
+        gap: 1px;
         align-items: center;
-    }
-
-    #footer .footer-links a {
-        padding: 8px 15px;
     }
 
     /* Enhanced mobile table styling */
@@ -2681,9 +2692,8 @@ ul.faq {
 
     /* General link styling for mobile */
     a {
-        font-size: 1.1em;
+        font-size: 1em;
         padding: 5px;
-        min-height: 44px;
         display: inline-block;
     }
 
