@@ -1461,6 +1461,10 @@ table.task_list .task-volunteers, table.talk_list .talk-volunteers {
 
 /* Responsive table improvements */
 @media (max-width: 768px) {
+    /* Hide desktop navbar on mobile */
+    #nav {
+        display: none !important;
+    }
     /* Small screens - revert to normal behavior */
     form.task_list, form.talk_list {
         width: 100%;
@@ -1704,6 +1708,10 @@ ul.faq {
 }
 
 @media only screen and (max-width: 1000px) {
+    /* Hide desktop navbar on tablets and small screens */
+    #nav {
+        display: none !important;
+    }
     .mobile-intro {
         display: block;
         text-align: center;
