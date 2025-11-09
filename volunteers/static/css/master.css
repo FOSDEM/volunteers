@@ -789,7 +789,7 @@ a.larger-font, .white-box > *, #content-container > h1,
 #content-container > h2, #content-container > p:not(#xtra-info):not(.intro), 
 #content-container > div:not(form):not(#intro), #content-container > a:not(#xtra-info a) {
     text-align: left !important;
-    margin-left: 10px;
+    margin: 0px 10px;
 }
 
 p.forgot-password{
@@ -1898,7 +1898,7 @@ ul.faq {
     input[type=submit] {
         font-size: 1.3em;
         font-weight: 600;
-        width: 100%;
+        width: 97%;
         padding: 20px 25px;
         min-height: 60px;
         background: var(--nav-bg);
@@ -1907,7 +1907,7 @@ ul.faq {
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin: 25px 0;
+        margin: 25px 10px;
     }
 
     input[type=submit]:hover {
@@ -2157,6 +2157,7 @@ ul.faq {
         font-size: 1.1em;
         transition: all 0.3s ease;
         text-align: center;
+        margin: 0px 10px;
     }
 
     ul#profile-nav li a:hover {
