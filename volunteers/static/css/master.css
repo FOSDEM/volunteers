@@ -1392,22 +1392,26 @@ table.task_list tr th.no_vert_border, table.talk_list tr th.no_vert_border {
 }
 
 table.task_list tr td.red, table.talk_list tr td.red {
-    color: red;
+    background-color: #d9534f;
+    color: white;
     font-weight: bold;
 }
 
 table.task_list tr td.gray, table.talk_list tr td.gray {
-    color: gray;
+    background-color: #6c757d;
+    color: white;
     font-weight: bold;
 }
 
 table.task_list tr td.green, table.talk_list tr td.green {
-    color: green;
+    background-color: #5cb85c;
+    color: white;
     font-weight: bold;
 }
 
 table.task_list tr td.blue, table.talk_list tr td.blue {
-    color: blue;
+    background-color: #337ab7;
+    color: white;
     font-weight: bold;
 }
 
@@ -1428,6 +1432,51 @@ table.task_list .task-name {
 
 table.task_list .task-volunteers, table.talk_list .talk-volunteers {
     cursor: pointer;
+    /* keep td as table-cell so background fills full cell */
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding-left: 8px;
+    padding-right: 8px;
+    min-width: 72px; /* keep column width reasonable */
+}
+
+/* ensure badge and number are centered inline with a small gap */
+.task-volunteers .status-label, .talk-volunteers .status-label {
+    display: inline-block;
+    margin-right: 0.35em;
+}
+
+/* Status badge shown next to volunteer counts */
+.status-label {
+    display: inline-block;
+    font-size: 0.75em;
+    font-weight: 700;
+    padding: 0.12em 0.5em;
+    border-radius: 999px;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* map status color keywords to project palette */
+.status-label.red, table.task_list tr td.red {
+    background: #d9534f; /* danger */
+    color: #fff;
+}
+.status-label.green, table.task_list tr td.green {
+    background: #5cb85c; /* success */
+    color: #fff;
+}
+.status-label.blue, table.task_list tr td.blue {
+    background: #337ab7; /* primary */
+    color: #fff;
+}
+.status-label.grey, table.task_list tr td.gray {
+    background: #6c757d; /* secondary */
+    color: #fff;
 }
 
 /* Responsive table improvements */
