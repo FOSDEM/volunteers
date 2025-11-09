@@ -1476,7 +1476,7 @@ table.task_list .task-volunteers, table.talk_list .talk-volunteers {
     /* Make table more compact on mobile */
     table.task_list tr td, table.task_list tr th,
     table.talk_list tr td, table.talk_list tr th {
-        padding: 8px 12px;
+        padding: 5px 5px;
         font-size: 0.9em;
     }
 }
@@ -1710,7 +1710,6 @@ ul.faq {
     }
     
     tbody td {
-        margin: 0.5rem;
         padding: 1rem;
     }
     
@@ -2649,7 +2648,7 @@ ul.faq {
     table.task_list tr td, table.task_list tr th,
     table.talk_list tr td, table.talk_list tr th {
         font-size: 1.0em;
-        line-height: 1.4;
+        line-height: 1;
     }
 
     table.task_list tr th, table.talk_list tr th {
@@ -2659,10 +2658,10 @@ ul.faq {
 
     /* Better link visibility in mobile tables */
     table a {
-        font-size: 1.1em;
+        font-size: 1em;
         display: inline-block;
-        min-height: 44px;
-        line-height: 1.4;
+        min-height: auto;
+        line-height: 1;
     }
 
     /* Improve form elements in tables */
