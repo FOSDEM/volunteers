@@ -100,9 +100,15 @@ body {
 }
 
 #top {
-    height: 30px;
-    background-color: #111;
-    border-bottom: 1px solid #fff;
+    /* Only show background when messages are present */
+    min-height: 0;
+    background-color: transparent;
+    border-bottom: none;
+}
+
+#top:not(:empty) {
+    /* Add spacing when messages are displayed */
+    min-height: auto;
 }
 
 #content-container {
