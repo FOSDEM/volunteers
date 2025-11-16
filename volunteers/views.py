@@ -17,7 +17,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 
-from guardian.decorators import permission_required_or_403
 from django.http import Http404
 import csv
 
@@ -270,9 +269,6 @@ def event_sign_on(request):
         if form.is_valid():
             user = form.save()
 
-            # Send the signup complete signal
-            userena_signals.signup_complete.send(sender=None, user=user)
-
             volunteer = Volunteer.objects.get(user=user)
             # get the checked tasks
             task_ids = request.POST.getlist('task')
@@ -404,19 +400,12 @@ def signup(request, signup_form=SignupForm,
         if form.is_valid():
             user = form.save()
 
-            # Send the signup complete signal
-            userena_signals.signup_complete.send(sender=None, user=user)
-
-            if success_url:
-                redirect_to = success_url
-            else:
-                redirect_to = reverse('userena_signup_complete', kwargs={'username': user.username})
+            redirect_to = reverse('userena_profile_detail', kwargs={'username': user.username})
 
             # A new signed user should logout the old one.
             if request.user.is_authenticated:
                 logout(request)
 
-            user = authenticate(identification=user.email, check_password=False)
             login(request, user)
 
             return redirect(redirect_to)
@@ -424,11 +413,10 @@ def signup(request, signup_form=SignupForm,
     if not extra_context:
         extra_context = dict()
     extra_context['form'] = form
-    return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
+    return render(request, template_name, extra_context)
 
 
 @login_required
-@permission_required_or_403('change_profile', (Volunteer, 'user__username', 'username'))
 def profile_edit(request, username, edit_profile_form=EditProfileForm,
                  template_name='userena/profile_form.html', success_url=None,
                  extra_context=None, **kwargs):
@@ -472,6 +460,9 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
         ``profile``
             Instance of the ``Profile`` that is edited.
     """
+    if request.user.username != username:
+        raise PermissionDenied("you are not allowed to edit another user")
+
     user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False)
 
     profile = user.volunteer
@@ -525,6 +516,8 @@ def profile_detail(request, username,
         ``profile``
             Instance of the currently viewed ``Profile``.
     """
+    if request.user.username != username:
+        raise PermissionDenied("you are not allowed to edit another user")
     user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False)
     current_tasks = Task.objects.filter(edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
 

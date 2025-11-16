@@ -163,7 +163,6 @@ MIDDLEWARE = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -191,7 +190,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'volunteers',
-    'guardian',
     'easy_thumbnails'
 )
 
