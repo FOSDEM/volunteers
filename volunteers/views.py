@@ -1,6 +1,6 @@
 from .models import Volunteer, VolunteerTask, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
     Talk, Edition
-from .forms import EditProfileForm, SignupForm, EventSignupForm
+from .forms import EditProfileForm, SignupForm, EventSignupForm, EmailChangeForm
 
 from django.contrib import messages
 from django.http import HttpResponse
@@ -19,7 +19,6 @@ from django.contrib.auth import get_user_model
 
 #from userena import signals as userena_signals
 #from userena import settings as userena_settings
-#from userena.views import ExtraContextTemplateView, get_profile_model
 
 from guardian.decorators import permission_required_or_403
 from django.http import Http404
@@ -33,6 +32,8 @@ except ImportError:
 from django.template.loader import get_template
 from django.template import Context
 from django.utils.html import escape
+
+from django.views.generic import TemplateView
 
 
 def check_profile_completeness(request, volunteer):
@@ -92,9 +93,7 @@ def talk_list(request):
         # delete all the not checked talks
         VolunteerTalk.objects.filter(volunteer=volunteer).exclude(talk_id__in=talk_ids).delete()
 
-        # show success message when enabled
-        if userena_settings.USERENA_USE_MESSAGES:
-            messages.success(request, _('Your talks have been updated.'), fail_silently=True)
+        messages.success(request, _('Your talks have been updated.'), fail_silently=True)
 
         # redirect to prevent repost
         return redirect('talk_list')
@@ -207,8 +206,7 @@ def task_list(request):
             VolunteerTask.objects.get_or_create(task=task, volunteer=volunteer)
 
         # show success message when enabled
-        if userena_settings.USERENA_USE_MESSAGES:
-            messages.success(request, _('Your tasks have been updated.'), fail_silently=True)
+        messages.success(request, _('Your tasks have been updated.'), fail_silently=True)
 
         # redirect to prevent repost
         return redirect('task_list')
@@ -294,8 +292,7 @@ def event_sign_on(request):
             # Send reset password mail
             volunteer.mail_user_created_for_you()
             # show success message when enabled
-            if userena_settings.USERENA_USE_MESSAGES:
-                messages.success(request, _('Tasks for {0} have been updated.'.format(user.username)),
+            messages.success(request, _('Tasks for {0} have been updated.'.format(user.username)),
                                  fail_silently=True)
 
     # get the preferred and other tasks, preserve key order with srteddict for view
@@ -422,10 +419,8 @@ def signup(request, signup_form=SignupForm,
             if request.user.is_authenticated:
                 logout(request)
 
-            if (userena_settings.USERENA_SIGNIN_AFTER_SIGNUP and
-                    not userena_settings.USERENA_ACTIVATION_REQUIRED):
-                user = authenticate(identification=user.email, check_password=False)
-                login(request, user)
+            user = authenticate(identification=user.email, check_password=False)
+            login(request, user)
 
             return redirect(redirect_to)
 
@@ -484,9 +479,6 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
 
     profile = user.volunteer
 
-    print(profile)
-
-
     user_initial = {'first_name': user.first_name, 'last_name': user.last_name}
 
     form = edit_profile_form(instance=profile, initial=user_initial)
@@ -511,9 +503,7 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
     if not extra_context: extra_context = dict()
     extra_context['form'] = form
     extra_context['profile'] = profile
-    return ExtraContextTemplateView.as_view(template_name=template_name,
-                                            extra_context=extra_context)(request)
-
+    return render(request, template_name, extra_context)
 
 @login_required
 def profile_detail(request, username,
@@ -538,22 +528,24 @@ def profile_detail(request, username,
         ``profile``
             Instance of the currently viewed ``Profile``.
     """
+    print("*****profile_detail")
     user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False)
     current_tasks = Task.objects.filter(edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
 
 
-    profile_model = get_profile_model()
     try:
         profile = user.volunteer
     except profile_model.DoesNotExist:
-        profile = profile_model.objects.create(user=user)
+        profile = Volunteer.objects.create(user=user)
 
     if not extra_context: extra_context = dict()
-    extra_context['profile'] = user.volunteer
+    print(f"***  {profile}")
+    extra_context['profile'] = profile
     extra_context['tasks'] = current_tasks.filter(volunteers__user=user)
-    extra_context['hide_email'] = userena_settings.USERENA_HIDE_EMAIL
+    extra_context['hide_email'] = True
+    extra_context['username'] = profile.user.username
     check_profile_completeness(request, user.volunteer)
-    return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
+    return render(request, template_name, extra_context)
 
 
 class ProfileListView(ListView):
@@ -572,10 +564,6 @@ class ProfileListView(ListView):
         except (TypeError, ValueError):
             page = self.page
 
-        if userena_settings.USERENA_DISABLE_PROFILE_LIST \
-                and not self.request.user.is_staff:
-            raise Http404
-
         if not self.extra_context: self.extra_context = dict()
 
         context['page'] = page
@@ -585,7 +573,7 @@ class ProfileListView(ListView):
         return context
 
     def get_queryset(self):
-        profile_model = get_profile_model()
+        profile_model = Volunteer 
         queryset = profile_model.objects.filter(privacy_policy_accepted_at__isnull=False).select_related().extra( \
             select={'lower_name': 'lower(first_name)'}).order_by('lower_name')
         return queryset
@@ -605,3 +593,16 @@ def privacy_policy_consent(request):
         return redirect('task_list')
     
     return render(request, 'volunteers/privacy_policy_consent.html')
+
+
+@login_required
+def email_change(request):
+    user = request.user
+    if request.method == 'POST':
+        form = EmailChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('userena_profile_detail', username=user.username)
+    else:
+        form = EmailChangeForm(instance=user)
+    return render(request, 'userena/email_form.html', {'form': form})

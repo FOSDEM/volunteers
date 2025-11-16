@@ -12,7 +12,7 @@ class EnforcePrivacyPolicyMiddleware:
                 allowed = {
                     reverse('privacy_policy'),
                     reverse('privacy_policy_consent'), 
-                    reverse('userena_signout'),
+                    reverse('logout'),
                 }
                 if request.path not in allowed and not request.path.startswith('/static/'):
                     return redirect('privacy_policy_consent')

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Login</h1>
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Log in</button>
+</form>
+
+{% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+{% endif %}
+{% endblock %}
+

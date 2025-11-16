@@ -185,3 +185,8 @@ class EditProfileForm(forms.ModelForm):
         user.save()
 
         return profile
+
+class EmailChangeForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['email']
