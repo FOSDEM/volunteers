@@ -1,0 +1,28 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block title %}Privacy Policy Agreement{% endblock %}
+{% block content_title %}<h2>Privacy Policy Agreement</h2>{% endblock %}
+
+{% block content %}
+<p>You must accept our updated Privacy Policy to continue.</p>
+<p><a href="{% url 'privacy_policy' %}" target="_blank">Read Privacy Policy</a></p>
+
+<form method="post">
+    {% csrf_token %}
+    <label>
+        <input type="checkbox" id="privacy_agree" required>
+        I have read and agree to the Privacy Policy
+    </label>
+    <br><br>
+    <button type="submit" name="agree" value="yes" id="agree_btn" disabled>
+        I Agree
+    </button>
+</form>
+
+<script>
+document.getElementById('privacy_agree').addEventListener('change', function() {
+    document.getElementById('agree_btn').disabled = !this.checked;
+});
+</script>
+{% endblock %}

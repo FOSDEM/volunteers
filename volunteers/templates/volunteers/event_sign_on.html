@@ -14,7 +14,7 @@
                 {% for field in form %}
                     {{ field.errors }}
                     {% comment %} Displaying checkboxes differently {% endcomment %}
-                    {% if field.name == 'tos' %}
+                    {% if field.name == 'privacy_policy' %}
                         <p class="checkbox">
                             <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
                         </p>
