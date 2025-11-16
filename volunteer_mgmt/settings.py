@@ -232,4 +232,7 @@ LOGGING = {
 
 DATA_UPLOAD_MAX_NUMBER_FIELD=1500
 
+LOGIN_REDIRECT_URL = '/volunteers/'
+LOGOUT_REDIRECT_URL = '/'
+
 from volunteer_mgmt.localsettings import *
