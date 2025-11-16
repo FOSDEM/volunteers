@@ -51,6 +51,10 @@ def faq(request):
     return render(request, 'static/faq.html')
 
 
+def privacy_policy(request):
+    return render(request, 'static/privacy_policy.html')
+
+
 def promo(request):
     return render(request, 'static/promo.html')
 
@@ -593,3 +597,19 @@ class ProfileListView(ListView):
         queryset = profile_model.objects.get_visible_profiles(self.request.user).select_related().extra( \
             select={'lower_name': 'lower(first_name)'}).order_by('lower_name')
         return queryset
+
+
+@login_required
+def privacy_policy_consent(request):
+    v = getattr(request.user, 'volunteer', None)
+    
+    if v and v.privacy_policy_accepted_at:
+        return redirect('task_list')
+    
+    if request.method == 'POST' and request.POST.get('agree') == 'yes' and v:
+        from django.utils import timezone
+        v.privacy_policy_accepted_at = timezone.now()
+        v.save(update_fields=['privacy_policy_accepted_at'])
+        return redirect('task_list')
+    
+    return render(request, 'volunteers/privacy_policy_consent.html')

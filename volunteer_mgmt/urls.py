@@ -19,6 +19,8 @@ urlpatterns = [
     # Userena urls:
     url(r'^$', promo, name='promo'),
     url(r'^faq/', faq, name='faq'),
+    url(r'^privacy_policy/', privacy_policy, name='privacy_policy'),
+    url(r'^privacy-consent/', privacy_policy_consent, name='privacy_policy_consent'),
     url(r'^volunteers/signup', signup, name='signup'),
     url(r'^volunteers/(?P<username>(?!signout|signup|signin)[\.\w-]+)/$', profile_detail, name='profile_detail'),
     url(r'^volunteers/(?P<username>[\.\w-]+)/edit/$', profile_edit, name='userena_profile_edit'),

@@ -3,6 +3,7 @@ import string
 import re
 
 from django import forms
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
@@ -62,6 +63,7 @@ class SignupForm(forms.Form):
 
         Validates that the requested username and e-mail is not already in use.
         Also requires the password to be entered twice.
+        Requires Privacy policy areement signed by the user.
     """
     USERNAME_RE = r'^[\.\w]+$'
     attrs_dict = {'class': 'required'}
@@ -76,6 +78,9 @@ class SignupForm(forms.Form):
                                 label=_("Create password"))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
                                 label=_("Repeat password"))
+    privacy_policy = forms.BooleanField(required=True, label=_("I read and agree to Privacy policy"),
+                                        help_text=_("You must agree to the Privacy policy terms and conditions."),
+                                    error_messages={'required': _('You must agree to the Privacy policy terms and conditions.')})
 
     def clean_username(self):
         """
@@ -135,6 +140,14 @@ class SignupForm(forms.Form):
         new_user.first_name = first_name
         new_user.last_name = last_name
         new_user.save()
+
+        # Set acceptance timestamp
+        if self.cleaned_data.get('privacy_policy'):
+            vol = getattr(new_user, 'volunteer', None)
+            if vol and not vol.privacy_policy_accepted_at:
+                vol.privacy_policy_accepted_at = timezone.now()
+                vol.save(update_fields=['privacy_policy_accepted_at'])
+
         return new_user
 
 def validate_matrix_id(value):
