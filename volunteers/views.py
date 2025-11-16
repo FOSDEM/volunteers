@@ -17,9 +17,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 
-#from userena import signals as userena_signals
-#from userena import settings as userena_settings
-
 from guardian.decorators import permission_required_or_403
 from django.http import Http404
 import csv
@@ -528,7 +525,6 @@ def profile_detail(request, username,
         ``profile``
             Instance of the currently viewed ``Profile``.
     """
-    print("*****profile_detail")
     user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False)
     current_tasks = Task.objects.filter(edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
 
@@ -539,7 +535,6 @@ def profile_detail(request, username,
         profile = Volunteer.objects.create(user=user)
 
     if not extra_context: extra_context = dict()
-    print(f"***  {profile}")
     extra_context['profile'] = profile
     extra_context['tasks'] = current_tasks.filter(volunteers__user=user)
     extra_context['hide_email'] = True

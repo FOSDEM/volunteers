@@ -8,13 +8,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
-
-#from userena.models import UserenaSignup
-#from userena import settings as userena_settings
-#from userena.utils import get_profile_model
-
 from volunteers.models import Volunteer, VolunteerTask, TaskCategory
-
 
 class EventSignupForm(forms.Form):
     first_name = forms.CharField(max_length=255, required=True, label=_('First name'))
