@@ -17,6 +17,8 @@ from django.dispatch import receiver
 from django.db import connections
 from django.db.models import PROTECT, CASCADE
 
+from PIL import Image
+
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
     return datetime.datetime.strptime(date_str, format)
@@ -528,6 +530,27 @@ class Volunteer(models.Model):
     def email(self):
         return self.user.email
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.mugshot:
+            img_path = self.mugshot.path
+            img = Image.open(img_path)
+
+            # crop to middle
+            width, height = img.size
+            min_side = min(width, height)
+            left = (width - min_side) / 2
+            top = (height - min_side) / 2
+            right = (width + min_side) / 2
+            bottom = (height + min_side) / 2
+
+            img = img.crop((left, top, right, bottom))
+
+            max_size = (140, 140)  # maximum width/height
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+            img.save(img_path)
+
     # Dr. Manhattan detection: is this person capable of being in multiple places at once?
     def detect_dr_manhattan(self):
         retval = [False, []]
@@ -601,50 +624,8 @@ class Volunteer(models.Model):
                   fail_silently=False)
 
     def check_mugshot(self):
-        mugshot_url = self.get_mugshot_url()
-        # We only get None for mugshot_url if userena is not set up to use
-        # gravatar fallback and no mughot has been uploaded.
-        if not mugshot_url:
-            return False
-        # OK, we either have a gravatar, or an uploaded pic.
-        elif 'gravatar.com' not in mugshot_url:
-            return True
-        # Right, definitely a gravatar then... Real, or auto-generated?
-        # Code lifted from http://mcnearney.net/blog/2010/2/14/creating-django-gravatar-template-tag-part-1/
-        GRAVATAR_DOMAIN = 'gravatar.com'
-        GRAVATAR_PATH = '/avatar/'
-        gravatar_hash = hashlib.md5(self.user.email.encode('utf-8').strip().lower()).hexdigest()
-        query = urllib.parse.urlencode({
-            'gravatar_id': gravatar_hash,
-            's': 1,
-            'default': '/'
-        })
-        full_path = '%s?%s' % (GRAVATAR_PATH, query)
-        try:
-            if os.environ.get('HTTPS_PROXY'):
-                proxy_host, proxy_port = os.environ.get('HTTPS_PROXY').split('//')[1].split(':')
-                proxy_port = int(proxy_port)
-                conn = http.client.HTTPSConnection(proxy_host, proxy_port, timeout=5)
-                conn.set_tunnel(GRAVATAR_DOMAIN)
-            elif os.environ.get('HTTP_PROXY'):
-                proxy_host, proxy_port = os.environ.get('HTTP_PROXY').split('//')[1].split(':')
-                proxy_port = int(proxy_port)
-                conn = http.client.HTTPConnection(proxy_host, proxy_port, timeout=5)
-                conn.set_tunnel(GRAVATAR_DOMAIN)
-            else:
-                conn = http.client.HTTPConnection(GRAVATAR_DOMAIN, timeout=5)
-            conn.request('HEAD', full_path)
-            response = conn.getresponse()
-            if response.status == 302:
-                return False
-            else:
-                return True
-        except:
-            # Don't bug them if the connection can't be established
-            return True
-
-    def check_mugshot(self):
         return bool(self.mugshot)
+
     def get_mugshot_url(self):
         if self.mugshot:
             return self.mugshot.url
