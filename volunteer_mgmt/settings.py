@@ -157,14 +157,12 @@ MIDDLEWARE = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'volunteers.middleware.EnforcePrivacyPolicyMiddleware',  # Your new middleware
-    'userena.middleware.UserenaLocaleMiddleware',
+    'volunteers.middleware.EnforcePrivacyPolicyMiddleware', 
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
-    'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -193,7 +191,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'volunteers',
-    'userena',
     'guardian',
     'easy_thumbnails'
 )

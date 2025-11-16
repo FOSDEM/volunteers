@@ -9,11 +9,11 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 
-from userena.models import UserenaSignup
-from userena import settings as userena_settings
-from userena.utils import get_profile_model
+#from userena.models import UserenaSignup
+#from userena import settings as userena_settings
+#from userena.utils import get_profile_model
 
-from volunteers.models import VolunteerTask, TaskCategory
+from volunteers.models import Volunteer, VolunteerTask, TaskCategory
 
 
 class EventSignupForm(forms.Form):
@@ -164,7 +164,7 @@ class EditProfileForm(forms.ModelForm):
         # Put the first and last name at the top
 
     class Meta:
-        model = get_profile_model()
+        model = Volunteer
         exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating',
                    'private_staff_notes', 'categories']
         fields = ['first_name', 'last_name', 'matrix_id', 'mobile_nbr', 'about_me', 'mugshot']

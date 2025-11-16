@@ -26,8 +26,8 @@ urlpatterns = [
     url(r'^volunteers/(?P<username>[\.\w-]+)/edit/$', profile_edit, name='userena_profile_edit'),
     url(r'^volunteers/page/(?P<page>[0-9]+)/$', views.ProfileListView.as_view(), name='userena_profile_list_paginated'),
     url(r'^volunteers/$', views.ProfileListView.as_view(), name='userena_profile_list'),
-    url(r'^volunteers/', include('userena.urls')),
-    url(r'^messages/', include('userena.contrib.umessages.urls')),
+    #url(r'^volunteers/', include('userena.urls')),
+    #url(r'^messages/', include('userena.contrib.umessages.urls')),
     # other urls:
     url(r'^tasks/(?P<username>[\.\w-]+)', task_list_detailed, name='task_list_detailed'),
     url(r'^task/(?P<task_id>\d+)/$', task_detailed, name='task_detailed'),

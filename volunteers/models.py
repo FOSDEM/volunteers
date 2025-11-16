@@ -12,7 +12,6 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from userena.models import UserenaLanguageBaseProfile
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db import connections
@@ -486,7 +485,7 @@ The nice guys n' gals who make it all happen.
 """
 
 
-class Volunteer(UserenaLanguageBaseProfile):
+class Volunteer(models.Model):
     class Meta:
         verbose_name = _('Volunteer')
         verbose_name_plural = _('Volunteers')
@@ -520,6 +519,7 @@ class Volunteer(UserenaLanguageBaseProfile):
                                           blank=True, max_length=256, help_text="We need this to link your volunteers account from Pentabarf to participate in heralding/hosting a digital edition.")
     matrix_id = models.CharField('Matrix ID', null=True, blank=True, max_length=256, help_text='If you have a matrix account (mxid), you can specify it here. This is required for the virtual infodesk. The format is @username:homeserver.tld')
     privacy_policy_accepted_at = models.DateTimeField(null=True, blank=True)
+    mugshot = models.ImageField(upload_to='mugshots/', blank=True, null=True)
 
     # Just here for the admin interface.
     def full_name(self):
@@ -642,6 +642,13 @@ class Volunteer(UserenaLanguageBaseProfile):
         except:
             # Don't bug them if the connection can't be established
             return True
+
+    def check_mugshot(self):
+        return bool(self.mugshot)
+    def get_mugshot_url(self):
+        if self.mugshot:
+            return self.mugshot.url
+        return settings.STATIC_URL + "img/default_mugshot.png"
 
 
 """

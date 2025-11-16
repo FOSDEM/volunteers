@@ -17,14 +17,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 
-from userena.forms import SignupFormOnlyEmail
-from userena.decorators import secure_required
-from userena import signals as userena_signals
-from userena import settings as userena_settings
-from userena.views import ExtraContextTemplateView, get_profile_model
+#from userena import signals as userena_signals
+#from userena import settings as userena_settings
+#from userena.views import ExtraContextTemplateView, get_profile_model
 
 from guardian.decorators import permission_required_or_403
-
+from django.http import Http404
 import csv
 
 # PDF generation (optional for local development)
@@ -371,7 +369,6 @@ def task_list_detailed(request, username):
     return render(request, 'volunteers/tasks_detailed.html', context)
 
 
-@secure_required
 def signup(request, signup_form=SignupForm,
            template_name='userena/signup_form.html', success_url=None,
            extra_context=None):
@@ -405,14 +402,6 @@ def signup(request, signup_form=SignupForm,
         ``form``
             Form supplied by ``signup_form``.
     """
-    # If signup is disabled, return 403
-    if userena_settings.USERENA_DISABLE_SIGNUP:
-        raise PermissionDenied
-
-    # If no usernames are wanted and the default form is used, fallback to the
-    # default form that doesn't display to enter the username.
-    if userena_settings.USERENA_WITHOUT_USERNAMES and (signup_form == SignupForm):
-        signup_form = SignupFormOnlyEmail
 
     form = signup_form()
 
@@ -446,14 +435,13 @@ def signup(request, signup_form=SignupForm,
     return ExtraContextTemplateView.as_view(template_name=template_name, extra_context=extra_context)(request)
 
 
-@secure_required
 @login_required
-@permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))
+@permission_required_or_403('change_profile', (Volunteer, 'user__username', 'username'))
 def profile_edit(request, username, edit_profile_form=EditProfileForm,
                  template_name='userena/profile_form.html', success_url=None,
                  extra_context=None, **kwargs):
     """
-        Edit profile.
+        Edit or view a profile.
 
         Edits a profile selected by the supplied username. First checks
         permissions if the user is allowed to edit this profile, if denied will
@@ -492,9 +480,12 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
         ``profile``
             Instance of the ``Profile`` that is edited.
     """
-    user = get_object_or_404(get_user_model(), username__iexact=username)
+    user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False)
 
     profile = user.volunteer
+
+    print(profile)
+
 
     user_initial = {'first_name': user.first_name, 'last_name': user.last_name}
 
@@ -507,8 +498,7 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
             profile = form.save(commit=False)
             profile.save()
 
-            if userena_settings.USERENA_USE_MESSAGES:
-                messages.success(request, _('Your profile has been updated.'), fail_silently=True)
+            messages.success(request, _('Your profile has been updated.'), fail_silently=True)
 
             if success_url:
                 # Send a signal that the profile has changed
@@ -527,7 +517,7 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
 
 @login_required
 def profile_detail(request, username,
-                   template_name=userena_settings.USERENA_PROFILE_DETAIL_TEMPLATE,
+                   template_name="userena/profile_detail.html",
                    extra_context=None, **kwargs):
     """
         Detailed view of an user.
@@ -548,7 +538,7 @@ def profile_detail(request, username,
         ``profile``
             Instance of the currently viewed ``Profile``.
     """
-    user = get_object_or_404(get_user_model(), username__iexact=username)
+    user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False)
     current_tasks = Task.objects.filter(edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
 
 
@@ -558,8 +548,6 @@ def profile_detail(request, username,
     except profile_model.DoesNotExist:
         profile = profile_model.objects.create(user=user)
 
-    if not profile.can_view_profile(request.user):
-        raise PermissionDenied
     if not extra_context: extra_context = dict()
     extra_context['profile'] = user.volunteer
     extra_context['tasks'] = current_tasks.filter(volunteers__user=user)
@@ -573,7 +561,7 @@ class ProfileListView(ListView):
     context_object_name = 'profile_list'
     page = 1
     paginate_by = 50
-    template_name = userena_settings.USERENA_PROFILE_LIST_TEMPLATE
+    template_name = 'userena/profile_list.html' 
     extra_context = None
 
     def get_context_data(self, **kwargs):
@@ -598,7 +586,7 @@ class ProfileListView(ListView):
 
     def get_queryset(self):
         profile_model = get_profile_model()
-        queryset = profile_model.objects.get_visible_profiles(self.request.user).select_related().extra( \
+        queryset = profile_model.objects.filter(privacy_policy_accepted_at__isnull=False).select_related().extra( \
             select={'lower_name': 'lower(first_name)'}).order_by('lower_name')
         return queryset
 
