@@ -15,7 +15,6 @@
         {{ task.location }}
     </h2><br/>
     <table width="98%" class="task_schedule">
-        <tr><td colspan="4">&nbsp;</td></tr>
         {% for volunteer in volunteers %}
         <tr>
             <td class="task_schedule_head" width="20%">{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</td>
@@ -41,9 +40,7 @@
                 <img src="{{ volunteer.get_mugshot_url }}" class="avatar_center"/>
             </td>
         </tr>
-        <tr><td colspan="4">&nbsp;</td></tr>
         {% endfor %}
     </table>
-    <br/>&nbsp;<br/>
     {% endfor %}
 {% endblock %}
