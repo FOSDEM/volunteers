@@ -9,7 +9,6 @@ DEBUG = False
 
 settings_dir = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
-LOGIN_URL = "/volunteers/signin"
 
 # We use Postgres everywhere atm.
 # DATABASES = {
@@ -232,5 +231,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELD=1500
 
 LOGIN_REDIRECT_URL = '/volunteers/'
 LOGOUT_REDIRECT_URL = '/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from volunteer_mgmt.localsettings import *

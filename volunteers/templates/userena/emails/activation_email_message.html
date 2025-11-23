@@ -1,14 +1,15 @@
+{% load i18n %}
 <html>
 <body>
-    <h1>Test message</h1>
+    <h1>Account activation</h1>
     {% if not without_usernames %}<p>{% blocktrans with user.username as username %}Dear {{ username }},</p>{% endblocktrans %}{% endif %}
     {% blocktrans with site.name as site %}<p>Thank you for volunteering for FOSDEM. As you might know, as a staff member, I am a volunteer too. I really appreciate your contribution!</p>{% endblocktrans %}
     <p>
         {% trans "To activate your account, please click the link below:" %}<br />
-        {{ protocol }}://{{ site.domain }}{% url 'userena_activate' activation_key %}
+        {{ protocol }}://{{ site.domain }}{% url 'activate' confirmation.token %}
     </p>
     <p>
-        To work together efficiently, we could really use a recognisable id photo, a mobile phone number, and tasks you will work on.
+        After activating, to work together efficiently, we could really use a recognisable id photo, a mobile phone number, and tasks you will work on.
     </p>
     <p>
         Please after signing up, add your photo id and mobile phone number at
@@ -42,4 +43,3 @@ talks heralding)
     </p>
 </body>
 </html>
-{% endautoescape %}

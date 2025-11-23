@@ -6,6 +6,7 @@ import os
 import urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
 import logging
+import uuid 
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -16,6 +17,8 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db import connections
 from django.db.models import PROTECT, CASCADE
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 from PIL import Image
 
@@ -522,6 +525,7 @@ class Volunteer(models.Model):
     matrix_id = models.CharField('Matrix ID', null=True, blank=True, max_length=256, help_text='If you have a matrix account (mxid), you can specify it here. This is required for the virtual infodesk. The format is @username:homeserver.tld')
     privacy_policy_accepted_at = models.DateTimeField(null=True, blank=True)
     mugshot = models.ImageField(upload_to='mugshots/', blank=True, null=True)
+    email_confirmed = models.BooleanField(null=False, default=False)
 
     # Just here for the admin interface.
     def full_name(self):
@@ -749,3 +753,41 @@ def delete_volunteertask(sender, instance, **kwargs):
             cursor.execute("delete from event_person where event_id=%s and person_id=(select person_id from auth.account where login_name = %s) and event_role='host' and remark='volunteer';", (event_id, account_name))
     except Exception as err:
         logger.exception(err)
+
+class EmailConfirmation(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    token = models.UUIDField(default=uuid.uuid4, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def send(self, request):
+        """
+        Send activation email:
+        """
+        subject = "[FOSDEM Volunteers]Activate your account"
+        ctx = {
+            "user": self.user,
+            "confirmation": self,
+            "domain": request.get_host(),
+            "protocol": "https" if request.is_secure() else "http"
+        }
+        
+        # texts below need a review
+        #text_body = render_to_string(
+        #    "userena/emails/activation_email_message.txt", ctx
+        #)
+
+        #html_body = render_to_string(
+        #    "userena/emails/activation_email_message.html", ctx
+        #)
+        text_body = render_to_string(
+            "userena/emails/activation_email_message_short.txt", ctx
+        )
+
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_body,
+            from_email="volunteers@fosdem.org",
+            to=[self.user.email],
+        )
+        # email.attach_alternative(html_body, "text/html")
+        email.send()

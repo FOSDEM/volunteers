@@ -8,6 +8,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 admin.autodiscover()
 
+from volunteers.forms import ActivationAwareAuthenticationForm
 
 urlpatterns = [
     # Examples:
@@ -39,8 +40,9 @@ urlpatterns = [
     url(r'^task_schedule/(?P<template_id>\d+)/$', task_schedule, name='task_schedule'),
     url(r'^task_schedule_csv/(?P<template_id>\d+)/$', task_schedule_csv, name='task_schedule_csv'),
     url(r'^media/(?P<path>.*)$', django_static_serve, {'document_root': settings.MEDIA_ROOT, 'show_indexes': True }),
-    path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
+    path("accounts/login/", auth_views.LoginView.as_view(authentication_form=ActivationAwareAuthenticationForm), name="login"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("accounts/activate/<str:token>/", activate_account ,name="activate"),
     path('accounts/password/change/',
          auth_views.PasswordChangeView.as_view(template_name='userena/password_form.html'),
          name='userena_password_change'),

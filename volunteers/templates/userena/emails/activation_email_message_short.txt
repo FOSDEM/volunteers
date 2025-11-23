@@ -1,0 +1,12 @@
+Dear {{user.username}},
+
+Thank you for signing up at volunteers.fosdem.org.
+
+To activate your account you should click on the link below:
+
+{{ protocol }}://{{ domain }}{% url 'activate' confirmation.token %}
+
+Thanks for using our site!
+
+Sincerely,
+volunteers.fosdem.org

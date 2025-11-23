@@ -1,5 +1,8 @@
+from django.utils import timezone
+from datetime import timedelta
+
 from .models import Volunteer, VolunteerTask, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
-    Talk, Edition
+    Talk, Edition, EmailConfirmation
 from .forms import EditProfileForm, SignupForm, EventSignupForm, EmailChangeForm
 
 from django.contrib import messages
@@ -399,16 +402,10 @@ def signup(request, signup_form=SignupForm,
         form = signup_form(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
-
-            redirect_to = reverse('userena_profile_detail', kwargs={'username': user.username})
-
-            # A new signed user should logout the old one.
-            if request.user.is_authenticated:
-                logout(request)
-
-            login(request, user)
-
-            return redirect(redirect_to)
+            
+            confirmation = EmailConfirmation.objects.create(user=user)
+            confirmation.send(request)
+            return render(request, "userena/activation_send.html")
 
     if not extra_context:
         extra_context = dict()
@@ -460,6 +457,9 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
         ``profile``
             Instance of the ``Profile`` that is edited.
     """
+    
+    # we should probably avoid needing this test by not adding the username ot the url,
+    # and just using the request username
     if request.user.username != username:
         raise PermissionDenied("you are not allowed to edit another user")
 
@@ -594,3 +594,17 @@ def email_change(request):
     else:
         form = EmailChangeForm(instance=user)
     return render(request, 'userena/email_form.html', {'form': form})
+
+@login_required
+def activate_account(request, token):
+    try:
+        valid_since = timezone.now() - timedelta(days=7)
+        confirmation = EmailConfirmation.objects.get(token=token, created_at__gte=valid_since, user=request.user)
+    except Exception:
+        return render(request, "userena/activate_fail.html")
+    
+    if confirmation:
+        confirmation.user.volunteer.email_confirmed=True
+        confirmation.user.volunteer.save()
+        confirmation.delete()
+        return redirect('userena_profile_detail', username=user.username)

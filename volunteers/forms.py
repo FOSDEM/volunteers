@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 from volunteers.models import Volunteer, VolunteerTask, TaskCategory
-
+from django.contrib.auth.forms import AuthenticationForm
 
 class EventSignupForm(forms.Form):
     """
@@ -112,7 +112,7 @@ class SignupForm(forms.ModelForm):
                 raise forms.ValidationError(_('The two password fields didn\'t match.'))
         return self.cleaned_data
 
-    def save(self, activation_required=True):
+    def save(self):
         """ Creates a new user and account. Returns the newly created user. """
 
         first_name, last_name, username, email, password = (self.cleaned_data['first_name'],
@@ -124,6 +124,7 @@ class SignupForm(forms.ModelForm):
         new_user = get_user_model().objects.create_user(username, email, password)
         new_user.first_name = first_name
         new_user.last_name = last_name
+        new_user.active=False
         new_user.save()
 
         # Set acceptance timestamp
@@ -173,3 +174,13 @@ class EmailChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['email']
+
+
+class ActivationAwareAuthenticationForm(AuthenticationForm):
+    def confirm_login_allowed(self, user):
+        print(">>> confirm_login_allowed called for:", user)
+        if not user.volunteer.email_confirmed:
+            raise forms.ValidationError(
+                _("Your account is not activated yet. Please check your email for the activation link."),
+                code='inactive',
+            )
