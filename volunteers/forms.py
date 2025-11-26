@@ -4,7 +4,7 @@ import re
 
 from django import forms
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
@@ -75,12 +75,21 @@ class SignupForm(forms.ModelForm):
                 help_text=_("You must agree to the Privacy policy terms and conditions."),
                                     error_messages={'required': _('You must agree to the Privacy policy terms and conditions.')})
 
+    captcha_answer = forms.CharField(
+        required=True,
+        label=_("For which word is the D in FOSDEM the abbreviation"),
+        help_text=_("This helps prevent automated signups."),
+    )
 
     class Meta:
         model = get_user_model()
         fields = ["first_name", "last_name", "username", "email" ]
 
-
+    def clean_captcha_answer(self):
+        value = self.cleaned_data.get("captcha_answer", "").strip().lower()
+        if value not in ["developers", "developer", "developers'"]:
+            raise forms.ValidationError(_("Incorrect answer. You may find a hint in the about page: https://fosdem.org/about/"))
+        return value
     def clean_username(self):
         """
             Validate that the username is alphanumeric and is not already in use.
@@ -124,12 +133,11 @@ class SignupForm(forms.ModelForm):
         new_user = get_user_model().objects.create_user(username, email, password)
         new_user.first_name = first_name
         new_user.last_name = last_name
-        new_user.active=False
         new_user.save()
 
         # Set acceptance timestamp
         if self.cleaned_data.get('privacy_policy'):
-            vol = Volunteer.objects.create(user=new_user, privacy_policy_accepted_at=timezone.now())
+            vol = Volunteer.objects.create(user=new_user, privacy_policy_accepted_at=timezone.now(), email_validated=False)
             vol.save()
 
         return new_user
