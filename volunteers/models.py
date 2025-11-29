@@ -526,6 +526,8 @@ class Volunteer(models.Model):
     privacy_policy_accepted_at = models.DateTimeField(null=True, blank=True)
     mugshot = models.ImageField(upload_to='mugshots/', blank=True, null=True)
     email_confirmed = models.BooleanField(null=False, default=False)
+    privacy = models.CharField(max_length=16, null=True, blank=True)
+    language = models.CharField(max_length=8, null=True, blank=True)
 
     # Just here for the admin interface.
     def full_name(self):
