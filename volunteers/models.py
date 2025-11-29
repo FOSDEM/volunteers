@@ -766,7 +766,7 @@ class EmailConfirmation(models.Model):
         """
         Send activation email:
         """
-        subject = "[FOSDEM Volunteers]Activate your account"
+        subject = "[FOSDEM Volunteers] Activate your account"
         ctx = {
             "user": self.user,
             "confirmation": self,
@@ -774,14 +774,6 @@ class EmailConfirmation(models.Model):
             "protocol": "https" if request.is_secure() else "http"
         }
         
-        # texts below need a review
-        #text_body = render_to_string(
-        #    "userena/emails/activation_email_message.txt", ctx
-        #)
-
-        #html_body = render_to_string(
-        #    "userena/emails/activation_email_message.html", ctx
-        #)
         text_body = render_to_string(
             "userena/emails/activation_email_message_short.txt", ctx
         )
@@ -792,5 +784,4 @@ class EmailConfirmation(models.Model):
             from_email="volunteers@fosdem.org",
             to=[self.user.email],
         )
-        # email.attach_alternative(html_body, "text/html")
         email.send()
