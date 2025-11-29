@@ -4,19 +4,18 @@ import re
 
 from django import forms
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
-
-from userena.models import UserenaSignup
-from userena import settings as userena_settings
-from userena.utils import get_profile_model
-
-from volunteers.models import VolunteerTask, TaskCategory
-
+from volunteers.models import Volunteer, VolunteerTask, TaskCategory
+from django.contrib.auth.forms import AuthenticationForm
 
 class EventSignupForm(forms.Form):
+    """
+    unclear when/whether this is used!
+    """
     first_name = forms.CharField(max_length=255, required=True, label=_('First name'))
     last_name = forms.CharField(max_length=255, required=True, label=_('Last name'))
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'required', 'maxlength': 255}), label=_('E-mail'))
@@ -28,7 +27,7 @@ class EventSignupForm(forms.Form):
             invalid_r.sub('', self.cleaned_data['first_name']),
             invalid_r.sub('', self.cleaned_data['last_name'])
         )
-
+ 
     def clean_email(self):
         """ Validate that the e-mail address is unique. """
         if get_user_model().objects.filter(email__iexact=self.cleaned_data['email']):
@@ -57,7 +56,8 @@ class EventSignupForm(forms.Form):
         return new_user
 
 
-class SignupForm(forms.Form):
+
+class SignupForm(forms.ModelForm):
     """
         Form for creating a new user account.
 
@@ -67,21 +67,30 @@ class SignupForm(forms.Form):
     """
     USERNAME_RE = r'^[\.\w]+$'
     attrs_dict = {'class': 'required'}
-    first_name = forms.CharField(max_length=30, required=True, label=_("First name"))
-    last_name = forms.CharField(max_length=30, required=True, label=_("Last name"))
-    username = forms.RegexField(regex=USERNAME_RE, max_length=30, widget=forms.TextInput(attrs=attrs_dict),
-                                label=_("Username"),
-                                error_messages={
-                                    'invalid': _('Username must contain only letters, numbers, dots and underscores.')})
-    email = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict, maxlength=75)), label=_("Email"))
+
     password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
                                 label=_("Create password"))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
                                 label=_("Repeat password"))
     privacy_policy = forms.BooleanField(required=True, label=_("I read and agree to Privacy policy"),
-                                        help_text=_("You must agree to the Privacy policy terms and conditions."),
+                help_text=_("You must agree to the Privacy policy terms and conditions."),
                                     error_messages={'required': _('You must agree to the Privacy policy terms and conditions.')})
 
+    captcha_answer = forms.CharField(
+        required=True,
+        label=_("For which word is the D in FOSDEM the abbreviation"),
+        help_text=mark_safe("This limits automated signups. Hint: <a href='https://fosdem.org/about/' target='_blank'>about FOSDEM</a>."),
+    )
+
+    class Meta:
+        model = get_user_model()
+        fields = ["first_name", "last_name", "username", "email" ]
+
+    def clean_captcha_answer(self):
+        value = self.cleaned_data.get("captcha_answer", "").strip().lower()
+        if value not in ["developers", "developer", "developers'"]:
+            raise forms.ValidationError(_("Incorrect answer. You may find a hint in the about page: https://fosdem.org/about/"))
+        return value
     def clean_username(self):
         """
             Validate that the username is alphanumeric and is not already in use.
@@ -93,24 +102,12 @@ class SignupForm(forms.Form):
         except get_user_model().DoesNotExist:
             pass
         else:
-            if userena_settings.USERENA_ACTIVATION_REQUIRED and UserenaSignup.objects.filter(
-                    user__username__iexact=self.cleaned_data['username']).exclude(
-                    activation_key=userena_settings.USERENA_ACTIVATED):
-                raise forms.ValidationError(_(
-                    'This username is already taken but not confirmed. Please check your email for verification steps.'))
             raise forms.ValidationError(_('This username is already taken.'))
-        if self.cleaned_data['username'].lower() in userena_settings.USERENA_FORBIDDEN_USERNAMES:
-            raise forms.ValidationError(_('This username is not allowed.'))
         return self.cleaned_data['username']
 
     def clean_email(self):
         """ Validate that the e-mail address is unique. """
         if get_user_model().objects.filter(email__iexact=self.cleaned_data['email']):
-            if userena_settings.USERENA_ACTIVATION_REQUIRED and UserenaSignup.objects.filter(
-                    user__email__iexact=self.cleaned_data['email']).exclude(
-                    activation_key=userena_settings.USERENA_ACTIVATED):
-                raise forms.ValidationError(_(
-                    'This email is already in use but not confirmed. Please check your email for verification steps.'))
             raise forms.ValidationError(_('This email is already in use. Please supply a different email.'))
         return self.cleaned_data['email']
 
@@ -125,7 +122,7 @@ class SignupForm(forms.Form):
                 raise forms.ValidationError(_('The two password fields didn\'t match.'))
         return self.cleaned_data
 
-    def save(self, activation_required=True):
+    def save(self):
         """ Creates a new user and account. Returns the newly created user. """
 
         first_name, last_name, username, email, password = (self.cleaned_data['first_name'],
@@ -134,19 +131,15 @@ class SignupForm(forms.Form):
                                                             self.cleaned_data['email'],
                                                             self.cleaned_data['password1'])
 
-        new_user = UserenaSignup.objects.create_user(username, email, password,
-                                                     not activation_required,
-                                                     activation_required)
+        new_user = get_user_model().objects.create_user(username, email, password)
         new_user.first_name = first_name
         new_user.last_name = last_name
         new_user.save()
 
         # Set acceptance timestamp
         if self.cleaned_data.get('privacy_policy'):
-            vol = getattr(new_user, 'volunteer', None)
-            if vol and not vol.privacy_policy_accepted_at:
-                vol.privacy_policy_accepted_at = timezone.now()
-                vol.save(update_fields=['privacy_policy_accepted_at'])
+            vol = Volunteer.objects.create(user=new_user, privacy_policy_accepted_at=timezone.now(), email_confirmed=False)
+            vol.save()
 
         return new_user
 
@@ -164,7 +157,7 @@ class EditProfileForm(forms.ModelForm):
         # Put the first and last name at the top
 
     class Meta:
-        model = get_profile_model()
+        model = Volunteer
         exclude = ['user', 'editions', 'tasks', 'signed_up', 'language', 'privacy', 'private_staff_rating',
                    'private_staff_notes', 'categories']
         fields = ['first_name', 'last_name', 'matrix_id', 'mobile_nbr', 'about_me', 'mugshot']
@@ -185,3 +178,37 @@ class EditProfileForm(forms.ModelForm):
         user.save()
 
         return profile
+
+class EmailChangeForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['email']
+
+
+class ActivationAwareAuthenticationForm(AuthenticationForm):
+    def confirm_login_allowed(self, user):
+        print(">>> confirm_login_allowed called for:", user)
+        if not user.volunteer.email_confirmed:
+            raise forms.ValidationError(
+                _("Your account is not activated yet. Please check your email for the activation link."),
+                code='inactive',
+            )
+
+
+class ResendActivationForm(forms.Form):
+    email = forms.EmailField(label="Email")
+
+    def clean_email(self):
+        email = self.cleaned_data["email"].strip().lower()
+        User = get_user_model()
+
+        try:
+            user = User.objects.get(email__iexact=email)
+        except User.DoesNotExist:
+            raise forms.ValidationError("No user with this email exists.")
+
+        if hasattr(user, "volunteer") and user.volunteer.email_confirmed:
+            raise forms.ValidationError("This account is already activated.")
+
+        self.user = user
+        return email

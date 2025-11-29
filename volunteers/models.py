@@ -6,17 +6,21 @@ import os
 import urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
 import logging
+import uuid 
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from userena.models import UserenaLanguageBaseProfile
+from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db import connections
 from django.db.models import PROTECT, CASCADE
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+
+from PIL import Image
 
 # Parse dates, times, DRY
 def parse_datetime(date_str, format='%Y-%m-%d'):
@@ -486,7 +490,7 @@ The nice guys n' gals who make it all happen.
 """
 
 
-class Volunteer(UserenaLanguageBaseProfile):
+class Volunteer(models.Model):
     class Meta:
         verbose_name = _('Volunteer')
         verbose_name_plural = _('Volunteers')
@@ -520,6 +524,10 @@ class Volunteer(UserenaLanguageBaseProfile):
                                           blank=True, max_length=256, help_text="We need this to link your volunteers account from Pentabarf to participate in heralding/hosting a digital edition.")
     matrix_id = models.CharField('Matrix ID', null=True, blank=True, max_length=256, help_text='If you have a matrix account (mxid), you can specify it here. This is required for the virtual infodesk. The format is @username:homeserver.tld')
     privacy_policy_accepted_at = models.DateTimeField(null=True, blank=True)
+    mugshot = models.ImageField(upload_to='mugshots/', blank=True, null=True)
+    email_confirmed = models.BooleanField(null=False, default=False)
+    privacy = models.CharField(max_length=16, null=True, blank=True)
+    language = models.CharField(max_length=8, null=True, blank=True)
 
     # Just here for the admin interface.
     def full_name(self):
@@ -527,6 +535,30 @@ class Volunteer(UserenaLanguageBaseProfile):
 
     def email(self):
         return self.user.email
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        try:
+            if self.mugshot:
+                img_path = self.mugshot.path
+                img = Image.open(img_path)
+
+                # crop to middle
+                width, height = img.size
+                min_side = min(width, height)
+                left = (width - min_side) / 2
+                top = (height - min_side) / 2
+                right = (width + min_side) / 2
+                bottom = (height + min_side) / 2
+
+                img = img.crop((left, top, right, bottom))
+
+                max_size = (140, 140)  # maximum width/height
+                img.thumbnail(max_size, Image.Resampling.LANCZOS)
+                img.save(img_path)
+        except FileNotFoundError:
+            self.mugshot=None
+            self.save()
 
     # Dr. Manhattan detection: is this person capable of being in multiple places at once?
     def detect_dr_manhattan(self):
@@ -601,47 +633,12 @@ class Volunteer(UserenaLanguageBaseProfile):
                   fail_silently=False)
 
     def check_mugshot(self):
-        mugshot_url = self.get_mugshot_url()
-        # We only get None for mugshot_url if userena is not set up to use
-        # gravatar fallback and no mughot has been uploaded.
-        if not mugshot_url:
-            return False
-        # OK, we either have a gravatar, or an uploaded pic.
-        elif 'gravatar.com' not in mugshot_url:
-            return True
-        # Right, definitely a gravatar then... Real, or auto-generated?
-        # Code lifted from http://mcnearney.net/blog/2010/2/14/creating-django-gravatar-template-tag-part-1/
-        GRAVATAR_DOMAIN = 'gravatar.com'
-        GRAVATAR_PATH = '/avatar/'
-        gravatar_hash = hashlib.md5(self.user.email.encode('utf-8').strip().lower()).hexdigest()
-        query = urllib.parse.urlencode({
-            'gravatar_id': gravatar_hash,
-            's': 1,
-            'default': '/'
-        })
-        full_path = '%s?%s' % (GRAVATAR_PATH, query)
-        try:
-            if os.environ.get('HTTPS_PROXY'):
-                proxy_host, proxy_port = os.environ.get('HTTPS_PROXY').split('//')[1].split(':')
-                proxy_port = int(proxy_port)
-                conn = http.client.HTTPSConnection(proxy_host, proxy_port, timeout=5)
-                conn.set_tunnel(GRAVATAR_DOMAIN)
-            elif os.environ.get('HTTP_PROXY'):
-                proxy_host, proxy_port = os.environ.get('HTTP_PROXY').split('//')[1].split(':')
-                proxy_port = int(proxy_port)
-                conn = http.client.HTTPConnection(proxy_host, proxy_port, timeout=5)
-                conn.set_tunnel(GRAVATAR_DOMAIN)
-            else:
-                conn = http.client.HTTPConnection(GRAVATAR_DOMAIN, timeout=5)
-            conn.request('HEAD', full_path)
-            response = conn.getresponse()
-            if response.status == 302:
-                return False
-            else:
-                return True
-        except:
-            # Don't bug them if the connection can't be established
-            return True
+        return bool(self.mugshot)
+
+    def get_mugshot_url(self):
+        if self.mugshot:
+            return self.mugshot.url
+        return settings.STATIC_URL + "img/default_mugshot.png"
 
 
 """
@@ -761,3 +758,32 @@ def delete_volunteertask(sender, instance, **kwargs):
             cursor.execute("delete from event_person where event_id=%s and person_id=(select person_id from auth.account where login_name = %s) and event_role='host' and remark='volunteer';", (event_id, account_name))
     except Exception as err:
         logger.exception(err)
+
+class EmailConfirmation(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    token = models.UUIDField(default=uuid.uuid4, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def send(self, request):
+        """
+        Send activation email:
+        """
+        subject = "[FOSDEM Volunteers] Activate your account"
+        ctx = {
+            "user": self.user,
+            "confirmation": self,
+            "domain": request.get_host(),
+            "protocol": "https" if request.is_secure() else "http"
+        }
+        
+        text_body = render_to_string(
+            "userena/emails/activation_email_message_short.txt", ctx
+        )
+
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_body,
+            from_email="volunteers@fosdem.org",
+            to=[self.user.email],
+        )
+        email.send()

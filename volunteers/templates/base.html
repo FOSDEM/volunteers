@@ -106,7 +106,6 @@
                         <li><a href="{% url 'promo' %}"><span>{% trans 'Home' %}</span></a></li>
                         {% if user.is_authenticated %}
                             <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Volunteers' %}</span></a></li>
-                        <!-- TODO: fix it :P <li><a href="{% url 'userena_umessages_list' %}"><span>{% trans 'Messages' %}</span></a></li> -->
                         {% endif %}
                         <li><a href="{% url 'task_list' %}"><span>{% trans 'Tasks' %}</span></a></li>
                         {% if user.is_authenticated %}
@@ -117,11 +116,11 @@
                             {% endif %}
                             <li><a href="{% url 'faq' %}"><span>{% trans 'FAQ' %}</span></a></li>
                             <li><a href="{% url 'userena_profile_detail' user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
-                            <li><a href="{% url 'userena_signout' %}"><span>{% trans 'Signout' %}</span></a></li>
+                            <li><a href="{% url 'logout' %}"><span>{% trans 'Signout' %}</span></a></li>
                         {% else %}
                             <li><a href="{% url 'faq' %}"><span>{% trans 'FAQ' %}</span></a></li>
-                            <li><a href="{% url 'userena_signin' %}"><span>{% trans 'Signin' %}</span></a></li>
-                            <li><a href="{% url 'userena_signup' %}"><span>{% trans 'Signup' %}</span></a></li>
+                            <li><a href="{% url 'login' %}"><span>{% trans 'Signin' %}</span></a></li>
+                            <li><a href="{% url 'login' %}">TODO<span>{% trans 'Signup' %}</span></a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -131,7 +130,6 @@
                     <li><a href="{% url 'promo' %}"><span>{% trans 'Home' %}</span></a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'userena_profile_list' %}"><span>{% trans 'Volunteers' %}</span></a></li>
-                    <!-- TODO: fix it :P <li><a href="{% url 'userena_umessages_list' %}"><span>{% trans 'Messages' %}</span></a></li> -->
                     {% endif %}
                     <li><a href="{% url 'task_list' %}"><span>{% trans 'Tasks' %}</span></a></li>
                     {% if user.is_authenticated %}
@@ -142,11 +140,11 @@
                         {% endif %}
                         <li><a href="{% url 'faq' %}"><span>{% trans 'FAQ' %}</span></a></li>
                         <li><a href="{% url 'userena_profile_detail' user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
-                        <li><a href="{% url 'userena_signout' %}"><span>{% trans 'Signout' %}</span></a></li>
+                        <li><a href="{% url 'logout' %}"><span>{% trans 'Signout' %}</span></a></li>
                     {% else %}
                         <li><a href="{% url 'faq' %}"><span>{% trans 'FAQ' %}</span></a></li>
-                        <li><a href="{% url 'userena_signin' %}"><span>{% trans 'Signin' %}</span></a></li>
-                        <li><a href="{% url 'userena_signup' %}"><span>{% trans 'Signup' %}</span></a></li>
+                        <li><a href="{% url 'login' %}"><span>{% trans 'Signin' %}</span></a></li>
+                        <li><a href="{% url 'signup' %}"><span>{% trans 'Signup' %}</span></a></li>
                     {% endif %}
                 </ul>
                 {% endblock %}
@@ -164,7 +162,7 @@
                 <p>Built by FOSDEM volunteers for FOSDEM volunteers!</p>
                 <div class="footer-links">
                     <a href="https://github.com/FOSDEM/volunteers" target="_blank" rel="noopener">GitHub Repository</a>
-                    <a href="https://github.com/FOSDEM/volunteers/blob/master/LICENSE.md" target="_blank" rel="noopener">MIT License</a>
+                    <a href="https://github.com/FOSDEM/volunteers/blob/master/LICENSE.md" target="_blank" rel="noopener">AGPL License</a>
                     <a href="https://fosdem.org" target="_blank" rel="noopener">FOSDEM.org</a>
                 </div>
             </div>
