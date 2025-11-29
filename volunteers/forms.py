@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
 from volunteers.models import Volunteer, VolunteerTask, TaskCategory
 from django.contrib.auth.forms import AuthenticationForm
@@ -78,7 +79,7 @@ class SignupForm(forms.ModelForm):
     captcha_answer = forms.CharField(
         required=True,
         label=_("For which word is the D in FOSDEM the abbreviation"),
-        help_text=_("This helps prevent automated signups."),
+        help_text=mark_safe("This limits automated signups. Hint: <a href='https://fosdem.org/about/' target='_blank'>about FOSDEM</a>."),
     )
 
     class Meta:
