@@ -5,12 +5,14 @@ import re
 from django import forms
 from django.utils import timezone
 from django.utils.translation import gettext as _
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 
 from volunteers.models import Volunteer, VolunteerTask, TaskCategory
 from django.contrib.auth.forms import AuthenticationForm
+
+User = get_user_model()
 
 class EventSignupForm(forms.Form):
     """
@@ -186,8 +188,42 @@ class EmailChangeForm(forms.ModelForm):
 
 
 class ActivationAwareAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label=_("Username or email"),
+        widget=forms.TextInput(attrs={"autofocus": True}),
+    )
+
+
+    def clean(self):
+        username_or_email = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if username_or_email and password:
+            user = authenticate(self.request, username=username_or_email, password=password)
+
+            # If login by username failed, try by email
+            if user is None:
+                try:
+                    user_obj = User.objects.get(email__iexact=username_or_email)
+                    user = authenticate(self.request, username=user_obj.username, password=password)
+                except User.DoesNotExist:
+                    pass
+
+            if user is None:
+                raise forms.ValidationError(
+                    self.error_messages["invalid_login"],
+                    code="invalid_login",
+                    params={"username": self.fields["username"].label},
+                )
+
+            # Activate-based restriction
+            self.confirm_login_allowed(user)
+
+            self.user_cache = user
+
+        return self.cleaned_data
+
     def confirm_login_allowed(self, user):
-        print(">>> confirm_login_allowed called for:", user)
         if not user.volunteer.email_confirmed:
             raise forms.ValidationError(
                 _("Your account is not activated yet. Please check your email for the activation link."),
