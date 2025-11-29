@@ -536,24 +536,27 @@ class Volunteer(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        try:
+            if self.mugshot:
+                img_path = self.mugshot.path
+                img = Image.open(img_path)
 
-        if self.mugshot:
-            img_path = self.mugshot.path
-            img = Image.open(img_path)
+                # crop to middle
+                width, height = img.size
+                min_side = min(width, height)
+                left = (width - min_side) / 2
+                top = (height - min_side) / 2
+                right = (width + min_side) / 2
+                bottom = (height + min_side) / 2
 
-            # crop to middle
-            width, height = img.size
-            min_side = min(width, height)
-            left = (width - min_side) / 2
-            top = (height - min_side) / 2
-            right = (width + min_side) / 2
-            bottom = (height + min_side) / 2
+                img = img.crop((left, top, right, bottom))
 
-            img = img.crop((left, top, right, bottom))
-
-            max_size = (140, 140)  # maximum width/height
-            img.thumbnail(max_size, Image.Resampling.LANCZOS)
-            img.save(img_path)
+                max_size = (140, 140)  # maximum width/height
+                img.thumbnail(max_size, Image.Resampling.LANCZOS)
+                img.save(img_path)
+        except FileNotFoundError:
+            self.mugshot=None
+            self.save()
 
     # Dr. Manhattan detection: is this person capable of being in multiple places at once?
     def detect_dr_manhattan(self):

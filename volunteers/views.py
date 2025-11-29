@@ -3,7 +3,7 @@ from datetime import timedelta
 
 from .models import Volunteer, VolunteerTask, VolunteerTalk, TaskCategory, TaskTemplate, Task, Track, \
     Talk, Edition, EmailConfirmation
-from .forms import EditProfileForm, SignupForm, EventSignupForm, EmailChangeForm
+from .forms import EditProfileForm, SignupForm, EventSignupForm, EmailChangeForm, ResendActivationForm
 
 from django.contrib import messages
 from django.http import HttpResponse
@@ -516,9 +516,7 @@ def profile_detail(request, username,
         ``profile``
             Instance of the currently viewed ``Profile``.
     """
-    if request.user.username != username:
-        raise PermissionDenied("you are not allowed to edit another user")
-    user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False)
+    user = get_object_or_404(get_user_model(), username__iexact=username, volunteer__privacy_policy_accepted_at__isnull=False, volunteer__email_confirmed=True)
     current_tasks = Task.objects.filter(edition=Edition.get_current()).order_by('date', 'start_time', 'end_time')
 
 
@@ -562,7 +560,7 @@ class ProfileListView(ListView):
 
     def get_queryset(self):
         profile_model = Volunteer 
-        queryset = profile_model.objects.filter(privacy_policy_accepted_at__isnull=False).select_related().extra( \
+        queryset = profile_model.objects.filter(privacy_policy_accepted_at__isnull=False, email_confirmed=True).select_related().extra( \
             select={'lower_name': 'lower(first_name)'}).order_by('lower_name')
         return queryset
 
@@ -595,11 +593,33 @@ def email_change(request):
         form = EmailChangeForm(instance=user)
     return render(request, 'userena/email_form.html', {'form': form})
 
-@login_required
+def resend_activation(request):
+    if request.method == "POST":
+        form = ResendActivationForm(request.POST)
+        if form.is_valid():
+            user = form.user
+
+            # Get or create token
+            confirmation, created = EmailConfirmation.objects.get_or_create(user=user)
+
+            # If it's very old, regenerate token (optional)
+            if confirmation.created_at < timezone.now() - timezone.timedelta(days=7):
+                confirmation.token = uuid.uuid4()
+                confirmation.created_at = timezone.now()
+                confirmation.save()
+
+            # Send email using your existing method
+            confirmation.send(request)
+            return render(request, "userena/activation_send.html")
+    else:
+        form = ResendActivationForm()
+
+    return render(request, "registration/resend_activation.html", {"form": form})
+
 def activate_account(request, token):
     try:
         valid_since = timezone.now() - timedelta(days=7)
-        confirmation = EmailConfirmation.objects.get(token=token, created_at__gte=valid_since, user=request.user)
+        confirmation = EmailConfirmation.objects.get(token=token, created_at__gte=valid_since)
     except Exception:
         return render(request, "userena/activate_fail.html")
     
@@ -608,3 +628,4 @@ def activate_account(request, token):
         confirmation.user.volunteer.save()
         confirmation.delete()
         return redirect('userena_profile_detail', username=user.username)
+

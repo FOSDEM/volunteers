@@ -137,7 +137,7 @@ class SignupForm(forms.ModelForm):
 
         # Set acceptance timestamp
         if self.cleaned_data.get('privacy_policy'):
-            vol = Volunteer.objects.create(user=new_user, privacy_policy_accepted_at=timezone.now(), email_validated=False)
+            vol = Volunteer.objects.create(user=new_user, privacy_policy_accepted_at=timezone.now(), email_confirmed=False)
             vol.save()
 
         return new_user
@@ -192,3 +192,22 @@ class ActivationAwareAuthenticationForm(AuthenticationForm):
                 _("Your account is not activated yet. Please check your email for the activation link."),
                 code='inactive',
             )
+
+
+class ResendActivationForm(forms.Form):
+    email = forms.EmailField(label="Email")
+
+    def clean_email(self):
+        email = self.cleaned_data["email"].strip().lower()
+        User = get_user_model()
+
+        try:
+            user = User.objects.get(email__iexact=email)
+        except User.DoesNotExist:
+            raise forms.ValidationError("No user with this email exists.")
+
+        if hasattr(user, "volunteer") and user.volunteer.email_confirmed:
+            raise forms.ValidationError("This account is already activated.")
+
+        self.user = user
+        return email

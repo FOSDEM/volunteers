@@ -52,6 +52,11 @@ urlpatterns = [
     path("accounts/login/", auth_views.LoginView.as_view(authentication_form=ActivationAwareAuthenticationForm), name="login"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("accounts/activate/<str:token>/", activate_account ,name="activate"),
+    path(
+    "accounts/resend-activation/",
+    resend_activation,
+    name="resend_activation"
+),
     path('accounts/password/change/',
          auth_views.PasswordChangeView.as_view(template_name='userena/password_form.html'),
          name='userena_password_change'),
@@ -60,4 +65,19 @@ urlpatterns = [
          name='userena_password_change_done'),
     path('accounts/email/change/', email_change,
          name='userena_email_change'),
+    path("accounts/password/reset/",
+         auth_views.PasswordResetView.as_view(template_name="registration/password_reset_form.html", email_template_name="registration/password_reset_email.txt", subject_template_name="registration/password_reset_subject.txt"),
+         name="password_reset"),
+
+    path("accounts/password/reset/done/",
+         auth_views.PasswordResetDoneView.as_view(),
+         name="password_reset_done"),
+
+    path("accounts/password/reset/<uidb64>/<token>/",
+         auth_views.PasswordResetConfirmView.as_view(),
+         name="password_reset_confirm"),
+
+    path("accounts/password/reset/complete/",
+         auth_views.PasswordResetCompleteView.as_view(),
+         name="password_reset_complete"),
 ]
