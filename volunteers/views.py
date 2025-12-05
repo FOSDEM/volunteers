@@ -627,5 +627,6 @@ def activate_account(request, token):
         confirmation.user.volunteer.email_confirmed=True
         confirmation.user.volunteer.save()
         confirmation.delete()
-        return redirect('userena_profile_detail', username=user.username)
+        messages.success(request, "Your account has been successfully activated!")
+        return redirect('task_list')
 
