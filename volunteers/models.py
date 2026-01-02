@@ -457,7 +457,11 @@ class Task(models.Model):
         task.description = xml.find('description').text
         if xml.find('url'):
             task.fosdem_url = xml.find('url').text
-        task.location = xml.find('location').text if xml.find('location') else ''
+        location_elem = xml.find('location')
+        if location_elem is not None and location_elem.text:
+            task.location = location_elem.text
+        else:
+            task.location = ''
         day_offset = int(xml.find('day').text)
         task.date = edition.start_date + datetime.timedelta(days=day_offset)
         task.start_time = parse_time(xml.find('start_time').text)
