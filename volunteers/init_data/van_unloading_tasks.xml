@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Transportation">
+        <name>Van Unloading</name>
+        <counter>1</counter>
+        <description>
+IMPORTANT! This task is not at the ULB, but at our office (Kortenberg, walking distance from the train station). Address will be provided to those that sign up.
+
+Help us unload all our equipment from two vans (no stairs, but lots of walking) and stack it in our storage rooms. After a successful FOSDEM, we need to return all materials to our storage facility.
+Dinner will be provided.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/buildup-cleanup/van-loading
+        </description>
+        <location>Kortenberg (not ULB)</location>
+        <day>2</day>
+        <start_time>18:00</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>10</nbr_volunteers>
+        <nbr_volunteers_min>8</nbr_volunteers_min>
+        <nbr_volunteers_max>15</nbr_volunteers_max>
+    </task>
+</generic_tasks>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Food Courier">
+        <name>Food Courier</name>
+        <counter>1</counter>
+        <description>
+Help coordinate and deliver food to volunteers working at various stations throughout the venue. This is a great way to support fellow volunteers and ensure everyone stays energized throughout the day.
+You'll be picking up food orders and distributing them to volunteer stations, infodesk teams, and other key locations around the campus. Good knowledge of the venue layout is helpful but not required.
+This task involves walking around the venue and carrying food containers, so comfortable shoes are recommended.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/food-courier
+        </description>
+        <location>Infodesk K</location>
+        <day>0</day>
+        <start_time>12:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Food Courier">
+        <name>Food Courier</name>
+        <counter>2</counter>
+        <description>
+Help coordinate and deliver food to volunteers working at various stations throughout the venue. This is a great way to support fellow volunteers and ensure everyone stays energized throughout the day.
+You'll be picking up food orders and distributing them to volunteer stations, infodesk teams, and other key locations around the campus. Good knowledge of the venue layout is helpful but not required.
+This task involves walking around the venue and carrying food containers, so comfortable shoes are recommended.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/food-courier
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>12:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+</generic_tasks>
