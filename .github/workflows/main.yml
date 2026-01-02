@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OS: ubuntu-latest
-      PYTHON: '3.7'
+      PYTHON: '3.13'
     name: Linting and Testing
     steps:
       - name: Checkout
@@ -13,13 +13,3 @@ jobs:
       - name: Test action step
         uses: ./
         id: test
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          files: ./coverage.xml
-          flags: unittests
-          env_vars: OS,PYTHON
-          name: codecov-umbrella
-          fail_ci_if_error: true
-          path_to_write_report: ./coverage/codecov_report.txt
-
