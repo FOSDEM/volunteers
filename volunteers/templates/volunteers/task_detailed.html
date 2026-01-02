@@ -24,7 +24,7 @@
                 <td>
                     {% if user.is_authenticated %}
                     {% for volunteer in task.volunteer_set.all %}
-                        <a href="{% url 'user_profile_detail' volunteer.user.username %}">{{ volunteer.user.first_name }} {{ volunteer.user.last_name }},</a>
+                        <a href="{% url 'userena_profile_detail' volunteer.user.username %}">{{ volunteer.user.first_name }} {{ volunteer.user.last_name }},</a>
                     {% endfor %}
                     {% else %}
                         {{ task.volunteer_set.count}}/{{ task.nbr_volunteers }}
