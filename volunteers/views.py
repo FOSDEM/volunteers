@@ -356,7 +356,7 @@ def task_list_detailed(request, username):
             return render_to_pdf(request, 'volunteers/tasks_detailed.html', context)
         elif 'mail_schedule' in request.POST:
             volunteer.mail_schedule()
-            messages.success(request, _('Your shedule has been mailed to %s.' % (volunteer.user.email,)),
+            messages.success(request, _('Your schedule has been mailed to %s.' % (volunteer.user.email,)),
                              fail_silently=True)
 
     return render(request, 'volunteers/tasks_detailed.html', context)
