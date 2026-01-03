@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Transportation">
+        <name>Van Loading</name>
+        <counter>1</counter>
+        <description>
+IMPORTANT! This task is not at the ULB, but at our office (Kortenberg, walking distance from the train station). Address will be provided to those that sign up.
+
+Help us load all our equipment in two vans (no stairs, but lots of walking). We need to transport all materials needed for FOSDEM from our storage facility to the venue.
+This involves carrying equipment, organizing items in the vans efficiently, and ensuring everything is properly secured for transport. While there are no stairs, you will be walking back and forth quite a bit.
+Dinner will be provided. This is an essential pre-event task that makes everything else possible!
+
+Read more at https://doc.volunteers.fosdem.org/tasks/buildup-cleanup/van-loading
+        </description>
+        <location>Kortenberg (not ULB)</location>
+        <day>-2</day>
+        <start_time>18:00</start_time>
+        <end_time>22:00</end_time>
+        <nbr_volunteers>10</nbr_volunteers>
+        <nbr_volunteers_min>8</nbr_volunteers_min>
+        <nbr_volunteers_max>15</nbr_volunteers_max>
+    </task>
+</generic_tasks>

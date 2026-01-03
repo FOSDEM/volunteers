@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Cleanup">
+        <name>Cleanup - Group A</name>
+        <counter>1</counter>
+        <description>
+This is for Group A volunteers who want to help with early cleanup tasks.
+
+This is a very important task. The more the merrier (and quicker we finish). We need to turn the FOSDEM venue back into a university and return the campus how we found it. 
+There will be many tasks: taking down stands, removing brown paper from walls, collecting cables, removing signs, general tidying up, etc. While carrying heavy stuff around is sometimes required, other work requires a more delicate touch.
+Dinner will be provided. Normally we're finished around 9pm, but we stay until we're done.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/buildup-cleanup/cleanup
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>17:00</start_time>
+        <end_time>21:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
+    </task>
+    <task template="Cleanup">
+        <name>Cleanup - Group B</name>
+        <counter>2</counter>
+        <description>
+This is for Group B volunteers. 
+
+This is a very important task. The more the merrier (and quicker we finish). We need to turn the FOSDEM venue back into a university and return the campus how we found it. 
+There will be many tasks: taking down stands, removing brown paper from walls, collecting cables, removing signs, general tidying up, etc. While carrying heavy stuff around is sometimes required, other work requires a more delicate touch.
+Dinner will be provided. Normally we're finished around 9pm, but we stay until we're done.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/buildup-cleanup/cleanup
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>17:30</start_time>
+        <end_time>21:00</end_time>
+        <nbr_volunteers>25</nbr_volunteers>
+        <nbr_volunteers_min>20</nbr_volunteers_min>
+        <nbr_volunteers_max>100</nbr_volunteers_max>
+    </task>
+    <task template="Cleanup">
+        <name>Cleanup - Group C</name>
+        <counter>3</counter>
+        <description>
+This is for Group C volunteers.
+
+This is a very important task. The more the merrier (and quicker we finish). We need to turn the FOSDEM venue back into a university and return the campus how we found it. 
+There will be many tasks: taking down stands, removing brown paper from walls, collecting cables, removing signs, general tidying up, etc. While carrying heavy stuff around is sometimes required, other work requires a more delicate touch.
+Dinner will be provided. Normally we're finished around 9pm, but we stay until we're done.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/buildup-cleanup/cleanup
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>18:00</start_time>
+        <end_time>21:00</end_time>
+        <nbr_volunteers>25</nbr_volunteers>
+        <nbr_volunteers_min>20</nbr_volunteers_min>
+        <nbr_volunteers_max>100</nbr_volunteers_max>
+    </task>
+</generic_tasks>

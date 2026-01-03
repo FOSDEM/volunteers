@@ -6,7 +6,8 @@ import os
 import urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
 import logging
-import uuid 
+import uuid
+import glob 
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -113,10 +114,31 @@ class Edition(models.Model):
     def init_generic_tasks(cls):
         edition = cls.get_current()
         if edition:
-            generic_task_tree = ET.parse('volunteers/init_data/generic_tasks.xml')
-            generic_task_root = generic_task_tree.getroot()
-            for task in generic_task_root.findall('task'):
-                Task.create_from_xml(task, edition)
+            # Find all XML files in the init_data directory
+            init_data_dir = 'volunteers/init_data'
+            xml_files = glob.glob(os.path.join(init_data_dir, '*.xml'))
+            
+            if not xml_files:
+                print(f"No XML files found in {init_data_dir}")
+                return
+            
+            print(f"Found {len(xml_files)} XML file(s) to import:")
+            
+            # Process each XML file
+            for xml_file in sorted(xml_files):
+                try:
+                    print(f"  Processing: {os.path.basename(xml_file)}")
+                    generic_task_tree = ET.parse(xml_file)
+                    generic_task_root = generic_task_tree.getroot()
+                    task_count = 0
+                    for task in generic_task_root.findall('task'):
+                        Task.create_from_xml(task, edition)
+                        task_count += 1
+                    print(f"    Imported {task_count} task(s)")
+                except Exception as e:
+                    print(f"    Error processing {os.path.basename(xml_file)}: {e}")
+            
+            print("Import complete!")
 
     @classmethod
     def create_from_task_list(cls, file_name):
@@ -435,7 +457,11 @@ class Task(models.Model):
         task.description = xml.find('description').text
         if xml.find('url'):
             task.fosdem_url = xml.find('url').text
-        task.location = xml.find('location').text if xml.find('location') else ''
+        location_elem = xml.find('location')
+        if location_elem is not None and location_elem.text:
+            task.location = location_elem.text
+        else:
+            task.location = ''
         day_offset = int(xml.find('day').text)
         task.date = edition.start_date + datetime.timedelta(days=day_offset)
         task.start_time = parse_time(xml.find('start_time').text)

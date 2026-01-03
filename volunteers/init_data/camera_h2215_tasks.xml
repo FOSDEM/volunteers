@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>1</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>0</day>
+        <start_time>09:00</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>2</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>0</day>
+        <start_time>11:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>3</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>0</day>
+        <start_time>13:00</start_time>
+        <end_time>15:00</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>4</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>4</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>0</day>
+        <start_time>15:00</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>5</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>0</day>
+        <start_time>17:00</start_time>
+        <end_time>19:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>6</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>1</day>
+        <start_time>08:30</start_time>
+        <end_time>10:30</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>7</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>1</day>
+        <start_time>10:30</start_time>
+        <end_time>12:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>8</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>1</day>
+        <start_time>12:30</start_time>
+        <end_time>14:30</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>4</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>9</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>1</day>
+        <start_time>14:30</start_time>
+        <end_time>16:30</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
+    </task>
+    <task template="Video: /dev/random">
+        <name>Camera Operator H2.215 /dev/random</name>
+        <counter>10</counter>
+        <description>
+This task is to operate the Camera in the assigned room (H2.215 - /dev/random). Some speakers stand still, other move around. The camera operator needs to keep the speaker in frame for remote participants to watch on stream or recordings.
+/dev/random talks move fast with quick speaker changes, so you'll need to stay alert and adapt quickly to different presentation styles.
+Good hand-eye coordination and ability to focus for extended periods are important.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H2.215</location>
+        <day>1</day>
+        <start_time>16:30</start_time>
+        <end_time>18:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+</generic_tasks>

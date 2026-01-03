@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>1</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>0</day>
+        <start_time>09:00</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>2</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>0</day>
+        <start_time>11:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>3</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>0</day>
+        <start_time>13:00</start_time>
+        <end_time>15:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>4</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>0</day>
+        <start_time>15:00</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>5</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>0</day>
+        <start_time>17:00</start_time>
+        <end_time>18:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>6</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>08:30</start_time>
+        <end_time>10:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>7</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>10:30</start_time>
+        <end_time>12:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>8</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>12:30</start_time>
+        <end_time>14:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Runner">
+        <name>Runner</name>
+        <counter>9</counter>
+        <description>
+Runners are the flexible support team for FOSDEM. You'll help with various tasks throughout the day as needs arise - delivering messages, assisting with crowd control, helping speakers, supporting other volunteer teams, and generally being available where extra hands are needed.
+This is a great role for people who like variety and want to see different parts of the conference. You'll be on your feet and moving around the venue quite a bit, so comfortable shoes are essential.
+Good problem-solving skills and a helpful attitude make this role successful.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/runner
+        </description>
+        <location>Infodesk K</location>
+        <day>1</day>
+        <start_time>14:30</start_time>
+        <end_time>16:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+</generic_tasks>

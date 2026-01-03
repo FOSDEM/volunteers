@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>1</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>0</day>
+        <start_time>09:00</start_time>
+        <end_time>11:00</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>2</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>0</day>
+        <start_time>11:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>3</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>0</day>
+        <start_time>13:00</start_time>
+        <end_time>15:00</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>4</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>4</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>0</day>
+        <start_time>15:00</start_time>
+        <end_time>17:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>5</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>0</day>
+        <start_time>17:00</start_time>
+        <end_time>19:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>6</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>1</day>
+        <start_time>08:30</start_time>
+        <end_time>10:30</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>7</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>1</day>
+        <start_time>10:30</start_time>
+        <end_time>12:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>8</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>1</day>
+        <start_time>12:30</start_time>
+        <end_time>14:30</end_time>
+        <nbr_volunteers>3</nbr_volunteers>
+        <nbr_volunteers_min>2</nbr_volunteers_min>
+        <nbr_volunteers_max>4</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>9</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>1</day>
+        <start_time>14:30</start_time>
+        <end_time>16:30</end_time>
+        <nbr_volunteers>5</nbr_volunteers>
+        <nbr_volunteers_min>4</nbr_volunteers_min>
+        <nbr_volunteers_max>6</nbr_volunteers_max>
+    </task>
+    <task template="Cloak Room">
+        <name>Cloak Room</name>
+        <counter>10</counter>
+        <description>
+During the event, we offer visitors a place to leave their coats and luggage. It's usually very busy, especially when the weather is bad or when people arrive with large bags.
+You'll be receiving items from visitors, tagging them, providing claim tickets, and returning items when visitors come back to collect them. Good organizational skills and attention to detail are important to ensure nothing gets lost.
+The work involves standing for extended periods and some light lifting of bags and coats.
+
+Read more at https://doc.volunteers.fosdem.org/tasks/onsite/cloakroom
+        </description>
+        <location>Cloakroom K Building</location>
+        <day>1</day>
+        <start_time>16:30</start_time>
+        <end_time>18:30</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+</generic_tasks>
