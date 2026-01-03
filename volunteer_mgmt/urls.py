@@ -18,12 +18,12 @@ urlpatterns = [
     path('volunteers/signup', signup, name='signup'),
 
     re_path(
-        r'^volunteers/(?P<username>(?!signout|signup|signin)[\.\w-]+)/$',
+        r'^volunteers/(?P<username>(?!signout|signup|signin)[^/]+)/$',
         profile_detail,
         name='userena_profile_detail'
     ),
     re_path(
-        r'^volunteers/(?P<username>[\.\w-]+)/edit/$',
+        r'^volunteers/(?P<username>[^/]+)/edit/$',
         profile_edit,
         name='userena_profile_edit'
     ),
