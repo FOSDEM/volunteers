@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Video build-up">
+        <name>Video build-up - H Building</name>
+        <counter>1</counter>
+        <description>
+Local control room is H.2111.
+Install and test the video equipment in all rooms in Building H. You'll work with the video team to set up cameras, microphones, streaming equipment, and recording systems in each devroom.
+Checklist and documentation available at https://github.com/FOSDEM/video/tree/master/instructions. There will be training sessions before the event.
+This involves some technical work, cable management, and testing equipment. Comfortable working with AV equipment is helpful.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H Building</location><day>-1</day>
+        <start_time>12:00</start_time>
+        <end_time>20:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>Video team - H Building</name>
+        <counter>1</counter>
+        <description>
+Provide support for people using the video equipment in Building H, make sure everything works. You'll monitor rooms, respond to issues, help speakers with microphones, and coordinate with the VOC.
+You'll be moving between different rooms in the building, troubleshooting issues as they arise, and ensuring all talks are being properly recorded and streamed.
+Technical knowledge helpful. Good problem-solving skills essential.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H.2111</location><day>0</day>
+        <start_time>08:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>Video team - H Building</name>
+        <counter>2</counter>
+        <description>
+Provide support for people using the video equipment in Building H, make sure everything works. You'll monitor rooms, respond to issues, help speakers with microphones, and coordinate with the VOC.
+You'll be moving between different rooms in the building, troubleshooting issues as they arise, and ensuring all talks are being properly recorded and streamed.
+Technical knowledge helpful. Good problem-solving skills essential.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H.2111</location><day>0</day>
+        <start_time>13:00</start_time>
+        <end_time>18:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>Video team - H Building</name>
+        <counter>3</counter>
+        <description>
+Provide support for people using the video equipment in Building H, make sure everything works. You'll monitor rooms, respond to issues, help speakers with microphones, and coordinate with the VOC.
+You'll be moving between different rooms in the building, troubleshooting issues as they arise, and ensuring all talks are being properly recorded and streamed.
+Technical knowledge helpful. Good problem-solving skills essential.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H.2111</location><day>1</day>
+        <start_time>08:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>Video team - H Building</name>
+        <counter>4</counter>
+        <description>
+Provide support for people using the video equipment in Building H, make sure everything works. You'll monitor rooms, respond to issues, help speakers with microphones, and coordinate with the VOC.
+You'll be moving between different rooms in the building, troubleshooting issues as they arise, and ensuring all talks are being properly recorded and streamed.
+Technical knowledge helpful. Good problem-solving skills essential.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H.2111</location><day>1</day>
+        <start_time>13:00</start_time>
+        <end_time>18:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>Video tear-down - Building H</name>
+        <counter>1</counter>
+        <description>
+Local control room is H.2111.
+Collect all video equipment from Building H at the end of the event. You'll work with the video team to carefully pack up cameras, microphones, cables, streaming boxes, and other equipment from all rooms.
+This involves systematically going through each room, disconnecting equipment, organizing cables, and preparing everything for transport back to storage.
+Attention to detail is important to ensure nothing is left behind or damaged during teardown.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>H.2111</location><day>1</day>
+        <start_time>18:00</start_time>
+        <end_time>20:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+</generic_tasks>
