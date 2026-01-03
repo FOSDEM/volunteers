@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<generic_tasks>
+    <task template="Video build-up">
+        <name>VOC build-up</name>
+        <counter>1</counter>
+        <description>
+Make sure the VOC (Video Operations Center) is up and operational, so the video setup can proceed. The VOC is the central control room for all video operations at FOSDEM.
+You'll help set up networking equipment, test video feeds, configure monitoring systems, and ensure all infrastructure is ready for the video team to deploy to individual rooms.
+Some technical knowledge is helpful but not required - training and guidance will be provided on-site.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>NOC</location><day>-1</day>
+        <start_time>09:00</start_time>
+        <end_time>12:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>VOC video team</name>
+        <counter>1</counter>
+        <description>
+Monitor and debug issues with the video from the Video Operations Center (VOC). You'll be in the central control room overseeing all video streams across FOSDEM.
+This involves monitoring multiple video feeds, troubleshooting technical issues, coordinating with room-based and building-responsible video volunteers, and ensuring smooth streaming and recording of all talks.
+Technical skills are helpful. You should be comfortable with computers and quick problem-solving.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>NOC</location><day>0</day>
+        <start_time>08:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>VOC video team</name>
+        <counter>2</counter>
+        <description>
+Monitor and debug issues with the video from the Video Operations Center (VOC). You'll be in the central control room overseeing all video streams across FOSDEM.
+This involves monitoring multiple video feeds, troubleshooting technical issues, coordinating with room-based and building-responsible video volunteers, and ensuring smooth streaming and recording of all talks.
+Technical skills are helpful. You should be comfortable with computers and quick problem-solving.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>NOC</location><day>0</day>
+        <start_time>13:00</start_time>
+        <end_time>18:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>VOC video team</name>
+        <counter>3</counter>
+        <description>
+Monitor and debug issues with the video from the Video Operations Center (VOC). You'll be in the central control room overseeing all video streams across FOSDEM.
+This involves monitoring multiple video feeds, troubleshooting technical issues, coordinating with room-based and building-responsible video volunteers, and ensuring smooth streaming and recording of all talks.
+Technical skills are helpful. You should be comfortable with computers and quick problem-solving.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>NOC</location><day>1</day>
+        <start_time>08:00</start_time>
+        <end_time>13:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+    <task template="Video">
+        <name>VOC video team</name>
+        <counter>4</counter>
+        <description>
+Monitor and debug issues with the video from the Video Operations Center (VOC). You'll be in the central control room overseeing all video streams across FOSDEM.
+This involves monitoring multiple video feeds, troubleshooting technical issues, coordinating with room-based video volunteers, and ensuring smooth streaming and recording of all talks.
+Technical skills are helpful. You should be comfortable with computers and quick problem-solving.
+
+Read more at https://doc.volunteers.fosdem.org/video/video/
+        </description>
+        <location>NOC</location><day>1</day>
+        <start_time>13:00</start_time>
+        <end_time>18:00</end_time>
+        <nbr_volunteers>4</nbr_volunteers>
+        <nbr_volunteers_min>3</nbr_volunteers_min>
+        <nbr_volunteers_max>5</nbr_volunteers_max>
+    </task>
+</generic_tasks>
