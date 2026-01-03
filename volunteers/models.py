@@ -244,7 +244,7 @@ class Talk(models.Model):
     @classmethod
     def penta_create_or_update(cls, xml, edition, day_date):
         event_id = xml.get('id')
-        talks = cls.objects.filter(ext_id=event_id, edition=edition)
+        talks = cls.objects.filter(ext_id=event_id, track__edition=edition)
         if len(talks):
             talk = talks[0]
         else:
