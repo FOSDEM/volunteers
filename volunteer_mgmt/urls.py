@@ -1,4 +1,5 @@
 from django.urls import path, re_path
+from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 from django.views.static import serve as django_static_serve
 import volunteers.views as views
@@ -46,7 +47,7 @@ urlpatterns = [
 
     re_path(
         r'^media/(?P<path>.*)$',
-        django_static_serve,
+        login_required(django_static_serve),
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}
     ),
     path("accounts/login/", auth_views.LoginView.as_view(authentication_form=ActivationAwareAuthenticationForm), name="login"),
