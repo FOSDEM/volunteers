@@ -25,7 +25,7 @@
   pip:
     virtualenv: "{{base_dir}}/venv3"
     virtualenv_python: python3
-    requirements: "{{base_dir}}/tool/requirements-frozen.txt"
+    requirements: "{{base_dir}}/tool/requirements.txt"
   become: yes
   become_user: "{{app_user}}"
 - name: Add gunicorn to venv
@@ -36,10 +36,11 @@
   become_user: "{{app_user}}"
 - name: Create media directory
   file:
-    path: "{{base_dir}}/tool/media/mugshots"
+    path: "{{base_dir}}/tool/public/media/mugshots"
     state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
   become: yes
-  become_user: "{{app_user}}"
 - name: Check if localsettings exists
   stat:
     path: "{{ base_dir }}/tool/volunteer_mgmt"
@@ -81,10 +82,10 @@
     src: nginx.conf.j2
   become: yes
   notify: Reload nginx
-- name: Create cronjob to sync penta (hourly)
+- name: Create cronjob to sync talks from the website 
   become_user: "{{app_user}}"
   cron:
-    name: Sync with penta
+    name: Sync with website
     job: "{{base_dir}}/venv3/bin/python {{base_dir}}/tool/manage.py sync_with_penta"
     minute: 0
     state: present
