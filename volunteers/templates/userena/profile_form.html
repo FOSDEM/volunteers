@@ -3,7 +3,7 @@
 
 {% block title %}{% trans "Account setup" %}{% endblock %}
 
-{% block content_title %}<h2 class="content-title">Account &raquo; {{ account.user.username }}</h2>{% endblock %}
+{% block content_title %}<h2 class="content-title">Account &raquo; {{ user.username }}</h2>{% endblock %}
 
 {% block content %}
 <ul id="profile-nav">
@@ -14,14 +14,6 @@
 </ul>
 
 <form action="" enctype="multipart/form-data" method="post">
-    {% if user.username == account.user.username %}
-    <ul id="box-nav">
-        <li class="first"><a href="{% url 'userena_detail' user.username %}"><span>{% trans 'View profile' %}</span></a></li>
-        <li class="selected"><a href="{% url 'userena_edit' account.user.username %}">{% trans "Edit profile" %}</a></li>
-        <li><a href="{% url 'userena_password_change' %}">{% trans "Change password" %}</a></li>
-        <li class="last"><a href="{% url 'userena_email_change' %}">{% trans "Change email" %}</a></li>
-    </ul>
-    {% endif %}
     {% csrf_token %}
     <center><img src="{{ profile.get_mugshot_url }}" alt="mugshot"></center>
     <fieldset>
