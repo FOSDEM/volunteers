@@ -435,6 +435,7 @@ class Task(models.Model):
         task.start_time = talk.start_time
         task.end_time = talk.end_time
         task.edition = edition
+        task.description = template.description
         task.nbr_volunteers = volunteers[0]
         task.nbr_volunteers_min = volunteers[1]
         task.nbr_volunteers_max = volunteers[2]
