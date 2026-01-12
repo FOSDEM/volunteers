@@ -490,7 +490,7 @@ class Task(models.Model):
         colors = {
             "FULL": "blue",
             "OK": "green",
-            "MANAGEABLE": "grey",
+            "MANAGEABLE": "yellow",
             "NEEDED": "red"
         }
         return colors[self.status]

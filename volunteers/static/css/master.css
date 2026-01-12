@@ -1470,6 +1470,11 @@ table.task_list .task-volunteers, table.talk_list .talk-volunteers {
     background: #337ab7; /* primary */
     color: #fff;
 }
+.status-label.yellow, table.task_list tr td.yellow {
+    background: #f0ad4e; /* yellow for manageable */
+    color: #212529; /* dark text for better contrast/WCAG compliance */
+    font-weight: 700; /* ensure text appears as bold as white on darker backgrounds */
+}
 .status-label.grey, table.task_list tr td.gray {
     background: #6c757d; /* secondary */
     color: #fff;
@@ -2621,9 +2626,19 @@ ul.privacy-policy {
 }
 
 [data-theme="dark"] ul.messages li.error {
-    background: #3e2723;
+    background: #5c1f1f;
     color: #ff8a80;
     border-color: #f44336;
+}
+
+[data-theme="dark"] ul.errorlist {
+    background-color: #5c1f1f !important;
+    color: #ff8a80 !important;
+    border-color: #f44336;
+}
+
+[data-theme="dark"] ul.errorlist li {
+    color: #ff8a80 !important;
 }
 
 [data-theme="dark"] ul.messages li.success {
