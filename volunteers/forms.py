@@ -99,13 +99,24 @@ class SignupForm(forms.ModelForm):
             Also validates that the username is not listed in
             ``USERENA_FORBIDDEN_USERNAMES`` list.
         """
+        username = self.cleaned_data.get('username', '').strip()
+        
+        # Check if username is empty
+        if not username:
+            raise forms.ValidationError(_('Username is required.'))
+        
+        # Validate username format
+        if not re.match(self.USERNAME_RE, username):
+            raise forms.ValidationError(_('Username can only contain letters, numbers, dots and underscores.'))
+        
+        # Check for already taken usernames
         try:
-            user = get_user_model().objects.get(username__iexact=self.cleaned_data['username'])
+            user = get_user_model().objects.get(username__iexact=username)
         except get_user_model().DoesNotExist:
             pass
         else:
             raise forms.ValidationError(_('This username is already taken.'))
-        return self.cleaned_data['username']
+        return username
 
     def clean_email(self):
         """ Validate that the e-mail address is unique. """
