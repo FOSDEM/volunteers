@@ -3,15 +3,10 @@ Description = FOSDEM Volunteers Tool
 After = network.target
 
 [Service]
-PermissionsStartOnly = true
-RuntimeDirectory = volunteers
-PIDFile = /run/volunteers/volunteers.pid
 User = {{ app_user }}
 Group = {{ app_group }}
 WorkingDirectory = {{ base_dir }}/tool
-ExecStart = {{ base_dir }}/venv3/bin/gunicorn volunteer_mgmt.wsgi -b 127.0.0.1:5000 --pid /run/volunteers/volunteers.pid
-ExecReload = /bin/kill -s HUP $MAINPID
-ExecStop = /bin/kill -s TERM $MAINPID
+ExecStart = {{ base_dir }}/venv3/bin/gunicorn volunteer_mgmt.wsgi -b 127.0.0.1:5000 --workers 4 --threads 2 --worker-class gthread --timeout 120 --access-logfile - --error-logfile -
 
 [Install]
 WantedBy = multi-user.target
