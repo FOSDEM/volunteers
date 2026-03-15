@@ -1,12 +1,40 @@
-Primary Authors:
-================
+Authors
+=======
 
-* Alexander Mills
-* Juan Rial
-* Silver Kuusik
+Listed by number of commits. Refresh list below using
+   git shortlog -sn --all | cut -f2- -d$'\t' >>AUTHORS
 
-Thanks to:
-==========
-
-* Louis Taylor
-
+Johan Van de Wauw
+Juan Rial
+silps
+Pieter De Praetere
+Silver Kuusik
+Kristian Schuhmacher
+Dan Clark
+Emanuil Tolev
+Martin Unzner
+Mark Van den Borre
+Alexander Mills
+Kristian
+FOSDEM Volunteer Administrators
+Giacomo Catenazzi
+Fosdem Volunteers
+Louis Taylor
+Thibault Molleman
+cccp
+Avinesh Kumar
+Benedikt Krisinsson
+Nguyễn Gia Phong
+Alasdair G Kergon
+Alexander Schwartz
+Keunes
+Niel Markwick
+Philippe Coval
+Rich
+Sebastian Grömcke
+Shin
+Stefan Derkits
+Tatjana Dubrovica
+eliasvandewauw-cpu
+hpdang
+simonhammes

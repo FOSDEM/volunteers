@@ -9,8 +9,7 @@ Volunteers management system for conferences, originally written for FOSDEM.
 Development setup
 =================
 
-The tool has been tested on Python3.10 and Python3.11. Python3.13 is not currently supported.
-The production version of this uses Python3.11 (as of Jan 2025).
+The tool has been tested on Python3.13. The production version of this uses Python3.13 (as of Jan 2026).
 
 After cloning the repo do these steps:
 
@@ -25,7 +24,7 @@ After cloning the repo do these steps:
 2) Install all dependencies in the environment:
 
    ```console
-   pip install -r requirements-dev.txt
+   pip install -r requirements.txt
 
    ```
    On debian these binary dependencies are required: 
