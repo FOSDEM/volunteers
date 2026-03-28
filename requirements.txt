@@ -6,7 +6,7 @@
 #
 asgiref==3.11.1
     # via django
-django==4.2.28
+django==4.2.29
     # via -r requirements.in
 pillow==12.1.1
     # via -r requirements.in
