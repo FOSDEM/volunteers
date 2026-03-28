@@ -40,16 +40,8 @@ except IOError:
 
 GENERIC_TASKS_FILE = 'volunteers/init_data/generic_tasks.xml'
 
-# Userena settings
-SITE_ID = 1
-ANONYMOUS_USER_NAME = 'Anonymous'
-USERENA_MUGSHOT_SIZE = 140
-USERENA_MUGSHOT_GRAVATAR = False
 USERENA_MUGSHOT_DEFAULT="/static/img/octicon-person.svg"
-USERENA_DISABLE_PROFILE_LIST = False
-AUTH_PROFILE_MODULE = 'volunteers.Volunteer'
 USERENA_SIGNIN_REDIRECT_URL = '/volunteers/%(username)s/'
-USERENA_REGISTER_PROFILE = False
 
 _ = lambda s: s
 LANGUAGES = (
