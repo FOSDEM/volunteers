@@ -4,13 +4,13 @@
 #
 #    pip-compile
 #
-asgiref==3.11.1
+asgiref==3.12.1
     # via django
 django==4.2.30
     # via -r requirements.in
-pillow==12.2.0
+pillow==12.3.0
     # via -r requirements.in
-psycopg2-binary==2.9.11
+psycopg2-binary==2.9.12
     # via -r requirements.in
-sqlparse==0.5.5
+sqlparse==0.6.0
     # via django
