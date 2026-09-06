@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 
 from volunteers.models import Volunteer, VolunteerTask, TaskCategory
 from django.contrib.auth.forms import AuthenticationForm
@@ -81,7 +81,7 @@ class SignupForm(forms.ModelForm):
     captcha_answer = forms.CharField(
         required=True,
         label=_("For which word is the D in FOSDEM the abbreviation"),
-        help_text=mark_safe("This limits automated signups. Hint: <a href='https://fosdem.org/about/' target='_blank'>about FOSDEM</a>."),
+        help_text=format_html("This limits automated signups. Hint: <a href='https://fosdem.org/about/' target='_blank'>about FOSDEM</a>."),
     )
 
     class Meta:
@@ -121,7 +121,8 @@ class SignupForm(forms.ModelForm):
     def clean_email(self):
         """ Validate that the e-mail address is unique. """
         if get_user_model().objects.filter(email__iexact=self.cleaned_data['email']):
-            raise forms.ValidationError(_('This email is already in use. Please supply a different email.'))
+            raise forms.ValidationError(_('Unable to register with the provided details. '
+                                           'If you already have an account, please log in or reset your password.'))
         return self.cleaned_data['email']
 
     def clean(self):
@@ -252,10 +253,16 @@ class ResendActivationForm(forms.Form):
         try:
             user = User.objects.get(email__iexact=email)
         except User.DoesNotExist:
-            raise forms.ValidationError("No user with this email exists.")
+            raise forms.ValidationError(
+                "Unable to process this request. If you already have an account, "
+                "check your email for further instructions."
+            )
 
         if hasattr(user, "volunteer") and user.volunteer.email_confirmed:
-            raise forms.ValidationError("This account is already activated.")
+            raise forms.ValidationError(
+                "Unable to process this request. If you already have an account, "
+                "check your email for further instructions."
+            )
 
         self.user = user
         return email
