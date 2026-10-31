@@ -48,7 +48,7 @@ urlpatterns = [
     re_path(
         r'^media/(?P<path>.*)$',
         login_required(django_static_serve),
-        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}
+        {'document_root': settings.MEDIA_ROOT, 'show_indexes': False}
     ),
     path("accounts/login/", auth_views.LoginView.as_view(authentication_form=ActivationAwareAuthenticationForm), name="login"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
